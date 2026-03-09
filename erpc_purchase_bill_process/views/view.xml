@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="view_account_move_form_inherit_foreign_purchase" model="ir.ui.view">
+        <field name="name">account.move.form.inherit.foreign.purchse</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+<!--            <xpath expr="//header" position="inside">-->
+<!--                <button name="create_foreign_purchase_entry"-->
+<!--                        string="Create Foreign Purchase Entry"-->
+<!--                        type="object"-->
+<!--                        invisible="transfer_bill_entry_count != 0 or move_type != 'in_invoice'"/>-->
+<!--            </xpath>-->
+
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button class="oe_stat_button" name="action_view_transfer_bill_entry" type="object" icon="fa-bars"
+                        invisible="transfer_bill_entry_count == 0 or move_type != 'in_invoice'">
+                    <field string="Transfer Entry" name="transfer_bill_entry_count" widget="statinfo"/>
+                </button>
+            </xpath>
+
+            <xpath expr="//group[@id='header_right_group']" position="inside">
+                <field name="purchase_order_count" invisible="1"/>
+                <field name="is_foreign_purchase_bill"
+                       invisible="move_type != 'in_invoice' or purchase_order_count == 0"
+                       readonly ="state != 'draft'"
+                       string="Foreign Purchase Bill"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="res_config_settings_view_form_inherit_foreign_purchase" model="ir.ui.view">
+        <field name="name">res.config.settings.foreign.purchase</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+        <!--            <field name="inherit_id" ref="base.res_config_settings_view_form"/>-->
+        <field name="arch" type="xml">
+            <xpath expr="//block[@id='default_accounts']" position="inside">
+                <setting string="Purchase Bill Entry:">
+                    <div class="content-group">
+                        <div class="row mt8">
+                            <label for="foreign_journal_id"
+                                   class="col-lg-5 o_light_label"/>
+                            <field name="foreign_journal_id"/>
+                        </div>
+                        <div class="row mt8">
+                            <label for="foreign_account_id"
+                                   class="col-lg-5 o_light_label"/>
+                            <field name="foreign_account_id"/>
+                        </div>
+                        <div class="row mt8">
+                            <label for="foreign_purchase_journal_id"
+                                   class="col-lg-5 o_light_label"/>
+                            <field name="foreign_purchase_journal_id"/>
+                        </div>
+                        <div class="row mt8">
+                            <label for="foreign_purchase_account_id"
+                                   class="col-lg-5 o_light_label"/>
+                            <field name="foreign_purchase_account_id"/>
+                        </div>
+
+                    </div>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

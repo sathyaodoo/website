@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+
+<!--        <record id="inherit_view_product" model="ir.ui.view">-->
+<!--            <field name="name">inherit_view.view.form</field>-->
+<!--            <field name="model">product.template</field>-->
+<!--            <field name="inherit_id" ref="product.product_template_search_view"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//filter[@name='services']" position="after">-->
+<!--                    <filter name="family_id" string="Family"/>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="view_kanban_product_template_offer" model="ir.ui.view">-->
+<!--            <field name="name">view.kanban.product.template.offer</field>-->
+<!--            <field name="model">product.template</field>-->
+<!--            <field name="inherit_id" ref="product.product_template_kanban_view"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//kanban" position="inside">-->
+<!--                    <field name="offer_id"/>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//kanban//div[hasclass('oe_kanban_details')]" position="inside">-->
+<!--                    <span class="float-right badge badge-pill badge-primary" t-if="record.offer_id.raw_value">-->
+<!--                        Offer</span>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+    </data>
+</odoo>

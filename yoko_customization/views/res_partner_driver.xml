@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="driver_search" model="ir.ui.view">
+            <field name="name">drivers.search</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <search string="Drivers">
+                    <field name="name" string="Customer"/>
+                    <field name="id" string="Driver ID"/>
+                </search>
+            </field>
+        </record>
+        <record id="view_res_partner_driver_tree" model="ir.ui.view">
+            <field name="name">res.partner.driver.tree</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <list string="Drivers">
+                    <field invisible="1" name="active"/>
+                    <field name="name" required="1"/>
+                    <field name="id"/>
+                    <!--                    <field name="description"/>-->
+                </list>
+            </field>
+        </record>
+        <record id="view_res_partner_driver_form" model="ir.ui.view">
+            <field name="name">res.partner.driver.form</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <form string="Drivers">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box"/>
+                        <widget bg_color="bg-danger" invisible="active == True" name="web_ribbon" title="Archived"/>
+                        <field invisible="1" name="avatar_128"/>
+                        <field class="oe_avatar" name="image_1920" options='{"preview_image": "avatar_128"}' widget="image"/>
+                        <div class="oe_title mb24">
+                            <field invisible="1" name="active"/>
+                            <field name="driver_state" options="{'horizontal': true}" widget="radio"/>
+                        </div>
+                        <h1>
+                            <field default_focus="1" name="name" placeholder="e.g. Brandom Freeman" required="1"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <span class="o_form_label o_td_label" name="address_name">
+                                    <b>
+                                        Address
+                                    </b>
+                                </span>
+                                <div class="o_address_format">
+                                    <field class="o_address_country" name="country_id" options='{"no_open": True, "no_create": True}' placeholder="Country"/>
+                                    <field name="state_id" options='{"no_open": True, "no_create": True}' placeholder="State" required="0"/>
+                                    <!--                                    <field name="kaza_id" options='{"no_open": True, "no_create": True}' placeholder="Kazaa" required="0"/>-->
+                                    <!--                                    <field name="city_id" options='{"no_open": True, "no_create": True}' placeholder="City" required="0"/>-->
+                                    <field class="o_address_street" name="street" placeholder="Street..."/>
+                                    <field class="o_address_street" name="street2" placeholder="Street 2..."/>
+                                </div>
+                            </group>
+                            <group>
+                                <field name="phone" widget="phone"/>
+                                <!-- <field name="mobile" widget="phone"/> -->
+                                <field invisible="1" name="user_ids"/>
+                                <field context="{'gravatar_image': True}" name="email" required="user_ids != []" widget="email"/>
+                                <field name="website" placeholder="e.g. https://www.odoo.com" string="Website" widget="url"/>
+                                <!-- <field name="title" options='{"no_open": True}' placeholder="e.g. Mister"/> -->
+                                <field name="lang"/>
+                            </group>
+                        </group>
+                        <!--                        <notebook colspan="4">-->
+                        <!--                            <page name="internal_notes" string="Description">-->
+                        <!--                                <field name="description" placeholder="description..."/>-->
+                        <!--                            </page>-->
+                        <!--                        </notebook>-->
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="action_res_partner_driver" model="ir.actions.act_window">
+            <field name="name">Drivers</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">list,form</field>
+            <field eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('view_res_partner_driver_tree')}),                 (0, 0, {'view_mode': 'form', 'view_id': ref('view_res_partner_driver_form')})]" name="view_ids"/>
+            <field name="domain">[('is_driver', '=', 'True')]</field>
+            <field name="search_view_id" ref="driver_search"/>
+            <field name="context">{'is_driver': True}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click the Create button to add a new driver.
+                </p>
+            </field>
+        </record>
+        <menuitem action="action_res_partner_driver" id="menu_res_partner_driver" name="Drivers" parent="contacts.res_partner_menu_config" sequence="4"/>
+        <record id="contacts.res_partner_industry_menu" model="ir.ui.menu">
+            <field eval="5" name="sequence"/>
+        </record>
+        <record id="contacts.menu_localisation" model="ir.ui.menu">
+            <field eval="6" name="sequence"/>
+        </record>
+        <record id="contacts.menu_config_bank_accounts" model="ir.ui.menu">
+            <field eval="7" name="sequence"/>
+        </record>
+        <record id="contacts.action_contacts" model="ir.actions.act_window">
+            <field name="domain">[('is_driver', '=', False)]</field>
+        </record>
+    </data>
+</odoo>

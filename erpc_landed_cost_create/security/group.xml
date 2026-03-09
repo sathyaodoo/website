@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="res.groups" id="group_landed_cost_button">
+            <field name="name">Landed Costs Button</field>
+        </record>
+    </data>
+</odoo>

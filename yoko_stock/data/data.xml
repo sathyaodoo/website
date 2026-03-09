@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="product_category_promotion" model="product.category">
+            <field name="name">Promotional Item</field>
+            <field name="property_cost_method">standard</field>
+            <field name="advertising">True</field>
+        </record>
+    </data>
+</odoo>

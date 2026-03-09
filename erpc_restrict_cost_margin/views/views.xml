@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Sale Order Level -->
+        <record id="erpc_sale_margin_sale_order" model="ir.ui.view">
+            <field name="name">erpc.sale.order.margin.view.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_margin.sale_margin_sale_order"/>
+            <field name="arch" type="xml">
+                <xpath expr="//label[@for='margin']" position="attributes">
+                    <attribute name="groups">
+                        erpc_restrict_cost_margin.can_view_product_cost</attribute>
+                </xpath>
+                <xpath expr="//div[hasclass('text-nowrap')]" position="attributes">
+                    <attribute name="groups">
+                        erpc_restrict_cost_margin.can_view_product_cost</attribute>
+                </xpath></field>
+        </record>
+        <record id="sale_margin.sale_margin_sale_order_line" model="ir.ui.view">
+            <field name="name">erpc.sale.order.line.margin.view.form</field>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_line']/form//field[@name='price_unit']" position="after">
+                    <field groups="erpc_restrict_cost_margin.can_view_product_cost" name="purchase_price"/>
+                </xpath></field>
+        </record>
+        <record id="sale_margin.sale_margin_sale_order_line_form" model="ir.ui.view">
+            <field name="name">erpc.sale.order.line.tree.margin.view.form</field>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_line']/tree//field[@name='price_unit']" position="after">
+                    <field invisible="1" name="price_subtotal"/>
+                    <field groups="erpc_restrict_cost_margin.can_view_product_cost" name="purchase_price" optional="hide"/>
+                    <field groups="erpc_restrict_cost_margin.can_view_product_cost" name="margin" optional="hide"/>
+                    <field groups="erpc_restrict_cost_margin.can_view_product_cost" invisible="price_subtotal == 0" name="margin_percent" optional="hide" widget="percentage"/>
+                </xpath></field>
+        </record>
+        <!-- Product Level -->
+        <record id="erpc_product_product_tree_view" model="ir.ui.view">
+            <field name="name">erpc.product.product.tree</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_product_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='standard_price']" position="attributes">
+                    <attribute name="groups">
+                        erpc_restrict_cost_margin.can_view_product_cost</attribute>
+                </xpath></field>
+        </record>
+        <record id="erpc_product_template_tree_view" model="ir.ui.view">
+            <field name="name">erpc.product.template.product.tree</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='standard_price']" position="attributes">
+                    <attribute name="groups">
+                        erpc_restrict_cost_margin.can_view_product_cost</attribute>
+                </xpath></field>
+        </record>
+        <record id="erpc_product_variant_easy_edit_view" model="ir.ui.view">
+            <field name="name">erpc.product.product.view.form.easy</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_variant_easy_edit_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='pricing']//label[@for='standard_price']" position="attributes">
+                    <attribute name="groups">
+                        erpc_restrict_cost_margin.can_view_product_cost</attribute>
+                </xpath>
+                <xpath expr="//group[@name='pricing']//field[@name='standard_price']" position="attributes">
+                    <attribute name="groups">
+                        erpc_restrict_cost_margin.can_view_product_cost</attribute>
+                </xpath></field>
+        </record>
+        <record id="erpc_product_template_form_view" model="ir.ui.view">
+            <field name="name">erpc.product.template.common.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//label[@for='standard_price']" position="attributes">
+                    <attribute name="groups">
+                        erpc_restrict_cost_margin.can_view_product_cost</attribute>
+                </xpath>
+                <xpath expr="//div[@name='standard_price_uom']" position="attributes">
+                    <attribute name="groups">
+                        erpc_restrict_cost_margin.can_view_product_cost</attribute>
+                </xpath>
+                <xpath expr="//form//sheet[@name='product_form']/notebook[1]/page[@name='purchase']" position="attributes">
+                    <attribute name="groups">
+                        erpc_restrict_cost_margin.can_view_product_cost</attribute>
+                </xpath></field>
+        </record>
+        <!-- Others -->
+        <record id="erpc_product_template_tree_view_stock_account" model="ir.ui.view">
+            <field name="name">erpc.product.template.tree.inherit.stock.account</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="stock_account.product_template_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="standard_price" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                    <attribute name="groups">
+                        erpc_restrict_cost_margin.can_view_product_cost</attribute></field></field>
+        </record>
+        <record id="erpc_product_product_expense_categories_tree_view" model="ir.ui.view">
+            <field name="name">erpc.product.product.expense.categories.tree.view</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="hr_expense.product_product_expense_categories_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='standard_price']" position="attributes">
+                    <attribute name="groups">
+                        erpc_restrict_cost_margin.can_view_product_cost</attribute>
+                </xpath></field>
+        </record>
+        <record id="erpc_product_product_expense_form_view" model="ir.ui.view">
+            <field name="name">erpc.product.product.expense.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="hr_expense.product_product_expense_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='standard_price']" position="attributes">
+                    <attribute name="groups">
+                        erpc_restrict_cost_margin.can_view_product_cost</attribute>
+                </xpath></field>
+        </record>
+        <record id="erpc_product_product_expense_tree_view" model="ir.ui.view">
+            <field name="name">erpc.product.product.expense.tree</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="hr_expense.product_product_expense_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='standard_price']" position="attributes">
+                    <attribute name="groups">
+                        erpc_restrict_cost_margin.can_view_product_cost</attribute>
+                </xpath></field>
+        </record>
+        <record id="erpc_view_product_margin_form" model="ir.ui.view">
+            <field name="name">erpc.product.margin.form.inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product_margin.view_product_margin_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='standard_price']" position="attributes">
+                    <attribute name="groups">
+                        erpc_restrict_cost_margin.can_view_product_cost</attribute>
+                </xpath></field>
+        </record>
+        <!-- product.supplierinfo::seller_ids -->
+        <record id="erpc_product_supplierinfo_form_view" model="ir.ui.view">
+            <field name="name">erpc.product.supplierinfo.form.view</field>
+            <field name="model">product.supplierinfo</field>
+            <field name="inherit_id" ref="product.product_supplierinfo_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//label[@for='price']" position="attributes">
+                    <attribute name="groups">
+                        erpc_restrict_cost_margin.can_view_product_cost</attribute>
+                </xpath>
+                <xpath expr="//field[@name='price']" position="attributes">
+                    <attribute name="groups">
+                        erpc_restrict_cost_margin.can_view_product_cost</attribute>
+                </xpath></field>
+        </record>
+        <record id="erpc_product_supplierinfo_view_kanban" model="ir.ui.view">
+            <field name="name">erpc.product.supplierinfo.kanban</field>
+            <field name="model">product.supplierinfo</field>
+            <field name="inherit_id" ref="product.product_supplierinfo_view_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='price']" position="attributes">
+                    <attribute name="groups">
+                        erpc_restrict_cost_margin.can_view_product_cost</attribute>
+                </xpath>
+                <xpath expr="//templates//field[@name='price']" position="attributes">
+                    <attribute name="groups">
+                        erpc_restrict_cost_margin.can_view_product_cost</attribute>
+                </xpath></field>
+        </record>
+        <record id="erpc_product_supplierinfo_tree_view" model="ir.ui.view">
+            <field name="name">erpc.product.supplierinfo.tree.view</field>
+            <field name="model">product.supplierinfo</field>
+            <field name="inherit_id" ref="product.product_supplierinfo_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='price']" position="attributes">
+                    <attribute name="groups">
+                        erpc_restrict_cost_margin.can_view_product_cost</attribute>
+                </xpath></field>
+        </record>
+    </data>
+</odoo>

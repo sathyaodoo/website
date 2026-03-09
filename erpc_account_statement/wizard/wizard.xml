@@ -1,0 +1,39 @@
+<odoo>
+    <data>
+        <record id="view_account_debit_credit_wizard_form" model="ir.ui.view">
+            <field name="name">account.debit.credit.wizard.form</field>
+            <field name="model">account.debit.credit.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Trial Balance Partner and Currency">
+                    <group>
+<!--                        <field name="account_id"/>-->
+                        <field name="from_date"/>
+                        <field name="to_date"/>
+                        <field name="account_root" widget="many2many_tags"/>
+                        <field name="partner_id"/>
+<!--                        <field name="partner_id"/>-->
+<!--                        <field name="posted"/>-->
+                        <field name="excel_file_name" invisible="1"/>
+                        <field name="excel_file" invisible="1"/>
+                    </group>
+                    <footer>
+                        <button string="export as excel" type="object" name="print_data_excel" class="oe_highlight"/>
+<!--                        <button string="export as PDF" type="object" name="print_data_pdf" class="oe_highlight" invisible="1"/>-->
+                        <button string="Cancel" special="cancel" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_account_debit_credit_wizard" model="ir.actions.act_window">
+            <field name="name">Trial Balance Partner and Currency</field>
+            <field name="res_model">account.debit.credit.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_my_wizard" name="Trial Balance Partner and Currency" action="action_account_debit_credit_wizard" parent="account.menu_finance_entries_actions" sequence="57"/>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hr_payslip_form_inherit_des" model="ir.ui.view">
+        <field name="name">view.hr.payslip.form.inherit.des</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='salary_computation']/field[@name='line_ids']/list[1]/field[@name='name']"
+                   position="after">
+                <field name="matching_input_description" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+    <template id="report_payslip_inherit" inherit_id="hr_payroll.report_payslip">
+        <!-- Add new header column after Name -->
+        <xpath expr="//th[@id='line_header_name']" position="after">
+            <th id="line_header_description">Description</th>
+        </xpath>
+        <xpath expr="//td[@id='worked_days_name']" position="after">
+            <td>
+            </td>
+        </xpath>
+        <!-- Add corresponding data column for payslip lines -->
+        <xpath expr="//td[@id='payslip_line_name']" position="after">
+            <td id="payslip_line_description">
+                <span t-field="line.matching_input_description"/>
+            </td>
+        </xpath>
+        <xpath expr="//div[@id='to_pay']" position="replace">
+            <div id="to_pay">
+                <p t-if="o.net_to_pay &gt;= 0">To pay on <b><span t-field="o.employee_id.bank_account_id">xxxxxxxxxxxx</span></b> of <i><span t-field="o.employee_id"/></i>: $<span t-field="o.net_to_pay"/></p>
+                <p t-if="o.net_to_pay &lt; 0">The net amount will be recovered from the first positive remuneration established after this.</p>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>

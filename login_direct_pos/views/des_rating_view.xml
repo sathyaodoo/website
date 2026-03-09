@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="custom_product_tabs"
+              inherit_id="website_sale.product_comment"
+              priority="20">
+        <!-- Replace default reviews block -->
+        <xpath expr="//section[@id='o_product_page_reviews']"
+               position="replace">
+               
+            <!-- <div class="o_shop_discussion_rating border-top"> -->
+            <style>
+.product-header .nav-tabs {
+    border-bottom: 2px solid #f1f1f1; 
+    background-color: #f8f8f8;       
+}
+.product-header .nav-link.active .nav_tab_title {
+    color: #d92128 !important; /* The red from your image */
+}
+.product-header .nav-link {
+    text-transform: uppercase;       /* Makes text "SPECS", "GALLERY", etc. */
+    font-weight: 600;
+    font-size: 14px;
+    color: #333 !important;          /* Dark gray text */
+    padding: 15px 25px !important;
+    border: none !important;         /* Remove default Bootstrap borders */
+    background: transparent !important;
+}
+
+/* Active and Hover state (The red text) */
+.product-header .nav-link.active, 
+.product-header .nav-link:hover {
+    color: #d92128 !important;       /* The red color from your image */
+    background-color: #ffffff !important; /* White background for active tab */
+}
+
+.product-header .nav-link .fa {
+    display: none !important;
+}
+        .nav-link{
+            border: none !important;
+            padding: 0 0.5rem;
+            background-color:unset !important;
+            &amp;.active{
+                 li{
+                    border-bottom: 2px solid map-get($theme-colors, 'primary');
+                }
+            }
+            &amp;:hover{
+                border-color: transparent;
+            }
+             a:hover{
+                text-decoration:none;
+            }
+        }
+        .product_tab_li{
+        }
+        a.te_tab_mb_nav_link {
+            padding: 0.6rem 1rem;
+                        background-color:unset !important;
+
+            border-bottom: 2px solid transparent;
+            margin-bottom: -3px;
+            display: inline-block;
+            .fa.hide_tab_icon{
+                display: none;
+            }
+        }
+    }
+}
+.editor_enable{
+    a.te_tab_mb_nav_link {
+        .fa.hide_tab_icon{
+            display: inline-block !important;
+        }
+    }
+}
+
+            </style>
+           <section class="product_tabs_ept s_tabs">
+    <div class="container tabs_container_main">
+        <div class="row s_col_no_bgcolor">
+            <div class="col-lg-12">
+                <div class="bg-white">
+                    <t t-set="product_documents" t-value="product.sudo().product_document_ids.filtered(lambda doc: doc.shown_on_product_page)"/>
+                    
+                    <nav class="product-header">
+                        <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
+                            
+                            <button t-if="product.website_description or request.env.user.has_group('website.group_website_designer')" class="nav-link active border-0 px-3" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">
+                                <!--<span class="fa fa-sliders me-2"/>-->
+                                <span class="nav_tab_title">Description</span>
+                            </button>
+
+                            <t t-set="categories" t-value="product.valid_product_template_attribute_line_ids._prepare_categories_for_display()"/>
+                            <button t-if="categories and request.website.viewref('website_sale_comparison.product_attributes_body').active" class="nav-link border-0 px-3" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">
+                                <!--<span class="fa fa-sort-amount-desc me-2"/>-->
+                                <span class="nav_tab_title">Specification</span>
+                            </button>
+
+                           
+
+                            <button t-if="product_documents" class="nav-link border-0 px-3" id="nav-document-tab" data-bs-toggle="tab" data-bs-target="#nav-document" type="button" role="tab" aria-controls="nav-document" aria-selected="false">
+                                <!--<span class="fa fa-file-text me-2"/>-->
+                                <span class="nav_tab_title">Documents</span>
+                            </button>
+                             <t t-set="user_type" t-value="request.env.user.has_group('website.group_website_designer')"/>
+                                    <t t-set="global_tabs_domain" t-value="[('tab_type', '=', 'global')] if user_type else [('tab_type', '=', 'global'), ('website_published', '=', True)]"/>
+                                    <t t-foreach="product.tab_line_ids" t-as="tab">
+                                        <t t-if="request.env['product.tab.line'].check_tab(website.id,tab.website_ids.ids)">
+                                            <t t-if="request.env['product.tab.line'].sudo().check_tab_publish(tab)">
+                                                <button class="nav-link border-0 px-3" t-att-id="'nav-global-tab_%s_%s' % (product.id, tab.id)" data-bs-toggle="tab" t-att-data-bs-target="'#nav-global_%s_%s' % (product.id, tab.id)" type="button" role="tab" t-att-aria-controls="'nav_tabs_content_%s_%s' % (product.id, tab.id)" aria-selected="false">
+                                                    <li class="product_tab_li">
+                                                        
+                                                        <a class="te_tab_mb_nav_link" t-if="tab.tab_content or request.env.user._is_admin()">
+                                                            <!--<span t-field="tab.icon_content"/>-->
+                                                            <span t-field="tab.tab_name" class="nav_tab_title"/>
+                                                        </a>
+                                                    </li>
+                                                </button>
+                                            </t>
+                                        </t>
+                                    </t>
+                                     <button t-if="request.website.viewref('website_sale.product_comment').active" class="nav-link border-0 px-3" id="nav_tabs_link_ratings" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">
+                                <!--<span class="fa fa-star me-2"/>-->
+                                <span class="nav_tab_title">Reviews</span>
+                            </button>
+                        </div>
+                    </nav>
+
+                    <div class="tab-content accordion" id="prd-tab-content">
+                        
+                        <div class="tab-pane fade show active py-3" aria-labelledby="nav-home-tab" id="nav-home" role="tabpanel">
+                            <div class="card-header d-lg-none" role="tab" id="prd-tab-content_description">
+                                <h6 class="mb-0">
+                                    <a class="te-tab-a" data-bs-toggle="collapse" data-bs-target="#collapse_description">
+                                        <span class="fa fa-sliders me-2"/> Description
+                                    </a>
+                                </h6>
+                            </div>
+                            <div id="collapse_description" class="collapse show accordion-collapse" data-bs-parent="#prd-tab-content">
+                                <div class="accordion-body">
+                                    <div itemprop="description" t-field="product.description_ecommerce" class="oe_structure" id="product_full_description"/>
+                                    <div t-field="product.description_ecommerce" t-attf-class="oe_structure mb-3 text-muted" placeholder="A detailed, formatted description to promote your product on this page. Use '/' to discover more features."/>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div t-if="categories and request.website.viewref('website_sale_comparison.product_attributes_body').active" class="tab-pane fade py-3" id="nav-profile" role="tabpanel">
+                            <div id="collapse_specifications" class="accordion-collapse">
+                                <div class="accordion-body p-0">
+                                    <table class="table table-striped table-sm table-hover mb-0">
+                                        <t t-foreach="categories" t-as="category">
+                                            <tr t-if="len(categories) &gt; 1" class="clickable bg-light">
+                                                <th colspan="2">
+                                                    <i class="fa fa-chevron-down me-2 small"/>
+                                                    <span t-field="category.name" t-if="category"/>
+                                                    <span t-else="">Uncategorized</span>
+                                                </th>
+                                            </tr>
+                                            <tr t-foreach="categories[category].filtered(lambda l: len(l.value_ids) &gt; 1)" t-as="ptal">
+                                                <td class="text-capitalize"><span t-field="ptal.attribute_id.name"/></td>
+                                                <td>
+                                                    <t t-foreach="ptal.value_ids" t-as="pav">
+                                                        <span t-field="pav.name"/><t t-if="not pav_last"> or </t>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <div t-if="product_documents" class="tab-pane fade py-3" id="nav-document" role="tabpanel">
+                            <div class="accordion-body">
+                                <t t-foreach="product_documents" t-as="document_sudo">
+                                    <t t-set="attachment_sudo" t-value="document_sudo.ir_attachment_id"/>
+                                    <div class="product_docs_main d-inline-block me-3">
+                                        <a class="text-decoration-none" t-att-href="'/shop/' + slug(product) + '/document/' + str(document_sudo.id)" t-att-target="attachment_sudo.type == 'url' and '_blank' or '_self'">
+                                            <i t-att-class="'fa ' + ('fa-link' if attachment_sudo.type == 'url' else 'fa-download') + ' me-1'"/>
+                                            <t t-out="attachment_sudo.name"/>
+                                        </a>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                        
+
+                    </div>
+                    
+                </div>
+                <t t-set="user_type" t-value="request.env.user.has_group('website.group_website_designer')"/>
+                                <t t-set="global_tabs_domain" t-value="[('tab_type', '=', 'global')] if user_type else [('tab_type', '=', 'global'), ('website_published', '=', True)]"/>
+                                <t t-foreach="product.tab_line_ids" t-as="tab">
+                                    <t t-if="request.env['product.tab.line'].check_tab(website.id,tab.website_ids.ids)">
+                                        <t t-if="request.env['product.tab.line'].sudo().check_tab_publish(tab)">
+                                            <div class="tab-pane fade py-3 collapse accordion-collapse" t-att-id="'nav-global_%s_%s' % (product.id, tab.id)" t-att-aria-labelledby="'nav-global-tab_%s_%s' % (product.id, tab.id)">
+                                                <!-- <div class="card-header" role="tab" t-att-id="'prd_card_content_%s_%s' % (product.id, tab.id)">
+                                                    <h6 class="mb-0">
+                                                        <a class="collapsed te-tab-a" data-bs-toggle="collapse" t-att-data-bs-target="'#collapse_%s_%s' % (product.id, tab.id)" data-bs-parent="#prd-tab-content" aria-expanded="false" t-att-aria-controls="'collapse_%s_%s' % (product.id, tab.id)">
+                                                            <span class="fa fa-info-circle me-2"/>
+                                                            <span t-field="tab.tab_name" class="nav_tab_title"/>
+                                                        </a>
+                                                    </h6>
+                                                </div> -->
+                                                 <!--<div t-att-id="'collapse_%s_%s' % (product.id, tab.id)" data-parent="#prd-tab-content" class="collapse accordion-collapse" t-att-aria-labelledby="'prd_card_content_%s_%s' % (product.id, tab.id)"> -->
+                                                     <center>
+                                                    <div class="accordion-body">
+                                                        <div t-field="tab.tab_content" class="oe_structure"/>
+                                                    </div>
+                                                    </center>
+                                                 <!--</div> -->
+                                            </div>
+                                        </t>
+                                    </t>
+                                </t>
+                                <div t-if="request.website.viewref('website_sale.product_comment').active" class="tab-pane fade py-3" id="nav-contact" role="tabpanel">
+                            <div class="accordion-body">
+                                <t t-call="portal.message_thread">
+                                                                        <t t-set="display_rating" t-value="True"/>
+
+                                    <t t-set="object" t-value="product"/>
+                                </t>
+                            </div>
+                        </div>
+            </div>
+        </div>
+    </div>
+</section>
+            <!-- </div> -->
+        </xpath>
+    </template>
+</odoo>

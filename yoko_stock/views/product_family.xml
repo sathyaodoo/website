@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    
+<!--        <record id="product_family_tree" model="ir.ui.view">-->
+<!--            <field name="name">product_family.view.tree</field>-->
+<!--            <field name="model">product.family</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree string="product family tree">-->
+<!--                    <field name="code"/>-->
+<!--                    <field name="name"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="family_view_form" model="ir.ui.view">-->
+<!--            <field name="name">family.view.form</field>-->
+<!--            <field name="model">product.family</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form>-->
+<!--                    <sheet>-->
+<!--                        <label for="name"/>-->
+<!--                        <h1><field name="name" placeholder="Name..." required="1"/></h1>-->
+<!--                        <group>-->
+<!--                            <group>-->
+<!--                                <field name="code" placeholder="e.g. 101"/>-->
+<!--                            </group>-->
+<!--                        </group>-->
+<!--                    </sheet>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="product_family_action" model="ir.actions.act_window">-->
+<!--            <field name="name">Product Family</field>-->
+<!--            <field name="res_model">product.family</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--        </record>-->
+
+<!--        <menuitem id="product_family_menu" name="Product Family" action="product_family_action" parent="stock.menu_stock_inventory_control" sequence="10" active="True"/>-->
+    
+    </data>
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="erpc_attendance_mail_view_employee_form" model="ir.ui.view">
+        <field name="name">erpc.view.employee.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='hr_settings']//field[@name='user_id']" position="after">
+                <field name="send_attendance_reminder"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

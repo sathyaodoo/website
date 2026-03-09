@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="erpc_view_partner_form_inherit" model="ir.ui.view">
+        <field name="name">erpc.res.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet[1]/group[1]/group[2]" position="after">
+                <group string="Employee Relation">
+                    <field name="employee_parent" groups="hr.group_hr_manager"/>
+                    <field name="employee_parent" invisible="1"/>
+                    <field name="erpc_employee_id" readonly="1" groups="!hr.group_hr_manager"
+                           options="{'no_create': True, 'no_open': True}"/>
+                    <field name="erpc_employee_id" groups="hr.group_hr_manager" force_save="1"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

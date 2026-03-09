@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+        <record id="group_see_own_contact" model="res.groups">
+            <field name="name">See Own Contact Only</field>
+        </record>
+    </data>
+
+    <record id="see_own_contact_rule" model="ir.rule">
+        <field name="name">See Only Own Contacts</field>
+        <field name="model_id" ref="base.model_res_partner"/>
+        <field name="domain_force">[('user_id','=',user.id)]</field>
+        <field name="groups" eval="[(4, ref('erpc_salesperson_own_contacts_view.group_see_own_contact'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+</odoo>

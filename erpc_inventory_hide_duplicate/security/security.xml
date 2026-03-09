@@ -1,0 +1,6 @@
+<odoo>
+    <record id="group_hide_duplicate" model="res.groups">
+        <field name="name">Duplicate Access</field>
+    </record>
+
+</odoo>

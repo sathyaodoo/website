@@ -1,0 +1,41 @@
+{
+  "name": "Advance Request Dashboard",
+  "archived": false,
+  "template": false,
+  "raw": {
+    "sheets": [
+      {
+        "name": "Advance Summary",
+        "cells": {
+          "A1": {"value": "Advance Request Dashboard", "style": {"bold": true, "fontSize": 16}},
+          "A3": {"value": "Total Requests"},
+          "B3": {
+            "formula": "=COUNTA(PIVOT('Advance Pivot'!A1))"
+          },
+          "A4": {"value": "Total Amount"},
+          "B4": {
+            "formula": "=SUM(PIVOT('Advance Pivot'!B:B))"
+          }
+        }
+      },
+      {
+        "name": "Advance Pivot",
+        "pivots": [
+          {
+            "anchor": "A1",
+            "domain": [],
+            "model": "hr.advance.request",
+            "groupbys": ["create_uid", "state"],
+            "values": [
+              {
+                "field": "amount",
+                "aggregation": "sum"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "activeSheetIndex": 0
+  }
+}

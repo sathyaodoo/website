@@ -1,0 +1,598 @@
+
+<odoo>
+    <template id="website_shop_products" name="Shop Products">
+    
+<style>
+    .shop-products-section {
+    background-color: #ffffff;
+    }
+    
+    .nav-tabs .nav-link {
+        font-weight: 600;
+        color: #000;
+    }
+    
+    .nav-tabs .nav-link.active {
+        color: #e60000;
+        border-bottom: 3px solid #e60000;
+    }
+    
+    .table-header {
+        background-color: #e60000;
+        color: #fff;
+    }
+    .table-header th {
+        padding: 14px 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .custom-table {
+    width: 100%;
+    }
+    
+    .custom-table th {
+        font-size: 14px;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+    
+    .custom-table td {
+        white-space: nowrap;
+    }
+    
+    .dot {
+        height: 10px;
+        width: 10px;
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    .qty-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+    }
+    
+    .qty-input {
+        width: 40px;
+        text-align: center;
+    }
+    
+    /* NAV TABS BLACK STYLE */
+.custom-tabs .nav-link {
+        background-color: #111;
+        color: #fff;
+        font-weight: 600;
+        font-size: 15px; 
+        border: none;
+        margin: 0 5px;
+        padding: 18px 165px;
+    }
+    
+    .custom-tabs .nav-link:hover {
+        background-color: #222;
+        color: #fff;
+    }
+    
+    .custom-tabs .nav-link.active {
+        background-color: #fff;
+        color: #e60000;
+        border: 1px solid #F1F1F1;
+        border-bottom: 3px solid #e60000;
+      
+    }
+
+    /* Red Table Header */
+    .table-header {
+        background-color: #e60000;
+        color: #fff;
+    }
+    
+    /* Availability Dot */
+    .dot {
+        height: 10px;
+        width: 10px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 5px;
+    }
+    
+    /* Quantity Box */
+    .qty-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+    }
+    
+    .qty-input {
+        width: 40px;
+        text-align: center;
+    }
+    
+    .battery-table-wrapper {
+        overflow-x: visible;   /* allow natural width */
+    }
+    
+    .battery-table {
+        width: 100%;
+        font-size: 13px;
+    }
+    
+    .battery-table th,
+    .battery-table td {
+        padding: 8px 6px;
+        white-space: normal;      /* allow text wrapping */
+        word-break: break-word;   /* prevent overflow */
+    }
+    .battery-table th {
+        font-size: 12px;
+    }
+
+/* ================= MOBILE OPTIMIZATION ================= */
+
+@media (max-width: 768px) {
+
+    /* ===== NAV TABS SINGLE LINE SCROLL ===== */
+    .custom-tabs {
+        flex-wrap: nowrap !important;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .custom-tabs .nav-item {
+        flex: 0 0 auto;
+    }
+
+    .custom-tabs .nav-link {
+        padding: 9px 8px;   /* reduced width for mobile */
+        font-size: 12px;      /* slightly smaller text */
+        margin: 0 4px;
+    }
+
+   .custom-tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* ===== TABLE RESPONSIVE FIX ===== */
+
+    .table-responsive,
+    .battery-table-wrapper,
+    .lubricant-table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .custom-table {
+        min-width: 900px; /* forces horizontal scroll */
+    }
+
+    .battery-table {
+        min-width: 1100px;
+    }
+
+    /* Prevent header text breaking */
+    .custom-table th,
+    .custom-table td,
+    .battery-table th,
+    .battery-table td {
+        white-space: nowrap !important;
+    }
+
+    /* Reduce padding slightly for mobile */
+    .custom-table th,
+    .custom-table td {
+        padding: 8px 6px;
+        font-size: 12px;
+    }
+
+    /* Quantity box tighter */
+    .qty-input {
+        width: 35px;
+        font-size: 12px;
+    }
+}
+
+</style>
+        <script>
+document.addEventListener("DOMContentLoaded", function() {
+
+    document.querySelectorAll(".plus").forEach(btn =&gt; {
+        btn.addEventListener("click", function() {
+            let input = this.parentElement.querySelector(".qty-input");
+            input.value = parseInt(input.value || 0) + 1;
+            calculate(input);
+        });
+    });
+
+    document.querySelectorAll(".minus").forEach(btn =&gt; {
+        btn.addEventListener("click", function() {
+            let input = this.parentElement.querySelector(".qty-input");
+            if (input.value &gt; 0) {
+                input.value = parseInt(input.value) - 1;
+                calculate(input);
+            }
+        });
+    });
+
+    document.querySelectorAll(".qty-input").forEach(input =&gt; {
+        input.addEventListener("input", function() {
+            calculate(this);
+        });
+    });
+
+    function calculate(input) {
+        let price = parseFloat(input.dataset.price);
+        let discount = parseFloat(input.dataset.discount || 0);
+        let qty = parseInt(input.value || 0);
+
+        let final_price = price - (price * discount / 100);
+        let subtotal = final_price * qty;
+
+        input.closest("tr").querySelector(".subtotal").innerText =
+            subtotal.toFixed(2) + " $";
+    }
+
+});
+</script>
+
+
+    <t t-call="website.layout">
+        <!-- Background Section -->
+        <section class="shop-products-section py-5">
+            <div class="container-fluid px-5">
+
+                <!-- Header -->
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold">Shop Products</h2>
+                </div>
+
+                <!-- Nav Tabs -->
+                <ul class="nav custom-tabs justify-content-center mb-4" id="productTabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#tires">TIRES</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#lubricants">LUBRICANTS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#batteries">BATTERIES</a>
+                    </li>
+                </ul>
+
+                <!-- Tab Content -->
+                <div class="tab-content">
+
+                    <!-- TIRES TAB -->
+                    <div class="tab-pane fade show active" id="tires">
+                        <div class="d-flex justify-content-end align-items-center mb-2">
+                            <span class="me-3">
+                                <span class="dot bg-success"></span> Available
+                            </span>
+                            <span>
+                                <span class="dot bg-danger"></span> Not Available
+                            </span>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table custom-table align-middle text-center">
+
+                                <thead class="table-header">
+                                    <tr>
+                                        <th>TIRE SIZE</th>
+                                        <th>BRAND</th>
+                                        <th>PATTERN</th>
+                                        <th>PRICE</th>
+                                        <th>DISCOUNT</th>
+                                        <th>AVAILABLE QTY</th>
+                                        <th>QTY</th>
+                                        <th>SUBTOTAL</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <t t-foreach="tires" t-as="product">
+
+                                        <tr>
+                                            <td>
+                                                <t t-esc="product.name"/>
+                                            </td>
+
+                                            <td>
+                                                <!-- <t t-esc="product.product_brand_id.name if product.product_brand_id else ''"/> -->
+                                            </td>
+
+                                            <td>
+                                                <t t-esc="product.default_code"/>
+                                            </td>
+
+                                            <td>
+                                                <t t-esc="product.list_price"/> $
+                                            </td>
+
+                                            <td>
+                                                <t t-if="product.discount_percent">
+                                                    <t t-set="discounted"
+                                                    t-value="product.list_price - (product.list_price * product.discount_percent / 100)"/>
+                                                    <!-- <t t-esc="discounted"/> $ -->
+                                                    <br/>
+                                                    <span class="text-danger small">
+                                                        <!-- -<t t-esc="product.discount_percent"/>% -->
+                                                    </span>
+                                                </t>
+                                                <t t-else="">
+                                                    -
+                                                </t>
+                                            </td>
+
+                                            <td>
+                                                <span t-att-class="'dot bg-success' if product.show_available_qty > 0 else 'dot bg-danger'"/>
+                                                <t t-esc="product.show_available_qty"/>
+                                            </td>
+
+                                            <td>
+                                                <div class="qty-box">
+                                                    <button type="button"
+                                                            class="btn btn-sm btn-light minus">-</button>
+
+                                                    <input type="number"
+                                                        value="0"
+                                                        class="qty-input"
+                                                        t-att-data-price="product.list_price"
+                                                        t-att-data-discount="product.discount_percent"/>
+
+                                                    <button type="button"
+                                                            class="btn btn-sm btn-light plus">+</button>
+                                                </div>
+                                            </td>
+
+                                            <td class="subtotal">
+                                                0 $
+                                            </td>
+
+                                            <td>
+                                                <button class="btn btn-dark btn-sm">
+                                                    <i class="fa fa-shopping-cart"/>
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                    </t>
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                    </div>
+
+                    <!-- LUBRICANTS TAB -->
+                    <!-- LUBRICANTS TAB -->
+    <div class="tab-pane fade" id="lubricants">
+        <div class="d-flex justify-content-end align-items-center mb-2">
+            <span class="me-3">
+                <span class="dot bg-success"></span> Available
+            </span>
+            <span>
+                <span class="dot bg-danger"></span> Not Available
+            </span>
+        </div>
+    
+        <div class="lubricant-table-wrapper">
+            <table class="table custom-table align-middle text-center lubricant-table">
+    
+                <thead class="table-header">
+                    <tr>
+                        <th>DESCRIPTION</th>
+                        <th>FACTOR</th>
+                        <th>PACKAGING</th>
+                        <th>DENSITY</th>
+                        <th>TYPE</th>
+                        <th>PRICE</th> 
+                        <th>DISCOUNT</th>
+                        <th>AVAILABLE QTY</th>
+                        <th>QTY</th>
+                        <th>SUBTOTAL</th>
+                        <th></th>
+                    </tr>
+                </thead>
+    
+                <tbody>
+                                    <t t-foreach="lubricants" t-as="product">
+
+                                        <tr>
+                                            <td>
+                                                <t t-esc="product.name"/>
+                                            </td>
+
+                                            <td>
+                                                <!-- <t t-esc="product.product_brand_id.name if product.product_brand_id else ''"/> -->
+                                            </td>
+
+                                            <td>
+                                                <t t-esc="product.default_code"/>
+                                            </td>
+
+                                            <td>
+                                                <t t-esc="product.list_price"/> $
+                                            </td>
+
+                                            <td>
+                                                <t t-if="product.discount_percent">
+                                                    <t t-set="discounted"
+                                                    t-value="product.list_price - (product.list_price * product.discount_percent / 100)"/>
+                                                    <!-- <t t-esc="discounted"/> $ -->
+                                                    <br/>
+                                                    <span class="text-danger small">
+                                                        <!-- -<t t-esc="product.discount_percent"/>% -->
+                                                    </span>
+                                                </t>
+                                                <t t-else="">
+                                                    -
+                                                </t>
+                                            </td>
+
+                                            <td>
+                                                <span t-att-class="'dot bg-success' if product.show_available_qty > 0 else 'dot bg-danger'"/>
+                                                <t t-esc="product.show_available_qty"/>
+                                            </td>
+
+                                            <td>
+                                                <div class="qty-box">
+                                                    <button type="button"
+                                                            class="btn btn-sm btn-light minus">-</button>
+
+                                                    <input type="number"
+                                                        value="0"
+                                                        class="qty-input"
+                                                        t-att-data-price="product.list_price"
+                                                        t-att-data-discount="product.discount_percent"/>
+
+                                                    <button type="button"
+                                                            class="btn btn-sm btn-light plus">+</button>
+                                                </div>
+                                            </td>
+
+                                            <td class="subtotal">
+                                                0 $
+                                            </td>
+
+                                            <td>
+                                                <button class="btn btn-dark btn-sm">
+                                                    <i class="fa fa-shopping-cart"/>
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                    </t>
+                                </tbody>
+    
+            </table>
+        </div>
+    
+    </div>
+
+                    <!-- BATTERIES TAB -->
+<!-- BATTERIES TAB -->
+<div class="tab-pane fade" id="batteries">
+    <div class="d-flex justify-content-end align-items-center mb-2">
+        <span class="me-3">
+            <span class="dot bg-success"></span> Available
+        </span>
+        <span>
+            <span class="dot bg-danger"></span> Not Available
+        </span>
+    </div>
+
+    <div class="battery-table-wrapper">
+        <table class="table custom-table align-middle text-center battery-table">
+
+            <thead class="table-header">
+                <tr>
+                    <th>CATALOGUE NB</th>
+                    <th>CODE</th>
+                    <th>CAPACITY</th>
+                    <th>POLE LAYOUT</th>
+                    <th>DIMENSIONS (MM)</th>
+                    <th>A(EN)/CCA</th>
+                    <th>TYPES OF POLE</th>
+                    <th>PRICE</th>
+                    <th>DISCOUNT</th>
+                    <th>AVAILABLE QTY</th>
+                    <th>QTY</th>
+                    <th>SUBTOTAL</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                                    <t t-foreach="batteries" t-as="product">
+
+                                        <tr>
+                                            <td>
+                                                <t t-esc="product.name"/>
+                                            </td>
+
+                                            <td>
+                                                <!-- <t t-esc="product.product_brand_id.name if product.product_brand_id else ''"/> -->
+                                            </td>
+
+                                            <td>
+                                                <t t-esc="product.default_code"/>
+                                            </td>
+
+                                            <td>
+                                                <t t-esc="product.list_price"/> $
+                                            </td>
+
+                                            <td>
+                                                <t t-if="product.discount_percent">
+                                                    <t t-set="discounted"
+                                                    t-value="product.list_price - (product.list_price * product.discount_percent / 100)"/>
+                                                    <!-- <t t-esc="discounted"/> $ -->
+                                                    <br/>
+                                                    <span class="text-danger small">
+                                                        <!-- -<t t-esc="product.discount_percent"/>% -->
+                                                    </span>
+                                                </t>
+                                                <t t-else="">
+                                                    -
+                                                </t>
+                                            </td>
+
+                                            <td>
+                                                <span t-att-class="'dot bg-success' if product.show_available_qty > 0 else 'dot bg-danger'"/>
+                                                <t t-esc="product.show_available_qty"/>
+                                            </td>
+
+                                            <td>
+                                                <div class="qty-box">
+                                                    <button type="button"
+                                                            class="btn btn-sm btn-light minus">-</button>
+
+                                                    <input type="number"
+                                                        value="0"
+                                                        class="qty-input"
+                                                        t-att-data-price="product.list_price"
+                                                        t-att-data-discount="product.discount_percent"/>
+
+                                                    <button type="button"
+                                                            class="btn btn-sm btn-light plus">+</button>
+                                                </div>
+                                            </td>
+
+                                            <td class="subtotal">
+                                                0 $
+                                            </td>
+
+                                            <td>
+                                                <button class="btn btn-dark btn-sm">
+                                                    <i class="fa fa-shopping-cart"/>
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                    </t>
+                                </tbody>
+
+        </table>
+    </div>
+
+</div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+
+    </t>
+</template>
+
+    
+
+</odoo>

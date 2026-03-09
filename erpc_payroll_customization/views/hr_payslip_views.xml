@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hr_payslip_form_inherit" model="ir.ui.view">
+        <field name="name">view.hr.payslip.form.inherit</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='struct_id']" position="after">
+                <field name="work_location_id"/>
+<!--                <field name="usd_rate"/>-->
+<!--                <field name="lbp_rate"/>-->
+                <field name="category"/>
+                <field name="bmr_currency" options="{'no_create': True, 'no_open': True}"/>
+                <field name="bmr_currency_rate" readonly="0" force_save='1'/>
+                <field name="official_currency" options="{'no_create': True, 'no_open': True}"/>
+                <field name="official_currency_rate"/>
+            </xpath>
+            <xpath expr="//page[@name='salary_computation']/field[@name='line_ids']//field[@name='total']"
+                   position="after">
+                <field name="bmr_currency" invisible='1'/>
+                <field name="official_currency" invisible='1'/>
+                <field name="bmr_total" options="{'currency_field': 'bmr_currency'}" widget="monetary" optional="hide"/>
+                <field name="official_total" options="{'currency_field': 'official_currency'}" widget="monetary"
+                       optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="erpc_view_hr_payslip_tree" model="ir.ui.view">
+        <field name="name">erpc.hr.payslip</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='basic_wage']" position="attributes">
+                <attribute name="widget">float</attribute>
+                <attribute name="options">{'precision':0,'digits':[0,0]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='gross_wage']" position="attributes">
+                <attribute name="widget">float</attribute>
+                <attribute name="options">{'precision':0,'digits':[0,0]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='net_wage']" position="attributes">
+                <attribute name="widget">float</attribute>
+                <attribute name="options">{'precision':0,'digits':[0,0]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='basic_wage']" position="after">
+                <field name="contract_start_date" optional="1"/>
+                <field name="contract_end_date" optional="1"/>
+                <field name="department_id" optional="1"/>
+                <field name="transportation" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="allowances_bonus" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="allowances_commission" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="allowances_value_medical" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="allowances_value_goods" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="allowances_exceptional" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="deduction_exceptional" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="overtime" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="undertime" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="unpaid" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="deduction_advance" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="deduction_loan" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="deduction_goods" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="net_to_pay" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="net_value" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+
+                <field name="basic_nssf_usd" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="basic_nssf_lbp" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="nssf_additional_on_salary" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="nssf_medical_insurance" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="nssf_allowances_home" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="nssf_total_salary" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="nssf_abattement" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="nssf_taxable_salary" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="nssf_tax_on_salary" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+
+
+                <field name="transportation_nssf" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="allowances_scholarship" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="nssf_representation_fees" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="family_allowance_employee_nssf" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="nssf_3_sickness_salary" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="sickness_cotisation_3_nssf" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="nssf_8_sickness_salary" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="sickness_cotisation_8_nssf" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="sickness_cotisation_11_nssf" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="nssf_8_5_end_of_service" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="end_of_service_8_5_nssf" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="family_allowance_6_nssf" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="family_allowance_cont_comp_6_nssf" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="nssf_total_cotisation_tbp" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="nssf_net_to_pay" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="nssf_net_value" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="nssf_net_value_2" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+                <field name="difference_forfait" optional="1" widget="float" options="{'precision':0,'digits':[0,0]}"/>
+
+            </xpath>
+            <xpath expr="//field[@name='date_to']" position="after">
+                <field name="attendance" optional="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

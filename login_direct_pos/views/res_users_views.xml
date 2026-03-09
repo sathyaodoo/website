@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    
+<template id="login_register_popup" name="Login Register Popup">
+        <div class="modal fade" id="loginRegisterPopup" role="dialog" tabindex="-1" aria-labelledby="loginRegisterPopupLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-fullscreen-lg-down te_modal_split">
+                <div class="modal-content rounded-0 border-0">
+                    <button type="button" class="btn-close te_modal_close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-body p-0 d-flex">
+                        <!-- Left side: Login/Signup/Reset Forms -->
+                        <div class="te_login_section flex-fill">
+                            <div class="te_form_container">
+                                <!-- LOGIN FORM -->
+                                <div class="te_login_form_wrapper">
+                                    <h2 class="te_form_title">Sign in</h2>
+                                    <t t-call="login_direct_pos.login_popup"/>
+                                </div>
+                                <!-- SIGNUP FORM WITH CUSTOM FIELDS (Matching Your Design) -->
+                                <div class="te_signup_form_wrapper col-12">
+                                    <h2 class="te_form_title text-center">Sign up</h2>
+                                    <form class="oe_signup_form te_register_form shadow-none"
+          role="form"
+          method="post"
+          action="/web/signup">
+                                        <input type="hidden" name="csrf_token"
+               t-att-value="request.csrf_token()"/>
+                                        <!-- ROW 1 : NAME / EMAIL -->
+                                        <div class="row te_signup_row g-3">
+                                            <div class="col-lg-4 col-md-6 col-12">
+                                                <label class="form-label">First name</label>
+                                                <input type="text" name="name"
+                       class="form-control te_form_control"
+                       required="required"/>
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-12">
+                                                <label class="form-label">Last name</label>
+                                                <input type="text" name="last_name"
+                       class="form-control te_form_control"
+                       required="required"/>
+                                            </div>
+                                            <div class="col-lg-4 col-md-12 col-12">
+                                                <label class="form-label">Email</label>
+                                                <input type="email" name="login"
+                       class="form-control te_form_control"
+                       required="required"/>
+                                            </div>
+                                        </div>
+                                        <!-- ROW 2 : PHONE -->
+                                        <div class="row te_signup_row">
+                                            <div class="col-12">
+                                                <label class="form-label">Phone Number</label>
+                                                <div class="input-group-with-button">
+                                                    <select name="country_id"
+                            class="form-select te_country_select">
+                                                        <option value="">Select Country</option>
+                                                        <t t-foreach="request.env['res.country'].sudo().search([])" t-as="c">
+                                                            <option t-att-value="c.id">
+                                                                <t t-out="c.name"/> (+
+                                                                <t t-out="c.phone_code"/>)
+                                                            </option>
+                                                        </t>
+                                                    </select>
+                                                    <input type="tel" name="phone"
+                           class="form-control te_form_control"
+                           required="required"/>
+                                                    <!-- OTP SKIPPED -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- ROW 3 : PASSWORD -->
+                                        <div class="row te_signup_row g-3">
+                                            <div class="col-lg-6 col-md-6 col-12">
+                                                <label class="form-label">Password</label>
+                                                <input type="password" name="password"
+                       class="form-control te_form_control"
+                       required="required"/>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-12">
+                                                <label class="form-label">Confirm password</label>
+                                                <input type="password" name="confirm_password"
+                       class="form-control te_form_control"
+                       required="required"/>
+                                            </div>
+                                        </div>
+                                        <!-- ALERTS -->
+                                        <div class="alert-success-error mb-3">
+                                            <p class="alert alert-success d-none mb-0">
+                Account created successfully!
+            </p>
+                                            <p class="alert alert-danger d-none mb-0"></p>
+                                        </div>
+                                        <!-- SUBMIT -->
+                                        <button type="submit"
+                class="btn te_signup_button w-100">
+            SIGN UP
+        </button>
+                                        <div class="text-center mt-3">
+                                            <a class="back_to_login"
+               href="javascript:void(0);">
+                Back to Login
+            </a>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- RESET PASSWORD FORM -->
+                                <div class="te_reset_form_wrapper" style="display: none;">
+                                    <h2 class="te_form_title">Reset Password</h2>
+                                    <form class="oe_reset_password_form te_reset_password_form shadow-none" role="form" method="post" style="display: block;">
+                                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                        <input type="hidden" name="reset_form_ept" value="1"/>
+                                        <div class="form-group field-login mb-3">
+                                            <label for="reset_login" class="form-label">Your Email</label>
+                                            <input type="text" name="login" id="reset_login" class="form-control te_form_control rounded-0"
+                                                   autofocus="autofocus" required="required" autocapitalize="off"/>
+                                        </div>
+                                        <p class="alert alert-danger d-none mb-3" role="alert"></p>
+                                        <div class="clearfix oe_login_buttons text-center mb-3">
+                                            <button type="submit" class="btn btn-primary btn-lg te_theme_button w-100">Send Reset Link</button>
+                                        </div>
+                                        <div class="text-center small">
+                                            <a class="back_to_login" href="javascript:void(0);">Back to Login</a>
+                                        </div>
+                                        <input type="hidden" name="redirect" t-att-value="redirect"/>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Right side: Signup Promotion -->
+                        <div class="te_signup_section flex-fill">
+                            <div class="te_signup_container d-flex flex-column justify-content-center align-items-center w-100">
+                                <h3 class="te_signup_heading">Don't have an account?</h3>
+                                <button type="button" class="te_signup_button open_signup">SIGN UP</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template id="login_popup" name="Login Popup">
+        <form class="oe_login_form shadow-none" role="form" t-attf-action="/web/login" method="post" onsubmit="this.action = '/web/login' + location.hash">
+            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+            <input type="hidden" name="login_form_ept" value="1"/>
+            <div class="form-group field-login mb-3">
+                <label for="login" class="form-label">Email</label>
+                <input type="text" placeholder="Email" name="login" t-att-value="login" id="login"
+                       class="form-control te_form_control rounded-0" required="required"
+                       autofocus="autofocus" autocapitalize="off"/>
+            </div>
+            <div class="form-group field-password mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" placeholder="Password" name="password" id="password"
+                       class="form-control te_form_control rounded-0" required="required"
+                       autocomplete="current-password" t-att-autofocus="'autofocus' if login else None"
+                       maxlength="4096"/>
+            </div>
+            <div class="alert-success-error mb-3">
+                <p class="alert alert-success d-none mb-0">You are successfully logged in</p>
+                <p class="alert alert-danger d-none mb-0"></p>
+            </div>
+            <p class="alert alert-danger" t-if="error" role="alert">
+                <t t-out="error"/>
+            </p>
+            <p class="alert alert-success" t-if="message" role="status">
+                <t t-out="message"/>
+            </p>
+            <div class="te_forgot_password_link mb-3">
+                <a class="open_reset_password"
+                   t-if="request.env['ir.config_parameter'].sudo().get_param('auth_signup.reset_password') == 'True'"
+                   href="javascript:void(0);">Forgot your password?
+                </a>
+            </div>
+            <div class="clearfix oe_login_buttons text-center mb-3">
+                <button type="submit" class="btn btn-primary btn-lg te_theme_button te_login_button w-100">SIGN IN</button>
+            </div>
+            <div class="te_social_divider mb-3">
+                <span>Or</span>
+            </div>
+            <!-- OAuth Providers -->
+            <t t-set="enable" t-value="request.env['ir.module.module'].sudo().search([['name', '=', 'auth_oauth']])"/>
+            <t t-if="enable and enable.state == 'installed'">
+                <t t-set="providers" t-value="request.env['auth.oauth.provider'].sudo().search([('enabled', '=', True)])"/>
+                <t t-if="providers and len(providers) &gt; 0">
+                    <div class="te_oauth_providers">
+                        <a t-foreach="providers" t-as="p" class="te_oauth_button" 
+                        t-att-style="'background-color: %s; color: %s;' % (p.color, p.text_color)" t-att-href="p.auth_endpoint or '#'">
+                            <i t-att-class="p.css_class" role="presentation"/>
+                            <span t-out="p.body"/>
+                        </a>
+                    </div>
+                </t>
+            </t>
+            <input type="hidden" name="redirect" t-att-value="redirect"/>
+        </form>
+    </template>
+</odoo>

@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    <record id="view_users_form" model="ir.ui.view">-->
+<!--        <field name="name">res.partner.form.inherit.yokohama</field>-->
+<!--        <field name="model">res.partner</field>-->
+<!--        <field name="inherit_id" ref="base.view_partner_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='vat']" position="before">-->
+<!--                <field name="customer_category_id"/>-->
+<!--                <field name="business_id"/>-->
+<!--                <field name="invoice_currency_id"/>-->
+<!--                <field name="disable_invoice"/>-->
+<!--                <field name="blocked"/>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//field[@name='website']" position="after">-->
+<!--                <field name="second_phone"/>-->
+<!--                <field name="third_phone"/>-->
+<!--                <field name="birthdate"/>-->
+<!--                <field name="is_company"/>-->
+<!--            </xpath>-->
+<!--            &lt;!&ndash; <xpath expr="//field[@name='state_id']" position="attributes">-->
+<!--                <attribute name="invisible">True</attribute>-->
+<!--            </xpath> &ndash;&gt;-->
+<!--            <xpath expr="//field[@name='state_id']" position="attributes">-->
+<!--                <attribute name="placeholder">-->
+<!--                    Region</attribute>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//field[@name='zip']" position="attributes">-->
+<!--                <attribute name="placeholder">-->
+<!--                    Kaza</attribute>-->
+<!--            </xpath></field>-->
+<!--    </record>-->
+<!--    <record id="erpc_res_partner_kanban_view" model="ir.ui.view">-->
+<!--        <field name="name">erpc.res.partner.kanban</field>-->
+<!--        <field name="model">res.partner</field>-->
+<!--        <field name="inherit_id" ref="base.res_partner_kanban_view"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//kanban/field[@name='city']" position="after">-->
+<!--                <field name="city_id"/>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//kanban[1]/templates[1]/t[1]/div[1]/div[2]/div[1]" position="replace">-->
+<!--                <div>-->
+<!--                    <strong class="o_kanban_record_title oe_partner_heading">-->
+<!--                        <field name="display_name"/>-->
+<!--                    </strong>-->
+<!--                    <div class="o_kanban_tags_section oe_kanban_partner_categories"/>-->
+<!--                    <ul>-->
+<!--                        <li t-if="record.parent_id.raw_value and !record.function.raw_value">-->
+<!--                            <field name="parent_id"/>-->
+<!--                        </li>-->
+<!--                        <li t-elif="!record.parent_id.raw_value and record.function.raw_value">-->
+<!--                            <field name="function"/>-->
+<!--                        </li>-->
+<!--                        <li t-elif="record.parent_id.raw_value and record.function.raw_value">-->
+<!--                            <field name="function"/>-->
+<!--                            at-->
+<!--                            <field name="parent_id"/>-->
+<!--                        </li>-->
+<!--                        <li t-if="record.city_id or record.country_id.raw_value">-->
+<!--                            <t t-if="record.city_id">-->
+<!--                                <field name="street"/>-->
+<!--                            </t>-->
+<!--                        </li>-->
+<!--                        <li t-if="record.city_id or record.country_id.raw_value">-->
+<!--                            <t t-if="record.city_id">-->
+<!--                                <field name="city_id"/>-->
+<!--                                <t t-if="record.country_id.raw_value">-->
+<!--                                    ,-->
+<!--                                </t>-->
+<!--                            </t>-->
+<!--                            <t t-if="record.country_id.raw_value">-->
+<!--                                <field name="kaza_id"/>-->
+<!--                            </t>-->
+<!--                        </li>-->
+<!--                        <li t-if="record.city_id or record.country_id.raw_value">-->
+<!--                            <t t-if="record.city_id">-->
+<!--                                <field name="state_id"/>-->
+<!--                                <t t-if="record.country_id.raw_value">-->
+<!--                                    ,-->
+<!--                                </t>-->
+<!--                            </t>-->
+<!--                            <t t-if="record.country_id.raw_value">-->
+<!--                                <field name="country_id"/>-->
+<!--                            </t>-->
+<!--                        </li>-->
+<!--                        <li class="o_text_overflow" t-if="record.email.raw_value">-->
+<!--                            <field name="email"/>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--                <div class="o_kanban_record_bottom">-->
+<!--                    <div class="oe_kanban_bottom_left"/>-->
+<!--                    <div class="oe_kanban_bottom_right"/>-->
+<!--                </div>-->
+<!--            </xpath></field>-->
+<!--    </record>-->
+
+    <record id="parent_company_view_form" model="ir.ui.view">
+        <field name="name">parent_company.view.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='parent_id']" position="attributes">
+                <attribute name="invisible">(is_company == True and is_company == False) or parent_id == False and company_name != False and company_name != ''</attribute>
+            </xpath>
+<!--            <xpath expr="//page[@name='sales_purchases']/group/group[1]/field[@name='user_id']" position="attributes">-->
+<!--                <attribute name="required">1</attribute>-->
+<!--            </xpath>-->
+            <xpath expr="//field[@name='phone']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='street']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='state_id']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+<!--            <xpath expr="//field[@name='property_payment_term_id']" position="attributes">-->
+<!--                <attribute name="required">1</attribute>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//field[@name='category_id']" position="attributes">-->
+<!--                <attribute name="required">1</attribute>-->
+<!--            </xpath>-->
+            <xpath expr="//field[@name='website']" position="after">
+                <field name="second_phone"/>
+                <field name="birthdate"/>
+<!--                <field name="customer_category_id"/>-->
+            </xpath>
+        </field>
+    </record>
+    <record id="view_res_partner_filter" model="ir.ui.view">
+        <field name="name">partner_manual_rank.view_partner_filter</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <field name="parent_id" position="after">
+                <field name="id" string="ID"/>
+<!--                <field name="is_customer"/>-->
+<!--                <field name="is_supplier"/>-->
+            </field>
+        </field>
+    </record>
+<!--    <record id="view_partner_form" model="ir.ui.view">-->
+<!--        <field name="name">partner_manual_rank.view_partner_form</field>-->
+<!--        <field name="inherit_id" ref="base.view_partner_form"/>-->
+<!--        <field name="model">res.partner</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='child_ids']/kanban/templates" position="before">-->
+<!--                <field name="is_customer"/>-->
+<!--                <field name="is_supplier"/>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//field[@name='child_ids']/form/sheet" position="inside">-->
+<!--                <field invisible="1" name="is_customer"/>-->
+<!--                <field invisible="1" name="is_supplier"/>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <record id="erpc_view_partner_tree" model="ir.ui.view">
+        <field name="name">erpc.res.partner.tree</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <xpath expr="//list//field[@name='complete_name']" position="after">
+                <field name="parent_id" readonly="1" string="Parent Company"/>
+            </xpath>
+        </field>
+    </record>
+<!--    <record id="view_users_form" model="ir.ui.view">-->
+<!--        <field name="name">res.partner.form.inherit.yokohama</field>-->
+<!--        <field name="model">res.partner</field>-->
+<!--        <field name="inherit_id" ref="base.view_partner_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            &lt;!&ndash; to have parent also for companies &ndash;&gt;-->
+<!--            <xpath expr="//field[@name='parent_id']" position="attributes">-->
+<!--                <attribute name="invisible">(is_company == True and is_company == False) or parent_id == False and company_name != False and company_name != ''</attribute>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//field[@name='vat']" position="before">-->
+<!--                <field name="is_customer"/>-->
+<!--                <field name="is_supplier"/>-->
+<!--                <field invisible="1" name="customer_category_idsss"/>-->
+<!--                <field domain="[('id', 'in', customer_category_idsss)]" name="customer_category_id"/>-->
+<!--                <field name="business_id"/>-->
+<!--                <field name="invoice_currency_id"/>-->
+<!--                <field name="disable_invoice"/>-->
+<!--                <field name="blocked"/>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//field[@name='website']" position="after">-->
+<!--                <field name="extension"/>-->
+<!--                <field name="second_phone"/>-->
+<!--                <field name="third_phone"/>-->
+<!--                <field name="birthdate"/>-->
+<!--                &lt;!&ndash;                <field name="is_company"/>&ndash;&gt;-->
+<!--                <field name="customer_class_id" placeholder="Class..."/>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//field[@name='category_id']" position="after">-->
+<!--                <field name="credit_limit"/>-->
+<!--                <field name="target"/>-->
+<!--            </xpath>-->
+<!--            <field name="street" position="attributes">-->
+<!--                <attribute name="readonly">0</attribute></field>-->
+<!--            <field name="street2" position="attributes">-->
+<!--                <attribute name="readonly">0</attribute></field>-->
+<!--            <field name="city" position="attributes">-->
+<!--                <attribute name="readonly">0</attribute>-->
+<!--                <attribute name="invisible">1</attribute></field>-->
+<!--            <field name="state_id" position="attributes">-->
+<!--                <attribute name="readonly">0</attribute></field>-->
+<!--            <field name="country_id" position="attributes">-->
+<!--                <attribute name="readonly">0</attribute></field>-->
+<!--            <field name="country_id" position="before">-->
+<!--                <field name="kaza_id" placeholder="Kazaa" required="0"/>-->
+<!--                <field name="city_id" placeholder="City" required="0"/></field>-->
+<!--            <field name="zip" position="attributes">-->
+<!--                <attribute name="readonly">0</attribute>-->
+<!--&lt;!&ndash;                <attribute name="invisible">1</attribute>&ndash;&gt;-->
+<!--            </field>-->
+<!--            <field name="vat" position="attributes">-->
+<!--                <attribute name="readonly">0</attribute></field>-->
+<!--            &lt;!&ndash; <xpath expr="//field[@name='state_id']" position="attributes">-->
+<!--                <attribute name="invisible">True</attribute>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//field[@name='zip']" position="attributes">-->
+<!--                <attribute name="invisible">True</attribute>-->
+<!--            </xpath> &ndash;&gt;-->
+<!--            &lt;!&ndash; for customer rank and supplier rank &ndash;&gt;-->
+<!--            <xpath expr="//field[@name='child_ids']/kanban/templates" position="before">-->
+<!--                <field name="is_customer"/>-->
+<!--                <field name="is_supplier"/>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//field[@name='child_ids']/form/sheet" position="inside">-->
+<!--                <field invisible="1" name="is_customer"/>-->
+<!--                <field invisible="1" name="is_supplier"/>-->
+<!--            </xpath>-->
+<!--            &lt;!&ndash; <xpath expr="//group[@name='sale']/field[1]" position="before">-->
+<!--                <field name="is_customer"/>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//group[@name='purchase']/field[1]" position="before">-->
+<!--                <field name="is_supplier"/>-->
+<!--            </xpath> &ndash;&gt;-->
+<!--            <xpath expr="//page[@name='sales_purchases']/group/group[1]/field[@name='user_id']" position="attributes">-->
+<!--                <attribute name="required">1</attribute>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//field[@name='state_id']" position="attributes">-->
+<!--                <attribute name="placeholder">-->
+<!--                    Region</attribute>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//field[@name='zip']" position="attributes">-->
+<!--                <attribute name="placeholder">-->
+<!--                    Kazaa</attribute>-->
+<!--                <attribute name="placeholder">-->
+<!--                    Kazaa</attribute>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//field[@name='property_payment_term_id']" position="attributes">-->
+<!--                <attribute name="required">1</attribute>-->
+<!--            </xpath>-->
+<!--            &lt;!&ndash;            <xpath expr="//field[@name='city']" position="attributes">&ndash;&gt;-->
+<!--            &lt;!&ndash;                <attribute name="required">1</attribute>&ndash;&gt;-->
+<!--            &lt;!&ndash;            </xpath>&ndash;&gt;-->
+<!--            <xpath expr="//field[@name='is_company']" position="attributes">-->
+<!--                <attribute name="invisible">1</attribute>-->
+<!--            </xpath></field>-->
+<!--    </record>-->
+<!--    <record id="yokohama_view_res_partner_filter" model="ir.ui.view">-->
+<!--        <field name="name">yokohama.res.partner.search</field>-->
+<!--        <field name="model">res.partner</field>-->
+<!--        <field name="inherit_id" ref="base.view_res_partner_filter"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//group/filter[@name='salesperson']" position="after">-->
+<!--                <filter context="{'group_by':'customer_category_id'}" name="customer_category_id" string="Customer Category"/>-->
+<!--                <filter context="{'group_by':'business_id'}" name="business_id" string="Type of Business"/>-->
+<!--            </xpath></field>-->
+<!--    </record>-->
+<!--    <record id="view_form_partner_offers" model="ir.ui.view">-->
+<!--        <field name="name">view.form.partner.offers</field>-->
+<!--        <field name="inherit_id" ref="base.view_partner_form"/>-->
+<!--        &lt;!&ndash;                    <field name="groups_id" eval="[(5,)]"/>&ndash;&gt;-->
+<!--        <field name="model">res.partner</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//notebook" position="inside">-->
+<!--                <page name="offers" string="Offers">-->
+<!--                    <group>-->
+<!--                        <group>-->
+<!--                            <field name="offer_ids" widget="many2many_tags"/>-->
+<!--                            <field invisible="1" name="comma_separated_field"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                </page>-->
+<!--            </xpath></field>-->
+<!--    </record>-->
+    <!--    <record id="account_reports.partner_view_buttons" model="ir.ui.view">-->
+    <!--        <field name="groups_id" eval="[(5,)]"/>-->
+    <!--    </record>-->
+</odoo>

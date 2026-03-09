@@ -1,0 +1,6 @@
+<odoo>
+    <!-- View-Only Advertising Group -->
+    <record id="group_view_only_advertising" model="res.groups">
+        <field name="name">Advertising (View Only)</field>
+    </record>
+</odoo>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_order_tree_lot" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_template_id']" position="after">
+                <field name="lot_id" domain="[('product_id','=', product_id)]"
+                    context="{'default_product_id': product_id}"
+                    groups="stock.group_production_lot" options="{'no_create': True}"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/form/group/group/field[@name='product_id']" position="after">
+                <field name="lot_id" domain="[('product_id','=', product_id)]" width="100px"
+                    context="{'default_product_id': product_id}" groups="stock.group_production_lot"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_stock_move_line_operation_tree_inherited" model="ir.ui.view">
+        <field name="name">stock.view_stock_move_line_operation_tree.inherited</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock.view_stock_move_line_operation_tree"/>
+        <field name="arch" type="xml">
+            <field name="lot_id" position="attributes">
+                <attribute name="options">{'no_create': True}</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>

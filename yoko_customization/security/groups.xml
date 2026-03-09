@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="res.groups" id="confirm_so">
+            <field name="name">Can Confirm SO</field>
+        </record>
+
+        <record model="res.groups" id="offer_access_cus">
+            <field name="name">Offer Access</field>
+        </record>
+
+        <record model="res.groups" id="group_invoice_analysis">
+            <field name="name">Invoice Analysis</field>
+        </record>
+
+        <record id="stock_valuation_access" model="res.groups">
+            <field name="name">Stock Valuation View</field>
+        </record>
+
+        <!-- <menuitem id="stock_account.menu_valuation" name="Valuation" parent="stock.menu_warehouse_report" sequence="250" action="stock_account.stock_valuation_layer_action" groups="stock_valuation_access"/> -->
+
+        <record id="group_restricted_contact_management" model="res.groups">
+            <field name="name">Restricted Contact Management</field>
+        </record>
+
+        <!--        <record id="rule_restrict_contact" model="ir.rule">-->
+        <!--            <field name="name">Restriction Contact</field>-->
+        <!--            <field name="model_id" ref="base.model_res_partner"/>-->
+        <!--            <field name="groups" eval="[(4, ref('yoko_customization.group_restricted_contact_management'))]"/>-->
+        <!--            <field name="perm_write" eval="0"/>-->
+        <!--            <field name="perm_read" eval="1"/>-->
+        <!--            <field name="perm_create" eval="0"/>-->
+        <!--            <field name="perm_unlink" eval="0"/>-->
+        <!--        </record>-->
+    </data>
+</odoo>

@@ -1,0 +1,64 @@
+<odoo>
+    <record id="view_advance_account_move_tree" model="ir.ui.view">
+        <field name="name">Advancement Entries</field>
+        <field name="model">account.move</field>
+        <field name="arch" type="xml">
+            <list string="Journal Entries" sample="1" decoration-info="state == 'draft'"
+                  create="false" expand="context.get('expand', False)">
+                <field name="company_currency_id" column_invisible="True"/>
+                <field name="made_sequence_gap" column_invisible="True"/>
+                <field name="date" readonly="1"/>
+                <field name="name" decoration-danger="made_sequence_gap"/>
+                <field name="partner_id" optional="show" readonly="1"/>
+                <field name="ref" optional="show"/>
+                <field name="journal_id" optional="show" readonly="1"/>
+                <field name="company_id" optional="show" readonly="1"/>
+                <field name="amount_total_signed" sum="Total Amount" string="Total" decoration-bf="1" optional="show"
+                       readonly="1"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'"
+                       decoration-success="state == 'posted'"/>
+                <field name="currency_id" column_invisible="True" optional="show" readonly="1"/>
+            </list>
+        </field>
+    </record>
+
+    <menuitem id="advance_entries_menu"
+              name="Advance Accounting"
+              groups="erpc_hr_request_for_advance_menu_item.group_advance_hr"
+              parent="hr.menu_hr_root"/>
+
+
+    <record id="action_advance_account_move" model="ir.actions.act_window">
+        <field name="name">Advance Entry</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">account.move</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_ids"
+               eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('view_advance_account_move_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('account.view_move_form')})]"/>
+        <field name="domain">[("payment_id", "!=", False), ("payment_id.partner_id.customer_category_id", "in", [10,
+            21])]
+        </field>
+    </record>
+
+    <menuitem id="menu_advance_account_entry"
+              name="Journal Entries"
+              action="action_advance_account_move"
+              parent="advance_entries_menu"/>
+
+    <record id="action_advance_account_payment" model="ir.actions.act_window">
+        <field name="name">Payments</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">account.payment</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_ids"
+               eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('account.view_account_payment_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('account.view_account_payment_form')})]"/>
+        <field name="domain">[("partner_id.customer_category_id", "in", [10,21])]</field>
+
+    </record>
+
+    <menuitem id="menu_advance_account_payment"
+              name="Payments"
+              action="action_advance_account_payment"
+              parent="advance_entries_menu"/>
+
+</odoo>

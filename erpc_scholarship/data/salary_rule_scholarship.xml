@@ -1,0 +1,21 @@
+<odoo>
+    <data noupdate="1">
+        <record id="hr_rule_scholarship" model="hr.salary.rule">
+            <field name="code">SCHL</field>
+            <field name="name">Scholarship</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = 'SCHL' in inputs</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs['SCHL'] and inputs['SCHL'].amount</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="sequence" eval="4"/>
+            <field name="struct_id" ref="erpc_hr_payroll_extension.erpc_structure"/>
+        </record>
+
+        <record id="hr_rule_input_scholarship" model="hr.payslip.input.type">
+            <field name="code">SCHL</field>
+            <field name="name">Scholarship</field>
+        </record>
+    </data>
+</odoo>

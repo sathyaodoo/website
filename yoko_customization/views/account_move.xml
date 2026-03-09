@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="view_order_form_inherittt" model="ir.ui.view">
+            <field name="name">account.move.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <!--                    <field name="user_is_super" optional="show"/>-->
+                    <field name="can_edit_discount"/>
+                </xpath>
+                <!-- <xpath expr="//field[@name='line_ids']/list/field[@name='quantity']" position="after">
+                    <field name="price_after_discount" optional="hide" widget="monetary"/>
+                </xpath> -->
+                <xpath expr="/form/sheet/notebook/page[@id='aml_tab']/field[@name='line_ids']/list//field[@name='credit']" position="after">
+                    <field name="price_after_discount" optional="hide" widget="monetary"/>
+                </xpath>
+                <!--                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[1]/field[@name='invoice_line_ids']/tree[1]/field[@name='price_unit']"-->
+                <!-- position="attributes">-->
+                <!--                    <attribute name="readonly">parent.user_is_super != True</attribute>-->
+                <!--                </xpath>-->
+                <xpath expr="/form/sheet/notebook/page[@id='aml_tab']/field[@name='line_ids']/list//field[@name='discount_amount_currency']" position="attributes">
+                    <attribute name="readonly">parent.can_edit_discount == False</attribute>
+                    <attribute name="optional">show</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_shipping_id']" position="before">
+                    <!--                    TODO GR: to make driver_id readonly="1"-->
+                    <field invisible="move_type not in 'out_invoice'" name="driver_id" required="move_type in 'out_invoice'" options="{'no_create': True}" readonly="0"/>
+                    <!--                    <field invisible="move_type not in 'out_invoice'" name="delivery_term" readonly="1"/>-->
+                </xpath>
+                <!--                <xpath expr="//group[@id='header_right_group']" position="inside">-->
+                <!--                    <field name="total_qty"/>-->
+                <!--                </xpath>-->
+                <xpath expr="//field[@name='delivery_date']" position="replace"/>
+                <xpath expr="//field[@name='partner_shipping_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field invisible="1" name="second_currency_id" readonly="state in ('sales')"/>
+                    <!--                    <field invisible="1" name="invoice_from_sale"/>-->
+                    <field invisible="1" name="total_due"/>
+                    <field invisible="1" name="due_draft_invoice"/>
+                    <field invisible="1" name="due_confirm_invoice"/>
+                </xpath>
+                <!--                <xpath expr="//field[@name='invoice_outstanding_credits_debits_widget']" position="after">-->
+                <!--                    <field invisible="1" name="in_lbp_currency"/>-->
+                <!--                    <label for="in_lbp_currency" invisible="in_lbp_currency == True" string="BMR"-->
+                <!-- style="font-size:20px"/>-->
+                <!--                    <field invisible="in_lbp_currency == True" name="untaxed_custom_amount"/>-->
+                <!--                    <field invisible="in_lbp_currency == True" name="taxed_custom_amount"/>-->
+                <!--                </xpath>-->
+
+                <xpath expr="//group[@class='oe_subtotal_footer']" position="inside">
+                    <field name="in_lbp_currency" invisible="1"/>
+                    <!-- <label for="in_lbp_currency" invisible="in_lbp_currency == True" string="LBP"/> -->
+                    <!--                    TODO GR: to add taxed_custom_amount-->
+                    <field name="untaxed_custom_amount" class="oe_subtotal_footer_separator" invisible="in_lbp_currency == True" string="Untaxed LBP"/>
+                    <!--                    <field name="taxed_custom_amount" class="oe_subtotal_footer_separator" invisible="in_lbp_currency == True" string="Amount LBP"/>-->
+                    <field name="taxed_custom_amount" class="oe_subtotal_footer_separator" invisible="in_lbp_currency == True"/>
+
+
+                </xpath>
+
+                <xpath expr="//field[@name='invoice_origin']" position="attributes">
+                    <attribute name="invisible">0</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="required">move_type in 'out_invoice'</attribute>
+                </xpath>
+                <xpath expr="//div[@name='journal_div']" position="after">
+                    <field name="current_rate" readonly="True"/>
+                    <field name="posted_before"/>
+
+                </xpath>
+
+                <xpath expr="/form/sheet/notebook/page[@id='aml_tab']/field[@name='line_ids']/list//field[@name='discount_amount_currency']" position="after">
+                    <field name="final_price" optional="hide"/>
+                    <field name="sales_price"/>
+                </xpath>
+
+                <xpath expr="/form/sheet/notebook/page[@id='aml_tab']/field[@name='line_ids']/list//field[@name='discount_amount_currency']" position="before">
+                    <field name="price_list_id" readonly="1" optional="hide"/>
+                </xpath>
+                <!--                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='aml_tab']/field[@name='line_ids']/tree[1]/field[@name='discount_amount_currency']"-->
+                <!-- position="before">-->
+                <!--                    <field name="price_list_id" optional="hide"/>-->
+                <!--                </xpath>-->
+
+                <xpath expr="//button[@name='action_reverse']" position="attributes">
+                    <attribute name="context">
+                        {'credit_note': True}
+                    </attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_draft']" position="attributes">
+                    <attribute name="confirm">
+                        Invoice will be set to Draft , make sure to Return Delivery.
+                    </attribute>
+                </xpath>
+                <xpath expr="//field[@name='payment_reference']" position="replace"/>
+                <xpath expr="//field[@name='partner_shipping_id']" position="before">
+                    <field invisible="move_type not in ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt')" name="payment_reference"/>
+                    <!--                    <field invisible="1" name="invoice_from_sale"/>-->
+                </xpath>
+                <xpath expr="//form[1]/sheet[1]/group[1]/group[1]/label[1]" position="before">
+                    <field name="parent_company_id"/>
+                </xpath>
+                <xpath expr="/form/sheet/notebook/page[@id='aml_tab']/field[@name='line_ids']/list//field[@name='account_id']" position="after">
+                    <field name="product_id" options="{'no_create': true, 'no_open': true}" optional="hide"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="account_move_view_tree_driver" model="ir.ui.view">
+            <field name="name">account.move.view.tree.driver</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="/list//field[@name='state']" position="after">
+                    <field invisible="move_type not in 'out_invoice'" name="driver_id" required="move_type in 'out_invoice'"/>
+                    <field name="return_delivery" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+        <!--        <record id="yokohama_view_move_form_inherit" model="ir.ui.view">-->
+        <!--            <field name="name">yokohama.account.move.form</field>-->
+        <!--            <field name="model">account.move</field>-->
+        <!--            <field name="inherit_id" ref="account.view_move_form"/>-->
+        <!--            <field eval="16" name="priority"/>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <xpath expr="//field[@name='partner_id']" position="after">-->
+        <!--                    <field invisible="1" name="second_currency_id" readonly="state in ('sales')"/>-->
+        <!--                    <field invisible="1" name="invoice_from_sale"/>-->
+        <!--&lt;!&ndash;                    <field invisible="1" name="rate_access"/>&ndash;&gt;-->
+        <!--                    <field invisible="1" name="total_due"/>-->
+        <!--                    <field invisible="1" name="due_draft_invoice"/>-->
+        <!--                    <field invisible="1" name="due_confirm_invoice"/>-->
+        <!--&lt;!&ndash;                    <field invisible="1" name="rate_access"/>&ndash;&gt;-->
+
+
+        <!--                </xpath>-->
+        <!--&lt;!&ndash;                <xpath expr="//field[@name='partner_shipping_id']" position="before">&ndash;&gt;-->
+        <!--&lt;!&ndash;                    <field name="current_rate" readonly="rate_access == False"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;                </xpath>&ndash;&gt;-->
+        <!--                <xpath expr="//field[@name='invoice_outstanding_credits_debits_widget']" position="after">-->
+        <!--                    <field invisible="1" name="in_lbp_currency"/>-->
+        <!--                    <label for="in_lbp_currency" invisible="in_lbp_currency == True" string="BMR"-->
+        <!-- style="font-size:20px"/>-->
+        <!--                    <field invisible="in_lbp_currency == True" name="untaxed_custom_amount"/>-->
+        <!--                    <field invisible="in_lbp_currency == True" name="taxed_custom_amount"/>-->
+        <!--&lt;!&ndash;                    <field invisible="in_lbp_currency == True" name="amount_total"/>&ndash;&gt;-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//field[@name='invoice_origin']" position="attributes">-->
+        <!--                    <attribute name="invisible">0</attribute>-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//field[@name='partner_id']" position="attributes">-->
+        <!--                    <attribute name="required">move_type in 'out_invoice'</attribute>-->
+        <!--                </xpath>-->
+        <!--            </field>-->
+        <!--        </record>-->
+        <!--        <record id="yoko_discount_view_move_form_inherit" model="ir.ui.view">-->
+        <!--            <field name="name">yoko_discount.account.move.form</field>-->
+        <!--            <field name="model">account.move</field>-->
+        <!--            <field name="inherit_id" ref="account.view_move_form"/>-->
+        <!--            <field eval="8" name="priority"/>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <xpath expr="//div[@name='journal_div']" position="after">-->
+        <!--                    <field name="current_rate"/>-->
+        <!--&lt;!&ndash;                    <field name="discount_rate" readonly="state not in ('draft', 'sent')"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;                    <field invisible="1" name="price_and_discount_read"/>&ndash;&gt;-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='invoice_tab']/field[@name='invoice_line_ids']/tree[1]/field[@name='discount']"-->
+        <!-- position="after">-->
+        <!--                    <field invisible="1" name="final_price"/>-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//field[@name='invoice_line_ids']/form/sheet/group/field[@name='discount']"-->
+        <!-- position="before">-->
+        <!--&lt;!&ndash;                    <field name="discount_rate_line"/>&ndash;&gt;-->
+        <!--                    <field name="final_price" optional="hide"/>-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='aml_tab']/field[@name='line_ids']/tree[1]/field[@name='discount_amount_currency']"-->
+        <!-- position="after">-->
+        <!--&lt;!&ndash;                    <field invisible="1" name="discount_rate_line" optional="hide"/>&ndash;&gt;-->
+        <!--                    <field invisible="1" name="final_price" optional="hide"/>-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='invoice_tab']/field[@name='invoice_line_ids']/tree[1]/field[@name='price_unit']"-->
+        <!-- position="before">-->
+        <!--                    <field name="price_list_id" readonly="1"/>-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='aml_tab']/field[@name='line_ids']/tree[1]/field[@name='discount_amount_currency']"-->
+        <!-- position="before">-->
+        <!--                    <field name="price_list_id" optional="hide"/>-->
+        <!--                </xpath>-->
+        <!--&lt;!&ndash;                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[1]/field[@name='invoice_line_ids']/tree[1]/field[@name='discount']"&ndash;&gt;-->
+        <!--&lt;!&ndash; position="after">&ndash;&gt;-->
+        <!--&lt;!&ndash;                    <field invisible="1" name="price_and_discount_read"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;                </xpath>&ndash;&gt;-->
+        <!--                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[1]/field[@name='invoice_line_ids']/tree[1]/field[@name='discount']"-->
+        <!-- position="attributes">-->
+        <!--                    <attribute name="optional">-->
+        <!--                        show</attribute>-->
+        <!--                </xpath>-->
+        <!--            </field>-->
+        <!--        </record>-->
+        <!--        <record id="view_form_account_return_invoice" model="ir.ui.view">-->
+        <!--            <field name="name">view.form.account.move.return.invoice</field>-->
+        <!--            <field name="model">account.move</field>-->
+        <!--            <field name="inherit_id" ref="account.view_move_form"/>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <xpath expr="//button[@name='action_reverse']" position="attributes">-->
+        <!--                    <attribute name="context">-->
+        <!--                        {'credit_note': True}</attribute>-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//button[@name='action_reverse']" position="after">-->
+        <!--                    <button context="{'invoice_return': True}" groups="account.group_account_invoice"-->
+        <!-- invisible="move_type not in 'out_invoice' or state != 'posted'" name="action_reverse_new"-->
+        <!-- string="Invoice Return" type="object"/>-->
+        <!--                    <button context="{'invoice_return': True}" groups="account.group_account_invoice"-->
+        <!-- invisible="move_type not in 'in_invoice' or state != 'posted'" name="action_reverse_new"-->
+        <!-- string="Bill Return" type="object"/>-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//field[1]" position="after">-->
+        <!--                    <field invisible="1" name="is_credit_note"/>-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//field[@name='invoice_line_ids']//field[@name='price_unit']" position="after">-->
+        <!--                    <field column_invisible="parent.is_credit_note != True" name="deduction_price"/>-->
+        <!--                </xpath>-->
+        <!--Set the title of the invoice to include the Invoice Return-->
+        <!--                <xpath expr="//sheet//div[hasclass('oe_title')]//span[hasclass('o_form_label')]" position="attributes">-->
+        <!--                    <attribute name="invisible">move_type == 'out_refund' and is_credit_note == False</attribute>-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//sheet//div[hasclass('oe_title')]//span[hasclass('o_form_label')]" position="after">-->
+        <!--                    <span class="o_form_label" invisible="move_type != 'out_refund' or is_credit_note == True">-->
+        <!--                        Customer Invoice Return-->
+        <!--                    </span>-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//button[@name='button_draft']" position="attributes">-->
+        <!--                    <attribute name="confirm">-->
+        <!--                        Invoice will be set to Draft , make sure to Return Delivery.</attribute>-->
+        <!--                </xpath>-->
+        <!--            </field>    -->
+        <!--        </record>-->
+        <!-- <record id="view_tree_account_return_invoice" model="ir.ui.view">
+            <field name="name">view.tree.account.move.return.invoice</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_out_invoice_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='state']" position="after">
+                    <field name="return_delivery" optional="show"/>
+                </xpath>
+                <!              <xpath expr="//tree" position="inside">-->
+        <!--&lt;!&ndash;                    <field name="collector"/>&ndash;&gt;-->
+        <!--                    <field decoration-danger="delivery_term == '0'" decoration-info="delivery_term in ('1')"-->
+        <!-- decoration-primary="delivery_term in ('3')" decoration-success="delivery_term in ('2')"-->
+        <!-- name="delivery_term" widget="badge"/>-->
+        <!--&lt;!&ndash;                    <field name="delivery_date"/>&ndash;&gt;-->
+        <!--                </xpath>-->
+        <!-- </field>
+        </record> -->
+        <record id="view_tree_account_parent" model="ir.ui.view">
+            <field name="name">view.tree.account.move.parent</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_invoice_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_partner_display_name']" position="after">
+                    <field name="parent_company_id" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+        <!--Separate CreditNotes/InvoiceReturn into 2 Menuitems-->
+        <!--        <record id="account. -->
+        <!--        <record id="action_move_out_refund_invoice_return" model="ir.actions.act_window">-->
+        <!--            <field name="name">Invoice Return</field>-->
+        <!--            <field name="res_model">account.move</field>-->
+        <!--            <field name="view_mode">tree,kanban,form</field>-->
+        <!--            <field name="view_id" ref="account.view_out_credit_note_tree"/>-->
+        <!--            <field name="search_view_id" ref="account.view_account_invoice_filter"/>-->
+        <!--            <field name="domain">[('move_type', '=', 'out_refund'), ('is_credit_note', '=', False)]</field>-->
+        <!--            <field name="context">{'default_move_type': 'out_refund'}</field>-->
+        <!--            <field name="help" type="html">-->
+        <!--                <p class="o_view_nocontent_smiling_face">-->
+        <!--                    Create an Invoice Return-->
+        <!--                </p>-->
+        <!--                <p>-->
+        <!--                    Note that the easiest way to create an invoice return is to do it directly-->
+        <!--                    from the customer invoice.-->
+        <!--                </p>-->
+        <!--            </field>-->
+        <!--        </record>-->
+        <!--        <record id="view_order_form_inherited_invoice" model="ir.ui.view">-->
+        <!--            <field name="name">invoice.form.inherited</field>-->
+        <!--            <field name="model">account.move</field>-->
+        <!--            <field name="inherit_id" ref="account.view_move_form"/>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <xpath expr="//field[@name='payment_reference']" position="replace"/>-->
+        <!--                <xpath expr="//field[@name='partner_shipping_id']" position="before">-->
+        <!--                    <field invisible="move_type not in ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt')"-->
+        <!-- name="payment_reference"/>-->
+        <!--                    <field invisible="1" name="invoice_from_sale"/>-->
+        <!--&lt;!&ndash;                    <field invisible="move_type not in 'out_invoice'" name="collector"/>&ndash;&gt;-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//form[1]/sheet[1]/group[1]/group[1]/label[1]" position="before">-->
+        <!--                    <field name="parent_company_id"/>-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[1]/field[@name='invoice_line_ids']/tree[1]/field[@name='product_id']"-->
+        <!-- position="attributes">-->
+        <!--                    <attribute name="options">-->
+        <!--                        {"no_create": true, "no_open": true}</attribute>-->
+        <!--                </xpath>-->
+        <!--            </field>-->
+        <!--        </record>-->
+        <record id="account.menu_action_account_payments_receivable" model="ir.ui.menu">
+            <field name="name">Receipt</field>
+        </record>
+
+        <record id="account_move_search_filter" model="ir.ui.view">
+            <field name="name">account.move.search</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+            <field name="arch" type="xml">
+                <search>
+                    <filter domain="[('state', '=', 'posted'),('payment_state', '=', 'not_paid')]" name="status_filter" string="Posted and not paid"/>
+                    <group>
+                        <filter context="{'group_by':'partner_id'}" name="group_by_partner" string="Customer"/>
+                        <filter context="{'group_by':'parent_company_id'}" name="group_by_parent_company" string="Parent Company"/>
+                    </group>
+                </search>
+                <!--                <group expand="0" string="Group By">-->
+                <!--                    <filter context="{'group_by':'collector'}" name="group_by_collector" string="Collector"/>-->
+                <!--                </group>-->
+            </field>
+        </record>
+
+        <record id="custom_account_invoice_filter" model="ir.ui.view">
+            <field name="name">account.invoice.select.custom</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="inside">
+                    <field filter_domain="[('line_ids.product_id', 'ilike', self)]" name="invoice_line_ids" string="Product"/>
+                </xpath>
+            </field>
+        </record>
+        <!--        <record id="view_order_form_inherited_contact" model="ir.ui.view">-->
+        <!--            <field name="name">res.partner.form.inherited</field>-->
+        <!--            <field name="model">res.partner</field>-->
+        <!--            <field name="inherit_id" ref="base.view_partner_form"/>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <xpath expr="//field[@name='vat']" position="after">-->
+        <!--                    <field name="collection_type" required="1"/>-->
+        <!--                </xpath></field>-->
+        <!--        </record>-->
+        <!--        <record id="action_customer_dues_view" model="ir.actions.act_window">-->
+        <!--            <field name="name">Customer Dues</field>-->
+        <!--            <field name="res_model">account.move</field>-->
+        <!--            <field name="view_mode">tree,kanban,form</field>-->
+        <!--            <field name="domain">[('payment_id', '=', False)]</field>-->
+        <!--            <field name="help" type="html">-->
+        <!--                <p>-->
+        <!--                    Create an Invoice-->
+        <!--                </p>-->
+        <!--            </field>-->
+        <!--        </record>-->
+        <!--        <menuitem action="action_customer_dues_view" id="menu_customer_dues" name="Customer Dues"-->
+        <!-- parent="account.menu_finance_receivables" sequence="2"/>-->
+        <!--        <menuitem action="action_move_out_refund_invoice_return" id="menu_action_move_out_refund_invoice_return"-->
+        <!-- parent="account.menu_finance_receivables" sequence="2"/>-->
+        <record id="action_account_move_update_parent_company" model="ir.actions.server">
+            <field name="name">Update Parent Company</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="binding_view_types">list</field>
+            <field name="state">code</field>
+            <field name="code">for rec in records:
+                rec._get_parent_ids()
+            </field>
+        </record>
+    </data>
+</odoo>

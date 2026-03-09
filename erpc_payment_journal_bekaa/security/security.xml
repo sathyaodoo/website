@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.module.category" id="bekaa_user_category">
+            <field name="name">Bekaa User</field>
+        </record>
+
+        <record id="group_bekaa_user" model="res.groups">
+            <field name="name">Bekaa User</field>
+<!--            <field name="category_id" ref="erpc_payment_journal_bekaa.bekaa_user_category"/>-->
+        </record>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_stock_reservation_readonly,stock.reservation.readonly,model_stock_reservation,stock_reserve.erpc_stock_reservation_readonly,1,0,0,0
+access_stock_reservation_user,stock.reservation.user,model_stock_reservation,stock_reserve.erpc_stock_reservation_user,1,1,1,0
+access_stock_reservation_manager,stock.reservation.manager,model_stock_reservation,stock_reserve.erpc_stock_reservation_manager,1,1,1,1
+access_stock_reservation_group_readonly,stock.reservation.group.readonly,model_stock_reservation_group,stock_reserve.erpc_stock_reservation_readonly,1,0,0,0
+access_stock_reservation_group,stock.reservation.group,model_stock_reservation_group,stock_reserve.erpc_stock_reservation_manager,1,1,1,1
+

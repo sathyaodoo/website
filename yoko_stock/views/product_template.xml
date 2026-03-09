@@ -1,0 +1,126 @@
+<odoo>
+    <data>
+<!--        <record id="product_template_form_view" model="ir.ui.view">-->
+<!--            <field name="name">product.template.inherit.yokohama</field>-->
+<!--            <field name="model">product.template</field>-->
+<!--            <field name="inherit_id" ref="product.product_template_form_view"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//field[@name='detailed_type']" position="after">-->
+<!--                    <field name="family_id" required="is_service == False"/>-->
+<!--                    <field name="brand_id" required="is_service == False"/>-->
+<!--                    <field name="kind_id" required="is_service == False"/>-->
+<!--                    <field name="classification_id" required="is_service == False"/>-->
+<!--                    <field name="series_id" required="is_service == False"/>-->
+<!--                    <field name="pattern_id" required="is_service == False"/>-->
+<!--                    <field name="fast_moving"/>-->
+<!--                    <field name="is_service"/>-->
+<!--                    <field name="search_default_code" invisible="0" readonly="1"/>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='taxes_id']" position="before">-->
+<!--                    <field name="retail_price"/>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='product_tag_ids']" position="after">-->
+<!--                    <field name="country_id"/>-->
+<!--                    <field name="supplier_nb"/>-->
+<!--                    <field name="dolphin"/>-->
+<!--                    <field name="item_code"/>-->
+<!--                </xpath>-->
+<!--                <page name="inventory" position="inside">-->
+<!--                    <group name="size" string="Size">-->
+<!--                        <group>-->
+<!--                            <field name="size_name"/>-->
+<!--                            <field name="size_width"/>-->
+<!--                            <field name="size_aspect"/>-->
+<!--                            <field name="size_inch"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                </page>-->
+<!--            </field>-->
+<!--        </record>-->
+<!--        <record id="yokohama_product_template_search_view" model="ir.ui.view">-->
+<!--            <field name="name">yokohama.product.template.search</field>-->
+<!--            <field name="model">product.template</field>-->
+<!--            &lt;!&ndash;<field name="mode">primary</field>&ndash;&gt;-->
+<!--            <field name="inherit_id" ref="product.product_template_search_view"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//search[1]/field[@name='categ_id']" position="after">-->
+<!--                    <filter string="Family" name="family_id" context="{'group_by':'family_id'}"/>-->
+<!--                    <filter string="Brand" name="brand_id" context="{'group_by':'brand_id'}"/>-->
+<!--                    <filter string="Kind" name="kind_id" context="{'group_by':'kind_id'}"/>-->
+<!--                    <filter string="Classification" name="classification_id" context="{'group_by':'classification_id'}"/>-->
+<!--                    <filter string="Series" name="series_id" context="{'group_by':'series_id'}"/>-->
+<!--                    <filter string="Pattern" name="pattern_id" context="{'group_by':'pattern_id'}"/>-->
+<!--                    <filter string="Size" name="size_name" context="{'group_by':'size_name'}"/>-->
+<!--                </xpath>-->
+
+<!--                <xpath expr="//field[@name='name']" position="after">-->
+<!--                    <field name="search_default_code" string="Default Code" filter_domain="[('search_default_code', 'ilike', self)]"/>-->
+<!--                    <field name="family_id" string="Family" filter_domain="[('family_id', 'ilike', self)]"/>-->
+<!--                    <field name="brand_id" string="Brand" filter_domain="[('brand_id', 'ilike', self)]"/>-->
+<!--                    <field name="kind_id" string="Kind" filter_domain="[('kind_id', 'ilike', self)]"/>-->
+<!--                    <field name="classification_id" string="Classification" filter_domain="[('classification_id', 'ilike', self)]"/>-->
+<!--                    <field name="series_id" string="Series" filter_domain="[('series_id', 'ilike', self)]"/>-->
+<!--                    <field name="pattern_id" string="Pattern" filter_domain="[('pattern_id', 'ilike', self)]"/>-->
+<!--                    <field name="size_name" string="Size" filter_domain="[('size_name', 'ilike', self)]"/>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+
+        <record id="product_template_form_view" model="ir.ui.view">
+            <field name="name">product.template.inherit.yokohama</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='taxes_id']" position="before">
+                    <field name="retail_price"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- make UoM required -->
+        <record id="product_uom_inherit" model="ir.ui.view">
+            <field name="name">product.uom.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <field name="uom_id" position="attributes">
+                    <attribute name="required">1</attribute>
+                </field>
+            </field>
+        </record>
+
+<!--        <record id="product_template_tree_view_no_cost" model="ir.ui.view">-->
+<!--            <field name="name">product.template.tree.view.no.cost</field>-->
+<!--            <field name="model">product.template</field>-->
+<!--            <field name="inherit_id" ref="product.product_template_tree_view"/>-->
+<!--            <field name="priority" eval="8"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <field name="name" position="before">-->
+<!--                    <field name="brand_id"/>-->
+<!--                </field>-->
+<!--            </field>-->
+<!--        </record>-->
+        <record id="erpc_yoko_stock_view_stock_product_template_tree" model="ir.ui.view">
+            <field name="name">erpc.product.template.stock.tree.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="stock.view_stock_product_template_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='qty_available']" position="after">
+                    <field name="incoming_qty" optional="show"/>
+<!--                    <field name="erpc_free_qty" invisible="1"/>-->
+                </xpath>
+            </field>
+        </record>
+<!--        <record id="action_refresh_search_code" model="ir.actions.server">-->
+<!--            <field name="name">Update Search Code</field>-->
+<!--            <field name="type">ir.actions.server</field>-->
+<!--            <field name="model_id" ref="product.model_product_template"/>-->
+<!--            <field name="binding_view_types">form,list</field>-->
+<!--            <field name="state">code</field>-->
+<!--            <field name="code">-->
+<!--                if records:-->
+<!--                    records._remove_symbol_default_code()-->
+<!--            </field>-->
+<!--        </record>-->
+    </data>
+</odoo>

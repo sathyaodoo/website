@@ -1,0 +1,40 @@
+<odoo>
+    <data>
+
+
+<!--        <record model="ir.ui.view" id="view_list_product_product_selection">-->
+<!--            <field name="name">view.list.product.product.selection</field>-->
+<!--            <field name="model">product.product</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree default_order="brand_id desc">-->
+<!--                    <field name="brand_id"/>-->
+<!--                    <field name="name"/>-->
+<!--                    <field name="country_id"/>-->
+<!--                    <field name="list_price"/>-->
+<!--                    <field name="available_quant" string="Qty. To Sell"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+
+<!--    <record id="yoko_discount_view_users_form" model="ir.ui.view">-->
+<!--        <field name="name">yoko_discount.res.partner.form.inherit</field>-->
+<!--        <field name="model">res.partner</field>-->
+<!--        <field name="inherit_id" ref="base.view_partner_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//page[@name='sales_purchases']" position="after">-->
+<!--                <page name="partner_discount" string="Discounts">-->
+<!--                    <group>-->
+<!--                        <field name="discount_ids">-->
+<!--                            <tree editable="bottom">-->
+<!--                                <field name="brand_id"/>-->
+<!--                                <field name="price_list_id" domain="[('brand_id', '=', brand_id)]"/>-->
+<!--                            </tree>-->
+<!--                        </field>-->
+<!--                    </group>-->
+<!--                </page>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+    </data>
+</odoo>

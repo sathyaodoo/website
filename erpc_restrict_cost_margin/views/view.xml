@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="sale_order_inherit_erpc" model="ir.ui.view">
+            <field name="name">sale.order.inherit.erpc</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <!--                add the boolean field to the form-->
+                <xpath expr="//field[@name='date_order']" position="after">
+                    <field invisible="1" name="can_see_product_cost"/>
+                </xpath>
+                <!--                field cost in the sale order lines-->
+                <xpath expr="//field[@name='order_line']/tree[1]/field[@name='purchase_price']" position="attributes">
+                    <attribute name="invisible"/>
+                    <attribute name="column_invisible">parent.can_see_product_cost == False</attribute>
+                </xpath>
+                <!--                field margin in the sale order lines-->
+                <xpath expr="//field[@name='order_line']/tree[1]/field[@name='margin']" position="attributes">
+                    <attribute name="invisible"/>
+                    <attribute name="column_invisible">parent.can_see_product_cost == False</attribute>
+                </xpath>
+                <!--                field margin percent in the sale order lines-->
+                <xpath expr="//field[@name='order_line']/tree[1]/field[@name='margin_percent']" position="attributes">
+                    <attribute name="invisible"/>
+                    <attribute name="column_invisible">parent.can_see_product_cost == False</attribute>
+                </xpath></field>
+        </record>
+        <record id="sale_order_margin_form_inherit_erpc" model="ir.ui.view">
+            <field name="name">sale.order.margin.form.inherit.erpc</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_margin.sale_margin_sale_order"/>
+            <field name="arch" type="xml">
+                <!--                add the boolean to the form-->
+                <xpath expr="//group" position="inside">
+                    <field invisible="1" name="can_see_product_cost"/>
+                </xpath>
+                <!--                hide the label of margin-->
+                <xpath expr="//label[@for='margin']" position="attributes">
+                    <attribute name="invisible">can_see_product_cost == False</attribute>
+                </xpath>
+                <!--                hide the field margin-->
+                <xpath expr="//div[@class='text-nowrap']" position="attributes">
+                    <attribute name="invisible">can_see_product_cost == False</attribute>
+                </xpath></field>
+        </record>
+        <record id="product_template_inherit_form_erpc" model="ir.ui.view">
+            <field name="name">product.template.form.inherit.erpc</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <!--                add the boolean to the form-->
+                <xpath expr="//field[@name='name']" position="after">
+                    <field invisible="1" name="can_see_product_cost"/>
+                </xpath>
+                <!--                hide the cost from the form-->
+                <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/div[@name='standard_price_uom']" position="attributes">
+                    <attribute name="invisible">can_see_product_cost == False</attribute>
+                </xpath>
+                <!--                hide the purchase tab -->
+                <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='purchase']" position="attributes">
+                    <attribute name="invisible">can_see_product_cost == False</attribute>
+                </xpath>
+                <!--                hide the lable of the cost field-->
+                <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/label[2]" position="attributes">
+                    <attribute name="invisible">can_see_product_cost == False</attribute>
+                </xpath></field>
+        </record>
+        <record id="product_template_inherit_tree_erpc" model="ir.ui.view">
+            <field name="name">product.template.tree.inherit.erpc</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
+            <field name="arch" type="xml">
+                <!--                add the group to the tree-->
+                <xpath expr="//field[@name='name']" position="after">
+                    <field invisible="1" name="can_see_product_cost"/>
+                </xpath>
+                <!--                hide field cost in the tree-->
+                <xpath expr="//field[@name='standard_price']" position="attributes">
+                    <attribute name="groups">
+                        erpc_restrict_cost_margin.can_view_product_cost</attribute>
+                </xpath></field>
+        </record>
+        <record id="product_product_inherit_form_erpc" model="ir.ui.view">
+            <field name="name">product.product.form.inherit.erpc</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <!--                add the field to the form-->
+                <xpath expr="//field[@name='name']" position="after">
+                    <field invisible="1" name="can_see_product_cost"/>
+                </xpath>
+                <!--                hide the field cost-->
+                <xpath expr="//form[1]/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/div[@name='standard_price_uom']" position="attributes">
+                    <attribute name="invisible">can_see_product_cost == False</attribute>
+                </xpath>
+                <!--                hide the label of the field cost-->
+                <xpath expr="//form[1]/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/label[2]" position="attributes">
+                    <attribute name="invisible">can_see_product_cost == False</attribute>
+                </xpath>
+                <!--                hide the purchase tab-->
+                <xpath expr="//form[1]/sheet[@name='product_form']/notebook[1]/page[@name='purchase']" position="attributes">
+                    <attribute name="invisible">can_see_product_cost == False</attribute>
+                </xpath></field>
+        </record>
+        <record id="product_product_inherit_tree_erpc" model="ir.ui.view">
+            <field name="name">product.product.tree.inherit.erpc</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_product_tree_view"/>
+            <field name="arch" type="xml">
+                <!--                add the boolean to the form-->
+                <xpath expr="//field[@name='name']" position="after">
+                    <field invisible="1" name="can_see_product_cost"/>
+                </xpath>
+                <!--                hide cost field-->
+                <xpath expr="//field[@name='standard_price']" position="attributes">
+                    <attribute name="groups">
+                        erpc_restrict_cost_margin.can_view_product_cost</attribute>
+                </xpath></field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_hr_allowances" name="Allowances"
+              parent="hr.menu_hr_root"
+              groups="hr_payroll.group_hr_payroll_manager"/>
+    <menuitem id="menu_hr_deductions" name="Deductions"
+              parent="hr.menu_hr_root"/>
+</odoo>

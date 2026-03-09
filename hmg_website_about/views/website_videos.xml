@@ -1,0 +1,294 @@
+<odoo>
+    <template id="website_videos" name="Videos">
+        <t t-call="website.layout">
+
+            <section class="s_videos py-5" style="background:#111;">
+                <div class="container">
+
+                    <!-- Title -->
+                    <h2 class="text-center text-white mb-5"
+                        style="font-weight:600;">
+                        Videos
+                    </h2>
+
+                    <div class="row g-4">
+
+                        <!-- VIDEO 1 -->
+                        <div class="col-12 col-md-6">
+                            <div class="video-card position-relative"
+                                 data-bs-toggle="modal"
+                                 data-bs-target="#videoModal"
+                                 data-video="\hmg_website_about\static\src\img\videos\car_video.mp4">
+
+                                <img src="hmg_website_about/static/src/img/videos/video.jpg"
+                                     class="img-fluid w-100 rounded"/>
+
+                                <!-- Play Button -->
+                                <div class="play-btn">
+                                    ▶
+                                </div>
+
+                                <!-- Caption -->
+                                <div class="video-caption">
+                                    How to make use of old tyres and save the environment?
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- VIDEO 2 -->
+                        <div class="col-12 col-md-6">
+                            <div class="video-card position-relative"
+                                 data-bs-toggle="modal"
+                                 data-bs-target="#videoModal"
+                                 data-video="\hmg_website_about\static\src\img\videos\car_video.mp4">
+
+                                <img src="hmg_website_about/static/src/img/videos/video.jpg"
+                                     class="img-fluid w-100 rounded"/>
+
+                                <div class="play-btn">▶</div>
+
+                                <div class="video-caption">
+                                    How to make use of old tyres and save the environment?
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- VIDEO 3 -->
+                        <div class="col-12 col-md-6">
+                            <div class="video-card position-relative"
+                                 data-bs-toggle="modal"
+                                 data-bs-target="#videoModal"
+                                 data-video="\hmg_website_about\static\src\img\videos\car_video.mp4">
+
+                                <img src="hmg_website_about/static/src/img/videos/video.jpg"
+                                     class="img-fluid w-100 rounded"/>
+
+                                <div class="play-btn">▶</div>
+
+                                <div class="video-caption">
+                                    How to offroad like a pro
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- VIDEO 4 -->
+                        <div class="col-12 col-md-6">
+                            <div class="video-card position-relative"
+                                 data-bs-toggle="modal"
+                                 data-bs-target="#videoModal"
+                                 data-video="\hmg_website_about\static\src\img\videos\car_video.mp4">
+
+                                <img src="hmg_website_about/static/src/img/videos/video.jpg"
+                                     class="img-fluid w-100 rounded"/>
+
+                                <div class="play-btn">▶</div>
+
+                                <div class="video-caption">
+                                    How to offroad like a pro
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- Modal -->
+
+            <div class="modal fade video-modal"
+                id="videoModal"
+                tabindex="-1"
+                aria-hidden="true">
+
+                <div class="modal-dialog modal-dialog-centered modal-fullscreen">
+                    <div class="modal-content bg-black border-0">
+
+                        <!-- Close Button -->
+                        <button type="button"
+                                class="btn-close btn-close-white position-absolute top-0 end-0 m-4"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                                style="z-index: 20;">
+                        </button>
+
+                        <div class="modal-body p-0 d-flex align-items-center justify-content-center">
+
+                            <video id="videoPlayer" class="w-100 h-100 object-fit-contain">
+                                <source id="videoSource" src="" type="video/mp4"/>
+                            </video>
+
+                            <div id="modalPlayBtn" class="modal-play-btn">
+                                ▶
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- CSS -->
+            <style>
+                .video-card {
+                    cursor: pointer;
+                    overflow: hidden;
+                }
+
+                .video-card img {
+                    transition: 0.4s;
+                }
+
+                .video-card:hover img {
+                    transform: scale(1.05);
+                }
+
+                .play-btn {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    font-size: 40px;
+                    color: white;
+                    background: rgba(0,0,0,0.6);
+                    width: 70px;
+                    height: 70px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .video-caption {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    padding: 15px;
+                    color: white;
+                    font-size: 14px;
+                    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+                }
+                .modal-play-btn {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    font-size: 60px;
+                    color: white;
+                    background: rgba(0,0,0,0.6);
+                    width: 90px;
+                    height: 90px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    z-index: 10;
+                }
+
+                @media (max-width: 768px) {
+                    .modal-play-btn {
+                        width: 70px;
+                        height: 70px;
+                        font-size: 40px;
+                    }
+                }
+
+                @media (max-width: 768px) {
+                    .play-btn {
+                        width: 55px;
+                        height: 55px;
+                        font-size: 28px;
+                    }
+                }
+                /* Remove modal scrolling completely */
+                .video-modal .modal-dialog {
+                    margin: 0;
+                }
+
+                .video-modal .modal-content {
+                    height: 100vh;
+                }
+
+                .video-modal .modal-body {
+                    height: 100vh;
+                    overflow: hidden;
+                }
+
+                /* Remove body scroll when modal opens */
+                body.modal-open {
+                    overflow: hidden !important;
+                    padding-right: 0 !important;
+                }
+
+                /* Play button */
+                .modal-play-btn {
+                    position: absolute;
+                    font-size: 60px;
+                    color: white;
+                    background: rgba(0,0,0,0.6);
+                    width: 90px;
+                    height: 90px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                }
+
+                /* Make video perfectly centered */
+                video {
+                    max-height: 100vh;
+                    max-width: 100%;
+                }
+
+                /* Mobile fix */
+                @media (max-width: 768px) {
+                    .modal-play-btn {
+                        width: 70px;
+                        height: 70px;
+                        font-size: 40px;
+                    }
+                }
+
+            </style>
+
+
+            <!-- JS -->
+            <script>
+            document.addEventListener("DOMContentLoaded", function () {
+
+                var videoModal = document.getElementById('videoModal');
+                var videoPlayer = document.getElementById('videoPlayer');
+                var videoSource = document.getElementById('videoSource');
+                var playBtn = document.getElementById('modalPlayBtn');
+
+                videoModal.addEventListener('show.bs.modal', function (event) {
+                    var button = event.relatedTarget;
+                    var videoURL = button.getAttribute('data-video');
+
+                    videoSource.src = videoURL;
+                    videoPlayer.load(); // Load but don't play
+                    playBtn.style.display = "flex"; // show play button
+                });
+
+                playBtn.addEventListener('click', function () {
+                    videoPlayer.play();
+                    playBtn.style.display = "none"; // hide button after playing
+                });
+
+                videoModal.addEventListener('hidden.bs.modal', function () {
+                    videoPlayer.pause();
+                    videoPlayer.currentTime = 0;
+                    videoSource.src = "";
+                    playBtn.style.display = "flex";
+                });
+
+            });
+        </script>
+
+        </t>
+    </template>
+</odoo>

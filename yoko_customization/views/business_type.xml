@@ -1,0 +1,47 @@
+<odoo>
+    <data>
+        <!-- explicit list view definition -->
+<!--        <record id="business_type_view_tree" model="ir.ui.view">-->
+<!--            <field name="name">business_type.view.tree</field>-->
+<!--            <field name="model">business.type</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree string="business type tree">-->
+<!--                    <field name="name"/>-->
+<!--                    <field name="code"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="business_type_view_form" model="ir.ui.view">-->
+<!--            <field name="name">business.type.view.form</field>-->
+<!--            <field name="model">business.type</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form>-->
+<!--                    <sheet>-->
+<!--                        <label for="name"/>-->
+<!--                        <h1>-->
+<!--                            <field name="name" placeholder="Name..." required="1"/>-->
+<!--                        </h1>-->
+<!--                        <group>-->
+<!--                            <group>-->
+<!--                                <field name="code" placeholder="e.g. 101"/>-->
+<!--                            </group>-->
+<!--                        </group>-->
+<!--                    </sheet>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="business_type_action" model="ir.actions.act_window">-->
+<!--            <field name="name">Business Type</field>-->
+<!--            <field name="res_model">business.type</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--        </record>-->
+
+
+<!--        &lt;!&ndash; menu item &ndash;&gt;-->
+
+<!--        <menuitem id="business_type_menu" name="Business Type" action="business_type_action" parent="contacts.res_partner_menu_config" sequence="1" active="True"/>-->
+
+    </data>
+</odoo>

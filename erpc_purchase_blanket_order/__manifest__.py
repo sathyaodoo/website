@@ -1,0 +1,25 @@
+{
+    "name": "ERPC Purchase Blanket Order",
+    "version": "19.0.1.0.0",
+    "category": "Purchase",
+    "author": "ERP Cloud S.A.R.L",
+    "sequence": -100,
+    "summary": "ERPC Purchase Blanket Order",
+    "description": """Purchase Blanket Order""",
+    "depends": [
+        "base",
+        "purchase",
+        "stock",
+        "purchase_requisition",
+        "erpc_purchase_requisition",
+        "erpc_po_total_quantities",
+    ],
+    "data": [
+        # "views/view.xml",
+    ],
+    "demo": [],
+    "installable": True,
+    "application": True,
+    "auto_install": False,
+    "license": "LGPL-3",
+}

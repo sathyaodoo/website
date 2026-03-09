@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="contract_history_admin" model="res.groups">
+        <field name="name">Modify Contract History</field>
+    </record>
+</odoo>

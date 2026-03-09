@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="erpc_hr_employee_request_item" model="ir.actions.act_window">
+        <field name="name">Request For Item</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">request.item</field>
+        <field name="binding_model_id" ref="hr.model_hr_employee"/>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="erpc_request_item_tree"/>
+    </record>
+
+    <record id="erpc_view_employee_form" model="ir.ui.view">
+        <field name="name">erpc.view.employee.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="%(erpc_hr_employee_request_item)d"
+                        type="action"
+                        class="oe_stat_button"
+                        icon="fa-building-o"
+                        groups="hr.group_hr_manager,hr.group_hr_user,base.group_user">
+                    <field name="request_item_count" widget="statinfo" string="Request Items"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

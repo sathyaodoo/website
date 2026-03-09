@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="erpc_view_employee_form_inherit" model="ir.ui.view">
+        <field name="name">erpc.hr.employee.form.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="/form//field[@name='company_id']" position="after">
+                <field name="work_contact_id" readonly="1" groups="!hr.group_hr_manager"
+                       options="{'no_create': True, 'no_open': True}"/>
+                <field name="work_contact_id" groups="hr.group_hr_manager"/>
+            </xpath>
+            <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='personal_information']/group[1]/group[1]/field[@name='private_phone']"
+                   position="after">
+                <field name="private_birthdate"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

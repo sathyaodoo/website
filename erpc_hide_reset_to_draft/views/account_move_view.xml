@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="erpc_hide_reset_to_draft_view_form" model="ir.ui.view">
+            <field name="name">account.move.form.inherit.no.reset_to_draft</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='button_draft']" position="attributes">
+                    <attribute name="groups">!erpc_hide_reset_to_draft.erpc_group_hide_reset_draft</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="erpc_hide_reset_to_draft_payment_view_form" model="ir.ui.view">
+            <field name="name">account.payment.form.inherit.no.reset_to_draft</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_draft']" position="attributes">
+                    <attribute name="groups">!erpc_hide_reset_to_draft.erpc_group_hide_reset_draft</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

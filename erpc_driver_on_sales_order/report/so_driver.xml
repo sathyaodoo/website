@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="erpc_driver_on_so" inherit_id="stock.report_delivery_document">
+        <xpath expr="//div[@name='outgoing_warehouse_address']" position="after">
+            <div name="so_driver" t-if="o.driver_id">
+                <span>
+                    <strong>Driver:</strong>
+                </span>
+                <div t-field="o.driver_id"/>
+            </div>
+        </xpath>
+    </template>
+</odoo>

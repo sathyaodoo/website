@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_product_all,access_product_product,account.model_product_product,base.group_user,1,1,1,1
+access_product_product,access_product_product,product.model_product_product,base.group_user,1,1,1,1
+access_salesman_account_fiscal_year,access.salesman.account.fiscal.year,account_accountant.model_account_fiscal_year,yoko_security_custom.outdoor,1,0,0,0
+access_salesman_account_payment,access.salesman.account.payment,account.model_account_payment,yoko_security_custom.outdoor,1,0,0,0

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="product_template_form_view_can_be_fixed_asset" model="ir.ui.view">
+            <field name="name">product.template.can.be.fixed.asset</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='options']" position="inside">
+                    <span class="d-inline-block">
+                        <field name="fixed_asset_ok"/>
+                        <label for="fixed_asset_ok"/>
+                    </span>
+                </xpath>
+
+<!--                <xpath expr="//field[@name='family_id']" position="attributes">-->
+<!--                    <attribute name="required">is_service == False and fixed_asset_ok == False</attribute>-->
+<!--                </xpath>-->
+
+<!--                <xpath expr="//field[@name='brand_id']" position="attributes">-->
+<!--                    <attribute name="required">is_service == False and fixed_asset_ok == False</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='kind_id']" position="attributes">-->
+<!--                    <attribute name="required">is_service == False and fixed_asset_ok == False</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='classification_id']" position="attributes">-->
+<!--                    <attribute name="required">is_service == False and fixed_asset_ok == False</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='series_id']" position="attributes">-->
+<!--                    <attribute name="required">is_service == False and fixed_asset_ok == False</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='pattern_id']" position="attributes">-->
+<!--                    <attribute name="required">is_service == False and fixed_asset_ok == False</attribute>-->
+<!--                </xpath>-->
+
+                <xpath expr="//field[@name='property_account_expense_id']" position="attributes">
+                    <attribute name="required">fixed_asset_ok == True</attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

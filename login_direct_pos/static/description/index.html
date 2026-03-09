@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POS Direct Login - Odoo Module</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        .section {
+            background: white;
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .section h3 {
+            color: #764ba2;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .feature-card {
+            background: #f0f4ff;
+            padding: 20px;
+            border-radius: 6px;
+            border-left: 4px solid #667eea;
+        }
+
+        .feature-card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        ul,
+        ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 40px;
+        }
+
+        .company-info {
+            background: #f0f4ff;
+            padding: 20px;
+            border-radius: 6px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .company-info p {
+            margin: 5px 0;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin: 5px 5px 5px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🛒 POS Direct Login</h1>
+            <p>Fast & Direct Login to POS without Backend Access</p>
+        </div>
+
+        <!-- Overview Section -->
+        <div class="section">
+            <h2>Overview</h2>
+            <p>
+                <strong>POS Direct Login</strong> is a powerful Odoo module that streamlines the login process for Point
+                of Sale users.
+                This module eliminates the need to access the Odoo backend, allowing your POS operators to directly
+                login to configured
+                POS shops with a simple and efficient authentication mechanism.
+            </p>
+            <p style="margin-top: 15px;">
+                Save time, improve workflow efficiency, and enhance security by restricting direct backend access for
+                POS operators.
+            </p>
+        </div>
+
+        <!-- Key Features -->
+        <div class="section">
+            <h2>Key Features</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <h4>⚡ Direct POS Login</h4>
+                    <p>Skip the backend and login directly to the configured POS shop interface</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🔐 Enhanced Security</h4>
+                    <p>Restrict backend access and limit user permissions to POS operations only</p>
+                </div>
+                <div class="feature-card">
+                    <h4>⏱️ Time Saving</h4>
+                    <p>Reduce login time and improve operational efficiency for POS operators</p>
+                </div>
+                <div class="feature-card">
+                    <h4>👥 Easy Configuration</h4>
+                    <p>Simple and intuitive setup for assigning POS shops to users</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- How It Works -->
+        <div class="section">
+            <h2>How It Works</h2>
+            <ol>
+                <li><strong>User Assignment:</strong> Configure POS shops and assign users directly to them</li>
+                <li><strong>Direct Access:</strong> Users login directly to their assigned POS terminal</li>
+                <li><strong>Streamlined Experience:</strong> No need to navigate through backend menus</li>
+                <li><strong>Role-Based Restrictions:</strong> Automatically restrict access based on shop assignment
+                </li>
+            </ol>
+        </div>
+
+        <!-- Installation -->
+        <div class="section">
+            <h2>Installation & Setup</h2>
+            <h3>Requirements</h3>
+            <ul>
+                <li>Odoo 19.0 or later</li>
+                <li>Point of Sale module installed and configured</li>
+            </ul>
+
+            <h3>Installation Steps</h3>
+            <ol>
+                <li>Download and install the module from Odoo App Store</li>
+                <li>Install the module in your Odoo instance</li>
+                <li>Activate the module</li>
+                <li>Configure POS shops and user assignments in Settings</li>
+            </ol>
+        </div>
+
+        <!-- Configuration -->
+        <div class="section">
+            <h2>Configuration</h2>
+            <h3>Setting Up POS Direct Login</h3>
+            <ol>
+                <li>Go to Settings → Users</li>
+                <li>Select the user you want to configure</li>
+                <li>Enable "POS Direct Login" option</li>
+                <li>Assign the user to their POS shop</li>
+                <li>Save and test the configuration</li>
+            </ol>
+
+            <h3>User Permissions</h3>
+            <ul>
+                <li>Users can only access their assigned POS terminal</li>
+                <li>Backend access can be restricted for security</li>
+                <li>Super Admin can manage all assignments</li>
+            </ul>
+        </div>
+
+        <!-- Use Cases -->
+        <div class="section">
+            <h2>Ideal Use Cases</h2>
+            <ul>
+                <li>Multi-shop retail environments with multiple POS terminals</li>
+                <li>Quick service restaurants (QSR) with fast-paced operations</li>
+                <li>Shopping malls and commercial centers with multiple retailers</li>
+                <li>Organizations prioritizing POS operator security</li>
+                <li>Businesses requiring streamlined cashier workflows</li>
+            </ul>
+        </div>
+
+        <!-- Technical Specifications -->
+        <div class="section">
+            <h2>Technical Specifications</h2>
+            <ul>
+                <li><strong>Version:</strong> 19.0.1.0.0</li>
+                <li><strong>Category:</strong> Point of Sale</li>
+                <li><strong>License:</strong> AGPL-3</li>
+                <li><strong>Dependencies:</strong> Point of Sale (POS)</li>
+                <li><strong>Status:</strong> Installable & Production Ready</li>
+            </ul>
+        </div>
+
+        <!-- Company Information -->
+        <div class="company-info">
+            <h3>Developed by Aura Odoo Tech</h3>
+            <p><strong>Website:</strong> <a href="https://auraodoo.tech" target="_blank"
+                    style="color: #667eea;">https://auraodoo.tech</a></p>
+            <p><strong>Support & Maintenance:</strong> Professional support available</p>
+            <p><strong>License:</strong> <span class="badge">AGPL-3</span></p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>&copy; 2024 Aura Odoo Tech. All rights reserved.</p>
+            <p>POS Direct Login - Making POS Management Simpler & Faster</p>
+        </div>
+    </div>
+</body>
+
+</html>

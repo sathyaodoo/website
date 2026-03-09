@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_purchase_order_lines_tree" model="ir.ui.view">
+        <field name="name">purchase.order.line.tree</field>
+        <field name="model">purchase.order.line</field>
+        <field name="arch" type="xml">
+            <tree create="False">
+                <field name="order_id" optional="hide"/>
+                <field name="po_reference" optional="show"/>
+                <field name="partner_id" optional="show"/>
+                <field name="store_related_requisition_line_name" optional="show"/>
+                <field name="bo_origin" optional="show"/>
+                <field name="bo_order_date" widget="date" optional="show"/>
+                <field name="erpc_date_approve" widget="date" optional="show"/>
+                <!-- <field name="date_approve" widget="date" optional="show"/> -->
+                <field name="receipt_date" widget="date" optional="show"/>
+                <field name="invoice_payments_widget" widget="payment" optional="hide"/>
+                <field name="invoice_payments_text" optional="show" widget="text"/>
+                <field name="product_id" optional="show"/>
+                <field name="product_uom_qty" optional="show"/>
+                <field name="qty_received" optional="show"/>
+                <field name="price_unit" optional="show"/>
+                <field name="price_subtotal" optional="show"/>
+                <field name="price_total" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="erpc_purchase_order_line_search" model="ir.ui.view">
+        <field name="name">purchase.order.line.search</field>
+        <field name="model">purchase.order.line</field>
+        <field name="arch" type="xml">
+            <search string="Search Purchase Order">
+                <field name="order_id"/>
+                <field name="product_id"/>
+                <field name="partner_id" string="Vendor"/>
+                <field name="bo_origin"/>
+                <filter name="hide_cancelled" string="Hide cancelled lines" domain="[('state', '!=', 'cancel')]"/>
+                <group expand="0" string="Group By">
+                    <filter name="groupby_supplier" string="Vendor" domain="[]" context="{'group_by' : 'partner_id'}"/>
+                    <filter name="groupby_product" string="Product" domain="[]" context="{'group_by' : 'product_id'}"/>
+                    <filter string="Order Reference" name="order_reference" domain="[]" context="{'group_by' :'order_id'}"/>
+                    <filter string="Status" name="status" domain="[]" context="{'group_by' : 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_view_purchase_order_lines" model="ir.actions.act_window">
+        <field name="name">Purchase Order Lines</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">purchase.order.line</field>
+        <field name="view_mode">tree,search</field>
+        <field name="view_id" ref="view_purchase_order_lines_tree"/>
+        <field name="search_view_id" ref="erpc_purchase_order_line_search"/>
+    </record>
+
+    <menuitem id="erpc_account_reports_purchase_report_menu" name="Purchase Accounting Report" parent="account.menu_finance_reports" sequence="3">
+        <menuitem id="menu_action_account_report_purchase_order_lines" name="Purchase Order Lines" action="action_view_purchase_order_lines"/>
+    </menuitem>
+
+</odoo>

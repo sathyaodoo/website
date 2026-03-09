@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="stock.ForecastedDetailsInherit" t-inherit="stock.ForecastedDetails" t-inherit-mode="extension">
+        <xpath expr="//tr[td[text()='Forecasted with Pending']]" position="after">
+            <tr class="o_forecasted_row bg-200">
+                <td colspan="2">Remaining Confirmed Quantity</td>
+                <td t-out="_formatFloat(props.docs.remaining_ordered_quantity)" class="text-end"/>
+            </tr>
+        </xpath>
+
+        <!-- Remove the unreserve button -->
+        <xpath expr="//button[@name='unreserve_link']" position="replace"/>
+
+        <!-- Remove the unreserve button -->
+        <xpath expr="//button[@name='reserve_link']" position="replace"/>
+    </t>
+</templates>

@@ -1,0 +1,146 @@
+
+<odoo>
+    <template id="website_safety" name="Safety Content">
+            <style>
+                /* ===== Main Section ===== */
+                .safety-section {
+                    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+                    padding: 80px 0;
+                    color: #ffffff;
+                }
+
+                .safety-title {
+                    text-align: center;
+                    margin-bottom: 60px;
+                }
+
+                .safety-title h1 {
+                    font-size: 42px;
+                    font-weight: 700;
+                    letter-spacing: 1px;
+                    color: #e65100; /* Changed Title Color */
+                }
+
+                .safety-title p {
+                    font-size: 18px;
+                    color: #e0e0e0;
+                }
+
+                /* ===== Cards ===== */
+                .safety-card {
+                    background: #ffffff;
+                    color: #333;
+                    border-radius: 15px;
+                    padding: 30px;
+                    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+                    transition: 0.3s ease;
+                    height: 100%;
+                }
+
+                .safety-card:hover {
+                    transform: translateY(-10px);
+                    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+                }
+
+                .safety-card h3 {
+                    font-weight: 700;
+                    margin-bottom: 15px;
+                    color: #0f2027;
+                }
+
+                .safety-card ul {
+                    padding-left: 18px;
+                }
+
+                .safety-card ul li {
+                    margin-bottom: 10px;
+                }
+
+                .highlight {
+                    color: #ff7a00;
+                    font-weight: 600;
+                }
+
+                /* ===== Bottom Message ===== */
+                .safety-footer {
+                    text-align: center;
+                    margin-top: 60px;
+                    font-size: 20px;
+                    font-weight: 600;
+                    color: #ffffff;
+                }
+
+                @media (max-width: 768px) {
+                    .safety-title h1 {
+                        font-size: 28px;
+                    }
+                }
+            </style>
+            <t t-call="website.layout">
+            <div class="safety-section">
+                <div class="container">
+
+                    <!-- Title -->
+                    <div class="safety-title">
+                        <h1 style="color:#fff">Safety</h1>
+                        
+                        <h3 style="color:#e65100">Drive with Confidence. Drive Safe.</h3>
+                        <p>
+                            At HMG Holding, safety on the road is our top priority. From tires to lubricants and batteries, we help you make informed choices that keep every journey safe, efficient, and reliable.
+                        </p>
+                    </div>
+
+                    <div class="row g-4">
+
+                        <!-- Tires -->
+                        <div class="col-md-4">
+                            <div class="safety-card">
+                                <h3>Tires: The Road to Safety</h3>
+                                <ul>
+                                    <li><span class="highlight">Check your tires monthly: </span> Inspect tread depth sidewalls, and overall condition. Worn tires increase braking distance and risk of accidents.</li>
+                                    <li><span class="highlight">Maintain proper inflation pressure: </span> Under- or over-inflated tires affect handling, fuel efficiency, and tire life.</li>
+                                    <li><span class="highlight">Understand rolling resistance:</span>Properly maintained tires reduce rolling resistance, improving fuel consumption and vehicle performance.</li>
+                                    <li><span class="highlight">Never drive on worn tires:</span>Even small reductions in tread depth can compromise traction, especially on wet or uneven roads.</li>
+                                </ul>
+                            </div>
+                        </div> 
+
+                        <!-- Lubricants -->
+                        <div class="col-md-4">
+                            <div class="safety-card">
+                                <h3>Lubricants: Protect Your Engine</h3>
+                                <ul>
+                                    <li><span class="highlight">Regular lubricant checks:</span> Ensures smooth engine operation, reduces wear, and prevents overheating</li>
+                                    <li><span class="highlight">Use quality products: </span> High-performance lubricants like ENI protect engines under Lebanon’s varied climate and road conditions</li>
+                                    <li><span class="highlight">Timely changes matter: </span> Old or degraded oil affects fuel efficiency and can damage critical engine components.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Batteries -->
+                        <div class="col-md-4">
+                            <div class="safety-card">
+                                <h3>Batteries: Power You Can Trust</h3>
+                                <ul>
+                                    <li><span class="highlight">Regular inspection: </span> Check battery terminals for corrosion and ensure a secure connection.</li>
+                                    <li><span class="highlight">Monitor charge levels:</span>Weak batteries can leave you stranded and affect electrical systems.</li>
+                                    <li><span class="highlight">Choose the right battery: </span> Brands like Delkor provide reliable power for all vehicles and conditions in Lebanon.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Footer Message -->
+                    <div class="safety-footer">
+                        With the right tires, lubricants, and batteries, you can stay confident on every road.
+                    </div>
+
+                </div>
+            </div>
+
+        </t>
+    </template>
+    
+
+</odoo>

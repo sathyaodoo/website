@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="email_notification_cancel_so_template_id" model="mail.template">
+            <field name="name">Cancellation Request Email template</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="subject">Cancellation Request for the following: {{ object.display_name }}</field>
+            <field name="body_html" type="html">
+                <div>
+                    Dear <t>Madam/Sir</t>,
+                    <br/>
+                    <br/>
+                    Please find the Sales Order and cancel it
+                    <t t-if="object.get_portal_url()">
+                        <a t-attf-href="object.get_portal_url()" t-out="object.name or ''"/>
+                        <!-- <a t-attf-href="{{ ctx['url'] }}" t-out="object.name or ''"/> -->
+                    </t>
+                    <div style="text-align: center; padding: 16px 0px 16px 0px;">
+                        <a style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;" t-attf-href="object.get_portal_url()">View the Sales Order</a>
+                        <!-- t-attf-href="object.get_portal_url()">View the Sales Order</a> -->
+                        <br/>
+                    </div>
+                    To add additional comments, reply to this email.
+                    <br/>
+                    <br/>
+                    Thank you,
+                    <br/>
+                    <br/>
+                    <t>Outdoor Sales</t>
+                    Team.
+                </div>
+            </field>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+
+        <record id="email_notification_confirm_so_template_id" model="mail.template">
+            <field name="name">Confirmation Request Email template</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="subject">Confirmation Request for the following: {{ object.display_name }}</field>
+            <field name="body_html" type="html">
+                <div>
+                    Dear <t>Madam/Sir</t>,
+                    <br/>
+                    <br/>
+                    Please find the Sales Quotation and Confirm it
+                    <t t-if="object.get_portal_url()">
+                        <a t-attf-href="object.get_portal_url()" t-out="object.name or ''"/>
+                    </t>
+                    <!-- <t t-if="object.get_portal_url()">
+                        <a t-attf-href="{{ ctx['url'] }}" t-out="object.name or ''"/>
+                    </t> -->
+                    <div style="text-align: center; padding: 16px 0px 16px 0px;">
+                        <a style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;" t-attf-href="object.get_portal_url()">View the Sales Order</a>
+                        <br/>
+                        <!-- <a style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;" t-attf-href="{{ ctx['url'] }}">View the Quotation</a> -->
+                    </div>
+                    To add additional comments, reply to this email.
+                    <br/>
+                    <br/>
+                    Thank you,
+                    <br/>
+                    <br/>
+                    <t>Outdoor Sales</t>
+                    Team.
+                </div>
+            </field>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+        <record id="email_notification_invoice_return_template_id" model="mail.template">
+            <field name="name">Invoice Return Request Email</field>
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="subject">Invoice Return Request for the following: {{ object.display_name }}</field>
+            <field name="body_html" type="html">
+                <div>
+                    Dear <t>Madam/Sir</t>,
+                    <br/>
+                    <br/>
+                    Please Open the link and proceed with the creating a return to the invoice in the link
+                                        <!-- <t t-if="object.get_portal_url()">
+                        <a t-attf-href="{{ ctx['url'] }}" t-out="object.name or ''"/>
+                    </t> -->
+                    <t t-if="object.get_portal_url()">
+                        <a t-attf-href="object.get_portal_url()" t-out="object.name or ''"/>
+                        <!-- <a t-attf-href="{{ ctx['url'] }}" t-out="object.name or ''"/> -->
+                    </t>
+                    <div style="text-align: center; padding: 16px 0px 16px 0px;">
+                        <a style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;" t-attf-href="object.get_portal_url()">View the Sales Order</a>
+                        <!-- <a style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;" t-attf-href="{{ ctx['url'] }}">View Invoice</a> -->
+                        <br/>
+                    </div>
+                    To add additional comments, reply to this email.
+                    <br/>
+                    <br/>
+                    Thank you,
+                    <br/>
+                    <br/>
+                    <t>Outdoor Sales</t>
+                    Team.
+                </div>
+            </field>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+
+    </data>
+</odoo>

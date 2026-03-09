@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="view_account_move_form_inherit_transfer_yearly_discount" model="ir.ui.view">
+        <field name="name">account.move.form.inherit.transfer.yearly.discount</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@id='header_right_group']" position="inside">
+                <field name="transfer_deferral_yearly_entry_count" invisible="1"/>
+            </xpath>
+
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button class="oe_stat_button" name="action_view_transfer_yearly_entry" type="object" icon="fa-bars"
+                        invisible="transfer_deferral_yearly_entry_count == 0 or move_type != 'in_invoice'">
+                    <field string="Transfer Yearly Discount Entry" name="transfer_deferral_yearly_entry_count"
+                           widget="statinfo"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="res_config_settings_view_form_inherit_transfer_yearly_discount" model="ir.ui.view">
+        <field name="name">res.config.settings.transfer.yearly.discount</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@id='default_accounts']" position="inside">
+                <setting string="Yearly Discount Entry:">
+                    <div class="content-group">
+                        <div class="row mt8">
+                            <label for="internal_transfer_journal_id"
+                                   class="col-lg-5 o_light_label"/>
+                            <field name="internal_transfer_journal_id"/>
+                        </div>
+                        <div class="row mt8">
+                            <label for="yearly_discount_journal_id"
+                                   class="col-lg-5 o_light_label"/>
+                            <field name="yearly_discount_journal_id"/>
+                        </div>
+                        <div class="row mt8">
+                            <label for="deferral_payable_account_id"
+                                   class="col-lg-5 o_light_label"/>
+                            <field name="deferral_payable_account_id"/>
+                        </div>
+                        <div class="row mt8">
+                            <label for="deferral_receivable_account_id"
+                                   class="col-lg-5 o_light_label"/>
+                            <field name="deferral_receivable_account_id"/>
+                        </div>
+
+                    </div>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

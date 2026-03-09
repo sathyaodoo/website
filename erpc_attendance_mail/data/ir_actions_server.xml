@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="erpc_action_dismiss" model="ir.actions.server">
+        <field name="name">Dismiss</field>
+        <field name="model_id" ref="erpc_attendance_mail.model_hr_attendance_reminder"/>
+        <field name="binding_model_id" ref="erpc_attendance_mail.model_hr_attendance_reminder"/>
+        <field name="state">code</field>
+        <field name="code">
+if records:
+    records.action_dismiss()
+        </field>
+    </record>
+</odoo>

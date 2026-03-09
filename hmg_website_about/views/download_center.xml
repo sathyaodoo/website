@@ -1,0 +1,91 @@
+<odoo>
+    <template id="download_center_page" name="Download Center">
+        <t t-call="website.layout">
+
+            <div class="download-center-container">
+
+                <!-- Header -->
+                <h1 class="download-title">Download Center</h1>
+
+                <!-- Navigation Bar -->
+                <div class="download-navbar">
+                    <ul>
+                        <li class="active">Catalogues &amp; Brochures</li>
+                        <li>Product Information</li>
+                        <li>Price Lists</li>
+                        <li>Social Media Content</li>
+                        <li>Photo Gallery</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- CSS -->
+            <style>
+
+            .download-center-container{
+                text-align:center;
+                margin-top:40px;
+            }
+
+            .download-title{
+                font-size:34px;
+                font-weight:600;
+                margin-bottom:30px;
+            }
+
+            .download-navbar{
+                background:black;
+                display:flex;
+                justify-content:center;
+                padding:0;
+            }
+
+            .download-navbar ul{
+                display:flex;
+                list-style:none;
+                margin:0;
+                padding:0;
+            }
+
+            .download-navbar li{
+                color:white;
+                padding:14px 50px;
+                cursor:pointer;
+                text-transform:uppercase;
+                letter-spacing:1.5px; /* wider text */
+                font-size:13px;
+                font-weight: 1000;
+            }
+
+            .download-navbar li.active{
+                background:white;
+                color:red;
+                border-bottom:3px solid red;
+            }
+
+            </style>
+
+            <!-- JS -->
+            <script>
+
+            document.addEventListener("DOMContentLoaded", function(){
+
+                const items = document.querySelectorAll(".download-navbar li");
+
+                items.forEach(item => {
+                    item.addEventListener("click", function(){
+
+                        items.forEach(el => el.classList.remove("active"));
+                        this.classList.add("active");
+
+                    });
+                });
+
+            });
+
+            </script>
+
+        </t>
+    </template>
+</odoo>

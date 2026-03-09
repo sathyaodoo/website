@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="set_quantity_products" model="res.groups">
+            <field name="name">Products Quantity Manager Group</field>
+            <field name="comment">Allows User to Set Product Quantities</field>
+        </record>
+
+        <record id="stock_barcode.stock_picking_action_kanban" model="ir.actions.act_window">
+            <field name="name">Operations</field>
+            <field name="res_model">stock.picking</field>
+            <field name="view_mode">kanban,form</field>
+            <field name="view_id" ref="stock_barcode.stock_picking_view_kanban"/>
+            <field name="context">{
+                'contact_display': 'partner_address',
+                'search_default_available': 1,
+                }</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new transfer
+                </p>
+                <p>
+                    Transfers allow you to move products from one location to another.
+                </p>
+            </field>
+        </record>
+
+
+        <record model="ir.module.category" id="inventory_apply_category">
+            <field name="name">Inventory Apply</field>
+            <field name="description">Inventory Apply Counted Quantity</field>
+            <field name="sequence">20</field>
+        </record>
+
+        <record id="inventory_apply_group" model="res.groups">
+            <field name="name">Inventory Apply</field>
+            <field name="comment">Inventory Apply Counted Quantity</field>
+            <!-- <field name="category_id" ref="inventory_apply_category"/> -->
+        </record>
+
+        <record id="erpc_view_stock_quant_tree_inventory_editable_apply" model="ir.ui.view">
+            <field name="name">stock.quant.apply</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock.view_stock_quant_tree_editable"/>
+            <field name="arch" type="xml">
+                <!-- doesnt exist odoo 19 -->
+                <!-- <xpath expr="//button[@name='action_apply_inventory']" position="replace">
+                    <button name="action_apply_inventory" groups="yoko_stock.inventory_apply_group" type="object" string="Apply" class="btn btn-link" icon="fa-save" invisible="inventory_quantity_set == False"/>
+                </xpath>
+
+                <xpath expr="//button[@name='action_set_inventory_quantity']" position="attributes">
+                    <attribute name="groups">yoko_stock.set_quantity_products</attribute>
+                </xpath> -->
+<xpath expr="/list//field[@name='inventory_quantity_auto_apply']" position="after">
+    
+                        <field name="is_product_quantity_manager" column_invisible="1" invisible="1"/>
+
+    <field name="inventory_quantity" optional="show" readonly="not is_product_quantity_manager"/>
+    
+</xpath>
+            </field>
+        </record>
+
+        <record id="view_stock_quant_tree_for_sale" model="ir.ui.view">
+            <field name="name">view.stock.quant.tree.for.sale</field>
+            <field name="inherit_id" ref="stock.view_stock_quant_tree_editable"/>
+            <field name="model">stock.quant</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='inventory_quantity_auto_apply']" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="action_sale_stock_available" model="ir.actions.act_window">
+            <field name="name">Stock</field>
+            <field name="res_model">stock.quant</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="context">{'search_default_productgroup': 1}</field>
+            <field name="domain">[('location_id.usage', '=', 'internal'),
+                                  ('location_id.is_main_location', '=', True)]</field>
+            <field name="view_id" ref="view_stock_quant_tree_for_sale"/>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <!-- <record model="ir.ui.view" id="view_stock_quant_tree_editable_custom">
+            <field name="name">stock.quant.tree.editable.custom</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock.view_stock_quant_tree_editable"/>
+            <field name="arch" type="xml">
+                <field name="value" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+            </field>
+        </record> -->
+
+        <menuitem id="menu_sale_stock_available" name="Stock" action="action_sale_stock_available" parent="sale.product_menu_catalog" groups="yoko_security_custom.indoor" sequence="20" active="True"/>
+        <!-- groups="yoko_security_custom.indoor"-->
+
+    </data>
+</odoo>

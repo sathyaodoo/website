@@ -1,0 +1,1502 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="custom_homepage_full" inherit_id="website.homepage">
+        <xpath expr="//div[@id='wrap']" position="replace">
+            <div id="wrap" class="oe_structure oe_empty">
+               <section class="s_carousel o_cc o_cc4">
+                    <div id="homepageCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+
+                        <!-- Indicators -->
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#homepageCarousel" data-bs-slide-to="0" class="active"></button>
+                            <button type="button" data-bs-target="#homepageCarousel" data-bs-slide-to="1"></button>
+                            <button type="button" data-bs-target="#homepageCarousel" data-bs-slide-to="2"></button>
+                        </div>
+
+                        <!-- Slides -->
+                        <div class="carousel-inner">
+
+                            <!-- Slide 1 -->
+                            <div class="carousel-item active">
+                                <div class="d-block w-100 o_bg_img_center"
+                                    style="background-image: url('web/image/804-a8813f62/689ee081c82c7ac7d4435b0c56a5c71e.jpg'); height: 600px; background-size: cover;">
+                                    
+                                    <div class="bg-black-75 w-100 h-100 d-flex align-items-center justify-content-center text-center">
+                                        <div>
+                                            <h1 class="display-3" style="text-align: center;">
+                                                <span class="h4-fs">
+                                                    <strong>
+                                                        <span class="o_animated_text o_animate o_anim_fade_in o_visible">WE BRING YOU PERFORMANCE YOU'VE&amp;nbsp;
+                                                            <br/>BEEN DREAMING OF,ON AND OF THE TRUCK
+                                                        </span>
+                                                    </strong>
+                                                </span>
+                                            </h1>
+                                            <a class="btn btn-secondary mt-3" href="/contactus">Discover more</a>
+                                            <a class="btn btn-outline-light mt-3" href="/contactus">Contact us</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Slide 2 -->
+                            <div class="carousel-item">
+                                <!--<div class="d-block w-100"-->
+                                <!--     style="background-image: url('/web/image/803-19a790c7/1706094ae5bdacee4af780389d0fca99.jpg'); height: 600px; background-size: cover;">-->
+                                    <!--<div class="o_grid_item o_grid_item_image g-height-10 g-col-lg-6 col-lg-6 text-center o_colored_level" data-name="Block" style="grid-area: 1 / 7 / 11 / 13; z-index: 5;">-->
+                                <div data-oe-expression="//www.youtube.com/embed/VzdQDVwnyks?rel=0&amp;autoplay=1&amp;mute=1&amp;enablejsapi=1&amp;controls=0&amp;loop=1&amp;playlist=VzdQDVwnyks" class="mx-auto media_iframe_video"/>
+                            <!--</div>  -->
+                                    <!--<div class="bg-black-75 w-100 h-100 d-flex align-items-center justify-content-center text-center">-->
+                                    <!--    <div>-->
+                                    <!--        <h1 class="display-3 text-white">-->
+                                    <!--            PREMIUM TRUCK ACCESSORIES-->
+                                    <!--        </h1>-->
+                                    <!--        <a class="btn btn-secondary mt-3" href="/shop">Shop Now</a>-->
+                                    <!--    </div>-->
+                                    <!--</div>-->
+                                </div>
+                            <!--</div>-->
+
+                            <!-- Slide 3 -->
+                            <div class="carousel-item">
+                                <div class="d-block w-100"
+                                    style="background-image: url('https://www.yokohama-india.com/assets/images/homepage/Easy_EMI_web_banner_2.jpeg'); height: 600px; background-size: cover;">
+                                    
+                                    <div class="bg-black-75 w-100 h-100 d-flex align-items-center justify-content-center text-center">
+                                        <div>
+                                            <h1 class="display-3" style="text-align: center;">
+                                                <span class="h4-fs">
+                                                    <strong>
+                                                        <span class="o_animated_text o_animate o_anim_fade_in o_visible">
+                                                            BUILT FOR POWER &amp; PERFORMANCE
+                                                        </span>
+                                                    </strong>
+                                                </span>
+                                            </h1>
+                                            <a class="btn btn-outline-light mt-3" href="/contactus">Get in Touch</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Controls -->
+                        <button class="carousel-control-prev" type="button" data-bs-target="#homepageCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+
+                        <button class="carousel-control-next" type="button" data-bs-target="#homepageCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+
+                    </div>
+                </section>
+                <section class="s_references o_cc o_colored_level pb0 pt16 o_cc5" data-snippet="ss_references" data-name="Referencess">
+                    <div class="container">
+                        <div class="row mb-5">
+                            <div class="col-12">
+                                <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; align-items: center;">
+                            FIND YOUR TYRES
+                            </div>
+                                <div class="finder-form" style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; align-items: center;">
+                                    <select class="finder-select" style="padding: 12px 20px; background: #2a2a2a; color: white; border: none; border-radius: 4px; font-weight: 600; font-size: 13px; cursor: pointer; min-width: 120px; transition: all 0.3s ease;">
+                                        <option value="">Year</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2018">2018</option>
+                                    </select>
+                                    <select class="finder-select" style="padding: 12px 20px; background: #2a2a2a; color: white; border: none; border-radius: 4px; font-weight: 600; font-size: 13px; cursor: pointer; min-width: 120px; transition: all 0.3s ease;">
+                                        <option value="">Make</option>
+                                        <option value="toyota">Toyota</option>
+                                        <option value="honda">Honda</option>
+                                        <option value="ford">Ford</option>
+                                        <option value="bmw">BMW</option>
+                                        <option value="mercedes">Mercedes</option>
+                                        <option value="audi">Audi</option>
+                                        <option value="volkswagen">Volkswagen</option>
+                                    </select>
+                                    <select class="finder-select" style="padding: 12px 20px; background: #2a2a2a; color: white; border: none; border-radius: 4px; font-weight: 600; font-size: 13px; cursor: pointer; min-width: 120px; transition: all 0.3s ease;">
+                                        <option value="">Model</option>
+                                        <option value="sedan">Sedan</option>
+                                        <option value="suv">SUV</option>
+                                        <option value="truck">Truck</option>
+                                        <option value="coupe">Coupe</option>
+                                        <option value="wagon">Wagon</option>
+                                    </select>
+                                    <select class="finder-select" style="padding: 12px 20px; background: #2a2a2a; color: white; border: none; border-radius: 4px; font-weight: 600; font-size: 13px; cursor: pointer; min-width: 120px; transition: all 0.3s ease;">
+                                        <option value="">Engine</option>
+                                        <option value="v4">V4</option>
+                                        <option value="v6">V6</option>
+                                        <option value="v8">V8</option>
+                                        <option value="diesel">Diesel</option>
+                                        <option value="hybrid">Hybrid</option>
+                                    </select>
+                                    <button class="finder-btn" style="padding: 12px 30px; background: #FF0000; color: white; border: none; border-radius: 4px; font-weight: 600; font-size: 13px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease;">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="s_adventure o_colored_level s_parallax_no_overflow_hidden oe_img_bg o_bg_img_center o_bg_img_origin_border_box pb112 pt72 o_cc o_cc4" style="position: relative; background-position: 50% 100%; background-image: url(&quot;/web/image/1681-cf67e4e5/Screenshot%20from%202026-01-27%2022-10-12.webp&quot;);" data-snippet="s_adventure" data-name="Adventure" data-scroll-background-ratio="0" data-attachment-id="894" data-format-mimetype="image/webp" data-original-id="894" data-original-src="/web/image/894-1e9b96c1/Screenshot%20from%202026-01-27%2022-10-12.png" data-mimetype-before-conversion="image/png" data-resize-width="802" data-mimetype="image/webp" data-quality="100" data-gl-filter="custom" data-filter-options="{&quot;saturation&quot;:&quot;-20&quot;,&quot;contrast&quot;:&quot;-20&quot;,&quot;brightness&quot;:&quot;-70&quot;,&quot;sepia&quot;:&quot;25&quot;}">
+                    <div class="s_allow_columns container">
+                        <h1 class="display-1" style="text-align: center;">
+                            <span class="h2-fs">
+                                <font class="text-o-color-4">
+                                    <strong>Leading company since 2005.</strong>
+                                </font>
+                            </span>
+                            <br/>
+                        </h1>
+                        <div style="text-align: center;">
+                            <span class="o_small-fs">
+                                <font class="text-o-color-4">Yokohama team is dedicated to provide the most friendly and professional service to&amp;nbsp;</font>
+                            </span>
+                        </div>
+                        <div style="text-align: center;">
+                            <span class="o_small-fs">
+                                <font class="text-o-color-4">our customers and offer them constantly the excellent quality tires adequate to the&amp;nbsp;</font>
+                            </span>
+                        </div>
+                        <p style="text-align: center;">
+                            <span class="o_small-fs">
+                                <font class="text-o-color-4">Lebanese roads and weather conditions.</font>
+                                <br/>
+                            </span>
+                        </p>
+                        <p>
+                            <br/>
+                        </p>
+                        <p style="text-align: center;">
+                            <a class="o_translate_inline btn-lg flat btn btn-primary" href="/contactus">ABOUT US</a>
+                        </p>
+                    </div>
+                </section>
+                <section class="s_references o_cc o_colored_level pb0 pt16 o_cc5" data-snippet="s_references" data-name="References">
+                    <div class="container">
+                        <h2 style="color:#ffffff; font-weight:600; margin: 80px 0 50px; text-align: center;">
+            Our brands
+        </h2>
+        
+         <div id="brandCarousel" class="carousel slide" data-bs-ride="carousel">
+                            
+                                         <!--Indicators -->
+                                        <div class="carousel-indicators" style="bottom:-50px;">
+                                            <button type="button" data-bs-target="#brandCarousel" data-bs-slide-to="0" class="active" style="width:8px;height:8px;border-radius:50%;"/>
+                            
+                                            <button type="button" data-bs-target="#brandCarousel" data-bs-slide-to="1" style="width:8px;height:8px;border-radius:50%;"/>
+                            
+                                            <button type="button" data-bs-target="#brandCarousel" data-bs-slide-to="2" style="width:8px;height:8px;border-radius:50%;"/>
+                                            <button type="button" data-bs-target="#brandCarousel" data-bs-slide-to="3" style="width:8px;height:8px;border-radius:50%;"/>
+                                            
+                                        </div>
+
+             <!--Slides -->
+                                        <div class="carousel-inner">
+                            
+                                             <!--Slide 1 -->
+                                            <div class="carousel-item active">
+                                                <div class="row justify-content-center align-items-center">
+                                                    <div class="col-md-3">
+                                                        <img src="https://img.4imz.com/media/6LUM4GKX/upload/yokohama-car-tyres-dealer-in-cg-road-1756302767.png" style="max-width:180px;"/>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <img src="https://images.seeklogo.com/logo-png/30/1/triangle-tyres-logo-png_seeklogo-308126.png" style="max-width:180px;"/>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <img src="https://wheelworldtires.com/wp-content/uploads/laufennwhite.png" style="max-width:180px;"/>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <img src="https://i.pinimg.com/736x/b6/39/d7/b639d7a59035323126d30e8415763b7a.jpg" style="max-width:180px;"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                 <!--Slide 2 -->
+                                            <div class="carousel-item">
+                                                <div class="row justify-content-center align-items-center">
+                                                    <div class="col-md-3">
+                                                        <img src="https://img.4imz.com/media/6LUM4GKX/upload/yokohama-car-tyres-dealer-in-cg-road-1756302767.png" style="max-width:180px;"/>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <img src="https://images.seeklogo.com/logo-png/30/1/triangle-tyres-logo-png_seeklogo-308126.png" style="max-width:180px;"/>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <img src="https://wheelworldtires.com/wp-content/uploads/laufennwhite.png" style="max-width:180px;"/>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <img src="https://i.pinimg.com/736x/b6/39/d7/b639d7a59035323126d30e8415763b7a.jpg" style="max-width:180px;"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                 <!--Slide 3 -->
+                                            <div class="carousel-item">
+                                                <div class="row justify-content-center align-items-center">
+                                                    <div class="col-md-3">
+                                                        <img src="https://img.4imz.com/media/6LUM4GKX/upload/yokohama-car-tyres-dealer-in-cg-road-1756302767.png" style="max-width:180px;"/>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <img src="https://images.seeklogo.com/logo-png/30/1/triangle-tyres-logo-png_seeklogo-308126.png" style="max-width:180px;"/>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <img src="https://wheelworldtires.com/wp-content/uploads/laufennwhite.png" style="max-width:180px;"/>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <img src="https://i.pinimg.com/736x/b6/39/d7/b639d7a59035323126d30e8415763b7a.jpg" style="max-width:180px;"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="carousel-item">
+                                                <div class="row justify-content-center align-items-center">
+                                                    <div class="col-md-3">
+                                                        <img src="https://img.4imz.com/media/6LUM4GKX/upload/yokohama-car-tyres-dealer-in-cg-road-1756302767.png" style="max-width:180px;"/>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <img src="https://images.seeklogo.com/logo-png/30/1/triangle-tyres-logo-png_seeklogo-308126.png" style="max-width:180px;"/>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <img src="https://wheelworldtires.com/wp-content/uploads/laufennwhite.png" style="max-width:180px;"/>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <img src="https://i.pinimg.com/736x/b6/39/d7/b639d7a59035323126d30e8415763b7a.jpg" style="max-width:180px;"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                            
+                                        </div>
+                                    </div>
+                    </div>
+                </section>
+                <section data-snippet="s_blog_posts" class="s_blog_posts s_dynamic_snippet_blog_posts s_dynamic pb64 s_blog_post_big_picture s_blog_posts_effect_marley o_colored_level pt16 s_blog_posts_post_picture_size_default o_dynamic_snippet_loading" data-custom-template-data="{&quot;blog_posts_post_author_active&quot;:true, &quot;blog_posts_post_teaser_active&quot;:true, &quot;blog_posts_post_date_active&quot;:true, &quot;blog_posts_post_category_active&quot;:true, &quot;blog_posts_post_new_active&quot;:true}" data-number-of-records="16" data-name="Blog Posts" data-filter-id="8" data-template-key="website_blog.dynamic_filter_template_blog_post_big_picture" data-extra-classes="g-3" data-column-classes="col-12 col-sm-6 col-lg-4" data-filter-by-blog-id="5">
+                    <!--<section data-snippet="s_blog_posts" class="s_blog_posts s_dynamic_snippet_blog_posts s_dynamic pb64 s_blog_post_big_picture s_blog_posts_effect_marley o_colored_level pt16 s_blog_posts_post_picture_size_default o_cc o_cc5 o_dynamic_snippet_loading" data-custom-template-data="{&quot;blog_posts_post_author_active&quot;:true, &quot;blog_posts_post_teaser_active&quot;:true, &quot;blog_posts_post_date_active&quot;:true, &quot;blog_posts_post_category_active&quot;:true, &quot;blog_posts_post_new_active&quot;:true}" data-number-of-records="16" data-name="Blog Posts" data-filter-id="8" data-template-key="website_blog.dynamic_filter_template_blog_post_big_picture" data-extra-classes="g-3" data-column-classes="col-12 col-sm-6 col-lg-4" data-filter-by-blog-id="1">-->
+                    <div class="s_dynamic_snippet_container container">
+                        <div class="row s_nb_column_fixed">
+                            <section class="s_dynamic_snippet_holder d-none px-4 placeholder-glow o_colored_level">
+                                <div class="row">
+                                    <span class="placeholder col-3 rounded"/>
+                                    <span class="placeholder col-2 offset-7 rounded"/>
+                                    <span class="placeholder mt-3 col-6 rounded"/>
+                                </div>
+                                <div class="row mt-4">
+                                    <span class="placeholder col-12 rounded" style="height: 250px;"/>
+                                </div>
+                            </section>
+                            <section class="s_dynamic_snippet_content oe_unremovable oe_unmovable o_not_editable col s_col_no_resize o_colored_level">
+                                <div class="css_non_editable_mode_hidden">
+                                    <div class="missing_option_warning alert alert-info fade show d-print-none rounded-0 d-none">
+Best selling
+                            </div>
+                                </div>
+                                <div class="dynamic_snippet_template"/>
+                            </section>
+                            <section class="s_dynamic_snippet_title oe_unremovable oe_unmovable flex-column flex-md-row mb-lg-0 pb-3 pb-md-0 s_col_no_resize o_colored_level d-flex justify-content-between">
+                                <div>
+                                    <h2 class="h3">
+                                        <br/>
+                                    </h2>
+                                    <p class="lead">
+                                        <br/>
+                                    </p>
+                                </div>
+                                <div>
+                            &amp;nbsp;
+                                    <br/>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </section>
+                <section class="s_striped_top o_cc o_colored_level pb0 pt0 o_cc5" data-snippet="s_striped_top" data-name="Striped Top">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6 pt24 pb24 order-lg-0 o_colored_level" style="order: 1;">
+                                <img src="/web/image/1473-c7f5d680/Screenshot%20from%202026-01-27%2022-40-52.webp" alt="" data-attachment-id="1472" class="img img-fluid o_we_custom_image" style="width: 100% !important;" data-format-mimetype="image/webp" data-original-id="1472" data-original-src="/web/image/1472-e6578530/Screenshot%20from%202026-01-27%2022-40-52.png" data-mimetype-before-conversion="image/png" data-resize-width="571" data-mimetype="image/webp" loading="lazy"/>
+                            </div>
+                            <div class="col-lg-6 pt24 pb24 order-lg-0 o_colored_level" style="order: 2;">
+                                <h1>
+                                    <font style="color: rgb(255, 0, 0);">30% OFF
+                                        <br/>
+                                    </font>
+                                    <span class="h3-fs">
+                                        <font class="text-o-color-4">Last chance to benefit</font>
+                                    </span>
+                                </h1>
+                                <p class="lead">The Geolandar X-CV is built with technological advances combining optimized all-season performance with a refined quiet ride; exactly what your luxurious SUV needs.</p>
+                                <a class="btn btn-primary" href="/contactus">LEARN MORE</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="s_striped_top o_cc o_cc5 o_colored_level pb0 pt0" data-snippet="s_striped_top" data-name="Stripedd Top">
+                    <div class="s_tire_best_selling" style="background: black; padding: 60px 0; margin: 0;">
+                        <div class="container" style="background-color: black;">
+                            <!-- Fetch best sellers from database -->
+                            <t t-set="best_sellers" t-value="env['best.seller'].sudo().search([('active', '=', True)], order='name desc')"/>
+                            <div class="row">
+                                <div class="col-12">
+                                    <h2 class="text-center mb-5" style="color: white; font-size: 48px; font-weight: 700;">Best selling</h2>
+                                </div>
+                            </div>
+                            <!-- Tabs Navigation - Generated from best.seller records -->
+                            <div class="row mb-5">
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-center gap-4 flex-wrap">
+                                        <t t-foreach="best_sellers" t-as="seller">
+                                            <a href="#" class="tire-brand-tab" t-att-data-seller-id="seller.id" t-att-data-seller-products="json.dumps([{'id': p.id, 'name': p.name, 'price': p.list_price, 'categ': p.categ_id.name if p.categ_id else 'Product', 'image': image_data_uri(p.image_1024) if p.image_1024 else '/web/static/images/placeholder.png'} for p in seller.product_tmpl_ids[:3]])" t-att-class="'tire-brand-tab active' if seller_index == 0 else 'tire-brand-tab'" style="transition: all 0.3s ease; font-weight: 600; text-transform: uppercase; font-size: 14px; text-decoration: none; cursor: pointer; border-bottom: 3px solid; padding-bottom: 10px; margin: 0 15px;" t-att-style="'transition: all 0.3s ease; font-weight: 600; text-transform: uppercase; font-size: 14px; text-decoration: none; cursor: pointer; border-bottom: 3px solid #FF0000; padding-bottom: 10px; color: #FF0000; margin: 0 15px;' if seller_index == 0 else 'transition: all 0.3s ease; font-weight: 600; text-transform: uppercase; font-size: 14px; text-decoration: none; cursor: pointer; border-bottom: 3px solid transparent; padding-bottom: 10px; color: #999; margin: 0 15px;'">
+                                                <t t-esc="seller.name.upper()"/>
+                                            </a>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Products Container -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="row" id="tire-products-container">
+                                        <!-- First brand products shown by default -->
+                                        <t t-if="best_sellers and len(best_sellers) &gt; 0">
+                                            <t t-set="first_seller" t-value="best_sellers[0]"/>
+                                            <t t-if="first_seller.product_tmpl_ids">
+                                                <t t-foreach="first_seller.product_tmpl_ids[:3]" t-as="product">
+                                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                                        <div class="tire-product-card" style="text-align: center; padding: 20px; background: rgba(255, 255, 255, 0.02); border-radius: 8px; transition: all 0.3s ease; margin-bottom: 30px;">
+                                                            <div class="tire-season" style="color: #FF0000; font-weight: 600; text-transform: uppercase; font-size: 12px; margin-bottom: 10px;">
+                                                                <t t-esc="product.categ_id.name.upper() if product.categ_id else 'STANDARD'"/>
+                                                            </div>
+                                                            <h5 style="color: white; font-weight: 600; margin: 15px 0 10px 0; font-size: 16px;">
+                                                                <t t-esc="product.name"/>
+                                                            </h5>
+                                                            <div class="tire-price" style="color: #FF0000; font-size: 24px; font-weight: 700; margin: 10px 0;">
+                                                                <t t-esc="'{:.0f}'.format(product.list_price)"/> $
+                                                            </div>
+                                                            <div class="tire-category" style="color: #999; font-size: 13px; margin-bottom: 20px;">
+                                                                <t t-if="product.categ_id" t-esc="product.categ_id.name"/>
+                                                            </div>
+                                                            <div class="tire-image" style="height: 250px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, rgba(255,0,0,0.05) 0%, rgba(255,255,255,0.02) 100%); border-radius: 4px; margin: 20px 0; overflow: hidden;">
+                                                                <img t-if="product.image_1024" t-att-src="image_data_uri(product.image_1024)" t-att-alt="product.name" style="max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.3s ease;"/>
+                                                                <img t-else="" src="/web/static/images/placeholder.png" t-att-alt="product.name" style="max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.3s ease;"/>
+                                                            </div>
+                                                            <a t-att-href="'/shop/product/%d' % product.id" class="tire-btn" style="background-color: #FF0000; color: white; border: none; padding: 10px 20px; font-weight: 600; text-transform: uppercase; font-size: 12px; border-radius: 4px; text-decoration: none; display: inline-block; transition: all 0.3s ease;">View Details</a>
+                                                        </div>
+                                                    </div>
+                                                </t>
+                                            </t>
+                                            <t t-else="">
+                                                <div class="col-12" style="text-align: center; color: #999; padding: 40px; font-size: 14px;">
+                                            No products in first brand. Please add products to your brands.
+                                        </div>
+                                            </t>
+                                        </t>
+                                        <t t-else="">
+                                            <div class="col-12" style="text-align: center; color: #999; padding: 40px; font-size: 14px;">
+                                        No best sellers configured. Please add brands in the admin panel (Website &gt; Best Sellers).
+                                    </div>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- CTA Buttons -->
+                            <div class="row mt-5">
+                                <div class="col-12 text-center o_colored_level">
+                                    <a href="/shop" class="btn" style="background-color: rgb(255, 0, 0); padding: 12px 40px; font-weight: 600; text-transform: uppercase; border: none; border-radius: 4px; margin-right: 15px; text-decoration: none;">
+                                        <font style="color: white !important;">SHOP ALL</font>
+                                    </a>
+                                    <a href="/shop" class="btn" style="background-color: white; padding: 12px 40px; font-weight: 600; text-transform: uppercase; border: none; border-radius: 4px; text-decoration: none;">
+                                        <font>FIND YOUR TIRES</font>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <style>
+                .tire-brand-tab {
+                    transition: all 0.3s ease;
+                }
+
+                .tire-brand-tab:hover {
+                    color: white !important;
+                }
+
+                .tire-brand-tab.active {
+                    color: #FF0000 !important;
+                    border-bottom-color: #FF0000 !important;
+                }
+
+                .tire-product-card {
+                    text-align: center;
+                    padding: 20px;
+                    background: rgba(255, 255, 255, 0.02);
+                    border-radius: 8px;
+                    transition: all 0.3s ease;
+                    margin-bottom: 30px;
+                }
+
+                .tire-product-card:hover {
+                    background: rgba(255, 255, 255, 0.05);
+                    transform: translateY(-5px);
+                }
+
+                .tire-product-card h5 {
+                    color: white;
+                    font-weight: 600;
+                    margin: 15px 0 10px 0;
+                }
+
+                .tire-season {
+                    color: #FF0000;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    font-size: 12px;
+                    margin-bottom: 10px;
+                }
+
+                .tire-price {
+                    color: #FF0000;
+                    font-size: 24px;
+                    font-weight: 700;
+                    margin: 10px 0;
+                }
+
+                .tire-category {
+                    color: #999;
+                    font-size: 13px;
+                    margin-bottom: 20px;
+                }
+
+                .tire-image {
+                    height: 250px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: linear-gradient(135deg, rgba(255,0,0,0.05) 0%, rgba(255,255,255,0.02) 100%);
+                    border-radius: 4px;
+                    margin: 20px 0;
+                    overflow: hidden;
+                }
+
+                .tire-image img {
+                    max-width: 100%;
+                    max-height: 100%;
+                    object-fit: contain;
+                    transition: transform 0.3s ease;
+                }
+
+                .tire-product-card:hover .tire-image img {
+                    transform: scale(1.1);
+                }
+
+                .tire-btn {
+                    background-color: #FF0000;
+                    color: white;
+                    border: none;
+                    padding: 10px 20px;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    font-size: 12px;
+                    border-radius: 4px;
+                    text-decoration: none;
+                    display: inline-block;
+                    transition: all 0.3s ease;
+                }
+
+                .tire-btn:hover {
+                    background-color: #cc0000;
+                    color: white;
+                    text-decoration: none;
+                    transform: translateY(-2px);
+                }
+
+                @media (max-width: 768px) {
+                    .tire-product-card {
+                        padding: 15px;
+                    }
+
+                    .tire-image {
+                        height: 180px;
+                    }
+
+                    .tire-brand-tab {
+                        font-size: 12px;
+                        padding-bottom: 8px !important;
+                        margin: 0 5px;
+                    }
+                }
+            </style>
+                    <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const tabButtons = document.querySelectorAll('.tire-brand-tab');
+                    const productsContainer = document.getElementById('tire-products-container');
+                    
+                    // Add click handlers to tabs
+                    tabButtons.forEach((tab) =&gt; {
+                        tab.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            
+                            // Remove active from all tabs
+                            tabButtons.forEach(t =&gt; {
+                                t.classList.remove('active');
+                                t.style.color = '#999';
+                                t.style.borderBottomColor = 'transparent';
+                            });
+
+                            // Set active on clicked tab
+                            this.classList.add('active');
+                            this.style.color = '#FF0000';
+                            this.style.borderBottomColor = '#FF0000';
+
+                            // Get products from data attribute
+                            const productsJson = this.getAttribute('data-seller-products');
+                            const products = JSON.parse(productsJson);
+                            
+                            // Clear container
+                            productsContainer.innerHTML = '';
+
+                            // Display products
+                            if (products.length &gt; 0) {
+                                products.forEach(product =&gt; {
+                                    const col = document.createElement('div');
+                                    col.className = 'col-lg-4 col-md-6 col-sm-12';
+                                    
+                                    col.innerHTML = `
+                        <div class="tire-product-card" style="text-align: center; padding: 20px; background: rgba(255, 255, 255, 0.02); border-radius: 8px; transition: all 0.3s ease; margin-bottom: 30px;">
+                            <div class="tire-season" style="color: #FF0000; font-weight: 600; text-transform: uppercase; font-size: 12px; margin-bottom: 10px;">${product.categ}</div>
+                            <h5 style="color: white; font-weight: 600; margin: 15px 0 10px 0; font-size: 16px;">${product.name}</h5>
+                            <div class="tire-price" style="color: #FF0000; font-size: 24px; font-weight: 700; margin: 10px 0;">${Math.round(product.price)} $</div>
+                            <div class="tire-category" style="color: #999; font-size: 13px; margin-bottom: 20px;">${product.categ}</div>
+                            <div class="tire-image" style="height: 250px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, rgba(255,0,0,0.05) 0%, rgba(255,255,255,0.02) 100%); border-radius: 4px; margin: 20px 0; overflow: hidden;">
+                                <img src="${product.image}" alt="${product.name}" style="max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.3s ease;"/>
+                            </div>
+                            <a href="/shop/product/${product.id}" class="tire-btn" style="background-color: #FF0000; color: white; border: none; padding: 10px 20px; font-weight: 600; text-transform: uppercase; font-size: 12px; border-radius: 4px; text-decoration: none; display: inline-block; transition: all 0.3s ease;">View Details</a>
+                        </div>
+                                    `;
+                                    
+                                    productsContainer.appendChild(col);
+                                });
+                            } else {
+                                productsContainer.innerHTML = '
+                        <div class="col-12" style="text-align: center; color: #999; padding: 40px; font-size: 14px;">No products available for this brand</div>';
+                            }
+                        });
+                    });
+                });
+                    </script>
+                </section>
+                <section class="s_embed_code pt16 pb16 o_colored_level text-center" data-snippet="s_embed_code" data-name="Embed Code">
+                    <template class="s_embed_code_saved">
+                        <div class="tire-showcase" style="background: white; padding: 60px 0; margin: 0;">
+                            <div class="container">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-6 col-md-12 mb-4 mb-lg-0">
+                                        <div class="tire-image-left" style="text-align: center; padding: 40px 20px;">
+                                            <img src="https://via.placeholder.com/500x500?text=Tire+Product" alt="Tire Product" style="max-width: 100%; height: auto; display: block; margin: 0 auto;" loading="lazy"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12">
+                                        <div class="tire-details" style="padding: 40px;">
+                                            <h2 class="tire-title" style="font-size: 36px; font-weight: 700; color: #1a1a1a; margin-bottom: 20px; text-transform: uppercase;">Geolandar g055</h2>
+                                            <p class="tire-description" style="color: #666; font-size: 15px; line-height: 1.6; margin-bottom: 30px;">
+                                    Experience ultimate performance with Geolandar g055. Engineered for superior grip, durability, and comfort on all road conditions.
+                                </p>
+                                            <div class="tire-features" style="margin-bottom: 30px;">
+                                                <div class="feature-row" style="display: flex; gap: 20px; margin-bottom: 20px; align-items: flex-start;">
+                                                    <div class="feature-icon" style="min-width: 40px; text-align: center;">
+                                                        <svg width="40" height="40" viewbox="0 0 40 40" fill="none" style="margin: 0 auto;">
+                                                            <circle cx="20" cy="20" r="18" stroke="#FF0000" stroke-width="2"/>
+                                                            <path d="M20 10v20M10 20h20" stroke="#FF0000" stroke-width="2" stroke-linecap="round"/>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="feature-text">
+                                                        <h4 style="font-weight: 600; color: #1a1a1a; margin: 0 0 5px 0;">Superior Grip</h4>
+                                                        <p style="color: #999; margin: 0; font-size: 13px;">Enhanced tread pattern for better road grip</p>
+                                                    </div>
+                                                </div>
+                                                <div class="feature-row" style="display: flex; gap: 20px; margin-bottom: 20px; align-items: flex-start;">
+                                                    <div class="feature-icon" style="min-width: 40px; text-align: center;">
+                                                        <svg width="40" height="40" viewbox="0 0 40 40" fill="none" style="margin: 0 auto;">
+                                                            <circle cx="20" cy="20" r="18" stroke="#FF0000" stroke-width="2"/>
+                                                            <path d="M12 20L18 26L28 14" stroke="#FF0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="feature-text">
+                                                        <h4 style="font-weight: 600; color: #1a1a1a; margin: 0 0 5px 0;">Long Lasting</h4>
+                                                        <p style="color: #999; margin: 0; font-size: 13px;">Durable construction for extended tire life</p>
+                                                    </div>
+                                                </div>
+                                                <div class="feature-row" style="display: flex; gap: 20px; align-items: flex-start;">
+                                                    <div class="feature-icon" style="min-width: 40px; text-align: center;">
+                                                        <svg width="40" height="40" viewbox="0 0 40 40" fill="none" style="margin: 0 auto;">
+                                                            <circle cx="20" cy="20" r="18" stroke="#FF0000" stroke-width="2"/>
+                                                            <path d="M14 20h12M20 14v12" stroke="#FF0000" stroke-width="2" stroke-linecap="round"/>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="feature-text">
+                                                        <h4 style="font-weight: 600; color: #1a1a1a; margin: 0 0 5px 0;">Comfortable Ride</h4>
+                                                        <p style="color: #999; margin: 0; font-size: 13px;">Optimized for smooth and comfortable driving</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tire-price-section" style="margin-bottom: 30px; padding-bottom: 30px; border-bottom: 1px solid #eee;">
+                                                <span class="tire-price" style="font-size: 32px; font-weight: 700; color: #FF0000;">$85.00</span>
+                                                <span class="tire-unit" style="color: #999; font-size: 14px; margin-left: 10px;">per tire</span>
+                                            </div>
+                                            <div class="tire-cta" style="display: flex; gap: 15px; flex-wrap: wrap;">
+                                                <a href="#" class="btn-shop-now" style="background-color: #FF0000; color: white; padding: 14px 35px; font-weight: 600; text-transform: uppercase; border: none; border-radius: 4px; text-decoration: none; display: inline-block; transition: all 0.3s ease; font-size: 14px; letter-spacing: 1px;">Shop Now</a>
+                                                <a href="#" class="btn-add-cart" style="background-color: white; color: #1a1a1a; padding: 14px 35px; font-weight: 600; text-transform: uppercase; border: 2px solid #1a1a1a; border-radius: 4px; text-decoration: none; display: inline-block; transition: all 0.3s ease; font-size: 14px; letter-spacing: 1px;">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <style>
+                /* Showcase styling */
+                .tire-showcase {
+                    background: white;
+                }
+
+                .tire-title {
+                    letter-spacing: 1px;
+                }
+
+                .tire-description {
+                    line-height: 1.8;
+                }
+
+                /* Features styling */
+                .feature-row {
+                    transition: all 0.3s ease;
+                }
+
+                .feature-row:hover {
+                    transform: translateX(5px);
+                }
+
+                .feature-icon svg {
+                    transition: all 0.3s ease;
+                }
+
+                .feature-row:hover .feature-icon svg {
+                    transform: scale(1.1);
+                }
+
+                /* Price styling */
+                .tire-price-section {
+                    display: flex;
+                    align-items: baseline;
+                }
+
+                /* Button styling */
+                .btn-shop-now {
+                    transition: all 0.3s ease;
+                }
+
+                .btn-shop-now:hover {
+                    background-color: #cc0000;
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
+                    color: white;
+                    text-decoration: none;
+                }
+
+                .btn-add-cart {
+                    transition: all 0.3s ease;
+                }
+
+                .btn-add-cart:hover {
+                    background-color: #1a1a1a;
+                    color: white;
+                    text-decoration: none;
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 12px rgba(26, 26, 26, 0.2);
+                }
+
+                /* Responsive */
+                @media (max-width: 1024px) {
+                    .tire-title {
+                        font-size: 28px;
+                    }
+
+                    .tire-details {
+                        padding: 30px;
+                    }
+                }
+
+                @media (max-width: 768px) {
+                    .tire-showcase {
+                        padding: 40px 0;
+                    }
+
+                    .tire-title {
+                        font-size: 24px;
+                    }
+
+                    .tire-details {
+                        padding: 20px;
+                        margin-top: 30px;
+                    }
+
+                    .tire-price {
+                        font-size: 28px;
+                    }
+
+                    .tire-cta {
+                        flex-direction: column;
+                    }
+
+                    .btn-shop-now,
+                    .btn-add-cart {
+                        width: 100%;
+                        text-align: center;
+                    }
+
+                    .feature-row {
+                        gap: 15px;
+                    }
+
+                    .feature-icon {
+                        min-width: 35px;
+                    }
+
+                    .feature-icon svg {
+                        width: 35px;
+                        height: 35px;
+                    }
+                }
+            </style>
+                    </template>
+                    <div class="s_embed_code_embedded container o_not_editable">
+                        <div class="tire-showcase" style="background: white; padding: 60px 0; margin: 0;">
+                            <div class="container">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-6 col-md-12 mb-4 mb-lg-0">
+                                        <div class="tire-image-left" style="text-align: center; padding: 40px 20px;">
+                                            <!--<img src="https://via.placeholder.com/500x500?text=Tire+Product" alt="Tire Product"  loading="lazy"/>-->
+                                            <img src="/web/image/2272-36c6e88a/06_3999571c6f.webp" alt="" data-attachment-id="2270" class="img img-fluid o_we_custom_image" data-format-mimetype="image/webp" data-original-id="2270" data-original-src="/web/image/2270-1884e78a/06_3999571c6f.webp" data-mimetype-before-conversion="image/webp" data-resize-width="941" data-mimetype="image/webp"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12">
+                                        <div class="tire-details" style="padding: 40px;">
+                                            <h2 class="tire-title" style="font-size: 36px; font-weight: 700; color: #1a1a1a; margin-bottom: 20px; text-transform: uppercase;">Geolandar g055</h2>
+                                            <p class="tire-description" style="color: #666; font-size: 15px; line-height: 1.6; margin-bottom: 30px;">
+                                    Experience ultimate performance with Geolandar g055. Engineered for superior grip, durability, and comfort on all road conditions.
+                                </p>
+                                            <div class="tire-features" style="margin-bottom: 30px;">
+                                                <div class="feature-row" style="display: flex; gap: 20px; margin-bottom: 20px; align-items: flex-start;">
+                                                    <div class="feature-icon" style="min-width: 40px; text-align: center;">
+                                                        <svg width="40" height="40" viewbox="0 0 40 40" fill="none" style="margin: 0 auto;">
+                                                            <circle cx="20" cy="20" r="18" stroke="#FF0000" stroke-width="2"/>
+                                                            <path d="M20 10v20M10 20h20" stroke="#FF0000" stroke-width="2" stroke-linecap="round"/>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="feature-text">
+                                                        <h4 style="font-weight: 600; color: #1a1a1a; margin: 0 0 5px 0;">Superior Grip</h4>
+                                                        <p style="color: #999; margin: 0; font-size: 13px;">Enhanced tread pattern for better road grip</p>
+                                                    </div>
+                                                </div>
+                                                <div class="feature-row" style="display: flex; gap: 20px; margin-bottom: 20px; align-items: flex-start;">
+                                                    <div class="feature-icon" style="min-width: 40px; text-align: center;">
+                                                        <svg width="40" height="40" viewbox="0 0 40 40" fill="none" style="margin: 0 auto;">
+                                                            <circle cx="20" cy="20" r="18" stroke="#FF0000" stroke-width="2"/>
+                                                            <path d="M12 20L18 26L28 14" stroke="#FF0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="feature-text">
+                                                        <h4 style="font-weight: 600; color: #1a1a1a; margin: 0 0 5px 0;">Long Lasting</h4>
+                                                        <p style="color: #999; margin: 0; font-size: 13px;">Durable construction for extended tire life</p>
+                                                    </div>
+                                                </div>
+                                                <div class="feature-row" style="display: flex; gap: 20px; align-items: flex-start;">
+                                                    <div class="feature-icon" style="min-width: 40px; text-align: center;">
+                                                        <svg width="40" height="40" viewbox="0 0 40 40" fill="none" style="margin: 0 auto;">
+                                                            <circle cx="20" cy="20" r="18" stroke="#FF0000" stroke-width="2"/>
+                                                            <path d="M14 20h12M20 14v12" stroke="#FF0000" stroke-width="2" stroke-linecap="round"/>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="feature-text">
+                                                        <h4 style="font-weight: 600; color: #1a1a1a; margin: 0 0 5px 0;">Comfortable Ride</h4>
+                                                        <p style="color: #999; margin: 0; font-size: 13px;">Optimized for smooth and comfortable driving</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tire-price-section" style="margin-bottom: 30px; padding-bottom: 30px; border-bottom: 1px solid #eee;">
+                                                <span class="tire-price" style="font-size: 32px; font-weight: 700; color: #FF0000;">$85.00</span>
+                                                <span class="tire-unit" style="color: #999; font-size: 14px; margin-left: 10px;">per tire</span>
+                                            </div>
+                                            <div class="tire-cta" style="display: flex; gap: 15px; flex-wrap: wrap;">
+                                                <a href="#" class="btn-shop-now" style="background-color: #FF0000; color: white; padding: 14px 35px; font-weight: 600; text-transform: uppercase; border: none; border-radius: 4px; text-decoration: none; display: inline-block; transition: all 0.3s ease; font-size: 14px; letter-spacing: 1px;">Shop Now</a>
+                                                <a href="#" class="btn-add-cart" style="background-color: white; color: #1a1a1a; padding: 14px 35px; font-weight: 600; text-transform: uppercase; border: 2px solid #1a1a1a; border-radius: 4px; text-decoration: none; display: inline-block; transition: all 0.3s ease; font-size: 14px; letter-spacing: 1px;">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <style>
+                /* Showcase styling */
+                .tire-showcase {
+                    background: white;
+                }
+
+                .tire-title {
+                    letter-spacing: 1px;
+                }
+
+                .tire-description {
+                    line-height: 1.8;
+                }
+
+                /* Features styling */
+                .feature-row {
+                    transition: all 0.3s ease;
+                }
+
+                .feature-row:hover {
+                    transform: translateX(5px);
+                }
+
+                .feature-icon svg {
+                    transition: all 0.3s ease;
+                }
+
+                .feature-row:hover .feature-icon svg {
+                    transform: scale(1.1);
+                }
+
+                /* Price styling */
+                .tire-price-section {
+                    display: flex;
+                    align-items: baseline;
+                }
+
+                /* Button styling */
+                .btn-shop-now {
+                    transition: all 0.3s ease;
+                }
+
+                .btn-shop-now:hover {
+                    background-color: #cc0000;
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
+                    color: white;
+                    text-decoration: none;
+                }
+
+                .btn-add-cart {
+                    transition: all 0.3s ease;
+                }
+
+                .btn-add-cart:hover {
+                    background-color: #1a1a1a;
+                    color: white;
+                    text-decoration: none;
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 12px rgba(26, 26, 26, 0.2);
+                }
+
+                /* Responsive */
+                @media (max-width: 1024px) {
+                    .tire-title {
+                        font-size: 28px;
+                    }
+
+                    .tire-details {
+                        padding: 30px;
+                    }
+                }
+
+                @media (max-width: 768px) {
+                    .tire-showcase {
+                        padding: 40px 0;
+                    }
+
+                    .tire-title {
+                        font-size: 24px;
+                    }
+
+                    .tire-details {
+                        padding: 20px;
+                        margin-top: 30px;
+                    }
+
+                    .tire-price {
+                        font-size: 28px;
+                    }
+
+                    .tire-cta {
+                        flex-direction: column;
+                    }
+
+                    .btn-shop-now,
+                    .btn-add-cart {
+                        width: 100%;
+                        text-align: center;
+                    }
+
+                    .feature-row {
+                        gap: 15px;
+                    }
+
+                    .feature-icon {
+                        min-width: 35px;
+                    }
+
+                    .feature-icon svg {
+                        width: 35px;
+                        height: 35px;
+                    }
+                }
+            </style>
+                    </div>
+                </section>
+                <section data-snippet="s_dynamic_snippet_products" class="s_dynamic_snippet_products oe_website_sale s_dynamic s_product_product_products_item o_colored_level o_cc o_cc2 pt16 o_wsale_products_opt_name_color_regular o_wsale_products_opt_thumb_cover o_wsale_products_opt_img_secondary_show o_wsale_products_opt_has_cta o_wsale_products_opt_has_wishlist o_wsale_products_opt_has_comparison o_wsale_products_opt_actions_onhover o_wsale_products_opt_wishlist_fixed o_wsale_products_opt_actions_subtle o_wsale_products_opt_layout_catalog o_wsale_products_opt_design_cards o_wsale_products_opt_rounded_2 o_wsale_products_opt_img_hover_zoom_out_light o_wsale_products_opt_thumb_4_5 pb128 o_dynamic_snippet_loading" data-custom-template-data="{}" data-number-of-records="16" data-name="Products" data-filter-id="1" data-template-key="website_sale.dynamic_filter_template_product_product_products_item" data-number-of-elements="4" data-number-of-elements-small-devices="2" data-carousel-interval="5000" data-product-category-id="65" style="--o-wsale-products-grid-gap: 25px;">
+                    <div class="s_dynamic_snippet_container container-fluid">
+                        <div class="row s_nb_column_fixed">
+                            <section class="s_dynamic_snippet_holder d-none px-4 placeholder-glow o_colored_level">
+                                <div class="row">
+                                    <span class="placeholder col-3 rounded"/>
+                                    <span class="placeholder col-2 offset-7 rounded"/>
+                                    <span class="placeholder mt-3 col-6 rounded"/>
+                                </div>
+                                <div class="row mt-4">
+                                    <span class="placeholder col-12 rounded" style="height: 250px;"/>
+                                </div>
+                            </section>
+                            <section class="s_dynamic_snippet_title oe_unremovable oe_unmovable flex-column flex-md-row mb-lg-0 pb-3 pb-md-0 s_col_no_resize o_colored_level d-flex justify-content-between">
+                                <div class="text-center my-12">
+                                    <h2 class="h3 mb-2">
+                                        <b>Essentials for your vehicle</b>
+                                    </h2>
+                                    <p class="lead mb-0"/>
+                                </div>
+                                <div>
+                            &amp;nbsp;
+                                    <br/>
+                                </div>
+                            </section>
+                            <section class="s_dynamic_snippet_content oe_unremovable oe_unmovable o_not_editable col s_col_no_resize o_colored_level o_cc o_cc1">
+                                <div class="css_non_editable_mode_hidden">
+                                    <div class="missing_option_warning alert alert-info fade show d-print-none rounded-0 d-none">
+                                Your Dynamic Snippet will be displayed here... This message is displayed because you did not provide enough options to retrieve its content.
+                                        <br/>
+                                    </div>
+                                </div>
+                                <div class="dynamic_snippet_template"/>
+                            </section>
+                        </div>
+                    </div>
+                </section>
+                <section data-snippet="s_embed_code" data-name="Embed Code" data-attachment-id="1578" style="background-image: url(&quot;https://otibro-accounts-odoo-19-staging2-27973039.dev.odoo.com/web/image/1578-redirect/ee99b2063dcd1c925d370b53bde12e6a04a04f94.jpg&quot;); background-position: 70.8929% 100%;" class="o_colored_level">
+                    <template class="s_embed_code_saved">
+                        <div class="product-finder">
+                            <div class="container">
+                                <div class="row mb-4">
+                                    <div class="col-12 text-center">
+                                        <h2 style="color: white; font-size: 32px; font-weight: 700; margin-bottom: 10px;">Find the right battery or engine oil that fits your vehicle</h2>
+                                    </div>
+                                </div>
+                                <div class="row mb-5">
+                                    <div class="col-12">
+                                        <div class="finder-form" style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; align-items: center;">
+                                            <select class="finder-select" style="padding: 12px 20px; background: #2a2a2a; color: white; border: none; border-radius: 4px; font-weight: 600; font-size: 13px; cursor: pointer; min-width: 120px; transition: all 0.3s ease;">
+                                                <option value="">Year</option>
+                                                <option value="2024">2024</option>
+                                                <option value="2023">2023</option>
+                                                <option value="2022">2022</option>
+                                                <option value="2021">2021</option>
+                                                <option value="2020">2020</option>
+                                                <option value="2019">2019</option>
+                                                <option value="2018">2018</option>
+                                            </select>
+                                            <select class="finder-select" style="padding: 12px 20px; background: #2a2a2a; color: white; border: none; border-radius: 4px; font-weight: 600; font-size: 13px; cursor: pointer; min-width: 120px; transition: all 0.3s ease;">
+                                                <option value="">Make</option>
+                                                <option value="toyota">Toyota</option>
+                                                <option value="honda">Honda</option>
+                                                <option value="ford">Ford</option>
+                                                <option value="bmw">BMW</option>
+                                                <option value="mercedes">Mercedes</option>
+                                                <option value="audi">Audi</option>
+                                                <option value="volkswagen">Volkswagen</option>
+                                            </select>
+                                            <select class="finder-select" style="padding: 12px 20px; background: #2a2a2a; color: white; border: none; border-radius: 4px; font-weight: 600; font-size: 13px; cursor: pointer; min-width: 120px; transition: all 0.3s ease;">
+                                                <option value="">Model</option>
+                                                <option value="sedan">Sedan</option>
+                                                <option value="suv">SUV</option>
+                                                <option value="truck">Truck</option>
+                                                <option value="coupe">Coupe</option>
+                                                <option value="wagon">Wagon</option>
+                                            </select>
+                                            <select class="finder-select" style="padding: 12px 20px; background: #2a2a2a; color: white; border: none; border-radius: 4px; font-weight: 600; font-size: 13px; cursor: pointer; min-width: 120px; transition: all 0.3s ease;">
+                                                <option value="">Engine</option>
+                                                <option value="v4">V4</option>
+                                                <option value="v6">V6</option>
+                                                <option value="v8">V8</option>
+                                                <option value="diesel">Diesel</option>
+                                                <option value="hybrid">Hybrid</option>
+                                            </select>
+                                            <button class="finder-btn" style="padding: 12px 30px; background: #FF0000; color: white; border: none; border-radius: 4px; font-weight: 600; font-size: 13px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease;">Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="vehicle-categories" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 30px; margin-top: 40px;">
+                                            <div class="vehicle-category" style="text-align: center; cursor: pointer; transition: all 0.3s ease;">
+                                                <div class="vehicle-icon" style="margin-bottom: 20px;">
+                                                    <svg width="80" height="80" viewbox="0 0 80 80" fill="none" style="margin: 0 auto;">
+                                                        <rect x="15" y="35" width="50" height="25" fill="none" stroke="white" stroke-width="2" rx="2"/>
+                                                        <ellipse cx="28" cy="60" rx="6" ry="8" fill="none" stroke="white" stroke-width="2"/>
+                                                        <ellipse cx="52" cy="60" rx="6" ry="8" fill="none" stroke="white" stroke-width="2"/>
+                                                        <path d="M25 35L30 20L50 20L55 35" stroke="white" stroke-width="2" fill="none"/>
+                                                        <rect x="32" y="25" width="16" height="10" fill="none" stroke="white" stroke-width="1"/>
+                                                        <circle cx="24" cy="48" r="4" fill="#FF0000"/>
+                                                    </svg>
+                                                </div>
+                                                <h4 style="color: white; font-weight: 600; margin-bottom: 10px; font-size: 16px;">PASSENGER CARS</h4>
+                                                <p style="color: #999; font-size: 13px;">Find products for your sedan</p>
+                                            </div>
+                                            <div class="vehicle-category" style="text-align: center; cursor: pointer; transition: all 0.3s ease;">
+                                                <div class="vehicle-icon" style="margin-bottom: 20px;">
+                                                    <svg width="80" height="80" viewbox="0 0 80 80" fill="none" style="margin: 0 auto;">
+                                                        <rect x="12" y="38" width="56" height="22" fill="none" stroke="white" stroke-width="2" rx="2"/>
+                                                        <ellipse cx="25" cy="60" rx="7" ry="9" fill="none" stroke="white" stroke-width="2"/>
+                                                        <ellipse cx="55" cy="60" rx="7" ry="9" fill="none" stroke="white" stroke-width="2"/>
+                                                        <path d="M20 38L22 18L58 18L60 38" stroke="white" stroke-width="2" fill="none"/>
+                                                        <rect x="30" y="22" width="20" height="12" fill="none" stroke="white" stroke-width="1"/>
+                                                        <circle cx="20" cy="50" r="4" fill="#FF0000"/>
+                                                    </svg>
+                                                </div>
+                                                <h4 style="color: white; font-weight: 600; margin-bottom: 10px; font-size: 16px;">SUV &amp; CROSSOVER</h4>
+                                                <p style="color: #999; font-size: 13px;">Find products for your SUV</p>
+                                            </div>
+                                            <div class="vehicle-category" style="text-align: center; cursor: pointer; transition: all 0.3s ease;">
+                                                <div class="vehicle-icon" style="margin-bottom: 20px;">
+                                                    <svg width="80" height="80" viewbox="0 0 80 80" fill="none" style="margin: 0 auto;">
+                                                        <rect x="10" y="40" width="25" height="20" fill="none" stroke="white" stroke-width="2" rx="2"/>
+                                                        <rect x="36" y="35" width="34" height="25" fill="none" stroke="white" stroke-width="2" rx="2"/>
+                                                        <ellipse cx="20" cy="60" rx="6" ry="8" fill="none" stroke="white" stroke-width="2"/>
+                                                        <ellipse cx="58" cy="60" rx="6" ry="8" fill="none" stroke="white" stroke-width="2"/>
+                                                        <path d="M36 40L38 25L50 25L52 40" stroke="white" stroke-width="2" fill="none"/>
+                                                        <circle cx="15" cy="50" r="4" fill="#FF0000"/>
+                                                    </svg>
+                                                </div>
+                                                <h4 style="color: white; font-weight: 600; margin-bottom: 10px; font-size: 16px;">LIGHT TRUCKS</h4>
+                                                <p style="color: #999; font-size: 13px;">Find products for your truck</p>
+                                            </div>
+                                            <div class="vehicle-category" style="text-align: center; cursor: pointer; transition: all 0.3s ease;">
+                                                <div class="vehicle-icon" style="margin-bottom: 20px;">
+                                                    <svg width="80" height="80" viewbox="0 0 80 80" fill="none" style="margin: 0 auto;">
+                                                        <rect x="8" y="42" width="20" height="18" fill="none" stroke="white" stroke-width="2" rx="2"/>
+                                                        <rect x="29" y="35" width="43" height="25" fill="none" stroke="white" stroke-width="2" rx="2"/>
+                                                        <ellipse cx="18" cy="60" rx="6" ry="8" fill="none" stroke="white" stroke-width="2"/>
+                                                        <ellipse cx="60" cy="60" rx="6" ry="8" fill="none" stroke="white" stroke-width="2"/>
+                                                        <line x1="29" y1="45" x2="29" y2="35" stroke="white" stroke-width="2"/>
+                                                        <circle cx="12" cy="50" r="4" fill="#FF0000"/>
+                                                    </svg>
+                                                </div>
+                                                <h4 style="color: white; font-weight: 600; margin-bottom: 10px; font-size: 16px;">COMMERCIAL</h4>
+                                                <p style="color: #999; font-size: 13px;">Find products for commercial vehicles</p>
+                                            </div>
+                                            <div class="vehicle-category" style="text-align: center; cursor: pointer; transition: all 0.3s ease;">
+                                                <div class="vehicle-icon" style="margin-bottom: 20px;">
+                                                    <svg width="80" height="80" viewbox="0 0 80 80" fill="none" style="margin: 0 auto;">
+                                                        <circle cx="25" cy="55" r="8" fill="none" stroke="white" stroke-width="2"/>
+                                                        <circle cx="55" cy="55" r="8" fill="none" stroke="white" stroke-width="2"/>
+                                                        <rect x="32" y="30" width="16" height="15" fill="none" stroke="white" stroke-width="2" rx="2"/>
+                                                        <line x1="33" y1="55" x2="54" y2="55" stroke="white" stroke-width="2"/>
+                                                        <path d="M40 30L30 20" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                                                        <circle cx="20" cy="50" r="4" fill="#FF0000"/>
+                                                    </svg>
+                                                </div>
+                                                <h4 style="color: white; font-weight: 600; margin-bottom: 10px; font-size: 16px;">MOTORCYCLES</h4>
+                                                <p style="color: #999; font-size: 13px;">Find products for motorcycles</p>
+                                            </div>
+                                            <div class="vehicle-category" style="text-align: center; cursor: pointer; transition: all 0.3s ease;">
+                                                <div class="vehicle-icon" style="margin-bottom: 20px;">
+                                                    <svg width="80" height="80" viewbox="0 0 80 80" fill="none" style="margin: 0 auto;">
+                                                        <rect x="15" y="35" width="50" height="22" fill="none" stroke="white" stroke-width="2" rx="2"/>
+                                                        <ellipse cx="28" cy="57" rx="8" ry="10" fill="none" stroke="white" stroke-width="2"/>
+                                                        <ellipse cx="52" cy="57" rx="8" ry="10" fill="none" stroke="white" stroke-width="2"/>
+                                                        <path d="M22 35L26 15L54 15L58 35" stroke="white" stroke-width="2" fill="none"/>
+                                                        <path d="M32 22L40 18L48 22" stroke="white" stroke-width="2" fill="none"/>
+                                                        <circle cx="22" cy="46" r="4" fill="#FF0000"/>
+                                                    </svg>
+                                                </div>
+                                                <h4 style="color: white; font-weight: 600; margin-bottom: 10px; font-size: 16px;">OFF-ROAD</h4>
+                                                <p style="color: #999; font-size: 13px;">Find products for off-road vehicles</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <style>
+                /* Finder Select Hover */
+                .finder-select:hover,
+                .finder-select:focus {
+                    background: #333 !important;
+                    outline: none;
+                    box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.3);
+                }
+
+                /* Finder Button Hover */
+                .finder-btn:hover {
+                    background: #cc0000 !important;
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
+                }
+
+                .finder-btn:active {
+                    transform: translateY(0);
+                }
+
+                /* Vehicle Category Hover */
+                .vehicle-category:hover .vehicle-icon svg {
+                    filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.5));
+                    transform: scale(1.1);
+                }
+
+                .vehicle-category:hover h4 {
+                    color: #FF0000 !important;
+                }
+
+                .vehicle-icon svg {
+                    transition: all 0.3s ease;
+                }
+
+                /* Responsive */
+                @media (max-width: 768px) {
+                    .finder-form {
+                        flex-direction: column !important;
+                        gap: 15px !important;
+                    }
+
+                    .finder-select,
+                    .finder-btn {
+                        width: 100% !important;
+                        min-width: unset !important;
+                    }
+
+                    .vehicle-categories {
+                        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)) !important;
+                        gap: 20px !important;
+                    }
+
+                    .vehicle-icon svg {
+                        width: 60px !important;
+                        height: 60px !important;
+                    }
+
+                    h2 {
+                        font-size: 24px !important;
+                    }
+
+                    .vehicle-category h4 {
+                        font-size: 14px !important;
+                    }
+
+                    .vehicle-category p {
+                        font-size: 12px !important;
+                    }
+                }
+            </style>
+                        <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    // Vehicle category click handler
+                    document.querySelectorAll('.vehicle-category').forEach(category =&gt; {
+                        category.addEventListener('click', function() {
+                            console.log('Vehicle category clicked');
+                            // Add search functionality here
+                        });
+                    });
+
+                    // Search button handler
+                    document.querySelector('.finder-btn').addEventListener('click', function() {
+                        const year = document.querySelectorAll('.finder-select')[0].value;
+                        const make = document.querySelectorAll('.finder-select')[1].value;
+                        const model = document.querySelectorAll('.finder-select')[2].value;
+                        const engine = document.querySelectorAll('.finder-select')[3].value;
+
+                        console.log('Search:', { year, make, model, engine });
+                        
+                        // Redirect to shop with filters
+                        if (year || make || model || engine) {
+                            const params = new URLSearchParams();
+                            if (year) params.append('year', year);
+                            if (make) params.append('make', make);
+                            if (model) params.append('model', model);
+                            if (engine) params.append('engine', engine);
+                            
+                            window.location.href = '/shop?' + params.toString();
+                        }
+                    });
+                });
+            </script>
+                    </template>
+                    <div class="s_embed_code_embedded o_not_editable container-fluid">
+                        <div class="product-finder">
+                            <div class="container">
+                                <div class="row mb-4">
+                                    <div class="col-12 text-center o_colored_level">
+                                        <h2 style="color: white; font-size: 32px; font-weight: 700; margin-bottom: 10px;">Find the right battery or engine oil that fits your vehicle</h2>
+                                    </div>
+                                </div>
+                                <div class="row mb-5">
+                                    <div class="col-12 o_colored_level">
+                                        <div class="finder-form" style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; align-items: center;">
+                                            <select class="finder-select" style="padding: 12px 20px; background: #2a2a2a; color: white; border: none; border-radius: 4px; font-weight: 600; font-size: 13px; cursor: pointer; min-width: 120px; transition: all 0.3s ease;">
+                                                <option value="">Year</option>
+                                                <option value="2024">2024</option>
+                                                <option value="2023">2023</option>
+                                                <option value="2022">2022</option>
+                                                <option value="2021">2021</option>
+                                                <option value="2020">2020</option>
+                                                <option value="2019">2019</option>
+                                                <option value="2018">2018</option>
+                                            </select>
+                                            <select class="finder-select" style="padding: 12px 20px; background: #2a2a2a; color: white; border: none; border-radius: 4px; font-weight: 600; font-size: 13px; cursor: pointer; min-width: 120px; transition: all 0.3s ease;">
+                                                <option value="">Make</option>
+                                                <option value="toyota">Toyota</option>
+                                                <option value="honda">Honda</option>
+                                                <option value="ford">Ford</option>
+                                                <option value="bmw">BMW</option>
+                                                <option value="mercedes">Mercedes</option>
+                                                <option value="audi">Audi</option>
+                                                <option value="volkswagen">Volkswagen</option>
+                                            </select>
+                                            <select class="finder-select" style="padding: 12px 20px; background: #2a2a2a; color: white; border: none; border-radius: 4px; font-weight: 600; font-size: 13px; cursor: pointer; min-width: 120px; transition: all 0.3s ease;">
+                                                <option value="">Model</option>
+                                                <option value="sedan">Sedan</option>
+                                                <option value="suv">SUV</option>
+                                                <option value="truck">Truck</option>
+                                                <option value="coupe">Coupe</option>
+                                                <option value="wagon">Wagon</option>
+                                            </select>
+                                            <select class="finder-select" style="padding: 12px 20px; background: #2a2a2a; color: white; border: none; border-radius: 4px; font-weight: 600; font-size: 13px; cursor: pointer; min-width: 120px; transition: all 0.3s ease;">
+                                                <option value="">Engine</option>
+                                                <option value="v4">V4</option>
+                                                <option value="v6">V6</option>
+                                                <option value="v8">V8</option>
+                                                <option value="diesel">Diesel</option>
+                                                <option value="hybrid">Hybrid</option>
+                                            </select>
+                                            <button class="finder-btn" style="padding: 12px 30px; background: #FF0000; color: white; border: none; border-radius: 4px; font-weight: 600; font-size: 13px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease;">Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 o_colored_level">
+                                        <div class="vehicle-categories" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 30px; margin-top: 40px;">
+                                            <div class="vehicle-category" style="text-align: center; cursor: pointer; transition: all 0.3s ease;">
+                                                <div class="vehicle-icon" style="margin-bottom: 20px;">
+                                                    <svg width="80" height="80" viewbox="0 0 80 80" fill="none" style="margin: 0 auto;">
+                                                        <rect x="15" y="35" width="50" height="25" fill="none" stroke="white" stroke-width="2" rx="2"/>
+                                                        <ellipse cx="28" cy="60" rx="6" ry="8" fill="none" stroke="white" stroke-width="2"/>
+                                                        <ellipse cx="52" cy="60" rx="6" ry="8" fill="none" stroke="white" stroke-width="2"/>
+                                                        <path d="M25 35L30 20L50 20L55 35" stroke="white" stroke-width="2" fill="none"/>
+                                                        <rect x="32" y="25" width="16" height="10" fill="none" stroke="white" stroke-width="1"/>
+                                                        <circle cx="24" cy="48" r="4" fill="#FF0000"/>
+                                                    </svg>
+                                                </div>
+                                                <h4 style="color: white; font-weight: 600; margin-bottom: 10px; font-size: 16px;">PASSENGER CARS</h4>
+                                                <p style="color: #999; font-size: 13px;">Find products for your sedan</p>
+                                            </div>
+                                            <div class="vehicle-category" style="text-align: center; cursor: pointer; transition: all 0.3s ease;">
+                                                <div class="vehicle-icon" style="margin-bottom: 20px;">
+                                                    <svg width="80" height="80" viewbox="0 0 80 80" fill="none" style="margin: 0 auto;">
+                                                        <rect x="12" y="38" width="56" height="22" fill="none" stroke="white" stroke-width="2" rx="2"/>
+                                                        <ellipse cx="25" cy="60" rx="7" ry="9" fill="none" stroke="white" stroke-width="2"/>
+                                                        <ellipse cx="55" cy="60" rx="7" ry="9" fill="none" stroke="white" stroke-width="2"/>
+                                                        <path d="M20 38L22 18L58 18L60 38" stroke="white" stroke-width="2" fill="none"/>
+                                                        <rect x="30" y="22" width="20" height="12" fill="none" stroke="white" stroke-width="1"/>
+                                                        <circle cx="20" cy="50" r="4" fill="#FF0000"/>
+                                                    </svg>
+                                                </div>
+                                                <h4 style="color: white; font-weight: 600; margin-bottom: 10px; font-size: 16px;">SUV &amp;amp; CROSSOVER</h4>
+                                                <p style="color: #999; font-size: 13px;">Find products for your SUV</p>
+                                            </div>
+                                            <div class="vehicle-category" style="text-align: center; cursor: pointer; transition: all 0.3s ease;">
+                                                <div class="vehicle-icon" style="margin-bottom: 20px;">
+                                                    <svg width="80" height="80" viewbox="0 0 80 80" fill="none" style="margin: 0 auto;">
+                                                        <rect x="10" y="40" width="25" height="20" fill="none" stroke="white" stroke-width="2" rx="2"/>
+                                                        <rect x="36" y="35" width="34" height="25" fill="none" stroke="white" stroke-width="2" rx="2"/>
+                                                        <ellipse cx="20" cy="60" rx="6" ry="8" fill="none" stroke="white" stroke-width="2"/>
+                                                        <ellipse cx="58" cy="60" rx="6" ry="8" fill="none" stroke="white" stroke-width="2"/>
+                                                        <path d="M36 40L38 25L50 25L52 40" stroke="white" stroke-width="2" fill="none"/>
+                                                        <circle cx="15" cy="50" r="4" fill="#FF0000"/>
+                                                    </svg>
+                                                </div>
+                                                <h4 style="color: white; font-weight: 600; margin-bottom: 10px; font-size: 16px;">LIGHT TRUCKS</h4>
+                                                <p style="color: #999; font-size: 13px;">Find products for your truck</p>
+                                            </div>
+                                            <div class="vehicle-category" style="text-align: center; cursor: pointer; transition: all 0.3s ease;">
+                                                <div class="vehicle-icon" style="margin-bottom: 20px;">
+                                                    <svg width="80" height="80" viewbox="0 0 80 80" fill="none" style="margin: 0 auto;">
+                                                        <rect x="8" y="42" width="20" height="18" fill="none" stroke="white" stroke-width="2" rx="2"/>
+                                                        <rect x="29" y="35" width="43" height="25" fill="none" stroke="white" stroke-width="2" rx="2"/>
+                                                        <ellipse cx="18" cy="60" rx="6" ry="8" fill="none" stroke="white" stroke-width="2"/>
+                                                        <ellipse cx="60" cy="60" rx="6" ry="8" fill="none" stroke="white" stroke-width="2"/>
+                                                        <line x1="29" y1="45" x2="29" y2="35" stroke="white" stroke-width="2"/>
+                                                        <circle cx="12" cy="50" r="4" fill="#FF0000"/>
+                                                    </svg>
+                                                </div>
+                                                <h4 style="color: white; font-weight: 600; margin-bottom: 10px; font-size: 16px;">COMMERCIAL</h4>
+                                                <p style="color: #999; font-size: 13px;">Find products for commercial vehicles</p>
+                                            </div>
+                                            <div class="vehicle-category" style="text-align: center; cursor: pointer; transition: all 0.3s ease;">
+                                                <div class="vehicle-icon" style="margin-bottom: 20px;">
+                                                    <svg width="80" height="80" viewbox="0 0 80 80" fill="none" style="margin: 0 auto;">
+                                                        <circle cx="25" cy="55" r="8" fill="none" stroke="white" stroke-width="2"/>
+                                                        <circle cx="55" cy="55" r="8" fill="none" stroke="white" stroke-width="2"/>
+                                                        <rect x="32" y="30" width="16" height="15" fill="none" stroke="white" stroke-width="2" rx="2"/>
+                                                        <line x1="33" y1="55" x2="54" y2="55" stroke="white" stroke-width="2"/>
+                                                        <path d="M40 30L30 20" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                                                        <circle cx="20" cy="50" r="4" fill="#FF0000"/>
+                                                    </svg>
+                                                </div>
+                                                <h4 style="color: white; font-weight: 600; margin-bottom: 10px; font-size: 16px;">MOTORCYCLES</h4>
+                                                <p style="color: #999; font-size: 13px;">Find products for motorcycles</p>
+                                            </div>
+                                            <div class="vehicle-category" style="text-align: center; cursor: pointer; transition: all 0.3s ease;">
+                                                <div class="vehicle-icon" style="margin-bottom: 20px;">
+                                                    <svg width="80" height="80" viewbox="0 0 80 80" fill="none" style="margin: 0 auto;">
+                                                        <rect x="15" y="35" width="50" height="22" fill="none" stroke="white" stroke-width="2" rx="2"/>
+                                                        <ellipse cx="28" cy="57" rx="8" ry="10" fill="none" stroke="white" stroke-width="2"/>
+                                                        <ellipse cx="52" cy="57" rx="8" ry="10" fill="none" stroke="white" stroke-width="2"/>
+                                                        <path d="M22 35L26 15L54 15L58 35" stroke="white" stroke-width="2" fill="none"/>
+                                                        <path d="M32 22L40 18L48 22" stroke="white" stroke-width="2" fill="none"/>
+                                                        <circle cx="22" cy="46" r="4" fill="#FF0000"/>
+                                                    </svg>
+                                                </div>
+                                                <h4 style="color: white; font-weight: 600; margin-bottom: 10px; font-size: 16px;">OFF-ROAD</h4>
+                                                <p style="color: #999; font-size: 13px;">Find products for off-road vehicles</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <style>
+                /* Finder Select Hover */
+                .finder-select:hover,
+                .finder-select:focus {
+                    background: #333 !important;
+                    outline: none;
+                    box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.3);
+                }
+
+                /* Finder Button Hover */
+                .finder-btn:hover {
+                    background: #cc0000 !important;
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
+                }
+
+                .finder-btn:active {
+                    transform: translateY(0);
+                }
+
+                /* Vehicle Category Hover */
+                .vehicle-category:hover .vehicle-icon svg {
+                    filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.5));
+                    transform: scale(1.1);
+                }
+
+                .vehicle-category:hover h4 {
+                    color: #FF0000 !important;
+                }
+
+                .vehicle-icon svg {
+                    transition: all 0.3s ease;
+                }
+
+                /* Responsive */
+                @media (max-width: 768px) {
+                    .finder-form {
+                        flex-direction: column !important;
+                        gap: 15px !important;
+                    }
+
+                    .finder-select,
+                    .finder-btn {
+                        width: 100% !important;
+                        min-width: unset !important;
+                    }
+
+                    .vehicle-categories {
+                        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)) !important;
+                        gap: 20px !important;
+                    }
+
+                    .vehicle-icon svg {
+                        width: 60px !important;
+                        height: 60px !important;
+                    }
+
+                    h2 {
+                        font-size: 24px !important;
+                    }
+
+                    .vehicle-category h4 {
+                        font-size: 14px !important;
+                    }
+
+                    .vehicle-category p {
+                        font-size: 12px !important;
+                    }
+                }
+            </style>
+                        <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    // Vehicle category click handler
+                    document.querySelectorAll('.vehicle-category').forEach(category =&gt; {
+                        category.addEventListener('click', function() {
+                            console.log('Vehicle category clicked');
+                            // Add search functionality here
+                        });
+                    });
+
+                    // Search button handler
+                    document.querySelector('.finder-btn').addEventListener('click', function() {
+                        const year = document.querySelectorAll('.finder-select')[0].value;
+                        const make = document.querySelectorAll('.finder-select')[1].value;
+                        const model = document.querySelectorAll('.finder-select')[2].value;
+                        const engine = document.querySelectorAll('.finder-select')[3].value;
+
+                        console.log('Search:', { year, make, model, engine });
+                        
+                        // Redirect to shop with filters
+                        if (year || make || model || engine) {
+                            const params = new URLSearchParams();
+                            if (year) params.append('year', year);
+                            if (make) params.append('make', make);
+                            if (model) params.append('model', model);
+                            if (engine) params.append('engine', engine);
+                            
+                            window.location.href = '/shop?' + params.toString();
+                        }
+                    });
+                });
+            </script>
+                    </div>
+                </section>
+                <section class="s_map pt56 pb224" data-map-type="m" data-map-zoom="12" data-snippet="s_map" data-map-address="8000 Marina Blvd, Suite 300 Brisbane California (US) United States" data-name="Map">
+                    <div class="map_container o_not_editable">
+                        <div class="css_non_editable_mode_hidden">
+                            <div class="missing_option_warning alert alert-info rounded-0 fade show d-none d-print-none">
+                    An address must be specified for a map to be embedded
+                </div>
+                        </div>
+                        <iframe class="s_map_embedded o_not_editable" src="https://maps.google.com/maps?q=250%20Executive%20Park%20Blvd%2C%20Suite%203400%20San%20Francisco%20California%20(US)%20United%20States&amp;t=m&amp;z=12&amp;ie=UTF8&amp;iwloc=&amp;output=embed" width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" aria-label="Map"/>
+                        <div class="s_map_color_filter"/>
+        </div>
+                </section>
+            </div>
+        </xpath>
+    </template>
+</odoo>

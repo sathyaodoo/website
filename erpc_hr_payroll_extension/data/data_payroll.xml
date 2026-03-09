@@ -1,0 +1,16 @@
+<odoo>
+<data noupdate="1">
+
+    <record id="erpc_structure_type" model="hr.payroll.structure.type">
+      <field name="name">Workforce</field>
+    </record>
+
+    <record id="erpc_structure" model="hr.payroll.structure">
+      <field name="name">Workforce</field>
+      <field name="type_id" ref="erpc_hr_payroll_extension.erpc_structure_type"/>
+      <field name="unpaid_work_entry_type_ids" eval="[(4, ref('hr_work_entry.work_entry_type_unpaid_leave'))]"/>
+      <field name="country_id" eval="False"/>
+    </record>
+
+  </data>
+</odoo>

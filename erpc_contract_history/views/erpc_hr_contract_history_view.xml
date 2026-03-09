@@ -1,0 +1,101 @@
+<odoo>
+    <record id="view_contract_history_tree" model="ir.ui.view">
+        <field name="name">contract.history.tree</field>
+        <field name="model">erpc.hr.contract.history</field>
+        <field name="arch" type="xml">
+            <list string="Contract History" editable="bottom">
+                <field name="employee_id"/>
+                <field name="contract_id" invisible="True"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="resource_calendar_id"/>
+                <field name="wage"/>
+                <field name="currency_id"/>
+                <field name="department_id"/>
+                <field name="job_id"/>
+                <field name="description"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_contract_history_form" model="ir.ui.view">
+        <field name="name">contract.history.form</field>
+        <field name="model">erpc.hr.contract.history</field>
+        <field name="arch" type="xml">
+            <form string="Contract History">
+                <sheet>
+                    <group>
+                        <field name="contract_id" invisible="1"/>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                        <field name="resource_calendar_id"/>
+                        <field name="wage"/>
+                        <field name="currency_id"/>
+                        <field name="department_id"/>
+                        <field name="job_id"/>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_hr_contract_form_inherit" model="ir.ui.view">
+        <field name="name">hr.contract.form</field>
+        <field name="model">hr.version</field>
+        <field name="inherit_id" ref="hr.hr_contract_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='information']" position="before">
+                <page string="Contract History" name="contract_history">
+                    <field name="history_ids" context="{'default_contract_id': id}" editable="bottom"/>
+                </page>
+            </xpath>
+            <xpath expr="//page[@name='information']" position="after">
+                <page string="NSSF Information" name="nssf_information">
+                    <group name="nssf_info">
+                        <field name="nssf_wage"/>
+                        <field name="nssf_wage_lbp"/>
+                        <field name="nssf_entry_date" invisible="1"/>
+                        <field name="nssf_leave_date" invisible="1"/>
+                        <field name="r3_delivery_date" invisible="1"/>
+                    </group>
+
+                </page>
+            </xpath>
+
+            <xpath expr="//field[@name='wage']" position="attributes">
+                <attribute name="readonly">True</attribute>
+                <attribute name="force_save">True</attribute>
+            </xpath>
+
+            <xpath expr="/form//field[@name='resource_calendar_id']" position="attributes">
+                <attribute name="force_save">1</attribute>
+                <attribute name="readonly">True</attribute>
+            </xpath>
+
+            <xpath expr="/form//field[@name='department_id']" position="attributes">
+                <attribute name="force_save">1</attribute>
+                <attribute name="readonly">True</attribute>
+            </xpath>
+
+            <xpath expr="/form//field[@name='job_id']" position="attributes">
+                <attribute name="force_save">1</attribute>
+                <attribute name="readonly">True</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_contract_history" model="ir.actions.act_window">
+        <field name="name">Contract History</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">erpc.hr.contract.history</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_contract_history"
+              name="Contract History"
+              parent="hr.menu_hr_employee_payroll"
+              groups="base.group_user"
+              action="action_contract_history"
+              sequence="20"/>
+</odoo>

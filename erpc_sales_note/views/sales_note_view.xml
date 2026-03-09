@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="view_erpc_sales_note_tree" model="ir.ui.view">
+            <field name="name">erpc.sales.note.tree</field>
+            <field name="model">sales.note</field>
+            <field name="arch" type="xml">
+                <list string="Sales Note">
+                    <field name="title"/>
+                    <field name="description"/>
+                    <field name="attachment" column_invisible="1"/>
+                    <field name="attachment_filename" column_invisible="1"/>
+                    <field name="active" column_invisible="1"/>
+                </list>
+            </field>
+        </record>
+        <record id="view_erpc_sales_note_form" model="ir.ui.view">
+            <field name="name">erpc.sales.note.form</field>
+            <field name="model">sales.note</field>
+            <field name="arch" type="xml">
+                <form string="Sales Note">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="archive_note" type="object" string="Archive" class="oe_stat_button" icon="fa-archive" invisible="active != True"/>
+                            <button name="unarchive_note" type="object" string="Unarchive" class="oe_stat_button" icon="fa-refresh" invisible="active == True"/>
+                        </div>
+
+                        <group>
+                            <field name="title"/>
+                            <field name="description"/>
+                        </group>
+                        <group>
+                            <field name="attachment" filename="attachment_filename"/>
+                            <field name="attachment_filename" invisible="1"/>
+                            <field name="active" invisible="1"/>
+                            <field name="has_attachment" invisible="1"/>
+                        </group>
+                        <group>
+                            <button name="download_attachment"
+                                    type="object"
+                                    string="Download Attachment"
+                                    class="btn-primary"
+                                    invisible="not has_attachment"/>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_erpc_sales_note_search" model="ir.ui.view">
+            <field name="name">erpc.sales.note</field>
+            <field name="model">sales.note</field>
+            <field name="arch" type="xml">
+                <search string="Sales Note">
+                    <field name="title"/>
+                    <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="erpc_sales_note_action" model="ir.actions.act_window">
+            <field name="name">Sales Note</field>
+            <field name="res_model">sales.note</field>
+            <field name="view_mode">list,form,search</field>
+            <field name="view_id" ref="view_erpc_sales_note_tree"/>
+            <field name="views" eval="[(ref('view_erpc_sales_note_tree'), 'list'), (ref('view_erpc_sales_note_form'), 'form'), (ref('view_erpc_sales_note_search'), 'search')]"/>
+            <field name="domain">[]</field>
+        </record>
+
+
+        <menuitem id="menu_sales_note_view" name="Sales Note" action="erpc_sales_note_action" sequence="21"
+                  parent="sale.sale_order_menu"/>
+
+
+    </data>
+</odoo>

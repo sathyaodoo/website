@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="hr_payroll.action_report_payslip" model="ir.actions.report">
+            <field name="attachment">'Payslip_print.pdf'</field>
+        </record>
+    </data>
+</odoo>

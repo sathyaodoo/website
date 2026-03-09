@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+<!--    <record id="view_account_budget_post_form_inherit_financial" model="ir.ui.view">-->
+<!--        <field name="name">account.budget.post.form.inherit.financial</field>-->
+<!--        <field name="model">account.budget.post</field>-->
+<!--        <field name="inherit_id" ref="account_budget.view_budget_post_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='accounts']/field[@name='account_ids']/tree[1]/field[@name='name']"-->
+<!--                   position="after">-->
+<!--                <field name="financial_group_id"/>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='accounts']/field[@name='account_ids']/tree[1]"-->
+<!--                   position="attributes">-->
+<!--                <attribute name="create">False</attribute>-->
+<!--                <attribute name="edit">False</attribute>-->
+<!--                <attribute name="delete">False</attribute>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+
+    <record id="view_crossovered_budget_post_form_inherit_access" model="ir.ui.view">
+        <field name="name">crossovered.budget.form.inherit.access</field>
+        <field name="model">budget.analytic</field>
+        <field name="inherit_id" ref="account_budget.view_budget_analytic_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//button[@name='action_budget_confirm']" position="attributes">
+                <attribute name="groups">erpc_budgetary_constraints.group_approve_budgets</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='action_budget_done']" position="attributes">
+                <attribute name="groups">erpc_budgetary_constraints.group_done_budgets</attribute>
+            </xpath>
+
+
+        </field>
+    </record>
+
+<!--TODO GR: to check what to replace in odoo 19-->
+<!--    <record id="view_crossovered_budget_lines_tree_inherit_financial_entries" model="ir.ui.view">-->
+<!--        <field name="name">crossovered.budget.lines.tree.inherit.financial.entries</field>-->
+<!--        <field name="model">crossovered.budget.lines</field>-->
+<!--        <field name="inherit_id" ref="account_budget.budget_report_view_tree"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='percentage']"-->
+<!--                   position="after">-->
+<!--                <button type="object" name="action_open_budget_entries" string="Entries..."-->
+<!--                        icon="fa-arrow-circle-o-right"/>-->
+<!--            </xpath>-->
+
+<!--            <xpath expr="//field[@name='practical_amount']"-->
+<!--                   position="attributes">-->
+<!--                <attribute name="optional">show</attribute>-->
+<!--            </xpath>-->
+
+<!--            <xpath expr="//field[@name='theoritical_amount']"-->
+<!--                   position="attributes">-->
+<!--                <attribute name="optional">show</attribute>-->
+<!--            </xpath>-->
+
+<!--            <xpath expr="//field[@name='percentage']"-->
+<!--                   position="attributes">-->
+<!--                <attribute name="optional">show</attribute>-->
+<!--            </xpath>-->
+
+<!--            <xpath expr="//field[@name='practical_amount']"-->
+<!--                   position="after">-->
+<!--                <field name="stored_practical_amount" optional="show"/>-->
+<!--            </xpath>-->
+
+<!--            <xpath expr="//field[@name='theoritical_amount']"-->
+<!--                   position="after">-->
+<!--                <field name="stored_theoritical_amount" optional="show"/>-->
+<!--            </xpath>-->
+
+<!--        </field>-->
+<!--    </record>-->
+
+
+<!--    <record id="view_account_list_inherit_budgetary_position" model="ir.ui.view">-->
+<!--        <field name="name">account.account.list.inherit.budgetary.position</field>-->
+<!--        <field name="model">account.account</field>-->
+<!--        <field name="inherit_id" ref="account.view_account_list"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='group_id']" position="after">-->
+<!--                <field name="is_required_position" column_invisible="True"/>-->
+<!--                <field name="general_budget_id" optional="show" required="is_required_position == True"-->
+<!--                       options="{'no_create': True}"/>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record id="view_account_form_inherit_budgetary_position" model="ir.ui.view">-->
+<!--        <field name="name">account.account.form.inherit.budgetary.position</field>-->
+<!--        <field name="model">account.account</field>-->
+<!--        <field name="inherit_id" ref="account.view_account_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='group_id']" position="after">-->
+<!--                <field name="is_required_position" invisible="1"/>-->
+<!--                <field name="general_budget_id" required="is_required_position == True" options="{'no_create': True}"/>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+
+</odoo>

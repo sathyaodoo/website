@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="custom_product_attributes_body"
+              inherit_id="website_sale_comparison.product_attributes_body"
+              priority="20">
+        <xpath expr="//section[@id='product_full_spec']" position="replace"/>
+    </template>
+    <!-- <template id="product_attributes_body" inherit_id="website_sale.product" name="Product attributes table">
+        <xpath expr="//div[@id='product_attributes_simple']" position="replace"/>
+        <xpath expr="//div[@id='product_full_description']" position="after">
+            <t t-set="attrib_categories" t-value="product.valid_product_template_attribute_line_ids._prepare_categories_for_display()"/>
+            <t t-if="attrib_categories">
+                <section class="pt32 pb32" id="product_full_spec">
+                    <div class="container">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h3 class="m-0">Specifications</h3>
+                        </div>
+                        <div id="product_specifications">
+                            <div class="row">
+                                <t t-foreach="attrib_categories" t-as="category">
+                                    <div class="col-lg-6">
+                                        <t t-call="website_sale_comparison.specifications_table"/>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </t>
+        </xpath>
+    </template> -->
+
+    <template id="custom_shop_layout" inherit_id="website_sale.products" name="Custom Shop Layout">
+        
+        <xpath expr="//div[@id='wrap']" position="inside">
+            <style>
+                .custom_shop_banner {
+                    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/web/image/website.s_banner_default_image');
+                    background-size: cover;
+                    background-position: center;
+                    padding: 80px 0;
+                    margin-bottom: 2rem;
+                }
+                .sidebar_search .input-group {
+                    border: 1px solid #ddd;
+                    border-radius: 0px;
+                }
+                .sidebar_search .btn-danger {
+                    background-color: #e30613; /* Tire shop red */
+                    border: none;
+                }
+            </style>
+        </xpath>
+
+        <xpath expr="//div[@id='o_wsale_container']" position="before">
+            <div class="custom_shop_banner text-center text-white">
+                <div class="container">
+                    <h1 class="display-4 fw-bold text-uppercase">
+                        <t t-if="category" t-out="category.name"/>
+                        <t t-else="">All Products</t>
+                    </h1>
+                </div>
+            </div>
+        </xpath>
+
+        <xpath expr="//aside[@id='products_grid_before']/*[1]" position="before">
+            <div class="sidebar_search mb-4">
+                <h6 class="fw-bold text-uppercase mb-2">Search</h6>
+                <form method="get" action="/shop" class="input-group">
+                    <input type="text" name="search" class="form-control border-0 bg-light" placeholder="Search products..." t-att-value="search"/>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="oi oi-search"/>
+                    </button>
+                </form>
+            </div>
+        </xpath>
+
+        <xpath expr="//header[@id='o_wsale_products_header']" position="attributes">
+            <attribute name="class" add="d-none" separator=" "/>
+        </xpath>
+
+    </template>
+
+  
+
+</odoo>
+
+
+    

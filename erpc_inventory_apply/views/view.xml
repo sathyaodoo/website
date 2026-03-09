@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="erpc_res_config_settings_view_form_stock" model="ir.ui.view">
+            <field name="name">res.settings.config.stock</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="stock.res_config_settings_view_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//setting[@id='use_own_routes']" position="after">
+                    <div class="col-12 col-lg-6 o_setting_box" id="free_quantity_warehouse" title="Free Quantity Warehouse">
+                        <div class="o_setting_right_pane">
+                            <label for="free_qty_warehouse"/>
+                            <div class="text-muted">
+                                Set warehouse to use for tracking free quantity products
+                            </div>
+
+                            <field name="free_qty_warehouse"/>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="erpc_product_template_tree_view" model="ir.ui.view">
+            <field name="name">product.template.tree.view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="available_quantity"/>
+                </xpath>
+            </field>
+        </record>
+        
+       
+    </data>
+</odoo>

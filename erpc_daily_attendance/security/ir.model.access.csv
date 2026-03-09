@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+erpc_access_hr_daily_attendance,erpc_access_hr_daily_attendance,model_erpc_hr_daily_attendance,base.group_user,1,1,1,1
+erpc_access_hr_daily_attendance_line,erpc_access_hr_daily_attendance_line,model_erpc_hr_daily_attendance_line,base.group_user,1,1,1,1

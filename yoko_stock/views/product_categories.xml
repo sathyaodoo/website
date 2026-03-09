@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    
+<!--        <record id="product_classification_tree" model="ir.ui.view">-->
+<!--            <field name="name">product_classification.view.tree</field>-->
+<!--            <field name="model">product.categories</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree string="product classification tree">-->
+<!--                    <field name="code"/>-->
+<!--                    <field name="name"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="classification_view_form" model="ir.ui.view">-->
+<!--            <field name="name">classification.view.form</field>-->
+<!--            <field name="model">product.categories</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form>-->
+<!--                    <sheet>-->
+<!--                        <label for="name"/>-->
+<!--                        <h1><field name="name" placeholder="Name..." required="1"/></h1>-->
+<!--                        <group>-->
+<!--                            <group>-->
+<!--                                <field name="code" placeholder="e.g. 101"/>-->
+<!--                            </group>-->
+<!--                        </group>-->
+<!--                    </sheet>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="product_classification_action" model="ir.actions.act_window">-->
+<!--            <field name="name">Product classification</field>-->
+<!--            <field name="res_model">product.categories</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--        </record>-->
+
+<!--        <menuitem id="product_classification_menu" name="Product classification" action="product_classification_action" parent="stock.menu_stock_inventory_control" sequence="10" active="True"/>-->
+    
+    </data>
+</odoo>

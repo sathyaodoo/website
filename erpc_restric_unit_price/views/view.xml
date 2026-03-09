@@ -1,0 +1,27 @@
+<odoo>
+    <data>
+        <record id="erpc_yoko_sale_stock_view_order_form_inherit_can_edit_prices" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit.can.edit.prices</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="yoko_sale_stock.view_form_sale_order_promotional"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='is_promo']" position="after">
+                    <field name="can_edit_prices" invisible="1" string="Price Editing Enabled"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="erpc_view_order_form_inherit_can_edit_prices" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit.can.edit.prices</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/list[1]/field[@name='price_unit']" position="attributes">
+                    <attribute name="readonly">parent.is_promo == True or parent.can_edit_prices == False</attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

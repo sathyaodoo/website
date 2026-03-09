@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="purchase_order_view_inherit_erpc">
+        <field name="name">purchase.order.view.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/group/group/field[@name='currency_id']" position="after">
+                <field name="internal_ref"/>
+            </xpath>
+            <xpath expr="//div[@name='reminder']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//label[@for='receipt_reminder_email']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='incoterm_id']" position="replace">
+                <!-- <attribute name="invisible">1</attribute> -->
+            </xpath>
+            <xpath expr="//field[@name='picking_type_id']" position="after">
+                <field name="incoterm_id"/>
+            </xpath>
+            
+            
+        </field>
+    </record>
+</odoo>

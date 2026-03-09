@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="erpc_zk_machine_form" model="ir.ui.view">
+        <field name="name">erpc.zk.machine.form</field>
+        <field name="model">zk.machine</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="get_attendances" type="object" string="Get Attendances" class="oe_highlight"/>
+                    <button name="test_connection" type="object" string="Test connection"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Machine Name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="machine_ip" help="IP of the device to connect to. Make sure it is accessible by Odoo. If device on premises and Odoo on cloud then install a tunnel like ngrok or expose the IP of the machine"/>
+                            <field name="port_num"/>
+                            <field name="timeout"/>
+                            <field name="serial_num"/>
+                            <field name="cut_off_days"/>
+                        </group>
+                        <group>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="last_run_status" widget="toggle_button"/>
+                            <field name="last_error_msg"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="erpc_zk_machine_tree" model="ir.ui.view">
+        <field name="name">erpc.zk.machine.tree</field>
+        <field name="model">zk.machine</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="machine_ip"/>
+                <field name="port_num"/>
+                <field name="cut_off_days"/>
+                <field name="timeout"/>
+                <field name="serial_num" readonly="1"/>
+                <field name="last_run_status" readonly="1" widget="toggle_button"/>
+                <field name="last_error_msg" readonly="1"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="erpc_zk_machine_action" model="ir.actions.act_window">
+        <field name="name">ZK Machine</field>
+        <field name="res_model">zk.machine</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <menuitem id="erpc_zk_machine_menu" name="ZK Machine" parent="erpc_attendance_machine" action="erpc_zk_machine_action" sequence="1"/>
+</odoo>
+

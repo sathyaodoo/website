@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_stock_lot_erpc,access.stock.lot.erpc,stock.model_stock_lot,erpc_group_for_serial.group_can_see_serial,1,0,0,0

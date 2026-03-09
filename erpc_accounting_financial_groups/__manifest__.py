@@ -1,0 +1,20 @@
+{
+    'name': 'ERPC Accounting Financial Groups',
+    "version": "19.0.1.0.0",
+    'category': 'Accounting',
+    'author': 'ERP Cloud S.A.R.L',
+    'sequence': -100,
+    'summary': 'ERPC Accounting Financial Groups',
+    'description': """Accounting Financial Groups""",
+    'depends': ['base', 'account', 'analytic'],
+    'data': [
+        'security/ir.model.access.csv',
+        'security/security.xml',
+        'views/accounting_financial_groups_view.xml',
+    ],
+    'demo': [],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+    'license': 'LGPL-3',
+}

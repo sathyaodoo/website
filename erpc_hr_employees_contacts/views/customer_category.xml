@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<!--    <record id="erpc_view_customer_category_form_inherit" model="ir.ui.view">-->
+<!--        <field name="name">erpc.customer.category.form.inherit</field>-->
+<!--        <field name="model">customer.category</field>-->
+<!--        <field name="inherit_id" ref="yoko_customization.customer_category_view_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='type']" position="after">-->
+<!--                <field name="employee_categ"/>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+</odoo>

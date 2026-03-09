@@ -1,0 +1,984 @@
+<odoo>
+    <template id="website_about" name="About Us">
+    <style>
+    
+    
+    
+            
+    .nav-tabs .nav-link {
+        background-color: black; 
+        color: #ffffff !important;
+        border: none;
+        padding: 15px 25px;
+        margin: 0 2px;
+    }
+
+
+    .nav-tabs .nav-link.active {
+        background-color: #ffffff !important;
+        color: #e60000 !important;
+        border-bottom: 3px solid #e60000 !important;
+    }
+
+
+    .tab-pane h2 {
+        font-size: 3.5rem;
+        color: #212529;
+        margin-bottom: 20px;
+    }
+    .timeline-wrapper {
+            position: relative;
+            padding: 20px 0;
+            margin: 0 auto;
+            max-width: 850px;
+        }
+
+        .timeline-line {
+            position: absolute;
+            top: 28px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: rgba(255,255,255,0.2);
+            z-index: 1;
+        }
+
+        .timeline-nav {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            z-index: 2;
+        }
+
+        .timeline-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background: #bbb;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            border: 2px solid #111;
+            transition: 0.3s;
+        }
+
+        .year-label {
+            color: #bbb;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .timeline-item:hover .dot, 
+        .timeline-item.active .dot {
+            background: #fff;
+            transform: scale(1.3);
+        }
+
+        .timeline-item:hover .year-label, 
+        .timeline-item.active .year-label {
+            color: #fff;
+        }
+        
+        .why-item {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
+        }
+
+        .why-header {
+            cursor: pointer;
+            gap: 15px;
+        }
+
+        .why-icon {
+            width: 32px;
+            height: 32px;
+            border: 2px solid #e10600;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #e10600;
+            transition: 0.3s;
+        }
+
+        .why-content {
+            display: none;
+            margin-left: 47px;
+            margin-top: 15px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .why-item.active .why-content {
+            display: block;
+        }
+
+        .why-item.active .why-icon {
+            background: #e10600;
+            color: #fff;
+        }
+        
+        #channel-content a {
+            transition: 0.3s ease;
+        }
+        
+        #channel-content a:hover {
+            transform: translateY(-6px);
+            color: #e10600 !important;
+        }
+        
+
+    @media (max-width: 768px) {
+
+        .nav-tabs {
+            display: flex !important;
+            flex-wrap: nowrap !important;
+            justify-content: space-between !important;
+        }
+
+        .nav-tabs .nav-item {
+            flex: 1 1 25% !important;
+            display: flex;
+        }
+
+        .nav-tabs .nav-link {
+            flex: 1;
+            padding: 12px 6px !important;
+            font-size: 12px !important;
+            line-height: 1.3 !important;
+
+        
+            white-space: normal !important;
+            word-break: normal !important;
+            overflow-wrap: normal !important;
+
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+    }
+
+
+    @media (max-width: 768px) {
+
+        #brandCarousel .carousel-item .row {
+            flex-wrap: nowrap !important;
+            overflow: hidden !important;
+            justify-content: space-between !important;
+        }
+
+        #brandCarousel .carousel-item .col-md-3,
+        #brandCarousel .carousel-item .col-6 {
+            flex: 0 0 25% !important;  
+            max-width: 25% !important;
+            padding: 0 5px !important;
+        }
+
+        #brandCarousel .carousel-item img {
+            width: 100% !important;
+            max-width: 80px !important;  
+            height: auto !important;
+            display: block;
+            margin: 0 auto;
+        }
+
+    }
+
+
+    </style>
+    <script>
+     function changeYear(year, element){
+        const data = {
+            "1995":{ title:"1995", subtitle:"A Legacy Begins", desc:"Hanna Howayek opens Lebanon’s first automotive import venture, laying the foundation for decades of innovation and trust." },
+            "2005":{ title:"2005", subtitle:"HMG Holding is Born", desc:"Under Marwan Howayek, HMG Holding is established, securing exclusive Yokohama distribution rights and transforming a family legacy into a national force for mobility." },
+            "2010":{ title:"2010", subtitle:"Expanding Expertise",desc:"HMG diversifies into ENI lubricants and Delkor batteries, bringing world-class performance and reliability to Lebanon’s roads.." },
+            "2015":{ title:"2015", subtitle:"Nationwide Reach", desc:"Launch of a comprehensive logistics network, ensuring seamless distribution across all Lebanese territories." },
+            "2020":{ title:"2020", subtitle:"Trusted by Thousands", desc:"Partnering with over 400 dealers and 100 fleet companies, HMG strengthens its role as Lebanon’s go-to mobility solutions provider." },
+            "2025":{ title:"2025", subtitle:"Innovating for the Future", desc:"Introducing retail, e-commerce, and sustainability initiatives, continuing our mission to move Lebanon safely and efficiently into the next decade." }
+        };
+    
+        
+        document.getElementById("yearTitle").innerText = data[year].title;
+        document.getElementById("yearSubtitle").innerText = data[year].subtitle;
+        document.getElementById("yearDesc").innerText = data[year].desc;
+    
+        
+        document.querySelectorAll('.timeline-item').forEach(el =&gt; {
+            el.classList.remove('active');
+        });
+        element.classList.add('active');
+    }
+    
+    function toggleWhy(element) {
+        const parent = element.parentElement;
+        const icon = element.querySelector(".why-icon");
+    
+        parent.classList.toggle("active");
+    
+        if (parent.classList.contains("active")) {
+            icon.innerText = "-";
+        } else {
+            icon.innerText = "+";
+        }
+    }
+    </script>
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure">
+                <div id="wrap" class="oe_structure oe_empty"><section class="s_title o_colored_level pt24 pb8" data-vcss="001" data-snippet="s_title" data-name="Title">
+        <div class="container s_allow_columns">
+            <h3 style="text-align: center;"><strong>About us</strong><span class="h2"><strong>​</strong></span></h3>
+        </div>
+    </section></div>
+        <section class="s_tabs pb48 o_colored_level pt24" data-vcss="001" data-snippet="s_tabs">
+    <div class="container-fluid">
+        <ul class="nav nav-tabs justify-content-center mb-4 border-0" role="tablist" style="background: black;">
+          
+            <li class="nav-item" role="presentation">
+                <a class="nav-link text-uppercase fw-bold active" id="nav_tabs_link_1771391708131_236" data-bs-toggle="tab" href="#nav_tabs_content_1771391708131_236" role="tab" aria-controls="nav_tabs_content_1771391708131_236" aria-selected="true" tabindex="-1">Brand Overview</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link text-uppercase fw-bold " id="nav_tabs_link_1771391708131_237" data-bs-toggle="tab" href="#nav_tabs_content_1771391708131_237" role="tab" aria-controls="nav_tabs_content_1771391708131_237" aria-selected="false" tabindex="-1">Mission &amp;amp; Vision</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link text-uppercase fw-bold" id="channel-tab" data-bs-toggle="tab" href="#channel-content" role="tab" aria-selected="false" tabindex="-1">Distribution Channels</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link text-uppercase fw-bold" id="why-tab" data-bs-toggle="tab" href="#why-content" role="tab" aria-selected="false" tabindex="-1">Why Us?</a>
+                
+            </li>
+        </ul>
+
+        <div class="tab-content mt-5">
+        <div class="tab-pane fade active show" id="nav_tabs_content_1771391708131_236" role="tabpanel" aria-labelledby="nav_tabs_link_1771391708131_236">
+                        <div class="row align-items-center">
+                            <div class="col-md-5 d-none d-md-block o_colored_level"/><div class="text-center col-md-7 o_colored_level">
+                                <h6 style="font-weight: 800; font-size: 4rem; color: #1a1a1a; margin-bottom: 20px;"><span class="h3-fs">Established in 2005</span></h6>
+                                <p style="color: #1a1a1a; margin-bottom: 20px;"><strong>We Move What Matters</strong></p>
+                                <p style="line-height: 1.8; color: rgb(68, 68, 68); max-width: 600px; margin: 0px auto; text-align: center;"><span style="font-size: 12px;">Founded in 1955 by Hanna Howayek, HMG Holding was officially established in 2005 under Marwan Howayek, transforming a family legacy of trust into a national force for mobility and progress.
+We’ve powered Lebanon’s roads and industries with precision, performance, and pride,  always keeping people safe on the road. From Yokohama’s Japanese engineering to ENI’s Italian energy, from Delkor’s reliability to Aminol’s innovation, HMG connects the world’s leading brands to the heart of Lebanon.
+We move fleets, corporations, dealers, and families, because what we move isn’t just vehicles, it’s trust, pride, and safety.
+HMG Holding; born from resilience, driven by integrity, built to move what matters most: our nation.</span></p>
+                            </div>
+                             
+                            <div class="col-12 o_colored_level" style="padding:0;">
+
+
+
+        <!-- Center Black Section -->
+                                    <div style="                                         max-width:1400px;                                         margin:0 auto;                                         background:#111111 url('') center center / cover no-repeat;                                         padding:90px 40px;">
+
+                                        <div class="row text-center align-items-center">
+                            
+                                            <!-- Dealers -->
+                                            <div class="col-6 col-md-3 mb-5 mb-md-0">
+                                                <div style="font-size:38px; color:#ffffff;">
+                                                    <i class="fa fa-handshake-o"/>
+                                                </div>
+                                                <h2 style="color:#e10600; font-weight:800; font-size:56px; margin:15px 0 5px;">
+                                                    200
+                                                </h2>
+                                                <p style="color:#cfcfcf; font-size:14px; letter-spacing:2px; margin:0;">
+                                                    DEALERS
+                                                </p>
+                                            </div>
+                            
+                                            <!-- Audience -->
+                                            <div class="col-6 col-md-3 mb-5 mb-md-0">
+                                                <div style="font-size:38px; color:#ffffff;">
+                                                    <i class="fa fa-users"/>
+                                                </div>
+                                                <h2 style="color:#e10600; font-weight:800; font-size:56px; margin:15px 0 5px;">
+                                                    100k
+                                                </h2>
+                                                <p style="color:#cfcfcf; font-size:14px; letter-spacing:2px; margin:0;">
+                                                    AUDIENCE
+                                                </p>
+                                            </div>
+
+                <!-- Customer Database -->
+                                            <div class="col-6 col-md-3">
+                                                <div style="font-size:38px; color:#ffffff;">
+                                                    <i class="fa fa-database"/>
+                                                </div>
+                                                <h2 style="color:#e10600; font-weight:800; font-size:56px; margin:15px 0 5px;">
+                                                    200k
+                                                </h2>
+                                                <p style="color:#cfcfcf; font-size:14px; letter-spacing:2px; margin:0;">
+                                                    CUSTOMER DATABASE
+                                                </p>
+                                            </div>
+                            
+                                            <!-- Market Share -->
+                                            <div class="col-6 col-md-3">
+                                                <div style="font-size:38px; color:#ffffff;">
+                                                    <i class="fa fa-share-alt"/>
+                                                </div>
+                                                <h2 style="color:#e10600; font-weight:800; font-size:56px; margin:15px 0 5px;">
+                                                    12%
+                                                </h2>
+                                                <p style="color:#cfcfcf; font-size:14px; letter-spacing:2px; margin:0;">
+                                                    MARKET SHARE
+                                                </p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                
+                            </div>
+                            
+                      
+
+<div style="background:#111; padding:100px 0; position:relative; font-family: sans-serif; overflow: hidden;">
+    <div style="position:absolute; top:0; left:0; width:100%; height:100%; opacity:0.1; pointer-events:none; background-image: url('https://www.transparenttextures.com/patterns/tire-tread.png');"/>
+
+    <div class="container text-center" style="position:relative; z-index:1; max-width: 1000px; margin: 0 auto;">
+        
+        <h2 style="color:#ffffff; font-weight:600; margin-bottom:60px; text-align: center;">
+            Celebrating 30 years of excellence
+        </h2>
+
+        <div id="timelineCard" style="             background:#ffffff;             max-width:750px;             margin:0 auto 100px;             padding:60px 40px;             position:relative;             border-right:8px solid #e10600;             border-bottom:8px solid #e10600;             text-align: center;         ">
+            <h1 id="yearTitle" style="color:#e10600; font-weight:800; font-size: 3rem; margin: 0;">1995</h1>
+            <h4 id="yearSubtitle" style="font-weight:600; font-size: 1.5rem; margin: 10px 0;">A Legacy Begins</h4>
+            <p id="yearDesc" style="margin-top:20px; color:#444; line-height: 1.6; max-width: 500px; margin-left: auto; margin-right: auto;">
+                Hanna Howayek opens Lebanon’s first automotive import venture, laying the foundation for decades of innovation and trust.
+            </p>
+        </div>
+
+        <div class="timeline-wrapper">
+            <div class="timeline-line"/>
+            <div class="timeline-nav">
+                <div class="timeline-item active" onclick="changeYear('1995', this)">
+                    <div class="dot"/>
+                    <span class="year-label">1995</span>
+                </div>
+                <div class="timeline-item" onclick="changeYear('2005', this)">
+                    <div class="dot"/>
+                    <span class="year-label">2005</span>
+                </div>
+                <div class="timeline-item" onclick="changeYear('2010', this)">
+                    <div class="dot"/>
+                    <span class="year-label">2010</span>
+                </div>
+                <div class="timeline-item" onclick="changeYear('2015', this)">
+                    <div class="dot"/>
+                    <span class="year-label">2015</span>
+                </div>
+                <div class="timeline-item" onclick="changeYear('2020', this)">
+                    <div class="dot"/>
+                    <span class="year-label">2020</span>
+                </div>
+                <div class="timeline-item" onclick="changeYear('2025', this)">
+                    <div class="dot"/>
+                    <span class="year-label">2025</span>
+                </div>
+            </div>
+        </div>
+
+        <h2 style="color:#ffffff; font-weight:600; margin: 80px 0 50px; text-align: center;">
+            Our brands
+        </h2>
+        
+         <div id="brandCarousel" class="carousel slide" data-bs-ride="carousel">
+                            
+                                        <!-- Indicators -->
+                                        <div class="carousel-indicators" style="bottom:-50px;">
+                                            <button type="button" data-bs-target="#brandCarousel" data-bs-slide-to="0" class="active" style="width:8px;height:8px;border-radius:50%;"/>
+                            
+                                            <button type="button" data-bs-target="#brandCarousel" data-bs-slide-to="1" style="width:8px;height:8px;border-radius:50%;"/>
+                            
+                                            <button type="button" data-bs-target="#brandCarousel" data-bs-slide-to="2" style="width:8px;height:8px;border-radius:50%;"/>
+                                            <button type="button" data-bs-target="#brandCarousel" data-bs-slide-to="3" style="width:8px;height:8px;border-radius:50%;"/>
+                                            
+                                        </div>
+
+            <!-- Slides -->
+                                        <div class="carousel-inner">
+                            
+                                            <!-- Slide 1 -->
+                                            <div class="carousel-item active">
+                                                <div class="row justify-content-center align-items-center">
+                                                    <div class="col-md-3">
+                                                        <img src="https://img.4imz.com/media/6LUM4GKX/upload/yokohama-car-tyres-dealer-in-cg-road-1756302767.png" style="max-width:180px;"/>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <img src="https://images.seeklogo.com/logo-png/30/1/triangle-tyres-logo-png_seeklogo-308126.png" style="max-width:180px;"/>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <img src="https://wheelworldtires.com/wp-content/uploads/laufennwhite.png" style="max-width:180px;"/>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <img src="https://i.pinimg.com/736x/b6/39/d7/b639d7a59035323126d30e8415763b7a.jpg" style="max-width:180px;"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                <!-- Slide 2 -->
+                                            <div class="carousel-item">
+                                                <div class="row justify-content-center align-items-center">
+                                                    <div class="col-md-3">
+                                                        <img src="https://img.4imz.com/media/6LUM4GKX/upload/yokohama-car-tyres-dealer-in-cg-road-1756302767.png" style="max-width:180px;"/>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <img src="https://images.seeklogo.com/logo-png/30/1/triangle-tyres-logo-png_seeklogo-308126.png" style="max-width:180px;"/>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <img src="https://wheelworldtires.com/wp-content/uploads/laufennwhite.png" style="max-width:180px;"/>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <img src="https://i.pinimg.com/736x/b6/39/d7/b639d7a59035323126d30e8415763b7a.jpg" style="max-width:180px;"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                <!-- Slide 3 -->
+                                            <div class="carousel-item">
+                                                <div class="row justify-content-center align-items-center">
+                                                    <div class="col-md-3">
+                                                        <img src="https://img.4imz.com/media/6LUM4GKX/upload/yokohama-car-tyres-dealer-in-cg-road-1756302767.png" style="max-width:180px;"/>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <img src="https://images.seeklogo.com/logo-png/30/1/triangle-tyres-logo-png_seeklogo-308126.png" style="max-width:180px;"/>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <img src="https://wheelworldtires.com/wp-content/uploads/laufennwhite.png" style="max-width:180px;"/>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <img src="https://i.pinimg.com/736x/b6/39/d7/b639d7a59035323126d30e8415763b7a.jpg" style="max-width:180px;"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="carousel-item">
+                                                <div class="row justify-content-center align-items-center">
+                                                    <div class="col-md-3">
+                                                        <img src="https://img.4imz.com/media/6LUM4GKX/upload/yokohama-car-tyres-dealer-in-cg-road-1756302767.png" style="max-width:180px;"/>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <img src="https://images.seeklogo.com/logo-png/30/1/triangle-tyres-logo-png_seeklogo-308126.png" style="max-width:180px;"/>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <img src="https://wheelworldtires.com/wp-content/uploads/laufennwhite.png" style="max-width:180px;"/>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <img src="https://i.pinimg.com/736x/b6/39/d7/b639d7a59035323126d30e8415763b7a.jpg" style="max-width:180px;"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                            
+                                        </div>
+                                    </div>
+                                    
+                                    
+        
+        </div>
+</div>
+
+<!-- OUR CLIENTS SECTION -->
+<div style="background:#ffffff; padding:100px 0; text-align:center;">
+
+    <div class="container">
+
+        <!-- Title -->
+        <h2 style="color:#222; font-weight:600; margin-bottom:70px;">
+            Our clients
+        </h2>
+
+        <div id="brandCarousel" class="carousel slide" data-bs-ride="carousel">
+                            
+                                        <!-- Indicators -->
+                                        <div class="carousel-indicators" style="bottom:-50px;">
+                                            <button type="button" data-bs-target="#brandCarousel" data-bs-slide-to="0" class="active" style="width:8px;height:8px;border-radius:50%;"/>
+                            
+                                            <button type="button" data-bs-target="#brandCarousel" data-bs-slide-to="1" style="width:8px;height:8px;border-radius:50%;"/>
+                            
+                                            <button type="button" data-bs-target="#brandCarousel" data-bs-slide-to="2" style="width:8px;height:8px;border-radius:50%;"/>
+                                            <button type="button" data-bs-target="#brandCarousel" data-bs-slide-to="3" style="width:8px;height:8px;border-radius:50%;"/>
+                                            
+                                        </div>
+
+            <!-- Slides -->
+            <div class="carousel-inner">
+
+                <!-- Slide 1 -->
+                <div class="carousel-item active">
+                    <div class="row justify-content-center align-items-center">
+
+                        <div class="col-6 col-md-3 mb-4 mb-md-0">
+                            <img src="\hmg_website_about\static\src\img\our_clients\coca-cola.png" style="max-width:160px; transition:0.3s;"/>
+                        </div>
+
+                        <div class="col-6 col-md-3 mb-4 mb-md-0">
+                            <img src="\hmg_website_about\static\src\img\our_clients\burger.png" style="max-width:160px;  transition:0.3s;"/>
+                        </div>
+
+                        <div class="col-6 col-md-3">
+                            <img src="\hmg_website_about\static\src\img\our_clients\talaya.png" style="max-width:160px; transition:0.3s;"/>
+                        </div>
+
+                        <div class="col-6 col-md-3">
+                            <img src="\hmg_website_about\static\src\img\our_clients\lg.png" style="max-width:160px;  transition:0.3s;"/>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="carousel-item">
+                    <div class="row justify-content-center align-items-center">
+
+                        <div class="col-6 col-md-3">
+                            <img src="\hmg_website_about\static\src\img\our_clients\coca-cola.png" style="max-width:160px;"/>
+                        </div>
+
+                        <div class="col-6 col-md-3">
+                            <img src="\hmg_website_about\static\src\img\our_clients\burger.png" style="max-width:160px; "/>
+                        </div>
+
+                        <div class="col-6 col-md-3">
+                            <img src="\hmg_website_about\static\src\img\our_clients\talaya.png" style="max-width:160px;"/>
+                        </div>
+
+                        <div class="col-6 col-md-3">
+                            <img src="\hmg_website_about\static\src\img\our_clients\lg.png" style="max-width:160px; "/>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row justify-content-center align-items-center">
+
+                        <div class="col-6 col-md-3">
+                            <img src="\hmg_website_about\static\src\img\our_clients\coca-cola.png" style="max-width:160px; "/>
+                        </div>
+
+                        <div class="col-6 col-md-3">
+                            <img src="\hmg_website_about\static\src\img\our_clients\burger.png" style="max-width:160px;"/>
+                        </div>
+
+                        <div class="col-6 col-md-3">
+                            <img src="\hmg_website_about\static\src\img\our_clients\talaya.png" style="max-width:160px; "/>
+                        </div>
+
+                        <div class="col-6 col-md-3">
+                            <img src="\hmg_website_about\static\src\img\our_clients\lg.png" style="max-width:160px; "/>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row justify-content-center align-items-center">
+
+                        <div class="col-6 col-md-3">
+                            <img src="\hmg_website_about\static\src\img\our_clients\coca-cola.png" style="max-width:160px; "/>
+                        </div>
+
+                        <div class="col-6 col-md-3">
+                            <img src="\hmg_website_about\static\src\img\our_clients\burger.png" style="max-width:160px; "/>
+                        </div>
+
+                        <div class="col-6 col-md-3">
+                            <img src="\hmg_website_about\static\src\img\our_clients\talaya.png" style="max-width:160px; "/>
+                        </div>
+
+                        <div class="col-6 col-md-3">
+                            <img src="\hmg_website_about\static\src\img\our_clients\lg.png" style="max-width:160px; "/>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<!-- OUR WAREHOUSE SECTION -->
+<div style="background:#ffffff; padding:120px 0; position:relative; overflow:hidden;">
+
+    <div class="container-fluid">
+        <ul class="nav nav-tabs justify-content-center mb-5 border-0" role="tablist">
+
+            <!-- Warehouse Tab -->
+            <li class="nav-item" role="presentation">
+                <a class="nav-link text-uppercase fw-bold active" data-bs-toggle="tab" href="#warehouse_tab" role="tab">
+                   Warehouse
+                </a>
+            </li>
+
+            <!-- Fleet Tab -->
+            <li class="nav-item" role="presentation">
+                <a class="nav-link text-uppercase fw-bold" data-bs-toggle="tab" href="#fleet_tab" role="tab">
+                   Fleet
+                </a>
+            </li>
+
+        </ul>
+    </div>
+
+    <!-- TAB CONTENT -->
+    <div class="tab-content">
+
+        <!-- WAREHOUSE CONTENT -->
+        <div class="tab-pane fade show active" id="warehouse_tab" role="tabpanel">
+
+            <h1 style="                 position:absolute;                 top:50%;                 left:50%;                 transform:translate(-50%, -50%);                 font-size:180px;                 font-weight:700;                 color:#000;                 opacity:0.03;                 white-space:nowrap;                 pointer-events:none;">
+                WAREHOUSE
+            </h1>
+
+            <div class="container">
+                <div class="row align-items-center">
+
+                    <div class="col-lg-6 mb-5 mb-lg-0">
+                        <img src="\hmg_website_about\static\src\img\brand_overview\warehouse.png" class="img-fluid" style="border-radius:4px; box-shadow:0 15px 40px rgba(0,0,0,0.08);"/>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <h2 style="font-weight:700; margin-bottom:25px;">
+                            Our Warehouse
+                        </h2>
+
+                        <p style="color:#555; line-height:1.8; font-size:16px;">
+                            Capacity is more than 50,000 tires, covering PCR, LTR, TB.
+                            High standards Safety system is used (VESDA system for smoke detector).
+                            Cleanliness of the product and good storage using racking system.
+                            We use Automatic software system (FIFO system).
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- FLEET CONTENT -->
+        <div class="tab-pane fade" id="fleet_tab" role="tabpanel">
+
+            <h1 style="                 position:absolute;                 top:50%;                 left:50%;                 transform:translate(-50%, -50%);                 font-size:180px;                 font-weight:700;                 color:#000;                 opacity:0.03;                 white-space:nowrap;                 pointer-events:none;">
+                FLEET
+            </h1>
+
+            <div class="container">
+                <div class="row align-items-center">
+
+                    <div class="col-lg-6">
+                        <h2 style="font-weight:700; margin-bottom:25px;">
+                            Our Fleet
+                        </h2>
+
+                        <p style="color:#555; line-height:1.8; font-size:16px;">
+                            Capacity is more than 50,000 tires, covering PCR, LTR, TB.
+                            High standards Safety system is used (VESDA system for smoke detector).
+                            Cleanliness of the product and good storage using racking system.
+                            We use Automatic software system (FIFO system).
+                        </p>
+                    </div>
+
+                    <div class="col-lg-6 mt-5 mt-lg-0 text-end">
+                        <img src="\hmg_website_about\static\src\img\brand_overview\fleet.png" class="img-fluid" style="border-radius:4px; box-shadow:0 15px 40px rgba(0,0,0,0.08);"/>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+                        
+                        </div>
+                    </div>
+                    
+        <!--<div class="tab-content mt-5">-->
+        <div class="tab-pane fade" id="nav_tabs_content_1771391708131_237" role="tabpanel" aria-labelledby="nav_tabs_link_1771391708131_237">
+
+    <!-- INNER TABS -->
+    <div class="container py-5">
+
+        <!-- Inner Nav Tabs -->
+        <ul class="nav nav-tabs justify-content-center mb-5 border-0">
+
+            <!-- Mission Tab -->
+            <li class="nav-item">
+                <a class="nav-link active text-uppercase fw-bold" data-bs-toggle="tab" href="#mission_inner_tab" role="tab">
+                    Our Mission
+                </a>
+            </li>
+
+            <!-- Vision Tab -->
+            <li class="nav-item">
+                <a class="nav-link text-uppercase fw-bold" data-bs-toggle="tab" href="#vision_inner_tab" role="tab">
+                    Our Vision
+                </a>
+            </li>
+
+        </ul>
+
+        <!-- INNER TAB CONTENT -->
+        <div class="tab-content">
+
+            <!-- ================= MISSION CONTENT ================= -->
+            <div class="tab-pane fade show active" id="mission_inner_tab" role="tabpanel">
+                <h1 style="                 position:absolute;                 top:50%;                 left:50%;                 transform:translate(-50%, -50%);                 font-size:180px;                 font-weight:700;                 color:#000;                 opacity:0.03;                 white-space:nowrap;                 pointer-events:none;">
+                 Our Mission
+            </h1>
+
+                <div class="row align-items-center">
+
+                    <!-- Left Image -->
+                    <div class="col-lg-6 mb-5 mb-lg-0">
+                        <img src="\hmg_website_about\static\src\img\mission_vision\mission.png" class="img-fluid" style="border-radius:6px; box-shadow:0 15px 40px rgba(0,0,0,0.1);"/>
+                    </div>
+
+                    <!-- Right Content -->
+                    <div class="col-lg-6">
+
+                        <h2 style="font-weight:700; margin-bottom:25px;">
+                            Our Mission
+                        </h2>
+
+                        <p style="color:#555; line-height:1.8; font-size:16px;">
+                            Our mission is to provide premium tire solutions and
+                            lubrication products with high-quality service standards.
+                            We aim to continuously improve our distribution channels,
+                            strengthen partnerships, and ensure customer satisfaction
+                            across all Lebanese territories.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ================= VISION CONTENT ================= -->
+            <div class="tab-pane fade" id="vision_inner_tab" role="tabpanel">
+                <h1 style="                 position:absolute;                 top:50%;                 left:50%;                 transform:translate(-50%, -50%);                 font-size:180px;                 font-weight:700;                 color:#000;                 opacity:0.03;                 white-space:nowrap;                 pointer-events:none;">
+                 Our Vision
+            </h1>
+
+                <div class="row align-items-center">
+
+                    <!-- Left Content -->
+                    <div class="col-lg-6">
+
+                        <h2 style="font-weight:700; margin-bottom:25px;">
+                            Our Vision
+                        </h2>
+
+                        <p style="color:#555; line-height:1.8; font-size:16px;">
+                            Our vision is to become the leading tire and automotive
+                            solutions provider in the region by maintaining innovation,
+                            operational excellence, and long-term relationships with
+                            dealers, fleet companies, and governmental institutions.
+                        </p>
+
+                    </div>
+
+                    <!-- Right Image -->
+                    <div class="col-lg-6 mt-5 mt-lg-0 text-end">
+                        <img src="\hmg_website_about\static\src\img\mission_vision\vision.png" class="img-fluid" style="border-radius:6px; box-shadow:0 15px 40px rgba(0,0,0,0.1);"/>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<div class="tab-pane fade" id="why-content" role="tabpanel" aria-labelledby="why-tab">
+
+    <div class="container py-5" style="max-width:900px;">
+
+        <h2 class="text-center mb-5" style="font-weight:700;">
+            Why To Choose Us?
+        </h2>
+
+        <!-- ITEM 1 -->
+        <div class="why-item mb-4">
+            <div class="why-header d-flex align-items-center" onclick="toggleWhy(this)">
+                <div class="why-icon">+</div>
+                <h5 class="mb-0 fw-bold">Logistics and Stock Availability</h5>
+            </div>
+            <div class="why-content">
+                <p>
+                    Because we deliver on our word. Our nationwide logistics network and robust stock availability ensure fast, reliable, and precise delivery across Lebanon.
+                </p>
+            </div>
+        </div>
+
+        <!-- ITEM 2 -->
+        <div class="why-item mb-4">
+            <div class="why-header d-flex align-items-center" onclick="toggleWhy(this)">
+                <div class="why-icon">+</div>
+                <h5 class="mb-0 fw-bold">Support to Dealers</h5>
+            </div>
+            <div class="why-content">
+                <p>
+                    Because we value people over transactions. We provide dedicated support to dealers, building relationships rooted in trust, loyalty, and shared growth.
+                </p>
+            </div>
+        </div>
+
+        <!-- ITEM 3 -->
+        <div class="why-item mb-4">
+            <div class="why-header d-flex align-items-center" onclick="toggleWhy(this)">
+                <div class="why-icon">+</div>
+                <h5 class="mb-0 fw-bold">Prior / After Sale Support</h5>
+            </div>
+            <div class="why-content">
+                <p>
+                    Because we never stop evolving. From prior to after-sale support, our team ensures smooth, confident experiences and sets tomorrow’s standards today.
+                </p>
+            </div>
+        </div>
+
+        <!-- ITEM 4 -->
+        <div class="why-item mb-4">
+            <div class="why-header d-flex align-items-center" onclick="toggleWhy(this)">
+                <div class="why-icon">+</div>
+                <h5 class="mb-0 fw-bold">Fleet</h5>
+            </div>
+            <div class="why-content">
+                <p>
+                    Because we are Lebanon’s partner in motion. We serve fleet companies, industries, and businesses, delivering tailored solutions that keep operations safe, efficient, and forward-thinking.
+                </p>
+            </div>
+        </div>
+
+        <!-- ITEM 5 -->
+        <div class="why-item mb-4">
+            <div class="why-header d-flex align-items-center" onclick="toggleWhy(this)">
+                <div class="why-icon">+</div>
+                <h5 class="mb-0 fw-bold">Wholesale and Retail Expertise</h5>
+            </div>
+            <div class="why-content">
+                <p>
+                    Because we represent globally trusted brands. We bring Yokohama, ENI, Delkor, Triangle, Debica, Aminol, and Eurotec to every customer, across wholesale and retail channels, ensuring consistent quality and service.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Distribution Channels Content -->
+ <div class="tab-pane fade" id="channel-content" role="tabpanel" aria-labelledby="channel-tab">
+
+    <!-- Title Section -->
+    <div class="py-5 text-center" style="background:#ffffff;">
+        <h2 style="font-weight:700; color:#e10600;">
+            Distribution Channels
+        </h2>
+    </div>
+
+    <!-- Dark Full Width Section -->
+    <div style="         background:#111111 url('https://www.transparenttextures.com/patterns/tire-tread.png');         background-size:cover;         padding:80px 0;         width:100%;     ">
+
+        <div class="container">
+
+            <div class="row text-center">
+
+                <!-- ITEM 1 -->
+                <div class="col-6 col-md-4 mb-5">
+                    <a href="wholesale-dealer" style="text-decoration:none; color:#ffffff; display:block;">
+                        <i class="fa fa-user" style="font-size:40px;"/>
+                        <div style="width:30px; height:3px; background:#e10600; margin:15px auto;"/>
+                        <p style="font-size:13px; letter-spacing:1px; margin-bottom:0;">
+                            WHOLESALE DEALER
+                        </p>
+                    </a>
+                </div>
+
+                <!-- ITEM 2 -->
+                <div class="col-6 col-md-4 mb-5">
+                    <a href="government-sector" style="text-decoration:none; color:#ffffff; display:block;">
+                        <i class="fa fa-building" style="font-size:40px;"/>
+                        <div style="width:30px; height:3px; background:#e10600; margin:15px auto;"/>
+                        <p style="font-size:13px; letter-spacing:1px; margin-bottom:0;">
+                            GOVERNMENT SECTOR
+                        </p>
+                    </a>
+                </div>
+
+                <!-- ITEM 3 -->
+                <div class="col-6 col-md-4 mb-5">
+                    <a href="car-dealers" style="text-decoration:none; color:#ffffff; display:block;">
+                        <i class="fa fa-car" style="font-size:40px;"/>
+                        <div style="width:30px; height:3px; background:#e10600; margin:15px auto;"/>
+                        <p style="font-size:13px; letter-spacing:1px; margin-bottom:0;">
+                            CAR DEALERS
+                        </p>
+                    </a>
+                </div>
+
+                <!-- ITEM 4 -->
+                <div class="col-6 col-md-4">
+                    <a href="fleet-companies" style="text-decoration:none; color:#ffffff; display:block;">
+                        <i class="fa fa-truck" style="font-size:40px;"/>
+                        <div style="width:30px; height:3px; background:#e10600; margin:15px auto;"/>
+                        <p style="font-size:13px; letter-spacing:1px; margin-bottom:0;">
+                            FLEET COMPANIES
+                        </p>
+                    </a>
+                </div>
+
+                <!-- ITEM 5 -->
+                <div class="col-6 col-md-4">
+                    <a href="retail-own-shops" style="text-decoration:none; color:#ffffff; display:block;">
+                        <i class="fa fa-shopping-cart" style="font-size:40px;"/>
+                        <div style="width:30px; height:3px; background:#e10600; margin:15px auto;"/>
+                        <p style="font-size:13px; letter-spacing:1px; margin-bottom:0;">
+                            RETAIL / OWN SHOPS
+                        </p>
+                    </a>
+                </div>
+
+                <!-- ITEM 6 -->
+                <div class="col-6 col-md-4">
+                    <a href="school-sector" style="text-decoration:none; color:#ffffff; display:block;">
+                        <i class="fa fa-graduation-cap" style="font-size:40px;"/>
+                        <div style="width:30px; height:3px; background:#e10600; margin:15px auto;"/>
+                        <p style="font-size:13px; letter-spacing:1px; margin-bottom:0;">
+                            SCHOOL SECTOR
+                        </p>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+ 
+
+    
+
+
+
+
+
+        <!--</div>-->
+                </div>
+    </div>
+</section>
+            </div>
+        </t>
+    </template>
+</odoo>
+
+

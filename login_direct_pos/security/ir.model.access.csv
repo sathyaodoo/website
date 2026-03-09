@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_product_tab_line,product.tab.line,model_product_tab_line,,1,0,0,0
+access_product_tabs,product.tab.line,model_product_tab_line,base.group_system,1,1,1,1
+access_best_seller,best.seller,model_best_seller,base.group_user,1,1,1,1
+access_featured_products,featured.products,model_featured_products,base.group_user,1,1,1,1
+access_recently_added,recently.added,model_recently_added,base.group_user,1,1,1,1
+access_new_arrival,new.arrival,model_new_arrival,base.group_user,1,1,1,1
+access_testimonial,ecofood.testimonial,model_ecofood_testimonial,base.group_user,1,1,1,1
+access_product_feature,product.feature,model_product_feature,base.group_user,1,1,1,1
+access_faq,faq.model,model_faq_model,base.group_user,1,1,1,1
+access_faqline,faqline.model,model_faqline_model,base.group_user,1,1,1,1

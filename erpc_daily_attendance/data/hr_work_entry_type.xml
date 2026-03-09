@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="erpc_hr_work_entry_type_working_hours" model="hr.work.entry.type">
+        <field name="name">Attendance Day</field>
+        <field name="color">0</field>
+        <field name="code">WORK_HOURS</field>
+    </record>
+
+    <record id="erpc_hr_work_entry_type_overtime" model="hr.work.entry.type">
+        <field name="name">Overtime</field>
+        <field name="color">0</field>
+        <field name="code">OVR_TIME</field>
+    </record>
+
+    <record id="erpc_hr_work_entry_type_undertime" model="hr.work.entry.type">
+        <field name="name">Undertime</field>
+        <field name="color">0</field>
+        <field name="code">UND_TIME</field>
+    </record>
+</odoo>

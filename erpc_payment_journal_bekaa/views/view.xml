@@ -1,0 +1,50 @@
+<odoo>
+    <record id="view_res_config_settings_custom_bekaa_branch" model="ir.ui.view">
+        <field name="name">res.config.settings.custom.bekaa.branch</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@id='account_vendor_bills']" position="inside">
+                <setting string="Is Bekaa Branch" help="Identify login company as Bekaa Branch">
+                    <field name="is_bekaa_branch"/>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_account_journal_custom_bekaa_branch" model="ir.ui.view">
+        <field name="name">account.journal.custom.bekaa.branch</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='currency_id']" position="after">
+                <field name="is_journal_bekaa_in"
+                       invisible="type not in ('cash', 'bank') or not company_id.is_bekaa_branch"/>
+                <field name="is_journal_bekaa_out"
+                       invisible="type not in ('cash', 'bank') or not company_id.is_bekaa_branch"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_account_move_custom_bekaa_restrictions" model="ir.ui.view">
+        <field name="name">account.move.custom.bekaa.branch</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_reverse']" position="attributes">
+                <attribute name="groups">account.group_account_invoice,!erpc_payment_journal_bekaa.group_bekaa_user
+                </attribute>
+            </xpath>
+<!--            <xpath expr="//form[1]/header[1]/button[@name='action_reverse_new']" position="attributes">-->
+<!--                <attribute name="groups">account.group_account_invoice,!erpc_payment_journal_bekaa.group_bekaa_user-->
+<!--                </attribute>-->
+<!--            </xpath>-->
+
+<!--            <xpath expr="//form[1]/header[1]/button[@name='action_reverse_new'][2]" position="attributes">-->
+<!--                <attribute name="groups">account.group_account_invoice,!erpc_payment_journal_bekaa.group_bekaa_user-->
+<!--                </attribute>-->
+<!--            </xpath>-->
+        </field>
+    </record>
+</odoo>

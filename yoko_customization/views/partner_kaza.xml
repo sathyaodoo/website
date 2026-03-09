@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<!--        <record id="res_partner_kaza_view_tree" model="ir.ui.view">-->
+<!--            <field name="name">res.partner.kaza.view.tree</field>-->
+<!--            <field name="model">res.partner.kaza</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree>-->
+<!--                    <field name="name"/>-->
+<!--                    <field name="state_id" string="State"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="res_partner_kaza_view_form" model="ir.ui.view">-->
+<!--            <field name="name">res.partner.kaza.view.form</field>-->
+<!--            <field name="model">res.partner.kaza</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form>-->
+<!--                    <sheet>-->
+<!--                        <group>-->
+<!--                            <group>-->
+<!--                                <field name="name" string="Kazaa Name"/>-->
+<!--                                <field name="state_id" string="State"/>-->
+<!--                            </group>-->
+<!--                        </group>-->
+<!--                    </sheet>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="view_kazaa_search" model="ir.ui.view">-->
+<!--            <field name="name">view.kazaa.search</field>-->
+<!--            <field name="model">res.partner.kaza</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <search>-->
+<!--                    <filter string="Name" name="groupby_name" domain="[]" context="{'group_by':'name'}"/>-->
+<!--                    <filter string="State" name="groupby_state_id" domain="[]" context="{'group_by':'state_id'}"/>-->
+<!--                    <field name="name" string="Name"/>-->
+<!--                    <field name="state_id" string="State"/>-->
+<!--                </search>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="action_partner_kaza" model="ir.actions.act_window">-->
+<!--            <field name="name">Kazaa</field>-->
+<!--            <field name="res_model">res.partner.kaza</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--        </record>-->
+
+<!--        <menuitem id="menu_partner_kaza" name="Kazaa"-->
+<!--                  action="action_partner_kaza"-->
+<!--                  parent="contacts.menu_localisation" active="True"/>-->
+    </data>
+</odoo>

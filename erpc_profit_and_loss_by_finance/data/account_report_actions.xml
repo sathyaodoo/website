@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_account_report_pl_by_finance" model="ir.actions.client">
+            <field name="name">Profit and Loss by Financial Group</field>
+            <field name="tag">account_report</field>
+            <field name="context" eval="{'report_id': ref('erpc_profit_and_loss_by_finance.profit_and_loss_by_finance')}"/>
+        </record>
+    </data>
+</odoo>

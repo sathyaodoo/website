@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="account_report_total_column_inherit_form_view" model="ir.ui.view">
+        <field name="name">account_report_total_column_inherit_form_view</field>
+        <field name="model">account.report</field>
+        <field name="inherit_id" ref="account_reports.account_report_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='page_options']//group/field[@name='filter_analytic_groupby']" position="after">
+                <field name="enable_total_column" />
+            </xpath>
+        </field>
+    </record>
+    </data>
+</odoo>

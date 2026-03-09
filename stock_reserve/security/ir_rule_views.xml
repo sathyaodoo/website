@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="0">
+        <record id="stock_reserve.module_category_stock_reservation" model="ir.module.category">
+            <field name="name">Stock Reservation</field>
+            <field name="description">Helps managing stock reservations.</field>
+            <field name="sequence">10</field>
+        </record>
+        <record id="erpc_stock_reservation_readonly" model="res.groups">
+            <field name="name">Read Only</field>
+<!--            <field name="category_id" ref="stock_reserve.module_category_stock_reservation"/>-->
+            <field name="comment">The user will only be able to read reservation.</field>
+        </record>
+        <record id="erpc_stock_reservation_user" model="res.groups">
+            <field name="name">User</field>
+<!--            <field name="category_id" ref="stock_reserve.module_category_stock_reservation"/>-->
+            <field name="implied_ids" eval="[(4, ref('erpc_stock_reservation_readonly'))]"/>
+            <field name="comment">The user will be able to release reservations of the same stock reservation group.</field>
+        </record>
+        <record id="erpc_stock_reservation_manager" model="res.groups">
+            <field name="name">Manager</field>
+<!--            <field name="category_id" ref="stock_reserve.module_category_stock_reservation"/>-->
+            <field name="implied_ids" eval="[(4, ref('erpc_stock_reservation_user'))]"/>
+            <field name="comment">The user will be able to release reservations of the all stock reservation groups.</field>
+        </record>
+    </data>
+</odoo>

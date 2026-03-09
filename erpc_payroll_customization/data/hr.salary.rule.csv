@@ -1,0 +1,32 @@
+ID,Name,Category/ID,Code,Condition Based on,Sequence,Salary Structure/ID,Amount Type,Python Code
+erpc_salary_rule_01,Basic,erpc_hr_payroll_extension.erpc_basic,MCICBASIC,none,1,erpc_hr_payroll_extension.erpc_structure,Python Code,"if worked_days.WORK100:
+	result = worked_days.WORK100.amount
+else:
+	result = 0"
+erpc_salary_rule_02,Overtime,erpc_hr_payroll_extension.erpc_overtime,MCICOT,none,2,erpc_hr_payroll_extension.erpc_structure,Python Code,"if worked_days.WORK100:
+	result = worked_days.ERPC_Overtime.amount
+else:
+	result = 0"
+erpc_salary_rule_03,Undertime,erpc_hr_payroll_extension.erpc_undertime,MCICUT,none,2,erpc_hr_payroll_extension.erpc_structure,Python Code,"if worked_days.WORK100:
+	result = worked_days.ERPC_Undertime.amount
+else:
+	result = 0"
+erpc_salary_rule_04,Revised Basic,erpc_hr_payroll_extension.erpc_revised_basic,MCICRBASIC,none,3,erpc_hr_payroll_extension.erpc_structure,Python Code,result = categories.MCICBASIC + categories.MCICOT+ categories.MCICUT
+erpc_salary_rule_05,Bonus,erpc_hr_payroll_extension.erpc_allowance,BON,none,3,erpc_hr_payroll_extension.erpc_structure,Python Code,result = inputs.BON and (inputs.BON.amount)
+erpc_salary_rule_06,Revised Basic USD,erpc_hr_payroll_extension.erpc_revised_basic_usd,MCICRBASICUSD,none,3,erpc_hr_payroll_extension.erpc_structure,Python Code,result = MCICRBASIC * contract.usd_rate
+erpc_salary_rule_07,Revised Basic LBP,erpc_hr_payroll_extension.erpc_revised_basic_lbp,MCICRBASICLBP,none,3,erpc_hr_payroll_extension.erpc_structure,Python Code,result = MCICRBASIC * contract.lbp_rate
+erpc_salary_rule_08,IOS Commission,erpc_hr_payroll_extension.erpc_allowance,IOS,none,4,erpc_hr_payroll_extension.erpc_structure,Python Code,result = inputs.IOS and (inputs.IOS.amount)
+erpc_salary_rule_09,Commission,erpc_hr_payroll_extension.erpc_allowance,COM,none,4,erpc_hr_payroll_extension.erpc_structure,Python Code,result = inputs.COM and (inputs.COM.amount)
+erpc_salary_rule_10,Total Allowances,erpc_hr_payroll_extension.erpc_total_allowance,MCICTOTALALLOWANCES,none,5,erpc_hr_payroll_extension.erpc_structure,Python Code,result = categories.MCICALW
+erpc_salary_rule_11,Insurance,erpc_hr_payroll_extension.erpc_deduction,INS,none,10,erpc_hr_payroll_extension.erpc_structure,Python Code,result = inputs.INS and - (inputs.INS.amount)
+erpc_salary_rule_12,Warning,erpc_hr_payroll_extension.erpc_deduction,WARN,none,11,erpc_hr_payroll_extension.erpc_structure,Python Code,result = inputs.WARN and - (inputs.WARN.amount)
+erpc_salary_rule_13,Deduction,erpc_hr_payroll_extension.erpc_deduction,DED,none,12,erpc_hr_payroll_extension.erpc_structure,Python Code,result = inputs.DED and - (inputs.DED.amount)
+erpc_salary_rule_14,Company Loan,erpc_hr_payroll_extension.erpc_deduction,CLO,none,13,erpc_hr_payroll_extension.erpc_structure,Python Code,result = inputs.CLO and - (inputs.CLO.amount)
+erpc_salary_rule_15,Retail Loan,erpc_hr_payroll_extension.erpc_deduction,RLO,none,14,erpc_hr_payroll_extension.erpc_structure,Python Code,result = inputs.RLO and - (inputs.RLO.amount)
+erpc_salary_rule_16,Total Deductions,erpc_hr_payroll_extension.erpc_total_deduction,MCICTOTALDED,none,18,erpc_hr_payroll_extension.erpc_structure,Python Code,result = categories.MCICDED
+erpc_salary_rule_17,Transportation,erpc_hr_payroll_extension.erpc_transport,MCICTRANS,none,20,erpc_hr_payroll_extension.erpc_structure,Python Code,result = ((worked_days.WORK100 and worked_days.WORK100.number_of_days ) *  contract.transport ) / payslip.bmr_currency_rate
+erpc_salary_rule_18,Salary,erpc_hr_payroll_extension.erpc_gross,MCICSALARY,none,199,erpc_hr_payroll_extension.erpc_structure,Python Code,result = categories.MCICBASIC + categories.MCICALW + categories.MCICTRANS
+erpc_salary_rule_19,Net Salary,hr_payroll.NET,MCICNET,none,200,erpc_hr_payroll_extension.erpc_structure,Python Code,result = categories.MCICGROSS+ categories.MCICDED
+erpc_salary_rule_20,Rounded USD ($),erpc_hr_payroll_extension.erpc_rounded_USD,MCICROUNDUSD,none,201,erpc_hr_payroll_extension.erpc_structure,Python Code,result = MCICRBASICUSD  + MCICTOTALALLOWANCES + MCICTOTALDED
+erpc_salary_rule_21,Rounded LBP ($),erpc_hr_payroll_extension.erpc_rounded_LBP,MCICROUNDLBP,none,203,erpc_hr_payroll_extension.erpc_structure,Python Code,result = (( MCICRBASICLBP * payslip.official_currency_rate) + ( MCICTRANS * payslip.bmr_currency_rate) ) /  payslip.bmr_currency_rate
+erpc_salary_rule_22,Rounded Full Salary ($),erpc_hr_payroll_extension.erpc_rounded_full,MCICROUNDFULL,none,204,erpc_hr_payroll_extension.erpc_structure,Python Code,result = MCICROUNDUSD + MCICROUNDLBP

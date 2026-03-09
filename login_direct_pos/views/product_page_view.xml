@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="custom_product_page_full"
+              inherit_id="website_sale.product"
+              priority="20">
+
+        <!-- Replace entire template -->
+       <xpath expr="//t[@t-call='website_sale.product_price']" position="after">
+        <div class="d-flex gap-4 my-4">
+
+                        <t t-foreach="product.feature_ids" t-as="feature">
+                            <div class="text-center">
+                                <i t-att-class="feature.icon_class + ' fa-2x'"/>
+                                <div>
+                                    <span t-esc="feature.name"/>
+                                </div>
+                            </div>
+                        </t>
+
+                    </div>
+    </xpath>
+
+
+    </template>
+</odoo>

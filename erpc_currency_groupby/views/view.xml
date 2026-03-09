@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_account_move_line_group_by_inherit" model="ir.ui.view">
+        <field name="name">account.move.line.group.by.inherit</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_account_move_line_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search/group/filter[@name='group_by_account']" position="after">
+                <filter name="currency_id" string="Currency" context="{'group_by': 'currency_id'}"/>
+                <filter name="full_reconcile_id" string="Matching" context="{'group_by': 'full_reconcile_id'}"/>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="matching_number" string="Matching #"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="erpc_product_pricelist_item_form_view" model="ir.ui.view">
+        <field name="name">erpc.product.pricelist.item.form</field>
+        <field name="model">product.pricelist.item</field>
+        <field name="inherit_id" ref="product.product_pricelist_item_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='pricelist_rule_base']/group/div[3]" position="after">
+                <field name="lot_promotion"/>
+            </xpath>
+        </field>
+    </record>
+
+
+        <record model='res.groups' id='group_allow_pricelist_edit'>
+            <field name='name'>Allow Pricelists Edit</field>
+        </record>
+</odoo>

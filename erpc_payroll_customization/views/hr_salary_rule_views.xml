@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_salary_rule_form_inherit" model="ir.ui.view">
+        <field name="name">hr.salary.rule.form.inherit</field>
+        <field name="model">hr.salary.rule</field>
+        <field name="inherit_id" ref="hr_payroll.hr_salary_rule_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='general']" position="after">
+                <page name="reporting" string="Reporting">
+                    <group>
+                        <group>
+                            <field name="basic"/>
+                            <field name="overtime"/>
+                            <field name="undertime"/>
+                            <field name="bonus"/>
+                            <field name="commision"/>
+                            <field name="ios_comnission"/>
+                        </group>
+                        <group>
+                            <field name="company_loan"/>
+                            <field name="retail_loan"/>
+                            <field name="insurance"/>
+                            <field name="warning"/>
+                            <field name="deduction"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="transport"/>
+                            <field name="salary"/>
+                            <field name="net_salary"/>
+                            <field name="rounded_usd"/>
+                            <field name="rounded_LBP"/>
+                            <field name="rounded_full"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

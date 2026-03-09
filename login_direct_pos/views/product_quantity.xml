@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <template id="custom_product_qty" inherit_id="website_sale.product_quantity" name="Select Quantity inherit">
+        <xpath expr="//div[@id='add_to_cart_wrap']//div[1]" position="replace">
+            <style>
+        /* Container Row */
+.custom-cart-row {
+    height: 60px; /* Fixed height for that solid block look */
+}
+
+/* Quantity Block (Dark Side) */
+.custom-cart-row .css_quantity {
+    background-color: #1a1a1a !important; /* Dark black/gray */
+    border: none !important;
+    padding: 0 15px;
+    min-width: 180px;
+}
+
+.custom-cart-row .qty-label {
+    color: white;
+    text-transform: uppercase;
+    font-size: 14px;
+                <!--margin-right: 15px;-->
+                <!--border-right: 1px solid #444;-->
+                <!--padding-right: 15px;-->
+}
+
+.custom-cart-row .css_quantity input {
+    background: transparent !important;
+    border: none !important;
+    color: white !important;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: none !important;
+}
+
+.custom-cart-row .css_quantity .btn {
+    color: white !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Add to Cart Block (Red Side) */
+.custom-cart-row #add_to_cart {
+    background-color: #cc0000 !important; /* The bright red */
+    border: none !important;
+    border-radius: 0 !important; /* Square corners like image */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: background 0.3s;
+}
+
+.custom-cart-row #add_to_cart:hover {
+    background-color: #a30000 !important;
+}
+
+/* Remove the cart icon as per image */
+.custom-cart-row #add_to_cart i {
+    display: none;
+}
+            </style>
+            <div style="background: black;" t-attf-class="css_quantity input-group {{'d-none' if combination_info['prevent_zero_price_sale'] else 'd-inline-flex order-first'}} align-middle border" contenteditable="false">
+                <div class="input-group-prepend" style="padding-top: 0.3rem;   padding-right: 2rem;   padding-left: 1rem;">
+                    <span class="qty-label" style="color: white;">Qty</span>
+                </div>
+                <a t-attf-href="#" class="css_quantity_minus btn btn-link pe-2 js_add_cart_json border-0" aria-label="Remove one" title="Remove one" name="remove_one">
+                    <i class="oi oi-minus text-600"/>
+                </a>
+                <input type="text" style="color:white;background-color:black;" t-attf-class="form-control quantity text-center border-0" data-min="1" name="add_qty" t-att-value="1"/>
+                <a t-attf-href="#" class="css_quantity_plus btn btn-link ps-2 js_add_cart_json border-0" aria-label="Add one" title="Add one">
+                    <i class="oi oi-plus text-600"/>
+                </a>
+            </div>
+        </xpath>
+    </template>
+</odoo>

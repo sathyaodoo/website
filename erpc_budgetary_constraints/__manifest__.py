@@ -1,0 +1,20 @@
+{
+    'name': 'ERPC Budgetary Constraints',
+    'version': '19.0.1.0.0',
+    'category': 'Accounting',
+    'author': 'ERP Cloud S.A.R.L',
+    'sequence': -100,
+    'summary': 'ERPC Budgetary Constraints',
+    'description': """ERPC Budgetary Constraints,""",
+    'depends': ['base', 'account', 'account_budget', 'erpc_accounting_financial_groups',
+                'erpc_budgetary_position_creation_restrictions'],
+    'data': [
+        'security/security.xml',
+        'views/view.xml',
+    ],
+    'demo': [],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+    'license': 'LGPL-3',
+}

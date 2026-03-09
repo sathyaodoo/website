@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<templates>
+    <t t-name="tm_acc_report_profit_and_loss_total_col_inherit" inherit_id="account_reports.AccountReportHeaderCustomizable">
+        <xpath expr="//thead[id='table_header']/t/tr/t[@t-if='controller.hasGrowthComparisonColumn']" position="after">
+            <th class="o_account_report_column_header number">Total</th>
+            <t t-if="report.get('display_cumulative_total') == True">
+                <t t-if="report.get('name') == 'Profit and Loss'">
+                    <th class="o_account_report_column_header number">Total</th>
+                </t>
+            </t>
+        </xpath>
+        <xpath expr="//thead[id='table_header']/t[@t-if='controller.hasCustomSubheaders']/t[@t-if='controller.hasDebugColumn']" position="before">
+            <th class="o_account_report_column_header number">Total (hasCustomSubheaders)</th>
+        </xpath>
+
+        <xpath expr="//thead[id='table_header']/tr/t[@t-if='controller.hasDebugColumn']" position="before">
+            <th class="o_account_report_column_header number">Total (34)</th>
+        </xpath>
+    </t>
+</templates>

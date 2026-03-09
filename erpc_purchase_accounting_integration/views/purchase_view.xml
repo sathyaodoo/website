@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="purchase_requisition.menu_purchase_requisition_pro_mgt" name="Blanket Order"
+              sequence="1" parent="purchase.menu_procurement_management"/>
+
+    <menuitem id="erpc_purchase_blanket_order.act_purchase_requisition_line_menu_new"
+              name="Blanket Order Line"
+              sequence="2" parent="purchase.menu_procurement_management"/>
+
+    <menuitem id="purchase.menu_purchase_rfq" name="Requests for Quotation"
+              sequence="3" parent="purchase.menu_procurement_management"/>
+
+    <menuitem id="purchase.menu_purchase_form_action" name="Purchase order"
+              sequence="4" parent="purchase.menu_procurement_management"/>
+
+    <menuitem id="purchase.menu_procurement_management_supplier_name" name="Vendor"
+              sequence="6" parent="purchase.menu_procurement_management"/>
+
+</odoo>

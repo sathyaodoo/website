@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- <record id="product_brand_tree_inherit" model="ir.ui.view">
+        <field name="name">product_brand.view.tree.inherit</field>
+        <field name="model">product.brand</field>
+        <field name="inherit_id" ref="yoko_stock.product_brand_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='name']" position="after">
+                <field name="lot_dot_discount"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_brand_view_form_inherit" model="ir.ui.view">
+        <field name="name">product_brand.view.form.inherit</field>
+        <field name="model">product.brand</field>
+        <field name="inherit_id" ref="yoko_stock.product_brand_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form//field[@name='code']" position="after">
+                <field name="lot_dot_discount"/>
+
+            </xpath>
+            <xpath expr="//group/group" position="after">
+
+                    <field name="discount_dot_line">
+                        <tree editable='bottom'>
+                            <field name='lot_id'/>
+                            <field name='discount_dot'/>
+                            <field name='brand_id' invisible='1'/>
+                        </tree>
+                    </field>
+            </xpath>
+
+        </field>
+    </record> -->
+
+</odoo>

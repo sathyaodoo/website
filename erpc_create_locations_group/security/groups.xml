@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="group_create_location" model="res.groups">
+            <field name="name">Create Location</field>
+        </record>
+    </data>
+</odoo>

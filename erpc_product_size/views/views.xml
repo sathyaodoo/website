@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!-- <record id="producttempinherit" model="ir.ui.view">-->
+<!--            <field name="name">product.template</field>-->
+<!--            <field name="model">product.template</field>-->
+<!--            <field name="inherit_id" ref="product.product_template_only_form_view"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//field[@name='company_id']" position="before">-->
+<!--                    <field name='product_size'/>-->
+<!--                </xpath>-->
+<!--            </field>-->
+        <!--</record> -->
+
+        <record id="view_approval_request_form_inherit" model="ir.ui.view">
+            <field name="name">approval.request.view.form.inherit</field>
+            <field name="model">approval.request</field>
+            <field name="inherit_id" ref="approvals.approval_request_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date_confirmed']" position="after">
+                    <field name="productLines" widget="many2many_tags" options="{'no_create': True}" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//field[@name='amount']" position="replace">
+                    <field name="amount_char" invisible="has_amount == 'no'" readonly="request_status != 'new'"/>
+
+                </xpath>
+
+
+                 <xpath expr="//button[@name='action_open_purchase_orders']" position="replace">
+
+            <button name="action_open_purchase_orders" type="object"
+                    class="oe_stat_button" icon="fa-credit-card"
+                    invisible="purchase_order_count == 0" groups="purchase.group_purchase_user">
+                    <field name="purchase_order_count" string="Purchase Orders" widget="statinfo"/>
+                </button>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record model="ir.model.access" id="access_internal_user_purchase_order_line">
+            <field name="name">access_internal_user_purchase_order_line</field>
+            <field name="model_id" ref="purchase.model_purchase_order_line"/>
+            <field name="group_id" ref="base.group_user"/>
+            <field name="perm_read">1</field>
+            <field name="perm_write">0</field>
+            <field name="perm_create">0</field>
+            <field name="perm_unlink">0</field>
+        </record>
+
+
+
+
+        <record id="approval_request_view_tree_inherit" model="ir.ui.view">
+            <field name="name">approval.request.view.tree.inherit</field>
+            <field name="model">approval.request</field>
+            <field name="inherit_id" ref="approvals.approval_request_view_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//list" position="inside">
+                    <field name="productLines" widget="many2many_tags" options="{'no_create': True}"/>
+                    <field name="amount_char"/>
+                </xpath>
+            </field>
+        </record>
+
+
+        <!-- <record id="productprodinherit" model="ir.ui.view">
+            <field name="name">product.product</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='size_name']" position="before">
+                    <field name='product_size'/>
+                </xpath>
+            </field>
+        </record> -->
+
+<!--        <record id="product_sizes_action" model="ir.actions.act_window">-->
+<!--            <field name="name">Product Sizes</field>-->
+<!--            <field name="res_model">product.sizes</field>-->
+<!--            <field name="view_mode">list,form</field>-->
+<!--        </record>-->
+<!--        <menuitem id="menu_prod_size_view" name="Product Sizes" action="product_sizes_action"-->
+<!--                  parent="stock.menu_stock_inventory_control" sequence="2" groups='base.group_user'/>-->
+
+
+    </data>
+</odoo>

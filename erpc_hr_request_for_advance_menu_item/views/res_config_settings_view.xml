@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="hr_payroll.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@id='hr_payroll_settings']" position="inside">
+                <setting id="limit_setting">
+                    <div class="o_group">
+                        <div class="o_row">
+                            <span class="o_form_label" style="padding-right:10px">
+                                Ceiling Limit for Short Advance
+                            </span>
+                            <field name="ceiling_limit_for_short_advance"/>
+                        </div>
+                        <div class="o_row">
+                            <span class="o_form_label" style="padding-right:10px">
+                                Ceiling Limit for Long Advance
+                            </span>
+                            <field name="ceiling_limit_for_long_advance"/>
+                        </div>
+                    </div>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+</odoo>

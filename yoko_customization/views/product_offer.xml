@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<!--        <record id="view_form_product_offer" model="ir.ui.view">-->
+<!--            <field name="name">view.form.product.offer</field>-->
+<!--            <field name="model">product.offer</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form>-->
+<!--                    <sheet>-->
+<!--                        <group>-->
+<!--                            <group>-->
+<!--                                <field name="name" string="Offer Name"/>-->
+<!--                                <field name="active"/>-->
+<!--                            </group>-->
+<!--                            <group>-->
+<!--                                <field name="brand_id"/>-->
+<!--                            </group>-->
+<!--                        </group>-->
+<!--                        <group>-->
+<!--                            <field name="offer_line_ids" >-->
+<!--                                <tree editable="bottom">-->
+<!--                                    <field name="product_id" domain="[('brand_id', '=', parent.brand_id)]"/>-->
+<!--                                     <field name="currency_id" invisible="1"/>-->
+<!--                                    <field name="list_price"  widget="monetary" options="{'currency_field': 'currency_id', 'field_digits': True}"/>-->
+<!--                                    <field name="discount"/>-->
+<!--                                </tree>-->
+<!--                            </field>-->
+<!--                        </group>-->
+<!--                    </sheet>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="action_product_offer" model="ir.actions.act_window">-->
+<!--            <field name="name">Offers</field>-->
+<!--            <field name="res_model">product.offer</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="help" type="html">-->
+<!--                <p class="o_view_nocontent_smiling_face">-->
+<!--                    Create a new offer-->
+<!--                </p>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        &lt;!&ndash;Only accessible for Not price and discount&ndash;&gt;-->
+<!--        <menuitem id="menu_product_offers" name="Offers" action="action_product_offer" parent="sale.product_menu_catalog" sequence="20" active="True"/>-->
+
+
+        <!--        <menuitem id="menu_product_pricelist_main" name="Pricelists" parent="sale.product_menu_catalog"-->
+        <!-- action="product.product_pricelist_action2"-->
+        <!-- groups="product.group_product_pricelist,yoko_security_custom.discount" sequence="3"/>-->
+
+    </data>
+</odoo>

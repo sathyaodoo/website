@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+  <t t-inherit="web.SignatureDialog" t-inherit-mode="extension">
+
+    <xpath expr="//div[contains(@class, 'mt16') and contains(@class, 'small')]" position="after">
+      <div class="mt8 small custom-text">
+        I declare that I have received from Marwan Howayek SARL all amounts and compensation due to me to date, and thus. I have received all my rights in the company of any kind whatsoever, whether in terms of warning, previous salaries, annual leave, overtime or any other rights of any kind or entity prior to its date and related to my work in the said company. I discharge the company and all its directors from liability for a final and complete general discharge, stating that I no longer have any account or demand whatsoever of any kind or entity, and for the validity of my declaration, my termination of my rights and the company's clearance, I sign with my consent and without reservation.
+      </div>
+    </xpath>
+
+  </t>
+</templates>

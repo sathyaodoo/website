@@ -1,0 +1,4 @@
+table th[data-name="invoice_ids"] {
+    width: 200px !important;
+    min-width: 200px !important;
+}

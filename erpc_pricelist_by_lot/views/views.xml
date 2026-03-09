@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="product_pricelist_form_inherit_lot" model="ir.ui.view">
+            <field name="name">product.pricelist.form.inherit.lot</field>
+            <field name="model">product.pricelist</field>
+            <field name="inherit_id" ref="product.product_pricelist_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='pricelist_rules']/field[@name='item_ids']/tree[2]/field[@name='price']"
+                       position="after">
+                    <field name="lot_id" optional="show"/>
+                    <field name="final_price"/>
+                </xpath>
+            </field>
+        </record>
+        
+        <record id="product_pricelist_tree_inherit_lot" model="ir.ui.view">
+            <field name="name">product.pricelist.tree.inherit.lot</field>
+            <field name="model">product.pricelist.item</field>
+            <field name="inherit_id" ref="product.product_pricelist_item_tree_view_from_product"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='fixed_price']" position="attributes">
+                    <attribute name="column_invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='min_quantity']" position="after">
+                    <field name="final_price" optional="show"/>
+                    <field name="lot_id" optional="show"/>
+                </xpath>
+                
+            </field>
+        </record>
+
+        <record id="product_pricelist_item_form_view_inherit_lot" model="ir.ui.view">
+            <field name="name">product.pricelist.item.form.lot</field>
+            <field name="model">product.pricelist.item</field>
+            <field name="inherit_id" ref="product.product_pricelist_item_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='pricelist_rule_limits']" position="inside">
+                    <field name="lot_id" 
+                        domain="[('product_id.product_tmpl_id', '=', product_tmpl_id)]"/>
+                    
+                </xpath>
+            </field>
+        </record>
+        <record id="product_categ_form_view_inherit_lot" model="ir.ui.view">
+            <field name="name">product.categ.item.form.lot</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="product.product_category_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='parent_id']" position="after">
+                    <field name="restrict_lot_in_sale_order"/>
+                  </xpath>
+            </field>
+        </record>
+        <record id="sale_formpricelist_view_inherit_lot" model="ir.ui.view">
+            <field name="name">sale.formpricelist.view.inherit.lot</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form[1]/sheet[1]/group[@name='sale_header']/group[@name='order_details']/div[3]/field[@name='pricelist_id']"
+                       position="attributes">
+                    <attribute name="force_save">1</attribute>
+                    <attribute name="readonly">True</attribute>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

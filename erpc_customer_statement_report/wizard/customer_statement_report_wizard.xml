@@ -1,0 +1,53 @@
+<odoo>
+  <data>
+           <!--Display form view of wizard-->
+        <record id="view_partner_ledger_report" model="ir.ui.view">
+            <field name="name">partner.ledger.report.form</field>
+            <field name="model">partner.ledger.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Partner Ledger Report">
+                    <group>
+
+                       <group>
+                            <field name="date_from"/>
+                             <field name ="customer_ids" widget='many2many_tags'/>
+<!--                           <field name ="customer_ids"/>-->
+                           <field name="account_type"/>
+                           <field name="target_move" widget="radio"/>
+
+                      </group>
+
+                      <group>
+                          <field name="date_to"/>
+                          <field name="currency_id"/>
+                          <field name="with_initial_balance" invisible="0"/>
+                          <field name="with_null_amount_residual"/>
+                      </group>
+                        <group>
+                        </group>
+                    </group>
+
+                    <footer>
+                        <button string='Export Excel' name="check_report" type="object" default_focus="1" class="oe_highlight" invisible="1"/>
+                        <button name="print_report_fc" string="Export PDF" type="object"
+						default_focus="1" class="oe_highlight" />
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+      <record id="open_sale_inventory_action" model="ir.actions.act_window">
+		<field name="name">Customer Statement</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">partner.ledger.wizard</field>
+        <field name="context">{'default_customer_ids': active_ids}</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_partner_ledger_report" />
+		<field name="target">new</field>
+		<field name="binding_model_id" ref="base.model_res_partner" />
+		<field name="binding_type">report</field>
+	</record>
+
+  </data>
+</odoo>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- <record id="erpc_view_order_form_lot_discount" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form//page[@name='order_lines']/field[@name='order_line']//tree//field[@name='discount']" position="before">
+                <field name="offer_id" optional="hide"/>
+                <field name="offer_discount" optional="hide"/>
+                <field name="lot_dot_discount" optional="hide"/>
+            </xpath>
+
+            <xpath expr="//form//page[@name='order_lines']/field[@name='order_line']//tree//field[@name='discount']" position="attributes">
+                <attribute name='force_save'>1</attribute>
+            </xpath>
+        </field>
+    </record> -->
+</odoo>

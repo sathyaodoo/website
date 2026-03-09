@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <record id="profit_and_loss_by_finance" model="account.report">
+        <field name="name">Profit and Loss by Financial Group</field>
+        <field name="filter_analytic_groupby" eval="True"/>
+        <field name="filter_unfold_all" eval="True"/>
+        <field name="filter_journals" eval="True"/>
+        <field name="filter_multi_company">selector</field>
+        <field name="default_opening_date_filter">this_year</field>
+        <field name="column_ids">
+            <record id="profit_and_loss_by_finance_planned_budget" model="account.report.column">
+                <field name="name">Planned Budget</field>
+                <field name="expression_label">planned_budget</field>
+            </record>
+             <record id="profit_and_loss_by_finance_column" model="account.report.column">
+                <field name="name">Balance</field>
+                <field name="expression_label">balance</field>
+            </record>
+        </field>
+        <field name="line_ids">
+            <!-- Net Profit -->
+            <record id="account_financial_report_by_finance_net_profit0" model="account.report.line">
+                <field name="name">Net Profit</field>
+                <field name="hierarchy_level">0</field>
+                <field name="code">NEP</field>
+                <field name="expression_ids">
+                    <!-- <record id="account_financial_report_by_finance_net_profit0_planned_budget"
+                            model="account.report.expression">
+                        <field name="label">planned_budget</field>
+                        <field name="engine">aggregation</field>
+                        <field name="formula">OPINC.planned_budget + OIN.planned_budget - COS.planned_budget - EXP.planned_budget - DEP.planned_budget
+                        </field>
+                        <field name="date_scope">normal</field>
+                    </record> -->
+                    <record id="account_financial_report_by_finance_net_profit0_balance"
+                            model="account.report.expression">
+                        <field name="label">balance</field>
+                        <field name="engine">aggregation</field>
+                        <field name="formula">OPINC.balance + OIN.balance - COS.balance - EXP.balance - DEP.balance
+                        </field>
+                        <field name="date_scope">normal</field>
+                    </record>
+                </field>
+            </record>
+
+            <!-- Net Profit (%) -->
+            <record id="account_financial_report_by_finance_per_net_profit0" model="account.report.line">
+                <field name="name">Net Profit (%)</field>
+                <field name="hierarchy_level">0</field>
+                <field name="code">NPP</field>
+                <field name="expression_ids">
+<!--                    <record id="account_financial_report_by_finance_per_net_profit0_planned_budget"-->
+<!--                            model="account.report.expression">-->
+<!--                        <field name="label">planned_budget</field>-->
+<!--                        <field name="engine">aggregation</field>-->
+<!--                        <field name="formula">(NEP.planned_budget * 100)/INC.planned_budget</field>-->
+<!--                        <field name="date_scope">normal</field>-->
+<!--                    </record>-->
+                    <record id="account_financial_report_by_finance_per_net_profit0_balance"
+                            model="account.report.expression">
+                        <field name="label">balance</field>
+                        <field name="engine">aggregation</field>
+                        <field name="formula">(NEP.balance * 100)/INC.balance</field>
+                        <field name="date_scope">normal</field>
+                        <field name="figure_type">percentage</field>
+                    </record>
+                </field>
+            </record>
+
+
+            <!-- Gross Margin Profit (%) -->
+            <record id="account_financial_report_by_finance_gross_margin_profit0" model="account.report.line">
+                <field name="name">Gross Margin Profit (%)</field>
+                <field name="hierarchy_level">0</field>
+                <field name="code">GMP</field>
+                <field name="expression_ids">
+<!--                    <record id="account_financial_report_by_finance_gross_margin_profit0_planned_budget"-->
+<!--                            model="account.report.expression">-->
+<!--                        <field name="label">planned_budget</field>-->
+<!--                        <field name="engine">aggregation</field>-->
+<!--                        <field name="formula">(GRP.planned_budget * 100)/INC.planned_budget</field>-->
+<!--                        <field name="date_scope">normal</field>-->
+<!--                    </record>-->
+                    <record id="account_financial_report_by_finance_gross_margin_profit0_balance"
+                            model="account.report.expression">
+                        <field name="label">balance</field>
+                        <field name="engine">aggregation</field>
+                        <field name="formula">(GRP.balance * 100)/INC.balance</field>
+                        <field name="date_scope">normal</field>
+                        <field name="figure_type">percentage</field>
+                    </record>
+                </field>
+            </record>
+
+
+
+            <!-- Landed Cost (%)-->
+            <record id="account_financial_report_by_finance_per_landed_cost0" model="account.report.line">
+                <field name="name">Landed Cost (%)</field>
+                <field name="code">LCP</field>
+                <field name="foldable" eval="True"/>
+                <field name="expression_ids">
+<!--                    <record id="account_financial_report_by_finance_per_landed_cost0_planned_budget"-->
+<!--                            model="account.report.expression">-->
+<!--                        <field name="label">planned_budget</field>-->
+<!--                        <field name="engine">aggregation</field>-->
+<!--                        <field name="formula">(LC60.planned_budget * 100)/LCFPU.planned_budget</field>-->
+<!--                        <field name="date_scope">normal</field>-->
+<!--                    </record>-->
+                    <record id="account_financial_report_by_finance_per_landed_cost0_balance"
+                            model="account.report.expression">
+                        <field name="label">balance</field>
+                        <field name="engine">aggregation</field>
+                        <field name="formula">(LC60.balance * 100)/LCFPU.balance</field>
+                        <field name="date_scope">normal</field>
+                        <field name="figure_type">percentage</field>
+                    </record>
+                </field>
+                <field name="children_ids">
+                    <!-- 6018  -->
+                    <record id="account_financial_report_by_finance_lc60_landed_cost0" model="account.report.line">
+                        <field name="name">6018 LC</field>
+                        <field name="code">LC60</field>
+                        <field name="expression_ids">
+<!--                            <record id="account_financial_report_by_finance_lc60_landed_cost0_planned_budget"-->
+<!--                                    model="account.report.expression">-->
+<!--                                <field name="label">planned_budget</field>-->
+<!--                                <field name="engine">account_codes</field>-->
+<!--                                <field name="formula">6018</field>-->
+<!--                            </record>-->
+                            <record id="account_financial_report_by_finance_lc60_landed_cost0_balance"
+                                    model="account.report.expression">
+                                <field name="label">balance</field>
+                                <field name="engine">account_codes</field>
+                                <field name="formula">6018</field>
+                            </record>
+                        </field>
+                    </record>
+
+                    <!-- 601102(Foreign Purchase) -->
+                    <record id="account_financial_report_by_finance_fp_landed_costs0" model="account.report.line">
+                        <field name="name">Foreign Purchase</field>
+                        <field name="code">LCFPU</field>
+                        <field name="expression_ids">
+<!--                            <record id="account_financial_report_by_finance_fp_landed_costs0_planned_budget"-->
+<!--                                    model="account.report.expression">-->
+<!--                                <field name="label">planned_budget</field>-->
+<!--                                <field name="engine">domain</field>-->
+<!--                                <field name="formula"-->
+<!--                                       eval="[('account_id.code', '=', '601102')]"/>-->
+<!--                                <field name="date_scope">normal</field>-->
+<!--                                <field name="subformula">budget_sum</field>-->
+<!--                            </record>-->
+                            <record id="account_financial_report_by_finance_fp_landed_costs0_balance"
+                                    model="account.report.expression">
+                                <field name="label">balance</field>
+                                <field name="engine">domain</field>
+                                <field name="formula"
+                                       eval="[('account_id.code', '=', '601102')]"/>
+                                <field name="date_scope">normal</field>
+                                <field name="subformula">sum</field>
+                            </record>
+                        </field>
+                    </record>
+                </field>
+            </record>
+
+            <!-- Net Landed Cost -->
+            <record id="account_financial_report_by_finance_net_landed_cost0" model="account.report.line">
+                <field name="name">Net Landed Cost</field>
+                <field name="hierarchy_level">0</field>
+                <field name="code">NLC</field>
+                <field name="expression_ids">
+<!--                    <record id="account_financial_report_by_finance_net_landed_cost0_planned_budget"-->
+<!--                            model="account.report.expression">-->
+<!--                        <field name="label">planned_budget</field>-->
+<!--                        <field name="engine">aggregation</field>-->
+<!--                        <field name="formula">NEE.planned_budget/COS.planned_budget</field>-->
+<!--                        <field name="date_scope">normal</field>-->
+<!--                    </record>-->
+                    <record id="account_financial_report_by_finance_net_landed_cost0_balance"
+                            model="account.report.expression">
+                        <field name="label">balance</field>
+                        <field name="engine">aggregation</field>
+                        <field name="formula">(1 + (NEE.balance/COS.balance))</field>
+                        <field name="date_scope">normal</field>
+                        <field name="figure_type">float</field>
+                    </record>
+                </field>
+            </record>
+
+
+            <!-- Income Section -->
+            <record id="account_financial_report_by_finance_totalincome0" model="account.report.line">
+                <field name="name">Income</field>
+                <field name="hierarchy_level">0</field>
+                <field name="code">INC</field>
+                <field name="expression_ids">
+                    <!-- <record id="account_financial_report_by_finance_totalincome0_planned_budget"
+                            model="account.report.expression">
+                        <field name="label">planned_budget</field>
+                        <field name="engine">aggregation</field>
+                        <field name="formula">OPINC.planned_budget + OIN.planned_budget</field>
+                        <field name="date_scope">normal</field>
+                    </record> -->
+                    <record id="account_financial_report_by_finance_totalincome0_balance"
+                            model="account.report.expression">
+                        <field name="label">balance</field>
+                        <field name="engine">aggregation</field>
+                        <field name="formula">OPINC.balance + OIN.balance</field>
+                        <field name="date_scope">normal</field>
+                    </record>
+                </field>
+                <field name="children_ids">
+                    <!-- Gross Profit -->
+                    <record id="account_financial_report_by_finance_gross_profit0" model="account.report.line">
+                        <field name="name">Gross Profit</field>
+                        <field name="code">GRP</field>
+                        <field name="expression_ids">
+                            <record id="account_financial_report_by_finance_gross_profit0_planned_budget"
+                                    model="account.report.expression">
+                                <field name="label">planned_budget</field>
+                                <field name="engine">aggregation</field>
+                                <field name="formula">OPINC.planned_budget - COS.planned_budget</field>
+                                <field name="date_scope">normal</field>
+                            </record>
+                            <record id="account_financial_report_by_finance_gross_profit0_balance"
+                                    model="account.report.expression">
+                                <field name="label">balance</field>
+                                <field name="engine">aggregation</field>
+                                <field name="formula">OPINC.balance - COS.balance</field>
+                                <field name="date_scope">normal</field>
+                            </record>
+                        </field>
+                        <field name="children_ids">
+                            <!-- Operating Income -->
+                            <record id="account_financial_report_by_finance_income0" model="account.report.line">
+                                <field name="name">Operating Income</field>
+                                <field name="code">OPINC</field>
+                                <field name="groupby">financial_group_id, account_id</field> <!-- Add financial_group_id grouping -->
+                                <field name="foldable" eval="True"/>
+                                <field name="expression_ids">
+                                    <record id="account_financial_report_by_finance_income0_planned_budget"
+                                            model="account.report.expression">
+                                        <field name="label">planned_budget</field>
+                                        <field name="engine">domain</field>
+                                        <field name="formula" eval="[('account_id.account_type', '=', 'income')]"/>
+                                        <field name="date_scope">normal</field>
+                                        <field name="subformula">budget_sum</field>
+                                    </record>
+                                    <record id="account_financial_report_by_finance_income0_balance"
+                                            model="account.report.expression">
+                                        <field name="label">balance</field>
+                                        <field name="engine">domain</field>
+                                        <field name="formula" eval="[('account_id.account_type', '=', 'income')]"/>
+                                        <field name="date_scope">normal</field>
+                                        <field name="subformula">-sum</field>
+                                    </record>
+                                </field>
+                            </record>
+
+                            <!-- Cost of Revenue -->
+                            <record id="account_financial_report_by_finance_cost_sales0" model="account.report.line">
+                                <field name="name">Cost of Revenue</field>
+                                <field name="code">COS</field>
+                                <field name="groupby">financial_group_id, account_id</field> <!-- Add financial_group_id grouping -->
+                                <field name="foldable" eval="True"/>
+                                <field name="expression_ids">
+                                    <record id="account_financial_report_by_finance_cost_sales0_planned_budget"
+                                            model="account.report.expression">
+                                        <field name="label">planned_budget</field>
+                                        <field name="engine">domain</field>
+                                        <field name="formula"
+                                               eval="[('account_id.account_type', '=', 'expense_direct_cost')]"/>
+                                        <field name="date_scope">normal</field>
+                                        <field name="subformula">budget_sum</field>
+                                        <field name="green_on_positive" eval="False"/>
+                                    </record>
+                                     <record id="account_financial_report_by_finance_cost_sales0_balance"
+                                            model="account.report.expression">
+                                        <field name="label">balance</field>
+                                        <field name="engine">domain</field>
+                                        <field name="formula"
+                                               eval="[('account_id.account_type', '=', 'expense_direct_cost')]"/>
+                                        <field name="date_scope">normal</field>
+                                        <field name="subformula">sum</field>
+                                        <field name="green_on_positive" eval="False"/>
+                                    </record>
+                                </field>
+                            </record>
+                        </field>
+                    </record>
+
+                    <!-- Other Income -->
+                    <record id="account_financial_report_by_finance_other_income0" model="account.report.line">
+                        <field name="name">Other Income</field>
+                        <field name="code">OIN</field>
+                        <field name="groupby">financial_group_id, account_id</field> <!-- Add financial_group_id grouping -->
+                        <field name="foldable" eval="True"/>
+                        <field name="expression_ids">
+                            <!-- <record id="account_financial_report_by_finance_other_income0_planned_budget"
+                                    model="account.report.expression">
+                                <field name="label">planned_budget</field>
+                                <field name="engine">domain</field>
+                                <field name="formula" eval="[('account_id.account_type', '=', 'income_other')]"/>
+                                <field name="date_scope">normal</field>
+                                <field name="subformula">budget_sum</field>
+                            </record> -->
+                            <record id="account_financial_report_by_finance_other_income0_balance"
+                                    model="account.report.expression">
+                                <field name="label">balance</field>
+                                <field name="engine">domain</field>
+                                <field name="formula" eval="[('account_id.account_type', '=', 'income_other')]"/>
+                                <field name="date_scope">normal</field>
+                                <field name="subformula">-sum</field>
+                            </record>
+                        </field>
+                    </record>
+                </field>
+            </record>
+
+            <!-- Expenses NET -->
+            <record id="account_financial_report_by_finance_net_expenses0" model="account.report.line">
+                <field name="name">Expenses NET</field>
+                <field name="hierarchy_level">0</field>
+                <field name="code">NEE</field>
+                <field name="expression_ids">
+                    <record id="account_financial_report_by_finance_net_expenses0_planned_budget"
+                            model="account.report.expression">
+                        <field name="label">planned_budget</field>
+                        <field name="engine">aggregation</field>
+                        <field name="formula">EXP.planned_budget + DEP.planned_budget</field>
+                        <field name="date_scope">normal</field>
+                        <field name="green_on_positive" eval="False"/>
+                    </record>
+                    <record id="account_financial_report_by_finance_net_expenses0_balance"
+                            model="account.report.expression">
+                        <field name="label">balance</field>
+                        <field name="engine">aggregation</field>
+                        <field name="formula">EXP.balance + DEP.balance - OIN.balance</field>
+                        <field name="date_scope">normal</field>
+                        <field name="green_on_positive" eval="False"/>
+                    </record>
+                </field>
+
+                <field name="children_ids">
+
+                    <record id="account_financial_report_by_finance_less_expenses0" model="account.report.line">
+                        <field name="name">Expenses</field>
+<!--                        <field name="hierarchy_level">0</field>-->
+                        <field name="code">LEX</field>
+                        <field name="expression_ids">
+                            <record id="account_financial_report_by_finance_less_expenses0_planned_budget"
+                                    model="account.report.expression">
+                                <field name="label">planned_budget</field>
+                                <field name="engine">aggregation</field>
+                                <field name="formula">EXP.planned_budget + DEP.planned_budget</field>
+                                <field name="date_scope">normal</field>
+                                <!--                        <field name="green_on_positive" eval="False"/>-->
+                            </record>
+                            <record id="account_financial_report_by_finance_less_expenses0_balance"
+                                    model="account.report.expression">
+                                <field name="label">balance</field>
+                                <field name="engine">aggregation</field>
+                                <field name="formula">EXP.balance + DEP.balance</field>
+                                <field name="date_scope">normal</field>
+                                <!--                        <field name="green_on_positive" eval="False"/>-->
+                            </record>
+                        </field>
+                        <field name="children_ids">
+                            <!-- Expenses -->
+                            <record id="account_financial_report_by_finance_expense0" model="account.report.line">
+                                <field name="name">Expenses</field>
+                                <field name="code">EXP</field>
+                                <field name="groupby">financial_group_id, account_id</field> <!-- Add financial_group_id grouping -->
+                                <field name="foldable" eval="True"/>
+                                <field name="expression_ids">
+                                    <record id="account_financial_report_by_finance_expense0_planned_budget"
+                                            model="account.report.expression">
+                                        <field name="label">planned_budget</field>
+                                        <field name="engine">domain</field>
+                                        <field name="formula" eval="[('account_id.account_type', '=', 'expense')]"/>
+                                        <field name="date_scope">normal</field>
+                                        <field name="subformula">budget_sum</field>
+                                        <field name="green_on_positive" eval="False"/>
+                                    </record>
+                                    <record id="account_financial_report_by_finance_expense0_balance"
+                                            model="account.report.expression">
+                                        <field name="label">balance</field>
+                                        <field name="engine">domain</field>
+                                        <field name="formula" eval="[('account_id.account_type', '=', 'expense')]"/>
+                                        <field name="date_scope">normal</field>
+                                        <field name="subformula">sum</field>
+                                        <field name="green_on_positive" eval="False"/>
+                                    </record>
+                                </field>
+                            </record>
+
+                            <!-- Depreciation -->
+                            <record id="account_financial_report_by_finance_depreciation0" model="account.report.line">
+                                <field name="name">Depreciation</field>
+                                <field name="code">DEP</field>
+                                <field name="groupby">financial_group_id, account_id</field>
+                                <field name="foldable" eval="True"/>
+                                <field name="expression_ids">
+                                    <record id="account_financial_report_by_finance_depreciation0_planned_budget"
+                                            model="account.report.expression">
+                                        <field name="label">planned_budget</field>
+                                        <field name="engine">domain</field>
+                                        <field name="formula"
+                                               eval="[('account_id.account_type', '=', 'expense_depreciation')]"/>
+                                        <field name="date_scope">normal</field>
+                                        <field name="subformula">budget_sum</field>
+                                        <field name="green_on_positive" eval="False"/>
+                                    </record>
+                                    <record id="account_financial_report_by_finance_depreciation0_balance"
+                                            model="account.report.expression">
+                                        <field name="label">balance</field>
+                                        <field name="engine">domain</field>
+                                        <field name="formula"
+                                               eval="[('account_id.account_type', '=', 'expense_depreciation')]"/>
+                                        <field name="date_scope">normal</field>
+                                        <field name="subformula">sum</field>
+                                        <field name="green_on_positive" eval="False"/>
+                                    </record>
+                                </field>
+                            </record>
+                        </field>
+                    </record>
+
+                </field>
+            </record>
+
+            <!-- Expenses Section -->
+<!--            <record id="account_financial_report_by_finance_less_expenses0" model="account.report.line">-->
+<!--                <field name="name">Expenses</field>-->
+<!--                <field name="hierarchy_level">0</field>-->
+<!--                <field name="code">LEX</field>-->
+<!--                <field name="expression_ids">-->
+<!--                    <record id="account_financial_report_by_finance_less_expenses0_balance"-->
+<!--                            model="account.report.expression">-->
+<!--                        <field name="label">balance</field>-->
+<!--                        <field name="engine">aggregation</field>-->
+<!--                        <field name="formula">EXP.balance + DEP.balance</field>-->
+<!--                        <field name="date_scope">normal</field>-->
+<!--                        &lt;!&ndash;                        <field name="green_on_positive" eval="False"/>&ndash;&gt;-->
+<!--                    </record>-->
+<!--                </field>-->
+<!--                <field name="children_ids">-->
+<!--                    &lt;!&ndash; Expenses &ndash;&gt;-->
+<!--                    <record id="account_financial_report_by_finance_expense0" model="account.report.line">-->
+<!--                        <field name="name">Expenses</field>-->
+<!--                        <field name="code">EXP</field>-->
+<!--                        <field name="groupby">financial_group_id, account_id-->
+<!--                        </field> &lt;!&ndash; Add financial_group_id grouping &ndash;&gt;-->
+<!--                        <field name="foldable" eval="True"/>-->
+<!--                        <field name="expression_ids">-->
+<!--                            <record id="account_financial_report_by_finance_expense0_balance"-->
+<!--                                    model="account.report.expression">-->
+<!--                                <field name="label">balance</field>-->
+<!--                                <field name="engine">domain</field>-->
+<!--                                <field name="formula" eval="[('account_id.account_type', '=', 'expense')]"/>-->
+<!--                                <field name="date_scope">normal</field>-->
+<!--                                <field name="subformula">sum</field>-->
+<!--                                <field name="green_on_positive" eval="False"/>-->
+<!--                            </record>-->
+<!--                        </field>-->
+<!--                    </record>-->
+
+<!--                    &lt;!&ndash; Depreciation &ndash;&gt;-->
+<!--                    <record id="account_financial_report_by_finance_depreciation0" model="account.report.line">-->
+<!--                        <field name="name">Depreciation</field>-->
+<!--                        <field name="code">DEP</field>-->
+<!--                        <field name="groupby">financial_group_id, account_id-->
+<!--                        </field> &lt;!&ndash; Add financial_group_id grouping &ndash;&gt;-->
+<!--                        <field name="foldable" eval="True"/>-->
+<!--                        <field name="expression_ids">-->
+<!--                            <record id="account_financial_report_by_finance_depreciation0_balance"-->
+<!--                                    model="account.report.expression">-->
+<!--                                <field name="label">balance</field>-->
+<!--                                <field name="engine">domain</field>-->
+<!--                                <field name="formula"-->
+<!--                                       eval="[('account_id.account_type', '=', 'expense_depreciation')]"/>-->
+<!--                                <field name="date_scope">normal</field>-->
+<!--                                <field name="subformula">sum</field>-->
+<!--                                <field name="green_on_positive" eval="False"/>-->
+<!--                            </record>-->
+<!--                        </field>-->
+<!--                    </record>-->
+<!--                </field>-->
+<!--            </record>-->
+        </field>
+    </record>
+</odoo>
+
+

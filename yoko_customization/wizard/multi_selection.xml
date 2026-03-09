@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+<!--    <record id="multi_selection_view_form" model="ir.ui.view">-->
+<!--        <field name="name">multi.selection.view.form</field>-->
+<!--        <field name="model">multi.selection</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form string="Select Multi Products">-->
+<!--                <sheet>-->
+<!--                    <group>-->
+<!--                        <field name="selection_line_ids" nolabel="1">-->
+<!--                            <tree editable="bottom">-->
+<!--                                <field name="product_id" options="{'no_create': True}" domain="[('advertising', '=', context.get('is_promo', False)), ('sale_ok', '=', True)]"/>-->
+<!--                                <field name="name" invisible="1"/>-->
+<!--                                <field name="product_uom_qty"/>-->
+<!--                                <field name="available_quant" string="Qty. To Sell"/>-->
+<!--                                <field name="product_uom" invisible="1"/>-->
+<!--                                <field name="sales_price"/>-->
+<!--                                <field name="price_unit"/>-->
+<!--                                <field name="tax_id" invisible="1"/>-->
+<!--                                <field name="discount"/>-->
+<!--                                <field name="price_subtotal"/>-->
+<!--                                <field name="company_id" invisible="1"/>-->
+<!--                                <field name="product_uom_category_id" invisible="1"/>-->
+<!--                            </tree>-->
+<!--                        </field>-->
+<!--                    </group>-->
+<!--                    <button string="Add Multiple Products" type="object"-->
+<!--                            class="btn-primary" name="open_product_selection_wizard"/>-->
+<!--                </sheet>-->
+<!--                <footer>-->
+<!--                    <group>-->
+<!--                        <span>-->
+<!--                            <button string="Move To SO" type="object" class="oe_highlight" name="move_to_sale_order" style="margin-left: 15px;"/>-->
+<!--                            <button string="Close" class="oe_link" type="object" name="close_multi_selection"-->
+<!--                                    confirm="Are you sure you want to close?"  style="float:right;margin-left: 280px;"/>-->
+<!--                        </span>-->
+<!--                    </group>-->
+<!--                </footer>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record id="action_multi_product" model="ir.actions.act_window">-->
+<!--        <field name="name">Select multi product</field>-->
+<!--        <field name="res_model">select.multi.product</field>-->
+<!--        <field name="view_mode">form</field>-->
+<!--        <field name="target">new</field>-->
+<!--    </record>-->
+
+</odoo>

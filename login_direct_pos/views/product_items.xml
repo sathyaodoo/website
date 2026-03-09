@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="custom_product_item_layout" inherit_id="website_sale.products_item">
+        <xpath expr="//form[1]" position="attributes">
+            <attribute name="t-attf-class">oe_product_cart h-100 d-flex flex-row-reverse align-items-center custom_tire_card {{ptavs_classes}}
+          </attribute>
+        </xpath>
+        <xpath expr="//div[2]//div[1]" position="attributes">
+            <attribute name="class">o_wsale_product_info_attributes_wrapper mb-2</attribute>
+        </xpath>
+        <xpath expr="//form[1]" position="inside">
+            <style> 
+                /* Container adjustments */ 
+                .custom_tire_card { border: none !important; background: #fff; padding: 10px; } /* Force text to stay on the left and image on the right */ .custom_tire_card .oe_product_image { width: 50%; /* Image takes right half */ overflow: visible !important; /* Allow overlay to be seen */ } .custom_tire_card .o_wsale_product_information { width: 50%; /* Text takes left half */ text-align: left; padding-right: 15px; } /* Hover Overlay Logic */ .oe_product_image { position: relative; } .tire-hover-overlay { position: absolute; bottom: -100%; /* Hidden below */ left: 0; width: 100%; transition: all 0.4s ease; z-index: 10; } .custom_tire_card:hover .tire-hover-overlay { bottom: 0; /* Slide up on hover */ } /* Red Specs Box */ .tire-specs { background: #e11b1b; /* Tire Brand Red */ color: white; font-size: 10px; padding: 5px 0; } .spec-box { flex: 1; text-align: center; border-right: 1px solid rgba(255,255,255,0.2); } /* Shop Now Button */ .btn-shop-now { display: block; background: #1a1a1a; color: white; text-align: center; padding: 8px; font-weight: bold; text-transform: uppercase; text-decoration: none !important; } </style>
+            <div class="tire-hover-overlay">
+                <div class="tire-specs d-flex">
+                    <!-- <div class="spec-box">
+                        <i class="fa fa-tint"/>
+                        <br/>
+                        <span>Wet Grip</span>
+                    </div>
+                    <div class="spec-box">
+                        <i class="fab fa-gas-pump"/>
+                        <br/>
+                        <span>Fuel</span>
+                    </div> -->
+                    <t t-foreach="product.feature_ids" t-as="feature">
+            <div class="spec-box">
+                <i t-att-class="feature.icon_class"/>
+                <br/>
+                <span t-esc="feature.name"/>
+            </div>
+        </t>
+                </div>
+                <a t-att-href="product_href" class="btn-shop-now">SHOP NOW</a>
+            </div>
+        </xpath>
+    </template>
+</odoo>

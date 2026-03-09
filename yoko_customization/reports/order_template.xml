@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="yoko_saleorder_document_tax_totals" inherit_id="account.report_invoice_document">
+        <xpath expr="//div[@id='total']" position="before">
+            <t t-if="not o" t-set="o" t-value="doc"/>
+            <tr class="border-black o_subtotal">
+                <td>
+                    <strong>
+                        Total Quantity
+                    </strong>
+                </td>
+                <td class="text-right">
+                    <span t-att-class="oe_subtotal_footer_separator" t-esc="o.total_qty"/>
+                </td>
+            </tr>
+        </xpath>
+    </template>
+
+<template id="yoko_saleorder_document_inherit_sale_management" inherit_id="sale.report_saleorder_document">
+    <th name="th_description" position="before">
+        <th name="th_product" class="text-left">Product</th>
+        <th name="th_categ" class="text-left">Category</th>
+    </th>
+
+    <xpath expr="//th[@name='th_subtotal']" position="replace">
+        <th name="th_subtotal" class="text-end">
+            <span groups="account.group_show_line_subtotals_tax_excluded">Amount Without Tax</span>
+            <span groups="account.group_show_line_subtotals_tax_included">Total Price</span>
+        </th>
+    </xpath>
+
+    <xpath expr="//th[@name='th_quantity']" position="before">
+        <th name="th_lot" class="text-end">Lot</th>
+    </xpath>
+
+<!--      <xpath expr="//th[@name='th_priceunit']" position="before">-->
+<!--        <th name="th_origin" class="text-end">Origin</th>-->
+<!--    </xpath>-->
+
+    <xpath expr="//th[@name='th_priceunit']" position="after">
+        <th name="th_remark" class="text-end">Remark</th>
+    </xpath>
+
+    <xpath expr="//th[@name='th_description']" position="replace">
+        <th name="th_description" class="text-start" t-if="False">Description</th>
+    </xpath>
+
+<!--    <xpath expr="//td[@name='td_priceunit']" position="before">-->
+<!--        <td name="td_origin" class="text-end">-->
+<!--            <span t-field="line.origin"/>-->
+<!--        </td>-->
+<!--    </xpath>-->
+    <xpath expr="//td[@name='td_name']" position="after">
+        <td name="td_lot" class="text-end">
+            <span t-field="line.lot_id.name"/>
+        </td>
+    </xpath>
+
+    <xpath expr="//td[@name='td_name']" position="after">
+        <td>
+            <span t-field="line.product_id.categ_id.name"/>
+        </td>
+    </xpath>
+
+    <xpath expr="//td[@name='td_priceunit']" position="after">
+        <td name="td_remark" class="text-end">
+            <span t-field="line.aditional_note"/>
+        </td>
+    </xpath>
+
+    <xpath expr="//td[@name='td_name']" position="inside">
+        <span t-field="line.aditional_note"/>
+    </xpath>
+
+    <xpath expr="//th[@name='th_taxes']" position="replace"></xpath>
+    <xpath expr="//td[@name='td_taxes']" position="replace"></xpath>
+    <xpath expr="//th[@name='th_discount']" position="replace"></xpath>
+    <xpath expr="//span[@t-field='line.discount']" position="replace"></xpath>
+</template></odoo>

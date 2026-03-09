@@ -1,0 +1,380 @@
+<odoo>
+    <template id="website_original_equipment" name="Original Equipment">
+    
+
+        <style>
+            .oe-section {
+                background: #111;
+                padding: 100px 0;
+                color: #fff;
+                font-family: Arial, sans-serif;
+                overflow: visible;
+            }
+
+            .oe-title {
+                text-align: center;
+                font-size: 42px;
+                font-weight: 700;
+                margin-bottom: 60px;
+            }
+
+            /* SLIDER */
+            .logo-wrapper {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 70px;
+                position: relative;
+                overflow: visible;
+            }
+            
+
+
+            .logo-container {
+                display: flex;
+                gap: 30px;
+                width: 1050px;
+                scroll-behavior: smooth;
+                overflow-x: auto;
+                overflow-y: visible;   /* important */
+                padding-bottom: 30px;  /* space for triangle */
+            }
+            
+            /* Hide scrollbar cleanly */
+            .logo-container::-webkit-scrollbar {
+                display: none;
+            }
+
+            
+            .logo-item {
+                flex: 0 0 240px;     /* bigger width */
+                height: 180px;       
+                background: #ffffff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: 0.3s ease;
+                position: relative;
+            }
+            
+            .logo-item img {
+                max-width: 160px;
+                max-height: 70px;
+            }
+
+
+            /* ACTIVE STYLE */
+                .logo-item.active {
+                    background: #fff;
+                    border: 3px solid #ff0000;
+                    z-index: 5;
+                }
+                
+                /* RED BORDER TRIANGLE */
+                .logo-item.active::before {
+                    content: "";
+                    position: absolute;
+                    bottom: -26px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    border-left: 22px solid transparent;
+                    border-right: 22px solid transparent;
+                    border-top: 26px solid #ff0000;
+                }
+                
+                .logo-item.active::after {
+                    content: "";
+                    position: absolute;
+                    bottom: -22px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    border-left: 18px solid transparent;
+                    border-right: 18px solid transparent;
+                    border-top: 22px solid #ffffff;
+                }
+
+
+
+
+            /* ARROWS */
+            .arrow {
+                position: absolute;
+                top: 45%;
+                transform: translateY(-50%);
+                font-size: 34px;
+                color: #fff;
+                cursor: pointer;
+                user-select: none;
+                z-index: 10;
+            }
+            .logo-wrapper .arrow:first-child {
+                left: 100px;   /* adjust if needed */
+            }
+            
+            .logo-wrapper .arrow:last-child {
+                right: 100px;  /* adjust if needed */
+            }
+
+
+            /* CONTENT AREA */
+            .brand-content {
+                display: none;
+                width: 85%;
+                margin: auto;
+                margin-top: 40px;
+                padding-bottom: 40px;
+                border-bottom: 2px solid red;
+            }
+
+            .brand-content.active {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex start;
+                gap: 60px;
+            }
+
+            .brand-left {
+                width: 45%;
+                position: relative;
+                padding-top: 40px;   /* space for close button */
+            }
+
+            .brand-left h3 {
+                font-size: 30px;
+                margin-top: 20px;   /* gap under close button */
+                margin-bottom: 20px;
+                color: #ffffff;
+            }
+
+            .brand-left p {
+                color: #ccc;
+                line-height: 1.8;
+                font-size: 15px;
+            }
+
+            .close-btn {
+                position: absolute;
+                top: 0;
+                bottom:2px
+                left: 0;
+                font-size: 22px;
+                cursor: pointer;
+            }
+
+            .brand-right {
+                width: 50%;
+            }
+
+            .brand-right img {
+                width: 100%;
+                height: 420px;
+                object-fit: cover;
+            }
+
+            
+            
+             <!--/* =========================-->
+             <!--  MOBILE SECTION-->
+             <!--  ========================= */-->
+           
+@media (max-width: 768px) {
+
+    .logo-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    /* CENTER ARROWS PERFECTLY */
+    .arrow {
+        position: absolute;
+        top: 35%;
+        transform: translateY(-50%);
+        font-size: 22px;
+        z-index: 20;
+    }
+
+    .logo-wrapper .arrow:first-child {
+        left: 5px;
+    }
+
+    .logo-wrapper .arrow:last-child {
+        right: 5px;
+    }
+
+    /* SHOW ONLY 4 LOGOS */
+    .logo-container {
+        width: 92%;
+        gap: 8px;
+        overflow-x: auto;
+    }
+
+    .logo-item {
+        flex: 0 0 23%;   /* 4 items visible */
+        height: 80px;
+    }
+
+    .logo-item img {
+        max-width: 70%;
+        max-height: 40px;
+    }
+
+    /* MOBILE CONTENT STACK */
+    .brand-content.active {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .brand-left,
+    .brand-right {
+        width: 100%;
+    }
+
+    .brand-right img {
+        height: 250px;
+    }
+}
+
+
+        </style>
+        <script>
+            function scrollLogos(direction) {
+                var container = document.getElementById("logoContainer");
+                container.scrollLeft += direction * 220;
+            }
+
+            function showContent(el) {
+
+                var logos = document.querySelectorAll(".logo-item");
+                logos.forEach(function(l){
+                    l.classList.remove("active");
+                });
+
+                el.classList.add("active");
+
+                var title = el.getAttribute("data-title");
+                var desc = el.getAttribute("data-desc");
+                var img  = el.getAttribute("data-img");
+
+                document.getElementById("brandTitle").innerText = title;
+                document.getElementById("brandDesc").innerText = desc;
+                document.getElementById("brandImage").src = img;
+
+                document.getElementById("brandContent").classList.add("active");
+            }
+
+            function closeContent() {
+                document.getElementById("brandContent").classList.remove("active");
+
+                var logos = document.querySelectorAll(".logo-item");
+                logos.forEach(function(l){
+                    l.classList.remove("active");
+                });
+            }
+        </script>
+        <t t-call="website.layout">
+        <section class="oe-section">
+
+            <div class="oe-title">Original Equipment</div>
+
+            <!-- LOGO SLIDER -->
+            <div class="logo-wrapper">
+
+                <div class="arrow" onclick="scrollLogos(-1)">&lt;</div>
+
+                <div class="logo-container" id="logoContainer">
+
+                    <!-- Yokohama -->
+                    <div class="logo-item"
+                        data-title="Yokohama"
+                        data-desc="Japan | Tires | The symbol of precision, safety, and endurance."
+                        data-img="/hmg_website_about/static/src/img/original-equipment/car1.jpg"
+                        onclick="showContent(this)">
+                        <img src="/hmg_website_about/static/src/img/original-equipment/yakohama.jpg"/>
+                    </div>
+
+                    <!-- ENI -->
+                    <div class="logo-item"
+                        data-title="ENI"
+                        data-desc="Italy | Lubricants | Italian engineering excellence and innovation."
+                        data-img="/hmg_website_about/static/src/img/original-equipment/car2.jpg"
+                        onclick="showContent(this)">
+                        <img src="/hmg_website_about/static/src/img/original-equipment/eni.jpg"/>
+                    </div>
+
+                    <!-- Delkor -->
+                    <div class="logo-item"
+                        data-title="Delkor"
+                        data-desc="Korea (Clarios) | Batteries | Trusted power for every start."
+                        data-img="/hmg_website_about/static/src/img/original-equipment/car3.jpg"
+                        onclick="showContent(this)">
+                        <img src="/hmg_website_about/static/src/img/original-equipment/delkor.png"/>
+                    </div>
+
+                    <!-- Triangle -->
+                    <div class="logo-item"
+                        data-title="Triangle"
+                        data-desc="China | Tires | Advanced technology and modern performance."
+                        data-img="/hmg_website_about/static/src/img/original-equipment/car4.jpg"
+                        onclick="showContent(this)">
+                        <img src="/hmg_website_about/static/src/img/original-equipment/triangle.jpg"/>
+                    </div>
+
+                    <!-- Debica -->
+                    <div class="logo-item"
+                        data-title="Debica"
+                        data-desc="Europe (Goodyear) | Tires | European reliability for everyday use."
+                        data-img="/hmg_website_about/static/src/img/original-equipment/car5.jpg"
+                        onclick="showContent(this)">
+                        <img src="/hmg_website_about/static/src/img/original-equipment/debica.png"/>
+                    </div>
+
+                    <!-- Aminol -->
+                    <div class="logo-item"
+                        data-title="Aminol"
+                        data-desc="UAE | Oils | Innovation and protection for modern engines."
+                        data-img="/hmg_website_about/static/src/img/original-equipment/car6.jpg"
+                        onclick="showContent(this)">
+                        <img src="/hmg_website_about/static/src/img/original-equipment/aminol.png"/>
+                    </div>
+
+                    <!-- Eurotec -->
+                    <div class="logo-item"
+                        data-title="Eurotec"
+                        data-desc="Germany | Oils | German-engineered endurance and efficiency."
+                        data-img="/hmg_website_about/static/src/img/original-equipment/car7.jpeg"
+                        onclick="showContent(this)">
+                        <img src="/hmg_website_about/static/src/img/original-equipment/eurotec.png"/>
+                    </div>
+
+                </div>
+
+                <div class="arrow" onclick="scrollLogos(1)">&gt;</div>
+
+            </div>
+
+            <!-- CONTENT -->
+            <div class="brand-content" id="brandContent">
+
+                <div class="brand-left">
+                    <div class="close-btn" onclick="closeContent()">✕</div>
+                    <h3 id="brandTitle"/>
+                    <p id="brandDesc"/>
+                </div>
+
+                <div class="brand-right">
+                    <img id="brandImage" src=""/>
+                </div>
+
+            </div>
+
+        </section>
+
+        
+
+    </t>
+</template>
+
+</odoo>

@@ -1,0 +1,259 @@
+<odoo>
+ 
+
+    <record id="action_create_rfq" model="ir.actions.server">
+        <field name="name">Create RFQ</field>
+        <field name="model_id" ref="purchase_requisition.model_purchase_requisition_line"/>
+        <field name="binding_model_id" ref="purchase_requisition.model_purchase_requisition_line"/>
+        <field name="binding_view_types">tree</field>
+        <field name="state">code</field>
+        <field name="code">action = records.action_create_rfq()</field>
+    </record>
+
+    <record id="purchase_order_view_tree_inherit_ttl_qty" model="ir.ui.view">
+        <field name="name">purchase.order.view.tree.inherit.ttl.qty</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='amount_total']" position="before">
+                <field name="total_quantity" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="purchase_order_kpis_tree_inherit" model="ir.ui.view">
+        <field name="name">purchase.order.kpis.tree.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_kpis_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='amount_total']" position="before">
+                <field name="total_quantity" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="purchase_requisition_line_view_inherit" model="ir.ui.view">
+        <field name="name">purchase.requisition.line.view.inherit</field>
+        <field name="model">purchase.requisition</field>
+        <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_form"/>
+        <field name="arch" type="xml">
+
+
+            <xpath expr="//field[@name='qty_ordered']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='product_qty']" position="attributes">
+                <attribute name="string">Confirmed QTY</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='extra_ordered_quantity']" position="attributes">
+                <attribute name="string">Shipped QTY</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='remaining_ordered_quantity']" position="attributes">
+                <attribute name="string">Remaining Confirmed QTY</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='price_unit']" position="attributes">
+                <attribute name="string">Confirmed U-Price</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='product_description_variants']" position="after">
+                <field name="original_qty" optional="show"/>
+            </xpath>
+
+            <xpath expr="//field[@name='extra_ordered_quantity']" position="after">
+                <field name="received_qty" optional="show"/>
+            </xpath>
+
+            <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='products']/field[@name='line_ids']/list[1]/field[@name='product_uom_id']"
+                   position="after">
+                <field name="original_u_price" optional="show"/>
+            </xpath>
+
+            <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='products']/field[@name='line_ids']/list[1]/field[@name='price_unit']"
+                   position="after">
+                <field name="remaining_price" optional="show"/>
+            </xpath>
+            <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='products']/field[@name='line_ids']"
+                   position="after">
+                <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_bmr" string="">
+                    <!--                    <field class="oe_inline" name="in_lbp_currency" field_id="remaining_price"/>-->
+                    <!--                    <field name="remaining_price"/>-->
+                    <field name="requested_total" optional="show"/>
+                    <field name="confirmed_total" optional="show"/>
+                    <!--<field name="amount_total" attrs="{'invisible':[('in_lbp_currency','=',True)]}"/>-->
+                </group>
+            </xpath>
+
+
+        </field>
+    </record>
+
+   
+    <record id="purchase_requisition_list_view_inherit" model="ir.ui.view">
+        <field name="name">purchase.requisition.list.view.inherit</field>
+        <field name="model">purchase.requisition</field>
+        <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='reference']" position="after">
+                <field name="currency_id" optional="show"/>
+                <field name="total_original_qty" optional="show"/>
+                <field name="total_confirmed_qty" optional="show"/>
+                <field name="total_shipped_qty" optional="show"/>
+                <field name="received_qty" optional="show"/>
+                <field name="total_remaining_confirmed_qty" optional="show"/>
+                <field name="total_original_u_price" optional="show"/>
+                <field name="total_confirmed_price" optional="show"/>
+                <!-- <field name="total_remaining_price" optional="show"/> -->
+            </xpath>
+            <xpath expr="//field[@name='remaining_ordered_quantity']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+            <xpath expr="//field[@name='total_quantities']" position="attributes">
+                <attribute name="string">QTY</attribute>
+            </xpath>
+             <xpath expr="//field[@name='total_quantities']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+            <xpath expr="//field[@name='total_amount']" position="attributes">
+                <attribute name="string">Amount</attribute>
+            </xpath>
+            <xpath expr="//field[@name='total_amount']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+            <xpath expr="//field[@name='state']" position="attributes">
+                <attribute name="widget">badge</attribute>
+                <attribute name="decoration-success">state == 'done'</attribute>
+                <attribute name="decoration-info">state == 'draft'</attribute>
+                <attribute name="decoration-danger">state == 'cancel'</attribute>
+                <attribute name="decoration-warning">state == 'ongoing'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='total_amount']" position="after">
+                <field name="requested_total" optional="show"/>
+                <field name="confirmed_total" optional="show"/>
+            </xpath>
+            <xpath expr="//field[@name='confirmed_total']" position="after">
+                <field name="total_remaining_price" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_requisition_line_tree_new" model="ir.ui.view">
+        <field name="name">purchase.requisition.line.tree</field>
+        <field name="model">purchase.requisition.line</field>
+        <field eval="10" name="priority"/>
+        <field name="arch" type="xml">
+            <list string="Purchase Requisition Line">
+                <field name="requisition_id" optional="show"/>
+                <field name="name" optional="show"/>
+                <field name="vendor_id" optional="show"/>
+                <field name="user_id" optional="show" widget="many2one_avatar_user"/>
+                <field name="ordering_date" optional="show"/>
+                <field name="date_end" optional="show"/>
+                <field name="origin" optional="show"/>
+                <!-- <field name="product_id" optional="show"/> -->
+                <field name="original_qty" optional="show"/>
+                <field name="product_qty" string="Confirmed QTY" optional="show"/>
+                <field name="extra_ordered_quantity" optional="show" string="Shipped QTY"/>
+                <field name="shipped_value" optional="show"/>
+                <field name="received_qty" optional="show"/>
+                <field name="remaining_ordered_quantity" optional="show" string="Remaining Confirmed QTY"/>
+                <!--                <field name="qty_ordered"/>-->
+
+                <!--                <field name="total_original_qty"/>-->
+
+                <!--                <field name="total_confirmed_qty"/>-->
+
+                <field name="original_u_price" optional="show"/>
+                <field name="price_unit" string="Confirmed U-Price" optional="show"/>
+                <field name="remaining_price" optional="show"/>
+                <field name="status" widget="badge" 
+                   decoration-success="status == 'done'"
+                   decoration-info="status == 'draft'"
+                   decoration-danger="status == 'cancel'"
+                   decoration-warning="status == 'ongoing'"/>
+                <!--                <field name="total_confirmed_price"/>-->
+            </list>
+
+        </field>
+    </record>
+    
+    <record id="view_requisition_line_search_new" model="ir.ui.view">
+            <field name="name">purchase.requisition.line.search</field>
+            <field name="model">purchase.requisition.line</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name" string="Name"/>
+                    <field name="product_id" string="Product"/>
+                    <field name="requisition_id" string="BO"/>
+                    <field name="status" string="Status"/>
+                    <!-- <field name="status" string="Status" filter_domain="['|',('name','ilike', self), ('ref', 'ilike', self)]"/> -->
+                    <filter name="status" string="Ongoing Agreements" 
+                        domain="[('requisition_id.state', '=', 'ongoing')]"/>
+                </search>
+            </field>
+        </record>
+    
+ 
+     <!-- <record id="new_requisition_line_filter_ongoing" model="ir.filters">
+        <field name="name">Ongoing Agreements</field>
+        <field name="model_id">purchase.requisition.line</field>
+        <field name="domain">[("requisition_id.state", "=", "ongoing")]</field>
+        <field name="is_default" eval="False"/>
+        <field name="user_id" eval="False"/>
+        <field name="context">{'group_by': ['product_id']}</field>
+    </record> -->
+
+    <record id="act_purchase_requisition_line_new" model="ir.actions.act_window">
+        <field name="name">Purchase Requisition Line</field>
+        <field name="res_model">purchase.requisition.line</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_requisition_line_tree_new"/>
+    </record>
+
+    <menuitem action="act_purchase_requisition_line_new"
+              id="act_purchase_requisition_line_menu_new"
+              parent="purchase.menu_procurement_management"
+              name="Purchase Requisition Line"
+              sequence="100"/>
+
+     <record id="purchase_order_line_view_inherit" model="ir.ui.view">
+        <field name="name">purchase.order.line.view.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+             <!-- <xpath expr="//tree/field[@name='product_id']" position="before">
+                    <field name='related_requisition_line_id' readonly='0' optional='show'/>
+                    <field name='related_requisition_line_name' readonly='1' optional='show'/>
+                </xpath> -->
+            
+            <xpath expr="//field[@name='requisition_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='total_quantity']" position="after">
+               <field name="amount_total" string="Total Amount"/>
+            </xpath>
+
+            <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='products']/field[@name='order_line']/list[1]/button[@name='action_product_forecast_report']"
+                   position="after">
+                <field name="remaining_ordered_quantity"/>
+            </xpath>
+
+            <xpath expr="//list" position="inside">
+                <field name="product_readonly" invisible='1'/>
+            </xpath>
+
+            <xpath expr="//list/field[@name='product_id']" position="attributes">
+                <attribute name="readonly">product_readonly</attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+
+
+</odoo>

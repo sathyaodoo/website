@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="yoko_invoice_report_inherit" inherit_id="account.report_invoice_document">
+
+        <th name="th_description" position="before">
+            <th name="th_categ" class="text-left">Category</th>
+        </th>
+        <!--        <th name="th_description" position="after">-->
+        <!--            <th name="th_warehouse" class="text-left">Warehouse</th>-->
+        <!--        </th>-->
+
+        <t t-set='forced_vat' position="after">
+            mobile :
+            <span t-field="o.partner_id.mobile"/>
+            <br></br>
+            phone :
+            <span t-field="o.partner_id.phone"/>
+
+        </t>
+
+        <t t-call="account.document_tax_totals" position="replace">
+            <!--            <t t-foreach="tax_totals['subtotals']" t-as="subtotal">-->
+            <!--                <t t-if="o.vat_move_id">-->
+            <tr class="border-black o_subtotal">
+                <td>
+
+                    <strong>Untaxed Amount</strong>
+                </td>
+
+                <td class="text-end">
+                    <span t-att-class="oe_subtotal_footer_separator" t-field="o.amount_untaxed"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="text-nowrap">V.A.T. 11%
+                    </span>
+                </td>
+                <td class="text-end o_price_total">
+                    <span class="text-nowrap" t-field="o.amount_tax"/>
+                </td>
+
+            </tr>
+            <!--                </t>-->
+
+            <!--Total amount with all taxes-->
+            <tr class="border-black o_total">
+                <td>
+                    <strong>Total</strong>
+                </td>
+                <td class="text-end">
+                    <!--                    <span t-esc="tax_totals['formatted_amount_total_rounded']" t-if="'formatted_amount_total_rounded' in tax_totals"/>-->
+                    <!--                    <span t-esc="tax_totals['formatted_amount_total']" t-else=""/>-->
+                    <span t-esc="o.vat_value + o.amount_total" t-if="o.vat_move_id"
+                          t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                    <span t-esc="o.amount_total" t-else=""
+                          t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+
+                </td>
+            </tr>
+            <!--            </t>-->
+            <t t-if="print_with_payments" position="before">
+                <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto">
+
+                    <!--                    <table class="table table-sm">-->
+                    <!--                        <td>-->
+                    <!--                            <tr class="border-black o_subtotal">-->
+                    <!--                                <t t-set="total_quantity" t-value="sum(o.invoice_line_ids.mapped('quantity'))"/>-->
+
+                    <!--                                Total quantity :-->
+                    <!--                                <span t-esc="total_quantity"/>-->
+                    <!--                            </tr>-->
+                    <!--                        </td>-->
+                    <!--                    </table>-->
+                    <table class="table table-sm">
+                        <td>
+                            <tr class="border-black o_subtotal">
+                                <t t-set="total_quantity"
+                                   t-value="sum(o.invoice_line_ids.mapped('quantity'))"/>
+
+                                VAT LBP :
+                                <!--                        <span-->
+                                <!--                                t-att-class="oe_subtotal_footer_separator"-->
+                                <!--                                t-esc="o.taxed_custom_amount"-->
+                                <!--                        />-->
+                                <span
+                                        t-att-class="oe_subtotal_footer_separator"
+                                        t-field="o.vat_move_id.amount_total" t-if="o.vat_move_id"
+                                />
+                                <span
+                                        t-att-class="oe_subtotal_footer_separator"
+                                        t-esc="o.amount_tax * o.invoice_line_ids[0].second_currency_rate" t-else=""
+                                />
+                                <span class="text-left">ل.ل</span>
+
+                                <!--                        <span t-esc="o.second_currency_id.symbol"/>-->
+
+                            </tr>
+                        </td>
+                    </table>
+
+                </div>
+            </t>
+        </t>
+
+        <xpath expr="//tbody[@class='invoice_tbody']//td[@class='text-end o_price_total']" position="before">
+            <td t-if="display_discount"
+                t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                <!-- <span class="text-nowrap" t-field="line.discount"/> -->
+            </td>
+
+        </xpath>
+
+
+        <th name="th_quantity" position="after">
+            <th name="th_price_list">
+                <span>Price List</span>
+            </th>
+
+            <th name="th_client_discount">
+                <span>Client Discount</span>
+            </th>
+        </th>
+
+        <xpath expr="//tbody[@class='invoice_tbody']//td[2]" position="after">
+            <td>
+                <span t-esc="line.price_unit"/>
+            </td>
+
+            <!-- <td>
+                <span t-esc="line.price_list_id.name"/>
+            </td> -->
+            <td class="text-center">
+                <span t-esc="line.disc"/>
+            </td>
+
+        </xpath>
+
+
+        <xpath expr="//td[@name='account_invoice_line_name']" position="before">
+            <td>
+                <span t-field="line.product_id.categ_id.name"/>
+            </td>
+        </xpath>
+
+        <!--        <xpath expr="//td[@name='account_invoice_line_name']" position="after">-->
+        <!--            <td>-->
+        <!--                <span t-field="o.warehouse_id.name"/>-->
+        <!--            </td>-->
+        <!--        </xpath>-->
+        <xpath expr="//td[@name='account_invoice_line_name']" position="replace">
+            <td>
+                <span t-field="line.name" t-options="{'widget': 'text'}"/>
+                <span t-field="line.aditional_note"/>
+            </td>
+        </xpath>
+
+
+        <!-- remove taxes -->
+        <th name="th_taxes" position="replace">
+        </th>
+
+
+        <xpath expr="//tbody[@class='invoice_tbody']//span[@id='line_tax_ids']/.." position="replace">
+        </xpath>
+
+
+        <th name="th_discount" position="replace"></th> <!--replacing discount -->
+        <xpath expr="//tbody[@class='invoice_tbody']//span[@t-field='line.discount']/.." position="replace">
+        </xpath>
+
+        <th name="th_subtotal" position="before">
+            <th name="th_discount" t-if="display_discount"
+                t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                <!-- <span>Disc.%</span> -->
+            </th>
+        </th>
+
+
+        <xpath expr="//table[@class='table table-sm table-borderless avoid-page-break-inside']" position="after">
+            <div t-attf-class="#{'col-5' if report_type != 'html' else 'col-12 col-md-5'} ms-5 d-inline-block float-end">
+                <table class="table table-sm">
+                    <tr class="border-black o_subtotal">
+                        <td>VAT LBP</td>
+                        <td class="text-right">
+                            <span t-att-class="oe_subtotal_footer_separator"
+                                  t-esc="o.amount_tax * o.invoice_line_ids[0].second_currency_rate"/>
+                            <span class="text-left">ل.ل</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </xpath>
+
+
+    </template>
+
+
+    <record id="account.account_invoices" model="ir.actions.report">
+        <field name="name">Invoices A4</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">account.report_invoice_with_payments</field>
+        <field name="report_file">account.report_invoice_with_payments</field>
+        <field name="print_report_name">(object._get_report_base_filename())</field>
+        <field name="attachment">(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')</field>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="binding_type">report</field>
+        <field name="groups_id" eval="[(4, ref('account.group_account_invoice')),
+ (4, ref('account.group_account_readonly'))]"/>
+    </record>
+
+</odoo>

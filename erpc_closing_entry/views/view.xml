@@ -1,0 +1,78 @@
+<odoo>
+
+    <record id="view_account_account_form_inherit" model="ir.ui.view">
+        <field name="name">account.account.form.inherit</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_list"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='reconcile']" position="after">
+                <field name="is_regulatory_account" widget="boolean_toggle"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_closing_entry_wizard_form" model="ir.ui.view">
+        <field name="name">closing.entry.wizard.form</field>
+        <field name="model">closing.entry.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Closing Entry Wizard">
+                <group>
+                    <group>
+                        <field name="journal_date"/>
+                        <field name="currency_id"/>
+                        <field name="journal_id"/>
+                        <field name="regulatory_account_id"/>
+                    </group>
+                    <group>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                        <field name="company_id" readonly="1"/>
+                    </group>
+                </group>
+                <field name="line_ids">
+                    <list editable="bottom">
+                        <field name="group_account"/>
+                        <field name="debit_credit_account"/>
+                        <field name="partner_id"/>
+                    </list>
+                </field>
+                <footer>
+                     <button string="Confirm" type="object" name="action_confirm" class="btn-primary"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_closing_entry_wizard" model="ir.actions.act_window">
+        <field name="name">Closing Entry</field>
+        <field name="res_model">closing.entry.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="access_closing_entry_wizard" model="ir.model.access">
+        <field name="name">access.closing.entry.wizard</field>
+        <field name="model_id" ref="model_closing_entry_wizard"/>
+        <field name="group_id" ref="base.group_user"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="access_closing_entry_line" model="ir.model.access">
+        <field name="name">access.closing.entry.line</field>
+        <field name="model_id" ref="model_closing_entry_line"/>
+        <field name="group_id" ref="base.group_user"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <menuitem id="menu_closing_entry_wizard" name="Closing Entry Wizard"
+              action="action_closing_entry_wizard"
+              parent="account.menu_finance_entries_actions"
+              sequence="58"/>
+</odoo>

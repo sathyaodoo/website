@@ -1,0 +1,9 @@
+<odoo>
+     <report id="partner_ledger_report"
+            model="partner.ledger.wizard"
+            string="Partner Ledger Report"
+            report_type="xlsx"
+            name="erpc_customer_statement_report.partner_ledger_report"
+            file="erpc_customer_statement_report.partner_ledger_report"
+    />
+</odoo>

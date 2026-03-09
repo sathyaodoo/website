@@ -1,0 +1,25 @@
+{
+    'name': 'ERPC Purchase Bill Process',
+    'version': '19.0.1.0.0',
+    'category': 'Accounting',
+    'author': 'ERP Cloud S.A.R.L',
+    'sequence': -100,
+    'summary': 'ERPC Purchase Bill Process',
+    'description': """ERPC Purchase Bill Process,""",
+    'depends': [
+        'base',
+        'account',
+        'purchase',
+        'stock',
+        'erpc_expected_arrival',
+        # 'erpc_account_move_reset_draft_forbid',
+    ],
+    'data': [
+        'views/view.xml',
+    ],
+    'demo': [],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+    'license': 'LGPL-3',
+}

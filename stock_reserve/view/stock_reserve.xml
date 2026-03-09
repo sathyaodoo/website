@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_stock_reservation_form" model="ir.ui.view">
+        <field name="name">stock.reservation.form</field>
+        <field name="model">stock.reservation</field>
+        <field name="arch" type="xml">
+            <form string="Stock Reservations">
+                <header>
+                    <button class="oe_highlight" groups="stock_reserve.erpc_stock_reservation_user" invisible="state not in ['draft']" name="reserve" string="Reserve" type="object"/>
+                    <button class="oe_highlight" groups="stock_reserve.erpc_stock_reservation_manager" invisible="state not in ['assigned','confirmed','partially_available','done']" name="release_reserve" string="Release" type="object"/>
+                    <button name="open_move" string="View Reservation Move" type="object"/>
+                    <field name="state" statusbar_visible="draft,assigned" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <widget bg_color="bg-danger" invisible="state != 'cancel'" name="web_ribbon" text="Released"/>
+                    <group>
+                        <group name="main_grp" string="Details">
+                            <field invisible="1" name="company_id"/>
+                            <field invisible="1" name="categ_id"/>
+                            <field name="location_track_id" invisible="1"/>
+                            <field name="location_dest_track_id" invisible="1"/>
+                            <field name="product_track_id" invisible="1"/>
+                            <field name="product_uom_track_qty" invisible="1"/>
+                            <field name="product_track_uom" invisible="1"/>
+                            <field name="restrict_lot_track_id" invisible="1"/>
+                            <field name="track_name" invisible="1"/>
+                            <field name="company_track_id" invisible="1"/>
+                            <field name="product_id" readonly="state not in 'draft'"/>
+                            <label for="product_uom_qty"/>
+                            <div>
+                                <field class="oe_inline" name="product_uom_qty"/>
+                                <field class="oe_inline" groups="uom.group_uom" name="product_uom"/>
+                            </div>
+                            <field name="restrict_lot_id" options="{'no_open': True, 'no_create': True}" readonly="state not in 'draft'"/>
+                            <field name="available_quant"/>
+                            <field invisible="1" name="product_uom_category_id"/>
+                            <field name="name" readonly="state not in 'draft'"/>
+                            <field groups="!stock_reserve.erpc_stock_reservation_manager" name="date_validity" readonly="1"/>
+                            <field groups="stock_reserve.erpc_stock_reservation_manager" name="date_validity" readonly="state not in 'draft'"/>
+                            <field groups="base.group_no_one" name="create_date"/>
+                            <field groups="base.group_multi_company" name="company_id" readonly="state not in 'draft'" widget="selection"/>
+                            <field groups="stock.group_tracking_owner" name="restrict_partner_id" readonly="state not in 'draft'"/>
+                            <field groups="!stock_reserve.erpc_stock_reservation_manager" name="reservation_group_id" readonly="1" string="Reservation Group"/>
+                            <field groups="stock_reserve.erpc_stock_reservation_manager" name="reservation_group_id" readonly="state not in 'draft'" string="Reservation Group"/>
+                        </group>
+                        <group name="location" string="Locations">
+                            <field name="location_id" readonly="state not in 'draft'"/>
+                            <field name="location_dest_id" readonly="state not in 'draft'"/>
+                        </group>
+                        <group name="note" string="Notes">
+                            <field name="note" nolabel="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form></field>
+    </record>
+    <record id="view_stock_reservation_tree" model="ir.ui.view">
+        <field name="name">stock.reservation.tree</field>
+        <field name="model">stock.reservation</field>
+        <field name="arch" type="xml">
+            <list decoration-muted="state == 'cancel'" decoration-primary="state == 'draft'">
+                <field name="name" readonly="state not in 'draft'"/>
+                <field name="product_id" readonly="state not in 'draft'"/>
+                <field name="move_id" readonly="state not in 'draft'"/>
+                <field name="restrict_lot_id" readonly="state not in 'draft'"/>
+                <field name="product_uom_qty" sum="Total"/>
+                <field name="product_uom"/>
+                <field groups="!stock_reserve.erpc_stock_reservation_manager" name="date_validity" readonly="1"/>
+                <field groups="stock_reserve.erpc_stock_reservation_manager" name="date_validity" readonly="state not in 'draft'"/>
+                <field name="create_date"/>
+                <field groups="stock.group_tracking_owner" name="restrict_partner_id" readonly="state not in 'draft'"/>
+                <field name="location_id" readonly="state not in 'draft'"/>
+                <field name="state" readonly="state not in 'draft'"/>
+                <field name="reservation_group_id" optional="show" readonly="state not in 'draft'" string="Reservation Group"/>
+                <field name="note"/>
+                <button class="oe_highlight" invisible="state not in ['draft']" name="reserve" readonly="state not in 'draft'" string="Reserve" type="object"/>
+                <button class="oe_highlight" groups="stock_reserve.erpc_stock_reservation_manager" invisible="state not in ['assigned','confirmed','partially_available','done']" name="release_reserve" readonly="state not in 'draft'" string="Release" type="object"/>
+            </list></field>
+    </record>
+    <record id="view_stock_reservation_search" model="ir.ui.view">
+        <field name="name">stock.reservation.search</field>
+        <field name="model">stock.reservation</field>
+        <field name="arch" type="xml">
+            <search string="Stock Reservations">
+                <filter domain="[('state', '=', 'draft')]" help="Not already reserved" name="draft" string="Draft"/>
+                <filter domain="[('state', '=', 'assigned')]" help="Moves are reserved." name="reserved" string="Reserved"/>
+                <filter domain="[('state', '=', 'confirmed')]" help="Moves are Confirmed." name="confirmed" string="Confirmed"/>
+                <filter domain="[('state', '=', 'cancel')]" help="Reservations have been released." name="cancel" string="Released"/>
+                <field name="name"/>
+                <field name="product_id"/>
+                <field name="move_id"/>
+                <field groups="stock.group_tracking_owner" name="restrict_partner_id"/>
+                <group expand="0" string="Group By...">
+                    <filter context="{'group_by': 'state'}" domain="[]" name="groupby_state" string="Status"/>
+                    <filter context="{'group_by': 'product_id'}" domain="[]" name="groupby_product" string="Product"/>
+                    <filter context="{'group_by': 'product_uom'}" domain="[]" name="groupby_product_uom" string="Product UoM"/>
+                    <filter context="{'group_by': 'location_id'}" domain="[]" name="groupby_location" string="Source Location"/>
+                </group>
+            </search></field>
+    </record>
+    <record id="action_stock_reservation_tree" model="ir.actions.act_window">
+        <field name="name">Stock Reservations</field>
+        <field name="res_model">stock.reservation</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_id" ref="view_stock_reservation_tree"/>
+        <field name="search_view_id" ref="view_stock_reservation_search"/>
+        <field name="context">{
+            'search_default_draft': 1,
+            'search_default_reserved': 1,
+            'search_default_groupby_product': 1
+            }</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a stock reservation.
+            </p>
+            <p>
+                This menu allow you to prepare and reserve some quantities
+                of products.
+            </p></field>
+    </record>
+    <menuitem action="action_stock_reservation_tree" id="menu_action_stock_reservation" parent="stock.menu_stock_warehouse_mgmt" sequence="110"/>
+    <record id="erpc_view_stock_reservation_group_form" model="ir.ui.view">
+        <field name="name">stock.reservation.group.form</field>
+        <field name="model">stock.reservation.group</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="name"/>
+            </form></field>
+    </record>
+    <record id="erpc_view_stock_reservation_group_tree" model="ir.ui.view">
+        <field name="name">stock.reservation.group.tree</field>
+        <field name="model">stock.reservation.group</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+            </list></field>
+    </record>
+    <record id="erpc_action_stock_reservation_group_form" model="ir.actions.act_window">
+        <field name="name">Stock Reservation Groups</field>
+        <field name="res_model">stock.reservation.group</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_id" ref="erpc_view_stock_reservation_group_tree"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a stock reservation groups.
+            </p></field>
+    </record>
+    <menuitem action="erpc_action_stock_reservation_group_form" id="erpc_menu_action_stock_reservation_group" name="Stock Reservation Groups" parent="stock.menu_warehouse_config" sequence="25"/>
+</odoo>

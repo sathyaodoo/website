@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="product_collection_sequence" model="ir.sequence">
+            <field name="name">Product Collection Sequence</field>
+            <field name="code">product.collection</field>
+            <field name="implementation">standard</field>
+            <field name="number_increment">1</field>
+            <field name="number_next">1</field>
+            <field name="padding">5</field>
+        </record>
+        <!-- Inherit Form View to Modify it -->
+        <record id="erpc_driver_collection" model="ir.ui.view">
+            <field name="name">erpc_driver_collection</field>
+            <field name="model">product.driver</field>
+            <field name="arch" type="xml">
+                <list>
+                    <!-- <header>
+                        <button name='button_draft' string='Set Draft' class='btn-primary' type='object'/>
+                        <button name='button_confirm' string='Confirm' class='btn-primary' type='object'/>
+                        <button name='button_paid' string='Paid' class='btn-primary' type='object'/>
+                        <button name='button_cancel' string='Cancel' class='btn-primary' type='object'/>
+                    </header> -->
+
+                    <field name="name" optional='show'/>
+                    <field name="parent_company_id" optional='show'/>
+                    <field name="partner_id" optional='show'/>
+                    <field name="price_usd" optional='show'/>
+                    <field name="price_lbp" optional='show'/>
+                    <field name="due_date" optional='show'/>
+                    <field name="state" optional='show'/>
+                    <field name="create_uid" optional='show' widget='many2one_avatar_user'/>
+                    <field name="driver_name" optional='show'/>
+                    <field name="invoice_number" optional="show"/>
+
+                </list>
+            </field>
+        </record>
+        <record id="erpc_driver_collection_form" model="ir.ui.view">
+            <field name="name">erpc_driver_collection_form</field>
+            <field name="model">product.driver</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="can_only_see_all_cash" invisible="1"/>
+                        <button name='button_draft' invisible='state != "cancelled" or can_only_see_all_cash' string='Set Draft'
+                                class='btn-primary' type='object' groups='erpc_driver_collection.group_admin_driver'/>
+                        <button name='button_confirm' invisible='state != "draft" or can_only_see_all_cash' string='Confirm' class='btn-primary'
+                                type='object'/>
+                        <button name='button_paid' invisible='state != "confirmed" or can_only_see_all_cash' string='Delivered'
+                                class='btn-primary' type='object' groups='erpc_driver_collection.group_admin_driver'/>
+                        <button name='button_cancel' string='Cancel' invisible='state == "cancelled" or can_only_see_all_cash'
+                                class='btn-primary' type='object' groups='erpc_driver_collection.group_admin_driver'/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,paid,cancelled"/>
+                    </header>
+                    <sheet>
+                        <h1>
+                            <field name='name' readonly='1'/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="parent_before" invisible="1"/>
+                                <field name="parent_company_id" readonly='state != "draft"'/>
+                                <field name="partner_id"
+                                       domain="[('is_driver', '=', False)]"
+                                       invisible="parent_before == True" readonly='state != "draft"'/>
+                                <field name="partner_id" domain="[('parent_id', '=', parent_company_id)]"
+                                       invisible="parent_before == False" readonly='state != "draft"'/>
+                                <field name="receipt_usd" readonly='1'
+                                       groups='erpc_driver_collection.group_admin_driver'/>
+                                <field name="receipt_lbp" readonly='1'
+                                       groups='erpc_driver_collection.group_admin_driver'/>
+                                <field name="usd_currency" invisible='1'/>
+                                <field name="lbp_currency" invisible='1'/>
+                            </group>
+                            <group>
+                                <field name="price_usd" readonly='state != "draft"'/>
+                                <field name="price_lbp" readonly='state != "draft"'/>
+                                <field name="due_date" readonly='1'/>
+                                <field name="create_uid" readonly='1' widget='many2one_avatar_user'/>
+                                <field name="is_creator_driver" invisible="1"/>
+                                <field name="driver_name" readonly='state != "draft"'
+                                       invisible="is_creator_driver == False"/>
+                                <field name="invoice_number" readonly='state != "draft"'/>
+                            </group>
+                        </group>
+                        <!--                        <field name="pdf_file"/>-->
+                    </sheet>
+                    <chatter>
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </chatter>
+                </form>
+            </field>
+        </record>
+        <record id="view_product_driver_report_search" model="ir.ui.view">
+            <field name="name">product.driver.search</field>
+            <field name="model">product.driver</field>
+            <field name="arch" type="xml">
+                <search string="Cash Collection">
+                    <separator/>
+                    <filter domain="[('state', '=', 'draft')]" name="draft" string="Draft"/>
+                    <filter domain="[('state', '=', 'confirmed')]" name="confirmed" string="Confirmed"/>
+                    <filter domain="[('state', '=', 'paid')]" name="paid" string="Delivered"/>
+                    <filter domain="[('state', '=', 'cancelled')]" name="cancelled" string="Cancelled"/>
+                    <separator/>
+                    <filter string="Date" name="date" date="due_date"/>
+                    <separator/>
+                    <field name="partner_id"/>
+                    <field name="parent_company_id"/>
+                    <field name="state"/>
+                    <field name="create_uid"/>
+                    <separator/>
+                    <filter context="{'group_by':'state'}" name="state" string="Status"/>
+                    <filter context="{'group_by':'create_uid'}" name="user" string="User"/>
+                </search>
+            </field>
+        </record>
+        <!-- <record id="action_sales_invoice_action" model="ir.actions.act_window">
+            <field name="name">Product Salemen</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.salesmen</field>
+            <field name="view_mode">pivot</field>
+        </record> -->
+        <record id="product_driver_action" model="ir.actions.act_window">
+            <field name="name">Cash Collection</field>
+            <field name="res_model">product.driver</field>
+            <field name="view_mode">list,form</field>
+        </record>
+        <menuitem id="menu_driver_collection_view" name="Cash Collection" action="product_driver_action" sequence="1"
+                  groups='erpc_driver_collection.group_admin_driver,erpc_driver_collection.group_user_driver,erpc_driver_collection.group_see_only_all_cash'
+                  web_icon="erpc_driver_collection,static/description/yokohamacash.png"/>
+        <record id="inherit_view_account_payment_collection" model="ir.ui.view">
+            <field name="name">inherit.view.account.payment.collection</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='memo']" position="before">
+                    <field name="collection_id" readonly="1"/>
+                    <field name="amount_collected"/>
+                </xpath>
+                <xpath expr="//field[@name='amount']" position="attributes">
+                    <attribute name="readonly">collection_id != False</attribute>
+                    <attribute name="force_save">1</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

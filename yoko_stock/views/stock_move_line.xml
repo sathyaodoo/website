@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_stock_move_line_tree_custom" model="ir.ui.view">
+            <field name="name">stock.move.line.tree.custom</field>
+            <field name="model">stock.move.line</field>
+            <field name="inherit_id" ref="stock.view_move_line_tree"/>
+            <field name="arch" type="xml">
+                <field name="quantity" position="before">
+                    <field name="sale_id"/>
+                    <field name="parent_id"/>
+                    <field name="user_id"/>
+                    <field name="invoice" widget="many2many_tags" optional="show"/>
+                </field>
+            </field>
+        </record>
+
+
+        <record id="view_stock_move_line_tree_add_description_note" model="ir.ui.view">
+            <field name="name">stock.picking.description.note</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_uom_qty']" position="before">
+                    <field name="aditional_note"/>
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

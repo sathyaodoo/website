@@ -1,0 +1,100 @@
+<odoo>
+    <template id="news_page_template" name="News Page">
+        <t t-call="website.layout">
+            <style>
+.news-card {
+    border-radius: 10px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+/* Rectangle like your design */
+.news-img-wrapper {
+    width: 100%;
+    aspect-ratio: 4 / 3;   /* Looks like your XD image */
+    overflow: hidden;
+}
+
+.news-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.news-card:hover .news-img {
+    transform: scale(1.07);
+}
+
+/* Overlay */
+.news-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.85) 20%,
+        rgba(0,0,0,0.4) 50%,
+        transparent 80%
+    );
+}
+
+/* Better spacing between rows */
+.row {
+    row-gap: 40px;
+}
+</style>
+            <div class="container py-5">
+
+                <h2 class="text-center mb-5 fw-bold">News &amp; Events</h2>
+
+                <div class="row">
+                    <t t-foreach="posts" t-as="post">
+                        <div class="col-lg-6 col-md-6 mb-5">
+
+                            <a t-att-href="post.website_url" class="text-decoration-none">
+
+                                <div class="news-card position-relative overflow-hidden">
+
+                                    <!-- Square Image Wrapper -->
+                                    <div class="news-img-wrapper">
+                                        <img t-if="post.news_image"
+                                            t-att-src="'/web/image/blog.post/%s/news_image' % post.id"
+                                            class="news-img"/>
+                                    </div>
+
+                                    <!-- Overlay Content -->
+                                    <div class="news-content d-flex align-items-end">
+                                        <div class="p-3 text-white w-100">
+
+                                            <h5 class="fw-bold mb-1">
+                                                <t t-esc="post.name"/>
+                                            </h5>
+
+                                            <p class="small mb-1">
+                                                <t t-esc="post.subtitle"/>
+                                            </p>
+
+                                            <small>
+                                                <t t-esc="post.post_date.strftime('%d %b %Y') if post.post_date else ''"/>
+                                            </small>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </a>
+
+                        </div>
+                    </t>
+                </div>
+
+            </div>
+        </t>
+    </template>
+    
+</odoo>

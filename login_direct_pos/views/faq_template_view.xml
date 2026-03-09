@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+ 
+    <template id="website_faq" name="FAQ">
+        <style>
+            .faq-title {
+                font-size: 32px;
+            }
+            .accordion-button::after {
+                display: none !important;
+            }
+
+            /* Custom icon circle */
+            .accordion-button::before {
+                content: "+";
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                border: 1px solid #333;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 15px;
+                font-weight: bold;
+                font-size: 18px;
+            }
+
+            /* When opened change to minus */
+            .accordion-button:not(.collapsed)::before {
+                content: "−";
+            }
+
+            /* Remove blue focus border */
+            .accordion-button:focus {
+                box-shadow: none;
+            }
+        </style>
+        <t t-call="website.layout">
+            <div class="container py-5">
+
+                <!-- Small FAQ Badge -->
+                <div class="mb-3">
+                    <span class="badge rounded-pill bg-light text-dark px-3 py-2">
+                        FAQ
+                    </span>
+                </div>
+
+                <!-- Loop Title (Category Name) -->
+                <t t-foreach="faqs" t-as="faq">
+
+                    <!-- Title -->
+                    <h1 class="mb-4 fw-bold">
+                        <t t-esc="faq.name"/>
+                    </h1>
+
+                    <!-- Accordion -->
+                    <div class="accordion mb-5" t-att-id="'accordion' + str(faq.id)">
+
+                        <t t-foreach="faq.faq_line_ids" t-as="line">
+                            <div class="accordion-item border-0 mb-3 shadow-sm rounded">
+
+                                <!-- Question -->
+                                <h2 class="accordion-header">
+
+                                    <button class="accordion-button collapsed bg-light fw-semibold no-arrow"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            t-att-data-bs-target="'#collapse' + str(line.id)"
+                                            aria-expanded="false">
+
+                                        <span t-esc="line.question"/>
+
+                                    </button>
+                                </h2>
+
+                                <!-- Answer -->
+                                <div t-att-id="'collapse' + str(line.id)"
+                                     class="accordion-collapse collapse"
+                                     t-att-data-bs-parent="'#accordion' + str(faq.id)">
+
+                                    <div class="accordion-body bg-light">
+                                        <t t-raw="line.answer"/>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </t>
+
+                    </div>
+
+                </t>
+
+            </div>
+        </t>
+    </template>
+
+            
+
+
+</odoo>

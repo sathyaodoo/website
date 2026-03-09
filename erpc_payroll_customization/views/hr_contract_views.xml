@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hr_contract_form_inherit" model="ir.ui.view">
+        <field name="name">hr.contract.form.inherit</field>
+        <field name="model">hr.version</field>
+        <field name="inherit_id" ref="hr.hr_contract_template_form_view"/>
+        <field name="arch" type="xml">
+            <!--            readonly for structure type-->
+
+            <xpath expr="/form//field[@name='structure_type_id']" position="attributes">
+                <attribute name="force_save">1</attribute>
+                <attribute name="readonly">True</attribute>
+            </xpath>
+
+
+            <xpath expr="/form//field[@name='department_id']" position="after">
+                <field name="transport_type" class="oe_inline" nolabel="0"/>
+                <field name="category"/>
+            </xpath>
+            <xpath expr="//group[@name='contract']" position="after">
+                <group name="Transport">
+                    <label for="bmr_currency"/>
+                    <div class="o_row mw-50" name="bmr_currency">
+                        <field name="bmr_currency" class="oe_inline" nolabel="1"/>
+                    </div>
+                    <label for="transport_bulk" invisible="[('transport_type', '!=', 'bulk')]"/>
+                    <div class="o_row mw-50" name="transport_bulk"
+                         invisible="[('transport_type', '!=', 'bulk')]">
+                        <field name="transport_bulk" options="{'currency_field': 'bmr_currency'}"
+                               required="[('transport_type', '!=', 'bulk')]" widget="monetary"
+                               class="oe_inline" nolabel="1"/>
+                    </div>
+                    <label for="transport" invisible="[('transport_type', '!=', 'based_on_attendance')]"/>
+                    <div class="o_row mw-50" name="transport"
+                         invisible="[('transport_type', '!=', 'based_on_attendance')]">
+                        <field name="transport" options="{'currency_field': 'bmr_currency'}"
+                               required="[('transport_type', '!=', 'based_on_attendance')]" widget="monetary"
+                               class="oe_inline" nolabel="1"/>
+                        <div class="mb-3">/ day</div>
+                    </div>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

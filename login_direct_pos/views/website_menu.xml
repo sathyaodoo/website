@@ -1,0 +1,153 @@
+<odoo>
+    <template id="custom_tires_menu"
+          inherit_id="website.template_header_default"
+          name="Add Tires Mega Menu">
+        <!-- Insert before default dynamic menu loop -->
+        <xpath expr="//t[@t-foreach='website.menu_id.child_id']"
+           position="before">
+            <style>
+            /* Full width mega */
+.nav-item.position-static .dropdown-menu.mega-menu {
+    left: 0;
+    right: 0;
+    border-radius: 0;
+}
+
+/* Image */
+.mega-img-wrapper {
+    height: 100%;
+    min-height: 350px;
+}
+
+.mega-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Right content spacing */
+.mega-content {
+    padding: 60px 80px;
+}
+
+/* Titles */
+.mega-title {
+    color: #d90000;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+}
+
+/* List styling */
+.mega-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mega-list li {
+    margin-bottom: 14px;
+}
+
+.mega-list li a {
+    text-decoration: none;
+    color: #000;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.mega-list li a:hover {
+    color: #d90000;
+    padding-left: 6px;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .mega-content {
+        padding: 40px 30px;
+    }
+}
+
+@media (max-width: 767px) {
+
+    /* Hide image on small screens */
+    .mega-img-wrapper {
+        display: none;
+    }
+
+    .mega-content {
+        padding: 30px 20px;
+    }
+}
+           </style>
+            <li class="nav-item dropdown position-static">
+                <a class="nav-link dropdown-toggle"
+       href="#"
+       data-bs-toggle="dropdown">
+        TIRES
+    </a>
+                <div class="dropdown-menu mega-menu w-100 border-0 shadow p-0">
+                    <div class="row g-0 align-items-stretch">
+                        <!-- LEFT IMAGE -->
+                        <div class="col-lg-4 col-md-5 d-none d-md-block bg-light">
+                            <div class="mega-img-wrapper">
+                                <img src="login_direct_pos/static/src/img/homepage/tire_menu.png"
+                         class="mega-img"/>
+                            </div>
+                        </div>
+                        <!-- RIGHT CONTENT -->
+                        <div class="col-lg-8 col-md-7 bg-light">
+                            <div class="mega-content">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <h6 class="mega-title">TIRES</h6>
+                                        <ul class="mega-list">
+                                            <li>
+                                                <a href="#">Passenger Cars</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Performance Cars</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Crossovers/SUVs</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Trucks</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Minivans</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h6 class="mega-title">BRANDS</h6>
+                                        <ul class="mega-list">
+                                            <li>
+                                                <a href="#">Yokohama</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Hankook</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Triangle</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Laufenn</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Interstate</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Aminol</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </xpath>
+    </template>
+</odoo>

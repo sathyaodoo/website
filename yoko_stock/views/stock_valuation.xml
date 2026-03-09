@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Inherit Form View to Modify it -->
+<!--        <record id="stock_valuation_layer_tree" model="ir.ui.view">-->
+<!--            <field name="name">stock.valuation.layer.tree</field>-->
+<!--            <field name="model">stock.valuation.layer</field>-->
+<!--            <field name="inherit_id" ref="stock_account.stock_valuation_layer_tree"/>-->
+<!--            <field name="arch" type="xml">-->
+
+<!--                <xpath expr="//field[@name='quantity']" position="after">-->
+<!--                    <field name="product_qty_by_liter" optional="hide"/>-->
+<!--                </xpath>-->
+
+<!--                  <xpath expr="//field[@name='product_id']" position="after">-->
+<!--                    <field name="kind_id" optional="hide"/>-->
+<!--                </xpath>-->
+
+<!--            </field>-->
+<!--        </record>-->
+
+    </data>
+</odoo>

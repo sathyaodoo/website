@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_cash_flow_in_out_report_handler,access.account.cash.flow.in.out.report.handler,model_account_cash_flow_in_out_report_handler,account.group_account_readonly,1,1,1,1
+

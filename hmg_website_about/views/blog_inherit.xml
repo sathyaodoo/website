@@ -1,0 +1,21 @@
+<odoo>
+
+    <record id="blog_post_form_inherit_news_image"
+            model="ir.ui.view">
+        <field name="name">blog.post.form.inherit.news.image</field>
+        <field name="model">blog.post</field>
+        <field name="inherit_id" ref="website_blog.view_blog_post_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Add image below title -->
+            <xpath expr="//group[@name='blog_details']" position="after">
+    <group><group>
+                        <field name="news_image" widget="image" class="oe_avatar"/>
+
+    </group></group>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

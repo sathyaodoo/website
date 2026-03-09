@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_reason_of_refusal" model="ir.ui.view">
+        <field name="name">view.reason.of.refusal</field>
+        <field name="model">reason.of.refusal</field>
+        <field name="arch" type="xml">
+            <form string="Reason Of Refusal">
+                <group>
+                    <group>
+                        <field name="reason"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_close_reason" string="Refuse" type="object" class="btn-primary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
+

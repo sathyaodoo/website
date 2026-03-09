@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="erpc_medical_value_allowance_form" model="ir.ui.view">
+        <field name="name">erpc.medical.value.allowance.form</field>
+        <field name="model">medical.value.allowance</field>
+        <field name="arch" type="xml">
+            <form string="Medical Value Allowance">
+                <sheet>
+                    <group>
+                        <field name="employee_id"/>
+                        <field name="date"/>
+                        <field name="department_id"/>
+                        <field name="job_position"/>
+                        <field name="medical_value_allowance"/>
+                        <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+                        <field name="currency_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+                        <field name="paid" invisible="1"/>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="erpc_medical_value_allowance_tree" model="ir.ui.view">
+        <field name="name">erpc.medical.value.allowance.tree</field>
+        <field name="model">medical.value.allowance</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="employee_id"/>
+                <field name="date"/>
+                <field name="department_id"/>
+                <field name="job_position"/>
+                <field name="medical_value_allowance"/>
+                <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+                <field name="currency_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+                <field name="paid"/>
+                <field name="description"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="erpc_medical_value_allowance_action" model="ir.actions.act_window">
+        <field name="name">Medical Value Allowance</field>
+        <field name="res_model">medical.value.allowance</field>
+        <field name="view_mode">list,form</field>
+        <field name="target">current</field>
+    </record>
+
+    <menuitem id="erpc_menu_medical_value_allowance"
+              name="Medical Value Allowance"
+              sequence="30"
+              action="erpc_medical_value_allowance_action"
+              parent="erpc_hr_payroll_extension.menu_hr_allowances"/>
+</odoo>

@@ -1,0 +1,15 @@
+<odoo>
+    <record model="ir.rule" id="record_adv_dep">
+        <field name="name">See advertising department</field>
+        <field name="model_id" ref="product.model_product_template"/>
+        <field name="domain_force">[('categ_id.advertising','=',True)]</field>
+        <field name="groups" eval="[(4, ref('yoko_security_custom.advertising_department'))]"/>
+    </record>
+
+    <record model="ir.rule" id="rule_product_category_advertise_dep">
+        <field name="name">See advertising department</field>
+        <field name="model_id" ref="product.model_product_category"/>
+        <field name="domain_force">[('advertising','=',True)]</field>
+        <field name="groups" eval="[(4, ref('yoko_security_custom.advertising_department'))]"/>
+    </record>
+</odoo>

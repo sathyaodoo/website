@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="erpc_hr_contract_view_form" model="ir.ui.view">
+        <field name="name">erpc_hr_contract_view_form</field>
+        <field name="model">hr.version</field>
+        <field name="inherit_id" ref="hr.hr_contract_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='title']//field[@name='name']" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='information']" position="inside">
+                <group>
+                    <separator string="Accounting Unique Entry"/>
+                    <field name="analytic_account_unique_entry"
+                           domain="['|', ('company_id', '=', company_id), ('company_id', '=', False)]"
+                           groups="analytic.group_analytic_accounting"
+                           required="1"
+                    />
+                    <separator string="Part time"/>
+                    <label for="work_time_rate"/>
+                    <div class="o_row">
+                        <!-- <field name="time_credit" class="oe_inline"/> -->
+                        <field name="work_time_rate" widget="percentage"/>
+                    </div>
+                    <field name="standard_calendar_id" help="The Standard Calendar is the calendar used by the people working at a 100% rate. It's used here to compute your part-time percentage."/>
+                    <!-- <field name="time_credit_type_id"/> -->
+                </group>
+
+
+            </xpath>
+            <!-- <xpath expr="//group[@name='contract_details_2']" position="replace"/> -->
+
+        </field>
+    </record>
+
+</odoo>

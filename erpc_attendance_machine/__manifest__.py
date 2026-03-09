@@ -1,0 +1,22 @@
+{
+    'name': 'ERP Cloud | Attendance Machine',
+    'summary': 'ERP Cloud | Attendance Machine',
+    'description': """ERP Cloud | Attendance Machine""",
+    'category': 'Human Resources/Time Off',
+    'author': 'ERP Cloud SARL',
+    'website': 'https://www.erpcloudllc.com/',
+    'license': 'LGPL-3',
+    'sequence': '-150',
+    'version': '19.0.0.0',
+    'depends': ['base', 'hr', 'hr_attendance'],
+    'data': [
+        # 'security/ir.model.access.csv',
+        # 'data/ir_cron_data.xml',
+        # 'views/attendance_biotime.xml',
+        # 'views/attendance_offline.xml',
+        # 'views/hr_attendance_view.xml',
+        # 'views/zk_machine.xml',
+        # 'views/zk_attendance_online.xml',
+        # 'views/hr_employee.xml',
+    ],
+}

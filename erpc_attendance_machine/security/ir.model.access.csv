@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_attendance_biotime,attendance.biotime,model_attendance_biotime,hr_attendance.group_hr_attendance_manager,1,1,1,1
+access_attendance_offline,attendance.offline,model_attendance_offline,hr_attendance.group_hr_attendance_manager,1,1,1,1
+access_zk_attendance_online,zk.attendance.online,model_zk_attendance_online,hr_attendance.group_hr_attendance_manager,1,1,1,1
+access_zk_machine,zk.machine,model_zk_machine,hr_attendance.group_hr_attendance_manager,1,1,1,1

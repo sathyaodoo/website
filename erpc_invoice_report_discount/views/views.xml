@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <record id="erpc_account_move_line_form_inherit" model="ir.ui.view">
+       <field name="name">erpc.account.move.line.inherit</field>
+       <field name="model">account.move</field>
+       <field name="inherit_id" ref="account.view_move_form"/>
+       <field name="arch" type="xml">
+             <xpath expr="//form[1]/sheet[1]/notebook[1]/page[1]/field[@name='invoice_line_ids']/tree[1]/field[@name='discount']" position="after">
+               <field name="disc" column_invisible="False" optional="hide"/>
+           </xpath>
+       </field>
+   </record>
+
+    <record model="ir.ui.view" id="discount_form_Form_view">
+        <field name="name">discount.form.Form</field>
+        <field name="model">discount.form</field>
+        <field name="arch" type="xml">
+            <form string='Discount Forms'>
+                <sheet>
+                    <group>
+                        <label for="disc" string="Discount"/>
+                        <div>
+                            <field name="disc" class="oe_inline"/>
+                            -
+                            <field name="disc_form" class="oe_inline"/>
+                        </div>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="discount_form_Tree_view" model="ir.ui.view">
+        <field name="name">discount.form.List</field>
+        <field name="model">discount.form</field>
+        <field name="arch" type="xml">
+            <tree string="Discount Forms" editable="bottom">
+                <field name="disc"/>
+                <field name="disc_form"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_discount_forms">
+        <field name="name">Discount Forms</field>
+        <field name="res_model">discount.form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <menuitem id="menu_discount_forms" parent="account.account_account_menu" name="Discount Forms" action="action_discount_forms" sequence="4"/>
+</odoo>

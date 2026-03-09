@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="erpc_payroll_res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">erpc.payroll.res.config.settings.view.form.inherit.hr.attendance</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="80"/>
+        <field name="inherit_id" ref="hr_payroll.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//app[@name='hr_payroll']" position="inside">
+                <h2>Working Hours</h2>
+                <div class="row mt16 o_settings_container">
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_right_pane">
+                            <label for="average_working_hours" class="o_form_label"/>
+                            <div class="text-muted">
+                                The average working hours per month used to calculate the hourly rate.
+                            </div>
+                            <field name="average_working_hours"/>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Basic Rates For Contracts With Commission</h2>
+                <div class="row mt16 o_settings_container">
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_right_pane">
+                            <label for="usd_rate_w_com" class="o_form_label"/>
+                            <div class="text-muted">
+                                The USD rate for contract with commission.
+                            </div>
+                            <field name="usd_rate_w_com"/>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_right_pane">
+                            <label for="lbp_rate_w_com" class="o_form_label"/>
+                            <div class="text-muted">
+                                The LBP rate for contract with commission.
+                            </div>
+                            <field name="lbp_rate_w_com"/>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Basic Rates For Contracts Without Commission</h2>
+                <div class="row mt16 o_settings_container">
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_right_pane">
+                            <label for="usd_rate_wot_com" class="o_form_label"/>
+                            <div class="text-muted">
+                                The USD rate for contract without commission.
+                            </div>
+                            <field name="usd_rate_wot_com"/>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_right_pane">
+                            <label for="lbp_rate_wot_com" class="o_form_label"/>
+                            <div class="text-muted">
+                                The LBP rate for contract without commission.
+                            </div>
+                            <field name="lbp_rate_wot_com"/>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

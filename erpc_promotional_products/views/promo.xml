@@ -1,0 +1,320 @@
+<odoo>
+
+    <!-- Inherit Form View to Modify it -->
+    <record id="product_category_form" model="ir.ui.view">
+        <field name="name">product.category.form</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_form_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='parent_id']" position="after">
+                <field name="is_promotional_categ"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="view_promotional_quotation_tree" model="ir.ui.view">
+        <field name="name">Promotional Quotation Tree</field>
+        <field name="model">sale.order</field>
+        <field name="arch" type="xml">
+            <list string="Promotional Quotations">
+                <field name="name"/>
+                <field name="partner_id" options="{'no_create': True}"/>
+                <field name="company_id"/>
+                <field name="state" column_invisible="1"/>
+                <field name="delivery_state"/>
+                <field name="date_order"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_promotional_quotation_form" model="ir.ui.view">
+        <field name="name">Promotional Quotation Form</field>
+        <field name="model">sale.order</field>
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <form string="Promotional Quotation">
+                <header>
+                    <field name="locked" invisible="1"/>
+                    <button name="action_confirm" type="object" string="Confirm" class="oe_highlight"
+                            invisible="state != 'draft'"/>
+                    <button name="action_cancel" type="object" string="Cancel"
+                            invisible="state not in ['draft', 'sent', 'sale'] or not id or locked"/>
+                    <button name="action_draft" invisible="state != 'cancel'" type="object" string="Set to Quotation"
+                            data-hotkey="w"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,sent,sale" invisible="1"/>
+                    <field name="delivery_state" widget="statusbar"/>
+
+                </header>
+
+
+                <sheet>
+
+                    <div class="oe_button_box" name="button_box">
+
+                        <button type="object"
+                                name="action_view_delivery"
+                                class="oe_stat_button"
+                                icon="fa-truck"
+                                invisible="delivery_count == 0" groups="stock.group_stock_user">
+                            <field name="delivery_count" widget="statinfo" string="Delivery"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="parent_id" readonly="1"/>
+                        <field name='partner_id' string="Customer" domain="[('parent_id', '=', parent_id), ('is_driver', '=', False)]" invisible="parent_id == False" options="{'no_create': True}"/>
+                        <field name='partner_id' string="Customer" domain="[('is_driver', '=', False)]"
+                               invisible="not parent_id == False" options="{'no_create': True}"/>
+                        <field name="company_id" invisible="1"/>
+                        <field name="currency_id" invisible="1"/>
+                        <field name="pricelist_id" invisible="1"/>
+                        <field name="warehouse_id" readonly="1"/>
+                        <field name="is_promo" readonly="1"/>
+                         <field name="promotional_categ" invisible="1"/>
+
+                    </group>
+                    <field name="order_line" nolabel="1">
+                        <list editable="bottom">
+                            <!-- <field name="product_uom_category_id" column_invisible="1"/> -->
+
+                            <field name="product_id" domain="[('categ_id.is_promotional_categ','=',True)]" context="{'default_categ_id': parent.promotional_categ }" options="{'no_create': True}"/>
+                            <field name="is_downpayment" column_invisible="True"/>
+                            <field name="display_type" column_invisible="True"/>
+                            <field name="invoice_status" column_invisible="True"/>
+                            <field name="name"/>
+                            <field
+                                    name="product_uom_qty"
+                                    decoration-info="(not display_type and invoice_status == 'to invoice')"
+                                    decoration-bf="(not display_type and invoice_status == 'to invoice')"
+                                    context="{
+                                        'partner_id': parent.partner_id,
+                                        'quantity': product_uom_qty,
+                                        'pricelist': parent.pricelist_id,
+                                        'uom': product_uom_id,
+                                        'company_id': parent.company_id
+                                    }"
+                                    readonly="is_downpayment"/>
+                            <field name="product_uom_id" options="{'no_create': True}"/>
+
+                            <!-- below fields are used in the widget qty_at_date_widget -->
+                            <field name="virtual_available_at_date" column_invisible="1"/>
+                            <field name="qty_available_today" column_invisible="1"/>
+                            <field name="free_qty_today" column_invisible="1"/>
+                            <field name="scheduled_date" column_invisible="1"/>
+                            <field name="forecast_expected_date" column_invisible="1"/>
+                            <field name="warehouse_id" column_invisible="1"/>
+                            <field name="move_ids" column_invisible="1"/>
+                            <field name="qty_to_deliver" column_invisible="1"/>
+                            <field name="is_mto" column_invisible="1"/>
+                            <field name="display_qty_widget" column_invisible="1"/>
+                            <widget name="qty_at_date_widget"/>
+                            <!-- -->
+
+                            <field name="price_unit" readonly="True"/>
+                            <field name="qty_delivered" readonly="True" optional="hide"/>
+                        </list>
+                    </field>
+                </sheet>
+                <chatter>
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </chatter>
+            </form>
+
+
+        </field>
+    </record>
+    <record id="action_promotional_quotations" model="ir.actions.act_window">
+        <field name="name">Promotional Quotations</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('is_promo', '=', True)]</field>
+        <field name="view_id" ref="view_promotional_quotation_tree"/>
+        <field name="context">
+            {
+                'default_is_promo': True,
+                'default_quotation_type': 'promotional_quotation'
+            }
+        </field>
+        <field name="view_ids"
+               eval="[(5, 0, 0), (0, 0, {'view_mode': 'list', 'view_id': ref('view_promotional_quotation_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('view_promotional_quotation_form')})]"/>
+    </record>
+
+    <menuitem id="menu_advertising" name="Advertising" sequence="1" groups="yoko_security_custom.advertising_department,group_view_only_advertising" web_icon="erpc_promotional_products,static/src/img/img.png"/>
+    <!-- <menuitem id="menu_advertising" name="Advertising" sequence="1" groups="yoko_security_custom.advertising_department" web_icon="erpc_promotional_products,static/src/img/img.png"/> -->
+    <menuitem id="menu_promotional_quotation" name="Promotional Quotation" parent="menu_advertising" sequence="2"
+              action="action_promotional_quotations"/>
+
+
+
+    <record id="product_product_list_view" model="ir.ui.view">
+        <field name="name">product.product.list.view</field>
+        <field name="model">product.product</field>
+        <field name="arch" type="xml">
+
+        <list string="Products">
+            <field name="display_name"/>
+            <field name="default_code"/>
+            <field name="available_quantity"/>
+            <field name="qty_available"/>
+            <field name="incoming_qty"/>
+            <field name="list_price"/>
+
+
+        </list>
+
+        </field>
+    </record>
+
+    <record id="product_template_list_view" model="ir.ui.view">
+        <field name="name">product.template.list.view</field>
+        <field name="model">product.template</field>
+        <field name="arch" type="xml">
+
+        <list string="Products">
+            <field name="display_name"/>
+            <field name="default_code"/>
+            <field name="available_quantity"/>
+            <field name="qty_available"/>
+            <field name="incoming_qty"/>
+            <field name="list_price"/>
+
+
+        </list>
+
+        </field>
+    </record>
+
+
+    <record id="product_product_action" model="ir.actions.act_window">
+
+        <field name="name">Product Variants</field>
+        <field name="res_model">product.product</field>
+        <field name="view_mode">list,kanban,form,activity</field>
+        <field name="view_id" ref="product_product_list_view"/>
+        <field name="search_view_id" ref="product.product_search_form_view"/>
+        <field name="domain">[('categ_id.is_promotional_categ','=',True)]</field>
+        <field name="context">{"search_default_filter_to_sell":1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new product
+            </p><p>
+                You must define a product for everything you sell or purchase,
+                whether it's a storable product, a consumable or a service.
+            </p>
+        </field>
+
+    </record>
+
+    <record id="product_template_action" model="ir.actions.act_window">
+
+        <field name="name">Products</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">kanban,list,form,activity</field>
+        <field name="view_id" ref="product_template_list_view"/>
+        <field name="search_view_id" ref="product.product_template_search_view"/>
+        <field name="domain">[('categ_id.is_promotional_categ','=',True)]</field>
+        <field name="context">{"search_default_filter_to_sell":1, "sale_multi_pricelist_product_template": 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new product
+            </p><p>
+                You must define a product for everything you sell or purchase,
+                whether it's a storable product, a consumable or a service.
+            </p>
+        </field>
+
+    </record>
+
+
+    <record model="ir.model.access" id="attribute_line_access_advertising">
+        <field name="name">Product Template Attribute Line</field>
+        <field name="model_id" ref="product.model_product_template_attribute_line"/>
+        <field name="group_id" ref="yoko_security_custom.advertising_department"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+
+
+    </record>
+
+    <record model="ir.model.access" id="product_attribute_access_advertising">
+        <field name="name">Product Attribute</field>
+        <field name="model_id" ref="product.model_product_attribute"/>
+        <field name="group_id" ref="yoko_security_custom.advertising_department"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+
+
+    </record>
+
+    <record model="ir.model.access" id="product_attribute_value_access_advertising">
+        <field name="name">Product Attribute Value</field>
+        <field name="model_id" ref="product.model_product_attribute_value"/>
+        <field name="group_id" ref="yoko_security_custom.advertising_department"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+
+
+    </record>
+
+
+
+    <record model="ir.model.access" id="product_template_attribute_value_access_advertising">
+        <field name="name">Product Template Attribute Value</field>
+        <field name="model_id" ref="product.model_product_template_attribute_value"/>
+        <field name="group_id" ref="yoko_security_custom.advertising_department"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+
+
+    </record>
+
+    <record model="ir.model.access" id="product_template_attribute_custom_value_access_advertising">
+        <field name="name">Product Template Attribute Custom Value</field>
+        <field name="model_id" ref="product.model_product_attribute_custom_value"/>
+        <field name="group_id" ref="yoko_security_custom.advertising_department"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+
+
+    </record>
+
+
+    <menuitem id="menu_advertising_products" name="Advertising Products" parent="menu_advertising" sequence="3"/>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="menu_advertising_product_product" name="Stock" parent="menu_advertising_products" action="erpc_promotional_products.product_product_action" sequence="1"/>
+    <menuitem id="menu_advertising_product_template" name="Products" parent="menu_advertising_products" action="erpc_promotional_products.product_template_action" sequence="2"/>
+    <menuitem id="menu_advertising_products_attribute" name="Products Attributes" parent="menu_advertising_products" action="product.attribute_action" sequence="3"/>
+
+
+    <data>
+        <record id="seq_sale_order_promo" model="ir.sequence">
+            <field name="name">Promotional Sales Order</field>
+            <field name="code">sale.order.promo</field>
+            <field name="prefix">PRO/%(year)s/</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"></field>
+        </record>
+    </data>
+
+    <record id="sale.action_orders_to_invoice" model="ir.actions.act_window">
+        <field name="domain">[('is_promo','=',False),('invoice_status','=','to invoice')]</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <template id="login_popup_ept"/>
+    <!-- Fixed: Updated to work with Odoo 19 portal structure -->
+    <template id="user_sign_in_ept" inherit_id="portal.user_sign_in">
+        <xpath expr="//a[@t-attf-href='/web/login']" position="replace">
+            <t t-if="request.website.viewref('login_direct_pos.login_popup_ept').active">
+                <a href="javascript:void(0);" t-attf-class="te_signin #{_link_class}" data-bs-toggle="modal" data-bs-target="#loginRegisterPopup">
+                    Sign in
+                </a>
+            </t>
+        </xpath>
+    </template>
+    <!-- Fixed: Updated modal triggering for Bootstrap 5 (Odoo 19) -->
+    <template id="login_register_popup_view" inherit_id="web.frontend_layout">
+        <xpath expr="//div[@id='wrapwrap']/footer" position="after">
+            <t t-if="request.website.viewref('login_direct_pos.login_popup_ept').active">
+                <t t-call="login_direct_pos.login_register_popup"/>
+            </t>
+        </xpath>
+    </template>
+    <!-- Fixed: Updated Bootstrap 5 modal structure with split design -->
+    <template id="login_register_popup" name="Login Register Popup">
+        <div class="modal fade" id="loginRegisterPopup" role="dialog" tabindex="-1" aria-labelledby="loginRegisterPopupLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-fullscreen-lg-down te_modal_split">
+                <div class="modal-content rounded-0 border-0">
+                    <div class="te_signup_form_wrapper col-12">
+                        <h2 class="te_form_title text-center">Sign up</h2>
+                        <form class="oe_signup_form te_register_form shadow-none"
+          role="form"
+          method="post"
+          action="/web/signup">
+                            <input type="hidden" name="csrf_token"
+               t-att-value="request.csrf_token()"/>
+                            <!-- ROW 1 : NAME / EMAIL -->
+                            <div class="row te_signup_row g-3">
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <label class="form-label">First name</label>
+                                    <input type="text" name="name"
+                       class="form-control te_form_control"
+                       required="required"/>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <label class="form-label">Last name</label>
+                                    <input type="text" name="last_name"
+                       class="form-control te_form_control"
+                       required="required"/>
+                                </div>
+                                <!-- <div class="col-lg-4 col-md-12 col-12">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" name="login"
+                       class="form-control te_form_control"
+                       required="required"/>
+                                </div> -->
+                                
+                            </div>
+                            <div class="row te_signup_row g-3">
+                                <!-- <div class="col-lg-6 col-md-6 col-12">
+                                    <label class="form-label">Email</label>
+                                    <div class="input-group">
+                                        <input type="email" name="login" id="signup_email" class="form-control te_form_control" required="required"/>
+                                        <button type="button" id="btn_send_otp" class="btn btn-outline-secondary">Send OTP</button>
+                                    </div>
+                                </div> -->
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <div id="otp_section" class="d-none">
+                                        <label class="form-label">Enter OTP</label>
+
+                                        <div class="position-relative">
+                                            <input type="text" id="entered_otp" class="form-control" placeholder="Enter 6-digit OTP" maxlength="6"/>
+                                            <div style="position: absolute; right: 10px; top: 8px;">
+                                                <span id="otp_icon_valid" class="d-none">✅</span>
+                                                <span id="otp_icon_invalid" class="d-none">❌</span>
+                                            </div>
+                                        </div>
+                                        <small>Expires in
+                                            <span id="timer">60</span>s
+                                        </small>
+                                    </div>
+                                </div>
+                                
+                               
+                                
+                            </div>
+                            <div class="row te_signup_row g-3">
+                                <div class="col-lg-2 col-md-6 col-12">
+                                    <label class="form-label">Country</label>
+                                    <!-- <div class="input-group-with-button"> -->
+                                    <select name="country_id"
+                            class="form-select te_country_select">
+                                        <option value="">Country</option>
+                                        <t t-foreach="request.env['res.country'].sudo().search([])" t-as="c">
+                                            <option t-att-value="c.id">
+                                                <t t-out="c.name"/> (+
+                                                <t t-out="c.phone_code"/>)
+                                            </option>
+                                        </t>
+                                    </select>
+                                    <!-- </div> -->
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <label class="form-label">Phone</label>
+                                    <input type="tel" name="phone"
+                           class="form-control te_form_control"
+                           required="required"/>
+                                </div>
+                                <div class="col-lg-4 col-md-12 col-12">
+                                    <!-- <label class="form-label">Email</label>
+                                    <input type="email" name="login"
+                       class="form-control te_form_control"
+                       required="required"/> -->
+                                </div>
+                            </div>
+                            <!-- ROW 2 : PHONE -->
+                            <!-- ROW 3 : PASSWORD -->
+                            <div class="row te_signup_row g-3">
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <label class="form-label">Password</label>
+                                    <input type="password" name="password"
+                       class="form-control te_form_control"
+                       required="required"/>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <label class="form-label">Confirm password</label>
+                                    <input type="password" name="confirm_password"
+                       class="form-control te_form_control"
+                       required="required"/>
+                                </div>
+                            </div>
+                            <!-- ALERTS -->
+                            <div class="alert-success-error mb-3">
+                                <p class="alert alert-success d-none mb-0">
+                Account created successfully!
+            </p>
+                                <p class="alert alert-danger d-none mb-0"></p>
+                            </div>
+                            <!-- SUBMIT -->
+                            <button type="submit"
+                class="btn te_signup_button w-100" disabled="disabled">
+            SIGN UP
+        </button>
+                            <div class="text-center mt-3">
+                                <a class="back_to_login"
+               href="javascript:void(0);">
+                Back to Login
+            </a>
+                            </div>
+                        </form>
+                    </div>
+                    <button type="button" class="btn-close te_modal_close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-body p-0 d-flex">
+                        <!-- Left side: Login/Signup/Reset Forms -->
+                        <div class="te_login_section flex-fill">
+                            <div class="te_form_container">
+                                <!-- LOGIN FORM -->
+                                <div class="te_login_form_wrapper">
+                                    <h2 class="te_form_title">Sign in</h2>
+                                    <t t-call="login_direct_pos.login_popup"/>
+                                </div>
+                                <!-- SIGNUP FORM WITH CUSTOM FIELDS (Matching Your Design) -->
+                                <!-- RESET PASSWORD FORM -->
+                                <div class="te_reset_form_wrapper" style="display: none;">
+                                    <h2 class="te_form_title">Reset Password</h2>
+                                    <form class="oe_reset_password_form te_reset_password_form shadow-none" role="form" method="post" style="display: block;">
+                                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                        <input type="hidden" name="reset_form_ept" value="1"/>
+                                        <div class="form-group field-login mb-3">
+                                            <label for="reset_login" class="form-label">Your Email</label>
+                                            <input type="text" name="login" id="reset_login" class="form-control te_form_control rounded-0"
+                                                   autofocus="autofocus" required="required" autocapitalize="off"/>
+                                        </div>
+                                        <p class="alert alert-danger d-none mb-3" role="alert"></p>
+                                        <div class="clearfix oe_login_buttons text-center mb-3">
+                                            <button type="submit" class="btn btn-primary btn-lg te_theme_button w-100">Send Reset Link</button>
+                                        </div>
+                                        <div class="text-center small">
+                                            <a class="back_to_login" href="javascript:void(0);">Back to Login</a>
+                                        </div>
+                                        <input type="hidden" name="redirect" t-att-value="redirect"/>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Right side: Signup Promotion -->
+                        <div class="te_signup_section flex-fill">
+                            <div class="te_signup_container d-flex flex-column justify-content-center align-items-center w-100">
+                                <h3 class="te_signup_heading">Don't have an account?</h3>
+                                <button type="button" class="te_signup_button open_signup">SIGN UP</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template id="login_popup" name="Login Popup">
+        <form class="oe_login_form shadow-none" role="form" t-attf-action="/web/login" method="post" onsubmit="this.action = '/web/login' + location.hash">
+            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+            <input type="hidden" name="login_form_ept" value="1"/>
+            <div class="form-group field-login mb-3">
+                <label for="login" class="form-label">Email</label>
+                <input type="text" placeholder="Email" name="login" t-att-value="login" id="login"
+                       class="form-control te_form_control rounded-0" required="required"
+                       autofocus="autofocus" autocapitalize="off"/>
+            </div>
+            <div class="form-group field-password mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" placeholder="Password" name="password" id="password"
+                       class="form-control te_form_control rounded-0" required="required"
+                       autocomplete="current-password" t-att-autofocus="'autofocus' if login else None"
+                       maxlength="4096"/>
+            </div>
+            <div class="alert-success-error mb-3">
+                <p class="alert alert-success d-none mb-0">You are successfully logged in</p>
+                <p class="alert alert-danger d-none mb-0"></p>
+            </div>
+            <p class="alert alert-danger" t-if="error" role="alert">
+                <t t-out="error"/>
+            </p>
+            <p class="alert alert-success" t-if="message" role="status">
+                <t t-out="message"/>
+            </p>
+            <div class="te_forgot_password_link mb-3">
+                <a class="open_reset_password"
+                   t-if="request.env['ir.config_parameter'].sudo().get_param('auth_signup.reset_password') == 'True'"
+                   href="javascript:void(0);">Forgot your password?
+                </a>
+            </div>
+            <div class="clearfix oe_login_buttons text-center mb-3">
+                <button type="submit" class="btn btn-primary btn-lg te_theme_button te_login_button w-100">SIGN IN</button>
+            </div>
+            <div class="te_social_divider mb-3">
+                <span>Or</span>
+            </div>
+            <!-- OAuth Providers -->
+            <t t-set="enable" t-value="request.env['ir.module.module'].sudo().search([['name', '=', 'auth_oauth']])"/>
+            <t t-if="enable and enable.state == 'installed'">
+                <t t-set="providers" t-value="request.env['auth.oauth.provider'].sudo().search([('enabled', '=', True)])"/>
+                <t t-if="providers and len(providers) &gt; 0">
+                    <div class="te_oauth_providers">
+                        <a t-foreach="providers" t-as="p" class="te_oauth_button" 
+                        t-att-style="'background-color: %s; color: %s;' % (p.color, p.text_color)" t-att-href="p.auth_endpoint or '#'">
+                            <i t-att-class="p.css_class" role="presentation"/>
+                            <span t-out="p.body"/>
+                        </a>
+                    </div>
+                </t>
+            </t>
+            <input type="hidden" name="redirect" t-att-value="redirect"/>
+        </form>
+    </template>
+    <template id="Registration_input_fields" inherit_id="auth_signup.fields"/>
+    <!-- For Recaptcha Verification -->
+    <template id="reacaptcha_signup" inherit_id="auth_signup.signup" name="OAuth Signup buttons">
+        <xpath expr="//div[hasclass('oe_login_buttons')]" position="before">
+            <div class="mt-3 alert-success-error">
+                <p class="alert alert-success d-none mb-0">You are successfully logged in</p>
+                <p class="alert alert-danger d-none mb-0"></p>
+            </div>
+        </xpath>
+    </template>
+
+ <!-- <template id="my_account_link_new" name="New Link to frontend portal" inherit_id="portal.user_dropdown">
+        <xpath expr="//*[@id='o_logout_divider']" position="before">
+            <a href="my/account" role="menuitem" class="dropdown-item ps-3">
+                <i class="fa fa-fw fa-id-card-o me-1 small text-primary-emphasis"/> Edit Account
+            </a>
+             <a href="my/orders" role="menuitem" class="dropdown-item ps-3">
+                <i class="fa fa-fw fa-id-card-o me-1 small text-primary-emphasis"/> Orders History
+            </a>
+             <a href="/my/addresses" role="menuitem" class="dropdown-item ps-3">
+                <i class="fa fa-fw fa-id-card-o me-1 small text-primary-emphasis"/> Address Book
+            </a>
+                         <a href="/shop/wishlist" role="menuitem" class="dropdown-item ps-3">
+                <i class="fa fa-fw fa-id-card-o me-1 small text-primary-emphasis"/> My Whishlist
+            </a>
+        </xpath>
+    </template> -->
+
+    <template id="my_account_link_new" name="New Link to frontend portal" inherit_id="portal.user_dropdown">
+    <xpath expr="//*[@id='o_logout_divider']" position="before">
+        
+        <a href="/my/account" role="menuitem" class="dropdown-item ps-3">
+            <i class="fa fa-fw fa-user me-1 small text-primary-emphasis"/>
+            Edit Account
+        </a>
+
+        <a href="/my/orders" role="menuitem" class="dropdown-item ps-3">
+            <i class="fa fa-fw fa-shopping-bag me-1 small text-primary-emphasis"/>
+            Orders History
+        </a>
+
+        <a href="/my/addresses" role="menuitem" class="dropdown-item ps-3">
+            <i class="fa fa-fw fa-address-book me-1 small text-primary-emphasis"/>
+            Address Book
+        </a>
+
+        <a href="/shop/wishlist" role="menuitem" class="dropdown-item ps-3">
+            <i class="fa fa-fw fa-heart me-1 small text-primary-emphasis"/>
+            My Wishlist
+        </a>
+
+    </xpath>
+</template>
+
+       <template id="portal_top_navigation">
+           <style>.portal-custom-header {
+    background-color: #111;
+    padding: 15px 0;
+}
+
+.portal-menu {
+    gap: 40px;
+    padding-left: 40px;
+}
+
+.portal-menu .menu-item {
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.portal-menu .menu-item:hover {
+    color: #e60000;
+}
+
+.portal-menu .menu-item.active {
+    color: #e60000;
+    text-decoration: underline;
+}
+
+.portal-menu .logout {
+    margin-left: auto;
+    padding-right: 40px;
+}
+</style>
+    <t t-set="current_path" t-value="request.httprequest.path"/>
+
+    <!-- Only show for selected pages -->
+    <t t-if="
+        current_path.startswith('/my/account') or
+        current_path.startswith('/my/orders') or
+        current_path.startswith('/my/addresses') or
+        current_path.startswith('/shop/wishlist')
+    ">
+
+        <div class="portal-custom-header">
+            <div class="container-fluid">
+                <div class="portal-menu d-flex align-items-center">
+
+                    <!-- Edit Account -->
+                    <a href="/my/account"
+                       t-att-class="'menu-item active' if current_path.startswith('/my/account') else 'menu-item'">
+                        EDIT ACCOUNT
+                    </a>
+
+                    <!-- Orders -->
+                    <a href="/my/orders"
+                       t-att-class="'menu-item active' if current_path.startswith('/my/orders') else 'menu-item'">
+                        ORDERS HISTORY
+                    </a>
+
+                    <!-- Address -->
+                    <a href="/my/addresses"
+                       t-att-class="'menu-item active' if current_path.startswith('/my/addresses') else 'menu-item'">
+                        ADDRESS BOOK
+                    </a>
+
+                    <!-- Wishlist -->
+                    <a href="/shop/wishlist"
+                       t-att-class="'menu-item active' if current_path.startswith('/shop/wishlist') else 'menu-item'">
+                        MY WISHLIST
+                    </a>
+
+                    <!-- Logout -->
+                    <a href="/web/session/logout"
+                       class="menu-item logout ms-auto">
+                        LOGOUT
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+    </t>
+</template>
+
+
+
+    <!-- ======================================
+         Inject Header Into All Portal Pages
+    ======================================= -->
+    <template id="portal_layout_inherit"
+              inherit_id="portal.portal_layout">
+
+        <xpath expr="//div[contains(@class,'o_portal_wrap')]" position="before">
+            <t t-call="login_direct_pos.portal_top_navigation"/>
+        </xpath>
+
+    </template>
+
+   
+
+<!-- </template>
+ -->
+<template id="as_shop_mini_cart" name="Mini Cart Extend" inherit_id="website_sale.header_cart_link" priority="1">
+        <xpath expr="//a[@href='/shop/cart']" position="attributes">
+            <attribute name="t-attf-class" separator=" " add="as_mini_cart"/>
+        </xpath>
+        <xpath expr="//sup[contains(@t-attf-class,'my_cart_quantity')]" position="attributes">
+            <attribute name="t-attf-class" separator=" " remove="#{'d-none' if (website_sale_cart_quantity == 0) else ''}"/>
+        </xpath>
+    </template>
+
+<template id="custom_step_wizard" inherit_id="website.step_wizard">
+  
+    <!-- Replace the main wizard div -->
+    <xpath expr="//div[contains(@class,'o_wizard')]" position="replace">
+          <style>
+        .o_wizard {
+    width: 100%;
+    gap: 5px;
+}
+
+.wizard-tab {
+    flex: 1;
+    padding: 15px 10px;
+    min-height: 50px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.inactive-step {
+    background-color: #1a1a1a !important;
+    color: #ffffff !important;
+}
+
+.active-step {
+    background-color: #ffffff !important;
+    color: #e60000 !important;
+    border: 1px solid #dee2e6;
+    border-bottom: 3px solid #e60000 !important;
+    position: relative;
+    z-index: 10;
+}
+
+.wizard-tab span {
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+    </style>
+        <div class="o_wizard d-flex justify-content-center my-4">
+            <t t-foreach="wizard_step" t-as="step">
+                
+                <t t-set="is_current_step"
+                   t-value="step.step_href == current_website_checkout_step_href"/>
+
+                <div t-attf-class="wizard-tab d-flex align-items-center justify-content-center #{'active-step' if is_current_step else 'inactive-step'}">
+                    
+                    <span t-if="is_current_step or not_completed_step"
+                          class="text-uppercase fw-bold">
+                        <span t-field="step.name"/>
+                    </span>
+
+                    <a t-else=""
+                       t-att-href="step.step_href"
+                       class="text-decoration-none text-uppercase fw-bold text-white">
+                        <span t-field="step.name"/>
+                    </a>
+
+                </div>
+
+                <!-- Mark steps after current as not clickable -->
+                <t t-if="is_current_step"
+                   t-set="not_completed_step"
+                   t-value="True"/>
+            </t>
+        </div>
+
+    </xpath>
+
+</template>
+
+
+</odoo>

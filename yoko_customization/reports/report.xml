@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="account_invoices_without_discount" model="ir.actions.report">
+            <field name="name">Invoices without Discount A4</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">yoko_customization.yoko_invoice_without_discount_report</field>
+            <field name="report_file">yoko_customization.yoko_invoice_without_discount_report</field>
+        </record>
+
+    </data>
+</odoo>

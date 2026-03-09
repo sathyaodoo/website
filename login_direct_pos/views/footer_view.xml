@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="custom_minimalist_footer"
+              inherit_id="website.layout"
+              priority="20">
+
+        <xpath expr="//div[@id='footer']" position="replace">
+
+            <div id="footer"
+                 class="oe_structure oe_structure_solo text-break"
+                 t-ignore="true"
+                 t-if="not no_footer">
+
+              <section class="s_text_block pb-0 pt-0" data-snippet="s_text_block" data-name="Container">
+
+    <style>
+        /* Navigation */
+        .footer-nav .nav-link {
+            font-weight: 600;
+            font-size: 14px;
+            color: #000;
+            padding: 8px 14px;
+        }
+
+        .footer-nav .nav-link:hover {
+            color: #e60023;
+        }
+
+        /* Social Icons */
+        .footer-social a {
+            font-size: 20px;
+            margin-right: 15px;
+            color: #000;
+        }
+
+        .footer-social a:hover {
+            color: #e60023;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+
+            .footer-nav {
+                gap: 6px;
+            }
+
+            .footer-nav .nav-link {
+                font-size: 13px;
+                padding: 6px 8px;
+            }
+
+            .footer-social {
+                margin-bottom: 10px;
+            }
+
+            .footer-copy {
+                font-size: 12px;
+                text-align: center !important;
+            }
+        }
+    </style>
+
+    <div class="container-fluid">
+
+        <!-- Navigation -->
+        <div class="row">
+            <div class="col-12 text-center py-3">
+
+                <nav class="nav justify-content-center flex-wrap footer-nav">
+
+                    <a class="nav-link" href="/shop/category/tires-3">TIRES</a>
+                    <a class="nav-link" href="/shop/category/motoroil-4">LUBRICANTS</a>
+                    <a class="nav-link" href="/shop/category/batteries-5">BATTERIES</a>
+                    <a class="nav-link" href="/about-us">ABOUT</a>
+                    <a class="nav-link" href="/dealers">DEALERS</a>
+                    <a class="nav-link" href="/safety-content">SAFETY</a>
+                    <a class="nav-link" href="/contactus">CONTACT</a>
+                    <a class="nav-link" href="/videos">VIDEOS</a>
+                    <a class="nav-link" href="/faq">FAQ</a>
+                    <a class="nav-link" href="/original-equipment">ORIGINAL EQUIPMENT</a>
+                    <a class="nav-link" href="/news">NEWS &amp; EVENTS</a>
+
+                </nav>
+
+            </div>
+        </div>
+
+        <hr class="my-3"/>
+
+        <!-- Bottom Section -->
+        <div class="row align-items-center py-3 text-center text-lg-start">
+
+            <!-- Social -->
+            <div class="col-12 col-lg-4 mb-2 mb-lg-0">
+
+                <div class="footer-social s_social_media no_icon_color o_not_editable">
+                    <a href="/website/social/facebook" target="_blank">
+                        <i class="fa fa-facebook"/>
+                    </a>
+                    <a href="/website/social/instagram" target="_blank">
+                        <i class="fa fa-instagram"/>
+                    </a>
+                    <a href="/website/social/youtube" target="_blank">
+                        <i class="fa fa-youtube-play"/>
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Copyright -->
+            <div class="col-12 col-lg-8 text-center text-lg-end footer-copy">
+
+                <p class="mb-0 text-muted small">
+                    © 2026 All rights reserved |
+                    <a href="#" class="text-decoration-none">
+                        By Koein
+                    </a>
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+            </div>
+
+        </xpath>
+
+    </template>
+</odoo>

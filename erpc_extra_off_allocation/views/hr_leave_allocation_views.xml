@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="erpc_hr_leave_allocation_view_form" model="ir.ui.view">
+            <field name="name">erpc.hr.leave.allocation.view.form</field>
+            <field name="model">hr.leave.allocation</field>
+            <field name="inherit_id" ref="hr_holidays.hr_leave_allocation_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='notes']" position="attributes">
+                    <attribute name="readonly">False</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

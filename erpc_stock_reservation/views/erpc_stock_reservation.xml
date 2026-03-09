@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="erpc_view_stock_reservation_tree_inherit" model="ir.ui.view">
+        <field name="name">stock.reservation.tree.inherit</field>
+        <field name="model">stock.reservation</field>
+        <field name="inherit_id"
+               ref="stock_reserve.view_stock_reservation_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <field name="show_reserve_button" column_invisible="True"/>
+                <button name="Reserve_again_button_action" type="object" string="Reserve Again" class="btn-success" invisible="show_reserve_button == False  or state == 'cancel'"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

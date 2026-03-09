@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <data>
+
+        <record id="indoor" model="res.groups">
+            <field name="name">Indoor</field>
+        </record>
+
+        <record id="outdoor" model="res.groups">
+            <field name="name">Outdoor</field>
+        </record>
+
+        <record model="res.groups" id="discount">
+            <field name="name">Price and Discount</field>
+        </record>
+
+        <record id="collector_group" model="res.groups">
+            <field name="name">Collector</field>
+        </record>
+
+        <record model="res.groups" id="advertising_department">
+            <field name="name">Advertising Department</field>
+        </record>
+        <record model="res.groups" id="super_user">
+            <field name="name">Super User</field>
+        </record>
+        <record model="res.groups" id="accounting">
+            <field name="name">Accounting</field>
+        </record>
+
+        <record model="ir.rule" id="partner_sales_man_rule">
+            <field name="name">Sales Man restricted to Salesperson</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="groups" eval="[(4, ref('yoko_security_custom.indoor'))]"/>
+            <field name="domain_force">['|',('user_id','=',user.id),('user_id','=',False)]</field>
+        </record>
+
+        <record model="ir.rule" id="partner_sales_man_rule_2">
+            <field name="name">Sales Man restricted to Salesperson (Sales Order)</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="groups" eval="[(4, ref('yoko_security_custom.indoor'))]"/>
+            <field name="domain_force">['|',('user_id','=',user.id),('user_id','=',False)]</field>
+        </record>
+
+    </data>
+</odoo>

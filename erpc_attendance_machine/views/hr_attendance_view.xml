@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="erpc_view_attendance_tree" model="ir.ui.view">
+        <field name="name">erpc.view.attendance.tree</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="attributes">
+                <attribute name="decoration-danger">check_in == check_out</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="erpc_hr_attendance_view_filter" model="ir.ui.view">
+        <field name="name">erpc.hr.attendance.view.filter</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.hr_attendance_view_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <filter string="Check in = Check Out" name="check_in_out" domain="[('checkin_equals_checkout','=', True)]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

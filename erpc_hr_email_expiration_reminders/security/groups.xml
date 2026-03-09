@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="group_send_email_expiration_reminders" model="res.groups">
+        <field name="name">Send Email Expiration Reminders</field>
+    </record>
+</odoo>

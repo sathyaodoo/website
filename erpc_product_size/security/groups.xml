@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <record model="res.groups" id="group_user_marketing">
+            <field name="name">Marketing</field>
+        </record>
+
+        <record model="res.groups" id="group_user_sale_discount_access">
+            <field name="name">Sale Discount Access</field>
+        </record>
+
+        <record model="res.groups" id="group_user_invoice_discount_access">
+            <field name="name">Invoice Discount Access</field>
+        </record>
+    </data>
+</odoo>

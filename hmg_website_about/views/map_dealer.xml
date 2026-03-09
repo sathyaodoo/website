@@ -1,0 +1,357 @@
+<odoo>
+    <!-- <template id="dealer_template" name="Dealer Locator">
+    <t t-call="website.layout">
+        <link rel="stylesheet"
+      href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        <div class="container mt-5">
+            <h2>Find Dealer by ZIP</h2>
+            <form method="get" action="/dealers">
+                <input type="text" name="zip" t-att-value="zip"
+                       placeholder="Enter ZIP Code"
+                       class="form-control w-25 d-inline"/>
+                <button type="submit" class="btn btn-primary">
+                    Search
+                </button>
+            </form>
+            <div id="map" style="height:500px;" class="mt-4"></div>
+           <script>
+    var dealers = <t t-raw="dealers"/>;
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        if (!dealers.length) return;
+
+        var map = L.map('map').setView([20, 77], 5);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        dealers.forEach(function(d) {
+
+            if (!d.lat || !d.lng) return;
+
+            var marker = L.marker([d.lat, d.lng]).addTo(map);
+
+            marker.bindPopup(`
+                <b>${d.name}</b><br/>
+                ${d.address || ''}<br/><br/>
+                <a href="https://www.google.com/maps/dir/?api=1&amp;destination=${d.lat},${d.lng}" target="_blank">
+                    Get Directions
+                </a>
+            `);
+        });
+
+        map.setView([dealers[0].lat, dealers[0].lng], 10);
+    });
+</script>
+        </div>
+    </t>
+</template> -->
+    <template id="dealer_template" name="Dealer Locator">
+        <t t-call="website.layout">
+            <!-- Leaflet -->
+            <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+            <script src="https://unpkg.com/leaflet/dist/leaflet.js"/>
+            <style>
+            #dealer_map_wrapper {
+                position: relative;
+                height: 90vh;
+                width: 100%;
+            }
+
+            #map {
+                height: 100%;
+                filter: grayscale(100%);
+            }
+
+            .dealer-search-box {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 10px 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 1000;
+    border-radius: 6px;
+    width: 90%;
+    max-width: 600px;
+}
+
+.dealer-search-box form {
+    display: flex;
+    width: 100%;
+}
+
+.dealer-search-box input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    padding: 10px;
+}
+
+.dealer-search-box button {
+    background: red;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    font-weight: 600;
+    border-radius: 4px;
+}
+@media (max-width: 768px) {
+
+    .dealer-search-box {
+        top: 15px;
+        padding: 8px 12px;
+        width: 95%;
+    }
+
+    .dealer-search-box input {
+        font-size: 13px;
+    }
+
+    .dealer-search-box button {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+}
+
+            .dealer-card {
+                position: absolute;
+                bottom: 40px;
+                left: 40px;
+                background: #111;
+                color: white;
+                padding: 25px;
+                width: 380px;
+                border-left: 5px solid red;
+                z-index: 1000;
+                box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+                transform: translateY(40px);
+                opacity: 0;
+                transition: all 0.3s ease;
+                pointer-events: none;
+            }
+
+            .dealer-card.show {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .dealer-card h4 {
+                margin-bottom: 15px;
+            }
+
+            .dealer-card a {
+                color: red;
+                font-weight: bold;
+                text-decoration: none;
+            }
+
+            .close-card {
+                position: absolute;
+                top: 10px;
+                right: 15px;
+                cursor: pointer;
+                font-size: 18px;
+            }
+
+            @media (max-width: 768px) {
+                .dealer-card {
+                    left: 10px;
+                    right: 10px;
+                    width: auto;
+                }
+            }
+            .dealer-row {
+    display: flex;
+    background: #1a1a1a;
+    border-top: 3px solid red;
+    margin-bottom: 40px;
+    overflow: hidden;
+}
+
+.dealer-info {
+    flex: 1;
+    padding: 50px;
+    color: #fff;
+}
+
+.dealer-info h3 {
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.dealer-info hr {
+    border-color: #444;
+    margin-bottom: 20px;
+}
+
+.dealer-info p {
+    color: #ccc;
+    margin-bottom: 15px;
+}
+
+.dealer-info i {
+    margin-right: 10px;
+    color: #fff;
+}
+
+.direction-btn {
+    color: red;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.dealer-image {
+    flex: 1;
+}
+
+.dealer-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dealer-row {
+        flex-direction: column;
+    }
+
+    .dealer-info {
+        padding: 30px;
+    }
+
+    .dealer-image img {
+        height: 300px;
+    }
+}
+        </style>
+            <div class="container mt-5">
+                <t t-if="no_dealer">
+                    <div style="background:#111;color:white;padding:20px;margin-bottom:20px;border-left:4px solid red;">
+                        <strong>No dealer found in "
+                            <t t-esc="search"/>"
+                        </strong>
+                        <br/>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div id="dealer_map_wrapper">
+                        <div id="map"/>
+                        <div class="dealer-search-box">
+                            <form method="get" action="/dealers">
+                                <input type="text" name="search" placeholder="Search for the nearest dealer"/>
+                                <button type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </form>
+                        </div>
+                        <div id="dealer-card" class="dealer-card"/>
+
+
+        </div>
+                    <!-- <div class="container my-5"> -->
+                        <t t-foreach="dealers_list" t-as="d">
+                            <div class="dealer-row">
+                                <div class="dealer-info">
+                                    <h3>
+                                        <t t-esc="d['name']"/>
+                                    </h3>
+                                    <hr/>
+                                    <p>
+                                        <i class="fa fa-map-marker-alt"></i>
+                                        <t t-esc="d['address']"/>
+                                        <br/>
+                                        <t t-esc="d['city']"/> -
+                                        <t t-esc="d['state']"/>
+                                    </p>
+                                    <p>
+                                        <i class="fa fa-phone"></i>
+                                        <t t-esc="d['phone']"/>
+                                    </p>
+                                    <a t-att-href="'https://www.google.com/maps/dir/?api=1&amp;destination=%s,%s' % (d['lat'], d['lng'])"
+                   target="_blank"
+                   class="direction-btn">
+                    GET DIRECTIONS
+                </a>
+                                </div>
+                                <div class="dealer-image">
+                                    <img t-att-src="d['image']" alt="Dealer"/>
+                                </div>
+                            </div>
+                        </t>
+                    <!-- </div> -->
+                </t>
+            </div>
+            <script>
+            var dealers =
+                <t t-raw="dealers or '[]'"/>;
+
+            document.addEventListener("DOMContentLoaded", function () {
+
+                var map = L.map('map').setView([33.8938, 35.5018], 8);
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap'
+                }).addTo(map);
+
+                if (!dealers.length) return;
+
+                var bounds = [];
+                var activeMarker = null;
+
+                dealers.forEach(function(d) {
+
+                    if (!d.lat || !d.lng) return;
+
+                    bounds.push([d.lat, d.lng]);
+
+                    var marker = L.marker([d.lat, d.lng]).addTo(map);
+
+                    marker.on('click', function() {
+
+                        if (activeMarker) {
+                            activeMarker.setZIndexOffset(0);
+                        }
+
+                        marker.setZIndexOffset(1000);
+                        activeMarker = marker;
+
+                        map.flyTo([d.lat, d.lng], 13, {
+                            animate: true,
+                            duration: 1.5
+                        });
+
+                        var card = document.getElementById("dealer-card");
+
+                        card.innerHTML = `
+                <span class="close-card" onclick="this.parentElement.classList.remove('show')">✕</span>
+                <h4>${d.name}</h4>
+                <p>📍 ${d.address || ''}</p>
+                <p>📞 ${d.phone || ''}</p>
+                <a href="https://www.google.com/maps/dir/?api=1&amp;destination=${d.lat},${d.lng}" target="_blank">
+                                GET DIRECTIONS
+                            </a>
+                        `;
+
+                        card.classList.add("show");
+                    });
+                });
+
+                if (bounds.length) {
+                    map.fitBounds(bounds);
+                }
+            });
+            </script>
+        </t>
+    </template>
+</odoo>

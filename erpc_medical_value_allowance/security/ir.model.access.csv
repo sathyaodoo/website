@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+medical_value_allowance_access_user,medical_value_allowance_access_user,model_medical_value_allowance,base.group_user,1,1,1,0
+medical_value_allowance_access_officer,medical_value_allowance_access_officer,model_medical_value_allowance,hr.group_hr_user,1,1,1,1
+medical_value_allowance_access_manager,medical_value_allowance_access_manager,model_medical_value_allowance,hr.group_hr_manager,1,1,1,1

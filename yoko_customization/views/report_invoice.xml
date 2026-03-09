@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<!--        <template id="report_invoice_document_return_invoice" inherit_id="account.report_invoice_document" priority="1">-->
+<!--            <xpath expr="//div[hasclass('page')]//h2//span[contains(@t-elif, 'out_refund')]" position="replace">-->
+<!--                <span t-if="o.move_type == 'out_refund' and o.is_credit_note">Credit Note</span>-->
+<!--                <span t-if="o.move_type == 'out_refund' and not o.is_credit_note">Invoice Return</span>-->
+<!--            </xpath>-->
+<!--        </template>-->
+    </data>
+</odoo>

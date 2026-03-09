@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="erpc_offline_attendance_generate_attendance" model="ir.actions.server">
+        <field name="name">Generate Attendance</field>
+        <field name="model_id" ref="model_attendance_offline"/>
+        <field name="binding_model_id" ref="erpc_attendance_machine.model_attendance_offline"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+            records.create_offline_attendance()
+        </field>
+    </record>
+
+    <!-- Custom Attendance Form View -->
+    <record id="erpc_attendance_offline_form" model="ir.ui.view">
+        <field name="name">erpc.attendance.offline.form</field>
+        <field name="model">attendance.offline</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="id_employee_device"/>
+                    <field name="employee_id"/>
+                    <field name="company_id"/>
+                    <field name="datetime"/>
+                    <field name="punch_state"/>
+                    <field name="import_state" readonly="True"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Custom Attendance Tree View -->
+    <record id="erpc_attendance_offline_tree" model="ir.ui.view">
+        <field name="name">erpc.attendance.offline.tree</field>
+        <field name="model">attendance.offline</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="id_employee_device"/>
+                <field name="employee_id"/>
+                <field name="datetime"/>
+                <field name="punch_state"/>
+                <field name="import_state"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Action for the Menu Item -->
+    <record id="erpc_attendance_offline_action" model="ir.actions.act_window">
+        <field name="name">ZK Offline Log</field>
+        <field name="res_model">attendance.offline</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu Item Action Binding -->
+   <menuitem id="erpc_attendance_offline_menu" name="ZK Offline Log" parent="erpc_attendance_machine" action="erpc_attendance_offline_action" sequence="3"/>
+</odoo>

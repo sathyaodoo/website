@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="erpc_request_for_item_seq" model="ir.sequence">
+        <field name="name">ERPC Request For Item</field>
+        <field name="code">request.for.item.seq</field>
+        <field name="prefix">RFI/</field>
+        <field name="padding">4</field>
+        <field name="number_increment">1</field>
+        <field name="number_next_actual">1</field>
+        <field name="implementation">standard</field>
+    </record>
+</odoo>

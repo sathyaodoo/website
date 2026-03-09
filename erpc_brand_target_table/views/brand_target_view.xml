@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="view_brand_target_tree" model="ir.ui.view">
+            <field name="name">brand.target.tree</field>
+            <field name="model">brand.target</field>
+            <field name="arch" type="xml">
+                <tree string="Seasonal Coefficient &amp; Brand Target Table" editable="bottom">
+                    <field name="product_brand"/>
+                    <field name="month"/>
+                    <field name="year"/>
+                    <field name="target_qty"/>
+                    <field name="target_value"/>
+                    <field name="target_percentage" widget="percentage"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_brand_target_table" model="ir.actions.act_window">
+            <field name="name">Seasonal Coefficient &amp; Brand Target</field>
+            <field name="res_model">brand.target</field>
+            <field name="view_mode">tree</field>
+        </record>
+        <menuitem id="menu_brand_target_table" name="Seasonal Coefficient &amp; Brand Target" action="action_brand_target_table"
+                  parent="sale.menu_sale_report" sequence="50"/>
+
+    </data>
+</odoo>

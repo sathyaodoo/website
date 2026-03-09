@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="hr_additional_allowances_tree_view" model="ir.ui.view">
+        <field name="name">hr.additional.allowances.tree</field>
+        <field name="model">hr.additional.allowances</field>
+        <field name="arch" type="xml">
+            <tree string="Additional Allowances">
+                <field name="name"/>
+                <field name="employee_id" readonly="paid == True"/>
+                <field name="add_allowances_amount" readonly="paid == True"/>
+                <field name="batch_id"/>
+                <field name="paid" readonly="1"/>
+                <field name="date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hr_additional_allowances_form_view" model="ir.ui.view">
+        <field name="name">hr.additional.allowances.form</field>
+        <field name="model">hr.additional.allowances</field>
+        <field name="arch" type="xml">
+            <form string="Additional Allowances">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group col="4">
+                        <field name="employee_id" readonly="paid == True"/>
+                        <field name="date" readonly="paid == True"/>
+                        <field name="department_id"/>
+                        <field name="job_position"/>
+                        <field name="add_allowances_amount" readonly="paid == True"/>
+                        <field name="payslip_id" invisible="1"/>
+                        <field name="batch_id"/>
+                        <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+                        <field name="currency_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+                        <field name="paid" readonly="1" invisible="1"/>
+                        <field name="note"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_additional_allowances_request_search_form" model="ir.ui.view">
+        <field name="name">hr.additional.allowances.search.form</field>
+        <field name="model">hr.additional.allowances</field>
+        <field name="arch" type="xml">
+            <search string="Additional Allowances">
+                <field name="employee_id" string="Employee"/>
+                <field name="department_id" string="Department"/>
+                <field name="batch_id" string="Payslip Batch"/>
+                <filter string="Payslip Batch" name="batch_id" context="{'group_by':'batch_id'}"/>
+                <filter string="Employee" name="employee_id" context="{'group_by':'employee_id'}"/>
+                <filter string="Department" name="department_id" context="{'group_by':'department_id'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_hr_additional_allowances_request" model="ir.actions.act_window">
+        <field name="name">Additional Allowances</field>
+        <field name="res_model">hr.additional.allowances</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_myrequest': 1}</field>
+        <field name="search_view_id" ref="view_additional_allowances_request_search_form"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new additional allowances.
+            </p>
+            <p>
+                Use this menu to create additional allowances.
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="Additional Allowances" parent="erpc_hr_payroll_extension.menu_hr_allowances" id="menu_hr_additional_alllowances" action="action_hr_additional_allowances_request"/>
+
+    <!-- Shortcuts -->
+    <record id="act_hr_employee_additional_allowances_request" model="ir.actions.act_window">
+        <field name="name">Additional Allowances</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.additional.allowances</field>
+        <field name="binding_model_id" ref="hr.model_hr_employee"/>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="hr_additional_allowances_tree_view"/>
+        <field name="domain">[('employee_id', '=', active_id)]</field>
+
+    </record>
+
+    <!-- HR employee inherit Additional Allowances -->
+    <record id="view_employee_form_insurance_inherit" model="ir.ui.view">
+        <field name="name">hr.employee.company.additional.allowances.form.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="priority" eval="10000"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="%(act_hr_employee_additional_allowances_request)d" type="action" class="oe_stat_button" icon="fa-percent" groups="hr.group_hr_manager,hr.group_hr_user">
+                    <field name="add_allowances_count" widget="statinfo" string="Additional Allowances"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

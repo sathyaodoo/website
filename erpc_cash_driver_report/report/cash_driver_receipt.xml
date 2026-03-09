@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="erpc_cn51_mini" model="report.paperformat">
+        <field name="name">CN51 Mini</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">200</field>
+        <field name="page_width">180</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">0</field>
+        <field name="margin_left">0</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">10</field>
+        <field name="dpi">50</field>
+    </record>
+
+    <record id="cash_driver_report" model="ir.actions.report">
+        <field name="name">Cash Driver Report</field>
+        <field name="model">product.driver</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">erpc_cash_driver_report.erpc_report_cash_driver</field>
+        <field name="report_file">erpc_cash_driver_report.erpc_report_cash_driver</field>
+        <field name="print_report_name">'Cash Driver - %s' % (object.name)</field>
+        <field name="paperformat_id" ref="erpc_cash_driver_report.erpc_cn51_mini"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="erpc_report_cash_driver">
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
+                <t t-foreach="docs" t-as="o">
+                    <div style="margin-bottom: 40px;">
+                        <img t-if="env.company.logo" t-att-src="image_data_uri(env.company.logo)"
+                             style="max-width:110%;margin-bottom:30px" alt="Logo"/>
+
+                        <div style="font-weight:bold;font-size:50px;margin-left:4%">
+                            <h5 style="margin-bottom:10px">Jounieh Highway, Damaa Center, 6th Floor</h5>
+                            <h5 style="margin-bottom:10px">T.09 - 911311 - 70-911311 - P.O Box 1705</h5>
+                            <h5 style="margin-bottom:10px">Capital 5,000,000 L.L. C.R.#Baabda 2023772</h5>
+                            <h5 style="margin-bottom:10px">VAT# 2455088-601</h5>
+                            <h6 style="color:blue">info@yokohamalebanon.com</h6>
+                        </div>
+                    </div>
+                    <hr style="font-weight:bold;height:7px;background-color:#000000;color:#000000"/>
+                    <div style="margin-left:28%;font-size:35px;margin-bottom: 20px;">
+                        <h1>Collection</h1>
+                        <div style="margin-left:30%">
+                            <p>
+                                <span t-esc="(o.due_date + datetime.timedelta(hours=3)).strftime('%Y-%m-%d %H:%M:%S')"/>
+                            </p>
+                            <p>
+                                <span t-esc="o.name" style="font-size:23px;font-weight:bold"/>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div style="font-size:30px">
+                        <p style="border: 3px solid black; padding: 5px;">
+                            <span style="font-weight:bold">Client:</span>
+                            <span t-field="o.partner_id.name"/>
+                            <br/>
+                            <span>
+                                <span t-field="o.partner_id.street"/>
+                                <span t-field="o.partner_id.city"/>
+                                <span t-field="o.partner_id.state_id.name"/>
+                                <span t-field="o.partner_id.country_id"/>
+                            </span>
+                        </p>
+
+                        <p style="margin-top:40px">
+                            <span style="font-weight:bold">USD:</span>
+                            <span t-field="o.price_usd"/>
+                        </p>
+
+                        <p style="margin-top:40px">
+                            <span style="font-weight:bold">LBP:</span>
+                            <span t-field="o.price_lbp"/>
+                        </p>
+
+                        <p style="margin-top:40px">
+                            <span style="font-weight:bold">Invoice Number:</span>
+                            <span t-field="o.invoice_number"/>
+                        </p>
+
+                        <p style="margin-top:40px">
+                            <span style="font-weight:bold;">Collected By:</span>
+                            <span t-field="o.create_uid.name"/>
+                        </p>
+
+                        <t t-if="o.is_creator_driver">
+                            <p style="margin-top:40px">
+                                <span style="font-weight:bold;">Driver Name:</span>
+                                <span t-field="o.driver_name.name"/>
+                            </p>
+                        </t>
+
+                        <p style="margin-top:100px">
+                            <span style="margin-left:8%;font-size:25px">Thank You for Your Business</span>
+                        </p>
+
+                        <p style="margin-top:100px;margin-left:75%">
+                            <span style="font-size:25px">COPY</span>
+                        </p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <record id="erpc_cash_driver_print_button" model="ir.ui.view">
+        <field name="name">erpc.cash.driver.print.button</field>
+        <field name="model">product.driver</field>
+        <field name="inherit_id" ref="erpc_driver_collection.erpc_driver_collection_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='button_cancel']" position="after">
+                <button name="%(erpc_cash_driver_report.cash_driver_report)d" type="action" string="Print Cash Report"
+                        class="btn" invisible="state not in ('confirmed', 'paid') or can_only_see_all_cash"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

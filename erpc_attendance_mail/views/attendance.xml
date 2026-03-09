@@ -1,0 +1,56 @@
+<odoo>
+    <!-- View to display employees who haven't attended today -->
+    <record id="erpc_hr_attendance_reminder_tree" model="ir.ui.view">
+        <field name="name">erpc.hr.attendance.reminder.tree</field>
+        <field name="model">hr.attendance.reminder</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="employee_id"/>
+                <field name="reminder_type"/>
+                <field name="date"/>
+                <button type="object" class="o_replenish_buttons" name="action_create_time_off" string="Create Time off"/>
+                <button type="object" class="o_replenish_buttons" name="action_dismiss" string="Dismiss"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="erpc_hr_attendance_reminder_search" model="ir.ui.view">
+        <field name="name">erpc.hr.attendance.reminder.search</field>
+        <field name="model">hr.attendance.reminder</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="employee_id" string="Employee"/>
+                <field name="date" string="Date"/>
+                <filter name="filter_pending" domain="[('processed', '=', False)]" string="Pending"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="erpc_hr_attendance_reminder_form" model="ir.ui.view">
+        <field name="name">erpc.hr.attendance.reminder.form</field>
+        <field name="model">hr.attendance.reminder</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="employee_id"/>
+                <field name="reminder_type"/>
+                <field name="date"/>
+                <field name="processed"/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action to open the employee attendance reminder view -->
+    <record id="erpc_hr_attendance_reminder_action" model="ir.actions.act_window">
+        <field name="name">Attendance Reminder</field>
+        <field name="res_model">hr.attendance.reminder</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="erpc_hr_attendance_reminder_tree"/>
+        <field name="context">{'search_default_filter_pending': 1}</field>
+    </record>
+
+    <!-- Menu item to access the employee attendance reminder view -->
+    <menuitem id="erpc_hr_attendance_reminder_menu" name="Attendance Reminder"
+              groups="hr_attendance.group_hr_attendance_manager"
+              parent="hr_attendance.menu_hr_attendance_root"
+              action="erpc_hr_attendance_reminder_action"/>
+</odoo>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="hr_leave_allocation_form_inherit_taken_leaves" model="ir.ui.view">
+            <field name="name">hr.leave.allocation.inherit.taken.leaves</field>
+            <field name="model">hr.leave.allocation</field>
+            <field name="inherit_id" ref="hr_holidays.hr_leave_allocation_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form[1]/sheet[1]/group[1]/group[@name='alloc_right_col']"
+                       position="inside">
+                    <field name="erpc_taken_leaves"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="hr_leave_allocation_tree_inherit_taken_leaves" model="ir.ui.view">
+            <field name="name">hr.leave.allocation.inherit.taken.leaves</field>
+            <field name="model">hr.leave.allocation</field>
+            <field name="inherit_id" ref="hr_holidays.hr_leave_allocation_view_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='duration_display']" position="after">
+                    <field name="erpc_taken_leaves" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="hr_leave_report_tree_inherit_taken_leaves" model="ir.ui.view">
+            <field name="name">hr.leave.report.tree.inherit.taken.leaves</field>
+            <field name="model">hr.leave.report</field>
+            <field name="inherit_id" ref="hr_holidays.hr_leave_report_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='leave_type']" position="before">
+                    <field name="taken_leaves" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

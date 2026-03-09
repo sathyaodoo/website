@@ -1,0 +1,33 @@
+<odoo>
+    <record id="view_hr_employee_form_inherit" model="ir.ui.view">
+        <field name="name">hr.employee.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+<!--            <xpath expr="//field[@name='marital']" position="after">-->
+<!--                <field name="is_working_spouse" invisible="marital != 'married'"/>-->
+<!--                <field name="is_nssf_social_detection" readonly="gender == 'male'"/>-->
+<!--            </xpath>-->
+            <xpath expr="//field[@name='gender']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+<!--            <xpath expr="//page[@name='personal_information']//group//group[2]//field[@name='marital']" position="before">-->
+<!--                <field name="gender"/>-->
+<!--            </xpath>-->
+            <xpath expr="//field[@name='children']" position="attributes">
+                <attribute name="help">Specify number of non-dependent children</attribute>
+            </xpath>
+<!--            <xpath expr="//field[@name='children']" position="after">-->
+<!--                <field name="number_of_kids"/>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//field[@name='country_of_birth']" position="after">-->
+<!--                <field name="has_establishment"/>-->
+<!--            </xpath>-->
+            <xpath expr="//field[@name='birthday']" position="after">
+                <field name="employee_age"/>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

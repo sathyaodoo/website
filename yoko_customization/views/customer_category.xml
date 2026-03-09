@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<!--        <record id="customer_category_view_tree" model="ir.ui.view">-->
+<!--            <field name="name">customer_category.view.tree</field>-->
+<!--            <field name="model">customer.category</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree string="category tree">-->
+<!--                    <field name="name"/>-->
+<!--                    <field name="type"/>-->
+<!--                    <field name="code"/>-->
+<!--                </tree></field>-->
+<!--        </record>-->
+<!--        <record id="customer_category_view_form" model="ir.ui.view">-->
+<!--            <field name="name">customer_category.view.form</field>-->
+<!--            <field name="model">customer.category</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form>-->
+<!--                    <sheet>-->
+<!--                        <label for="name"/>-->
+<!--                        <h1>-->
+<!--                            <field name="name" placeholder="Name..." required="1"/>-->
+<!--                        </h1>-->
+<!--                        <group>-->
+<!--                            <group>-->
+<!--                                <field name="code" placeholder="e.g. 101"/>-->
+<!--                                <field name="type"/>-->
+<!--                                <field name="account_payable_id" required="1"/>-->
+<!--                                <field name="account_receivable_id" required="1"/>-->
+<!--                            </group>-->
+<!--                        </group>-->
+<!--                    </sheet>-->
+<!--                </form></field>-->
+<!--        </record>-->
+<!--        <record id="customer_category_action" model="ir.actions.act_window">-->
+<!--            <field name="name">Contact Category</field>-->
+<!--            <field name="res_model">customer.category</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--        </record>-->
+<!--        <menuitem action="customer_category_action" active="True" id="customer_category_menu" name="Contact Category" parent="contacts.res_partner_menu_config" sequence="2"/>-->
+<!--        <record id="view_partner_property_form_inherit" model="ir.ui.view">-->
+<!--            <field name="name">res.partner.property.form.inherit</field>-->
+<!--            <field name="model">res.partner</field>-->
+<!--            <field name="inherit_id" ref="base.view_partner_form"/>-->
+<!--            <field eval="2" name="priority"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//field[@name='property_account_receivable_id']" position="attributes">-->
+<!--                    <attribute name="required">customer_category_id == False</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='property_account_payable_id']" position="attributes">-->
+<!--                    <attribute name="required">customer_category_id == False</attribute>-->
+<!--                </xpath></field>-->
+<!--        </record>-->
+    </data>
+</odoo>

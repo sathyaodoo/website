@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data noupdate='0'>
+        <record id="ir_seq_hr_bonus" model="ir.sequence">
+            <field name="name">Bonus Request</field>
+            <field name="code">hr.bonus.seq</field>
+            <field name="prefix">BON/</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">1</field>
+            <field name="implementation">standard</field>
+        </record>
+    </data>
+</odoo>

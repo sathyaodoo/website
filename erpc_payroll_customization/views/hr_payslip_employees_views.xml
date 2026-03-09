@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="erpc_view_hr_payslip_by_employees" model="ir.ui.view">
+        <field name="name">erpc_hr_payroll_payslip_employees</field>
+        <field name="model">hr.payslip.employees</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_by_employees"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='o_row'][2]" position="after">
+                <separator string="BRM Currency" colspan="2"/>
+                <div class="o_row">
+                    <group>
+                        <field name="bmr_currency"/>
+                        <field name="bmr_currency_rate"/>
+                    </group>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

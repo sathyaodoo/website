@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_advance_request,hr.advance.request,model_hr_advance_request,,1,1,1,1
+access_hr_advance_line,hr.advance.line,model_hr_advance_line,,1,1,1,1
+access_reason_of_refusal,reason.of.refusal,model_reason_of_refusal,,1,1,1,1

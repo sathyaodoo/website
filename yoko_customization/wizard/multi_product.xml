@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+<!--    <record id="multi_product_form_select" model="ir.ui.view">-->
+<!--        <field name="name">select_multi_product</field>-->
+<!--        <field name="model">select.multi.product</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form string="Select Multi Products">-->
+<!--            <sheet>-->
+<!--                    <group>-->
+<!--                        <field name="multi_products" options="{'no_create':True}"-->
+<!--                               context="{'tree_view_ref': 'yoko_customization.view_list_product_product_selection'}"-->
+<!--                               domain="[('advertising', '=', context.get('is_promo', False)), ('sale_ok', '=', True)]">-->
+<!--                            <tree>-->
+<!--                                <field name="name"/>-->
+<!--                                <field name="list_price"/>-->
+<!--                            </tree>-->
+<!--                        </field>-->
+<!--                    </group>-->
+<!--            </sheet>-->
+<!--                <footer>-->
+<!--                    <group>-->
+<!--                        <span>-->
+<!--                            <button string="Check Net Price" type="object" class="oe_highlight" name="add_multi_products"/>-->
+<!--                            <button string="Back"  class="p_highlight" type="object" name="back_to_select_product"/>-->
+<!--                            <button string="Close" class="oe_link" type="object" name="close_multi_product"-->
+<!--                                    confirm="Are you sure you want to close?" style="float:right;margin-left: 250px;"/>-->
+<!--                        </span>-->
+<!--                    </group>-->
+<!--                </footer>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record id="action_multi_product" model="ir.actions.act_window">-->
+<!--        <field name="name">Select multi product</field>-->
+<!--        <field name="res_model">select.multi.product</field>-->
+<!--&lt;!&ndash;        <field name="view_type">form</field>&ndash;&gt;-->
+<!--        <field name="view_mode">form</field>-->
+<!--        <field name="target">new</field>-->
+<!--    </record>-->
+
+</odoo>

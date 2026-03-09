@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="erpc_product_category_model_form_view" model="ir.ui.view">
+            <field name="name">erpc_product_category_model_form_view</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="erpc_promotional_products.product_category_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='is_promotional_categ']" position="after">
+                    <field name="is_expenses_categ"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="erpc_approval_request_model_tree_view" model="ir.ui.view">
+            <field name="name">approval_request_model_tree_view</field>
+            <field name="model">approval.request</field>
+            <field name="inherit_id" ref="approvals.approval_request_view_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_line_ids']" position="inside">
+                    <list editable="bottom" string="Products">
+                        <field name="company_id" column_invisible="True"/>
+                        <field name="product_id" required="parent.approval_type != 'purchase' and parent.has_product == 'required'" options="{'no_create': True}" domain="['|', ('categ_id.is_promotional_categ', '=', True), ('categ_id.is_expenses_categ', '=', True)]" column_invisible="False" invisible="False"/>
+                        <field name="description"/>
+                        <field name="warehouse_id" groups="stock.group_stock_multi_warehouses" options="{'no_create_edit': True, 'no_open': True}" column_invisible="parent.has_location == 'no'" required="parent.has_location == 'required'"/>
+                        <field name="quantity" column_invisible="parent.has_quantity == 'no'" required="parent.has_quantity == 'required' and parent.request_status != 'new'"/>
+                        <field name="product_uom_id" groups="uom.group_uom" options="{'no_create': True, 'no_open': True}"/>
+                        <!-- <field name="product_uom_category_id" column_invisible="True"/> -->
+                    </list>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

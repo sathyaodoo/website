@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="successive_leave_checkbox" model="ir.ui.view">
+        <field name="name">successive.leave.checkbox</field>
+        <field name="model">hr.leave.type</field>
+        <field name="inherit_id" ref="hr_holidays.edit_holiday_status_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='leave_validation_type']" position="after">
+                <field name="successive_leave"/>
+              </xpath>
+        </field>
+    </record>
+
+</odoo>

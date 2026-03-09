@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="erpc_report_invoice_document_inherit" inherit_id="account.report_invoice_document">
+        <xpath expr="//span[@t-field='o.delivery_date']" position="replace">
+            <span t-field="o.delivery_date" t-options="{'widget': 'date'}"/>
+        </xpath>
+    </template>
+</odoo>

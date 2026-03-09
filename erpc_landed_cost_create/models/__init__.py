@@ -1,0 +1,1 @@
+from . import landed_account_move

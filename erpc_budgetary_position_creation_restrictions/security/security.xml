@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <record id='group_budget_admin' model='res.groups'>
+            <field name='name'>Bugets Administrator</field>
+        </record>
+
+
+    </data>
+</odoo>

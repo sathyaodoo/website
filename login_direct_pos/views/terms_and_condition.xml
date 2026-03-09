@@ -1,0 +1,104 @@
+<odoo>
+
+    <template id="custom_product_terms"
+              inherit_id="website_sale.product_terms_and_conditions"
+              priority="30">
+
+        <xpath expr="//small" position="replace">
+
+           <style>
+            .te_s_shipping_info {
+        margin: 12px 0px 10px;
+        ul {
+            li.te_s_shipping_info_li {
+                display: inline;
+                border-color: lightgrey !important;
+                padding: 0px 12px 0px 0px;
+                margin-right: 14px;
+                border-right: 1px solid;
+                @include media-breakpoint-down(md){
+                    display: block;
+                    border:0;
+                }
+                @include media-breakpoint-down(md){
+                    &amp; .share_icon.fa {
+                        display: inline-block;
+                        width: 20px;
+                    }
+                    &amp; .share_dsc:last-child{
+                        display: inline-block;
+                        width: 90%;
+                        vertical-align: middle;
+                    }
+                    border-right: 0px !important;
+                    display: block;
+                    padding-right: 0px;
+                    margin-right: 0px;
+                    margin-bottom: 2px;
+                }
+                &amp;:last-child{
+                    border-right: 0px !important;
+                }
+            }
+        }
+    }
+    .te_s_shipping_info {
+        margin: 8px 0px 10px;
+          font-size: 15px;
+        ul {
+            li.te_s_shipping_info_li {
+                display: inline;
+                border-color: lightgrey !important;
+                padding: 0px 8px 0px 0px;
+                margin-right: 10px;
+                border-right: 1px solid;
+                @include media-breakpoint-down(md){
+                    display: block;
+                    border:0;
+                }
+                @include media-breakpoint-down(md){
+                    &amp; .share_icon.fa {
+                        display: inline-block;
+                        width: 20px;
+                    }
+                    &amp; .share_dsc:last-child{
+                        display: inline-block;
+                        width: 90%;
+                        vertical-align: middle;
+                    }
+                    border-right: 0px !important;
+                    display: block;
+                    padding-right: 0px;
+                    margin-right: 0px;
+                    margin-bottom: 2px;
+                }
+                &amp;:last-child{
+                    border-right: 0px !important;
+                }
+            }
+        }
+    }
+        </style>
+        <hr/>
+            <div class="te_s_shipping_info">
+                <ul class="ps-0 mb-0">
+                    <li class="te_s_shipping_info_li text-muted border-right list-unstyled">
+                        <span class="share_icon fa fa-money text-black mr-1"/>
+                        <span class="share_dsc">30-day money-back</span>
+                    </li>
+                    <li class="te_s_shipping_info_li text-muted border-right list-unstyled">
+                        <span class="share_icon fa fa-undo text-black mr-1"/>
+                        <span class="share_dsc">7-day returns</span>
+                    </li>
+                    <li class="te_s_shipping_info_li text-muted border-right list-unstyled">
+                        <span class="share_icon fa fa-clock-o text-black mr-1"/>
+                        <span class="share_dsc">Shipping: 2-3 Days</span>
+                    </li>
+                </ul>
+            </div>
+
+        </xpath>
+
+    </template>
+
+</odoo>

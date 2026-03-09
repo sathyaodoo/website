@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- List View -->
+<!--        <record id="view_sale_lost_reason_tree" model="ir.ui.view">-->
+<!--            <field name="name">sale.lost.reason.tree</field>-->
+<!--            <field name="model">sale.lost.reason</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree>-->
+<!--                    <field name="name"/>-->
+<!--                    <field name="active"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+        <!-- Form View -->
+<!--        <record id="view_sale_lost_reason_form" model="ir.ui.view">-->
+<!--            <field name="name">sale.lost.reason.form</field>-->
+<!--            <field name="model">sale.lost.reason</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form string="Sales Order" class="o_sale_order">-->
+<!--                    <sheet>-->
+<!--                        <div class="oe_title">-->
+<!--                            <h1>-->
+<!--                                <field name="name"/>-->
+<!--                            </h1>-->
+<!--                        </div>-->
+<!--                        <notebook>-->
+<!--                            <page string="sales" name="sales">-->
+<!--                                <field name="sales" mode="tree">-->
+<!--                                    <tree string="Sales Orders" sample="1"-->
+<!--                                          decoration-info="invoice_status == 'to invoice'"-->
+<!--                                          decoration-muted="state == 'cancel'">-->
+<!--                                    <field name="message_needaction" invisible="1"/>-->
+<!--                                    <field name="name" string="Number" readonly="1" decoration-bf="1"/>-->
+<!--                                    <field name="invoice_status" invisible="1"/>-->
+<!--                                    <field name="state" invisible="1"/>-->
+<!--                                    <field name="description" string="Cancel Reason Description"/>-->
+<!--                                    <field name="cancelled_date" string="cancellation date" readonly="1"/>-->
+<!--                                    </tree>-->
+<!--                                </field>-->
+<!--                            </page>-->
+<!--                        </notebook>-->
+<!--                    </sheet>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+        <!-- Action -->
+<!--        <record id="action_sale_lost_reason" model="ir.actions.act_window">-->
+<!--            <field name="name">Sale Lost Reasons</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">sale.lost.reason</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="search_view_id" ref="view_sale_lost_reason_tree"/>-->
+<!--        </record>-->
+
+        <!-- Menu -->
+<!--        <menuitem id="menu_sale_lost_reason" name="Sale Lost Reasons" parent="sale.menu_sale_config"/>-->
+<!--        <menuitem id="menu_sale_lost_reason_list" name="Sale Lost Reasons" parent="menu_sale_lost_reason"-->
+<!--                  action="action_sale_lost_reason"/>-->
+
+<!--        <record id="cancel_search" model="ir.ui.view">-->
+<!--            <field name="name">cancel.search</field>-->
+<!--            <field name="model">sale.order</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <search string="Cancelled Sale Orders">-->
+<!--                    <field name="cancel_reason" string="Cancel Reasons"/>-->
+<!--                    <field name="description" string="Cancel Reason Description"/>-->
+<!--                    <group expand="1" string="Group By">-->
+<!--                        <filter string="Cancelled date" name="cancelled_date" context="{'group_by': 'cancelled_date'}"/>-->
+<!--                        <filter string="Cancel Reasons" name="cancel_reason" context="{'group_by': 'cancel_reason'}"/>-->
+<!--                    </group>-->
+<!--                </search>-->
+<!--            </field>-->
+<!--        </record>-->
+
+        <!-- List view and form view of cancelled sales orders -->
+<!--        <record id="view_sale_order_canceled_tree" model="ir.ui.view">-->
+<!--            <field name="name">sale.order.canceled.tree</field>-->
+<!--            <field name="model">sale.order</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree string="Cancelled Sale Orders" default_order="id desc" create="false">-->
+<!--                    <field name="name"/>-->
+<!--                    <field name="partner_id"/>-->
+<!--                    <field name="date_order"/>-->
+<!--                    <field name="amount_total"/>-->
+<!--                    <field name="state" invisible="1"/>-->
+<!--                    <field name="cancel_reason" string="Cancel Reason" groups="base.group_user"/>-->
+<!--                    <field name="description" string="Cancel Reason Description" groups="base.group_user"/>-->
+<!--                    <field name="cancelled_date" string="Cancelled Date" groups="base.group_user"/>-->
+<!--                    <field name="user_id" groups="base.group_user" options="{'no_create': True, 'no_open': True}"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="view_sale_order_canceled_form_mn" model="ir.ui.view">-->
+<!--            <field name="name">view.canceled.form.mn</field>-->
+<!--            <field name="model">sale.order</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form string="Cancelled Sale Order" create="false">-->
+<!--                    <sheet>-->
+<!--                        <group>-->
+<!--                            <field name="name"/>-->
+<!--                            <field name="partner_id"/>-->
+<!--                            <field name="date_order"/>-->
+<!--                            <field name="amount_total"/>-->
+<!--                            <field name="state" invisible="1"/>-->
+<!--                            <field name="company_id" invisible="1"/>-->
+<!--                            <field name="cancel_reason" string="Cancel Reason" readonly="1"/>-->
+<!--                            <field name="description" string="Cancel Reason Description" readonly="1"/>-->
+<!--                            <field name="cancelled_date" string="Cancellation date" readonly="1"/>-->
+<!--                            <field name="user_id" groups="base.group_user"-->
+<!--                                   options="{'no_create': True, 'no_open': True}"/>-->
+<!--                        </group>-->
+<!--                    </sheet>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+
+        <!-- Action for canceled sales orders -->
+<!--        <record id="action_sale_order_canceled" model="ir.actions.act_window">-->
+<!--            <field name="name">Cancelled Orders</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">sale.order</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="view_ids" eval="[(5, 0, 0),-->
+<!--                (0, 0, {'view_mode': 'tree', 'view_id': ref('view_sale_order_canceled_tree')}),-->
+<!--                (0, 0, {'view_mode': 'form', 'view_id': ref('view_sale_order_canceled_form_mn')})]"/>-->
+<!--            <field name="domain">[('state', '=', 'cancel')]</field>-->
+<!--            <field name="search_view_id" ref="cancel_search"/>-->
+<!--        </record>-->
+
+        <!-- Menu item for canceled sales orders -->
+<!--        <menuitem id="menu_sale_order_canceled"-->
+<!--                  name="Cancelled Sale Orders"-->
+<!--                  parent="sale.sale_order_menu"-->
+<!--                  sequence="20"-->
+<!--                  action="action_sale_order_canceled"/>-->
+    </data>
+</odoo>

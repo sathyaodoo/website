@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_stock_picking_inh" model="ir.ui.view">
+            <field name="name">stock.picking_inh</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <field name="location_id" position="before">
+<!--                    <field name="driver_id"/>-->
+                    <field name="sale_id" invisible="1"/>
+                    <field name="driver_id" readonly="picking_type_code != 'internal'"
+                       invisible="not sale_id and picking_type_code != 'internal'"/>
+<!--                <field name="outgoing_driver_id" invisible="picking_type_code != 'outgoing'"/>-->
+                    <!--              <field name="collector"/>-->
+                </field>
+                <xpath expr="//form[1]/sheet[1]/group[1]/group[2]/field[@name='date_deadline']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='products_availability']" position="attributes">
+                    <attribute name="invisible">False</attribute>
+                </xpath>
+                <xpath expr="//field[@name='move_ids']/list/field[@name='quantity']"
+                       position="before">
+                    <field name="sale_line_id" string="Description"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

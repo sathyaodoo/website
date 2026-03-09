@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="erpc_request_item_tree" model="ir.ui.view">
+        <field name="name">erpc.request.item.tree</field>
+        <field name="model">request.item</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" string="Name"/>
+                <field name="employee_id"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+    <record id="erpc_request_item_form" model="ir.ui.view">
+        <field name="name">erpc.request.item.form</field>
+        <field name="model">request.item</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_submit" type="object" string="Submit" invisible="state != 'draft'" class="oe_highlight"/>
+                    <button name="action_cancel" type="object" string="Cancel" invisible="state != 'draft'"/>
+                    <button name="action_approve" type="object" string="Approve" invisible="state != 'waiting_approval_1'"
+                            class="oe_highlight" groups="hr.group_hr_manager"/>
+                    <button name="action_refuse" type="object" string="Refuse" invisible="state not in ('draft', 'waiting_approval_1')"
+                            class="oe_highlight" groups="hr.group_hr_manager"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,waiting_approval_1,approve"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group col="4">
+                        <field name="date"/>
+                        <field name="employee_id"/>
+                        <field name="company_id"/>
+                        <field name="sale_order_id" readonly="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Product" name="product_request">
+                            <field name="request_ids" widget="one2many">
+                                <list string="request" editable="top">
+                                    <field name="product_id"/>
+                                    <field name="lot_id" domain="[('product_id','=', product_id)]"/>
+                                    <field name="product_uom_qty"/>
+                                    <field name="price_unit"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="erpc_request_item_action" model="ir.actions.act_window">
+        <field name="name">Employee Request Item</field>
+        <field name="res_model">request.item</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new Item request.
+            </p>
+            <p>
+                Use this menu to create Item request.
+            </p>
+        </field>
+    </record>
+    <menuitem name="Request For Item"
+              groups="hr.group_hr_manager,hr.group_hr_user,base.group_user"
+              parent="hr.menu_hr_root"
+              id="erpc_request_item_menu" action="erpc_request_item_action"/>
+
+</odoo>

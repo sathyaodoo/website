@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="hr_rule_commission" model="hr.salary.rule">
+            <field name="code">COM</field>
+            <field name="name">Commission / Target / Bonus</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = 'COM' in inputs</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs['COM'] and + inputs['COM'].amount</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="sequence" eval="4"/>
+            <field name="struct_id" search="[('name', '=', 'Commission / Target / Bonus')]"/>
+        </record>
+
+        <record id="hr_rule_input_commission" model="hr.payslip.input.type">
+            <field name="code">COM</field>
+            <field name="name">Commission / Target / Bonus</field>
+        </record>
+    </data>
+</odoo>

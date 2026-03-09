@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Daily Attendance -->
+    <record id="erpc_hr_daily_attendance_action" model="ir.actions.act_window">
+        <field name="name">Daily Attendance</field>
+        <field name="res_model">erpc.hr.daily.attendance</field>
+        <field name="view_mode">tree,form,pivot</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">
+                No attendance records found
+            </p>
+            <p>
+                The "Daily Attendance" records of your employees will be displayed here.
+            </p>
+        </field>
+    </record>
+    <record id="erpc_hr_daily_attendance_tree" model="ir.ui.view">
+        <field name="name">hr.daily.attendance.tree</field>
+        <field name="model">erpc.hr.daily.attendance</field>
+        <field name="arch" type="xml">
+            <tree create="0" multi_edit="1">
+                <field name="attendance_date" optional="show"/>
+                <field name="dayofweek" optional="show"/>
+                <field name="attendance_type" optional="show"/>
+                <field name="resource_calendar_id" optional="hide"/>
+                <field name="work_entry_type_id" optional="show"/>
+                <field name="employee_id" optional="show"/>
+                <field name="planned_start_dt" optional="hide"/>
+                <field name="planned_end_dt" optional="hide"/>
+                <field name="planned_break_hours" optional="hide" widget="float_time"/>
+                <field name="planned_work_hours" optional="hide" widget="float_time"/>
+                <field name="actual_start_dt" optional="hide"/>
+                <field name="actual_end_dt" optional="hide"/>
+                <field name="actual_break_hours" optional="hide" widget="float_time"/>
+                <field name="actual_work_hours" optional="hide" widget="float_time"/>
+                <field name="tuned_start_dt" optional="hide"/>
+                <field name="tuned_end_dt" optional="hide"/>
+                <field name="tuned_break_hours" optional="hide" widget="float_time"/>
+                <field name="tuned_work_hours" optional="hide" widget="float_time"/>
+                <field name="core_work_hours" optional="hide" widget="float_time"/>
+                <field name="pre_work_hours" optional="hide" widget="float_time"/>
+                <field name="post_work_hours" optional="hide" widget="float_time"/>
+                <field name="include_pre_work" optional="show"/>
+                <field name="overtime" optional="show" widget="float_time"/>
+                <field name="lateness" optional="hide" widget="float_time"/>
+                <field name="earliness" optional="hide" widget="float_time"/>
+                <field name="undertime" optional="show" widget="float_time"/>
+                <field name="total_overtime_undertime" widget="float_time"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="erpc_hr_daily_attendance_form" model="ir.ui.view">
+        <field name="name">hr.daily.attendance.form</field>
+        <field name="model">erpc.hr.daily.attendance</field>
+        <field name="arch" type="xml">
+            <form create="false">
+                <sheet>
+                    <group col="3">
+                        <group>
+                            <field name="attendance_date"/>
+                        </group>
+                        <group>
+                            <field name="employee_id"/>
+                        </group>
+                        <group/>
+                    </group>
+                    <group col="3">
+                        <group>
+                            <field name="attendance_type"/>
+                        </group>
+                        <group>
+                            <field name="work_entry_type_id"/>
+                        </group>
+                        <group>
+                            <field name="resource_calendar_id"/>
+                        </group>
+                    </group>
+                    <group col="3" string="Schedule → Actual → Tuned">
+                        <group>
+                            <field name="planned_start_dt"/>
+                            <field name="planned_end_dt"/>
+                            <field name="planned_break_hours" widget="float_time"/>
+                            <field name="planned_work_hours" widget="float_time"/>
+                        </group>
+                        <group>
+                            <field name="actual_start_dt"/>
+                            <field name="actual_end_dt"/>
+                            <field name="actual_break_hours" widget="float_time"/>
+                            <field name="actual_work_hours" widget="float_time"/>
+                        </group>
+                        <group>
+                            <field name="tuned_start_dt"/>
+                            <field name="tuned_end_dt"/>
+                            <field name="tuned_break_hours" widget="float_time"/>
+                            <field name="tuned_work_hours" widget="float_time"/>
+                        </group>
+                    </group>
+                    <group col="3" string="Computed Fields">
+                        <group>
+                            <field name="pre_work_hours" widget="float_time" help="Pre-Work Hours = Schedule Start - Tuned Start"/>
+                            <field name="post_work_hours" widget="float_time" help="Post-Work Hours = Tuned End - Schedule End"/>
+                            <field name="include_pre_work"/>
+                        </group>
+                        <group>
+                            <field name="lateness" widget="float_time" help="Lateness = Tuned Start - Schedule Start"/>
+                            <field name="earliness" widget="float_time" help="Earliness = Schedule End - Tuned End"/>
+                            <field name="over_breaking" widget="float_time" help="Over-Breaking = Tuned Break Hours - Schedule Break Hours"/>
+                        </group>
+                        <group>
+                            <field name="core_work_hours" widget="float_time" help="Core Work Hours = Tuned Work Hours - Overtime"/>
+                            <field name="undertime" widget="float_time" help="Undertime = Lateness + Earliness"/>
+                            <field name="overtime" widget="float_time" help="Overtime = Pre-Work Hours + Post-Work Hours"/>
+                            <field name="total_overtime_undertime" widget="float_time"/>
+
+                        </group>
+                    </group>
+                    <group string="Attendances"/>
+                    <field name="attendance_ids"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="erpc_hr_daily_attendance_pivot" model="ir.ui.view">
+        <field name="name">hr.daily.attendance.pivot</field>
+        <field name="model">erpc.hr.daily.attendance</field>
+        <field name="arch" type="xml">
+            <pivot string="Sales Orders" sample="1">
+                <field name="employee_id" type="row"/>
+                <field name="overtime" type="measure"/>
+                <field name="undertime" type="measure"/>
+                <field name="total_overtime_undertime" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Attendance Per Day Line -->
+    <record id="erpc_hr_daily_attendance_line_tree" model="ir.ui.view">
+        <field name="name">hr.daily.attendance.line.tree</field>
+        <field name="model">erpc.hr.daily.attendance.line</field>
+        <field name="arch" type="xml">
+            <tree create="false">
+                <field name="employee_id" optional="hide"/>
+                <field name="department_id" optional="hide"/>
+                <field name="check_in"/>
+                <field name="check_out"/>
+                <field name="worked_hours" widget="float_time"/>
+            </tree>
+        </field>
+    </record>
+    <record id="erpc_hr_daily_attendance_line_form" model="ir.ui.view">
+        <field name="name">hr.daily.attendance.line.form</field>
+        <field name="model">erpc.hr.daily.attendance.line</field>
+        <field name="arch" type="xml">
+            <form create="false">
+                <sheet>
+                    <group>
+                        <field name="employee_id"/>
+                        <field name="department_id"/>
+                        <field name="check_in"/>
+                        <field name="check_out"/>
+                        <field name="worked_hours" widget="float_time"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <menuitem id="erpc_attendance_per_day_menu"
+              name="Daily Attendance" sequence="10"
+              groups="hr_attendance.group_hr_attendance_manager"
+              parent="hr_attendance.menu_hr_attendance_root"
+              action="erpc_hr_daily_attendance_action"/>
+    <record id="erpc_action_validate" model="ir.actions.server">
+        <field name="name">Validate</field>
+        <field name="model_id" ref="erpc_daily_attendance.model_erpc_hr_daily_attendance"/>
+        <field name="state">code</field>
+        <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
+        <field name="code">for record in records:
+            record.action_validate()</field>
+    </record>
+
+    <!-- User ID / Partner ID -->
+    <record id="view_employee_form_user_partner_inherit" model="ir.ui.view">
+        <field name="name">hr.employee.company.user.partner.form.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="user_partner_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

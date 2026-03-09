@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="spreadsheet_dashboard_advance_request" model="spreadsheet.dashboard">
+        <field name="name">Advance Request</field>
+        <field name="spreadsheet_binary_data" type="base64" file="erpc_hr_request_for_advance_menu_item/data/files/advance_request_dashboard.json"/>
+        <field name="dashboard_group_id" ref="spreadsheet_dashboard.spreadsheet_dashboard_group_hr"/>
+        <field name="group_ids" eval="[Command.link(ref('erpc_hr_request_for_advance_menu_item.group_advance_requester'))]"/>
+        <field name="sequence">120</field>
+    </record>
+
+</odoo>

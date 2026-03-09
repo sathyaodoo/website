@@ -1,0 +1,10 @@
+<odoo>
+    <record id="access_hr_scholarship" model="ir.model.access">
+        <field name="name">hr.scholarship</field>
+        <field name="model_id" ref="model_hr_scholarship"/>
+        <field name="perm_read">1</field>
+        <field name="perm_write">1</field>
+        <field name="perm_create">1</field>
+        <field name="perm_unlink">1</field>
+    </record>
+</odoo>

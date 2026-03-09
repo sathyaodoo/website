@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<odoo>
+    <template id="report_payment_receipt_footer" inherit_id="account.report_payment_receipt_document">
+        <xpath expr="//t[@t-call='web.external_layout']" position="before">
+<!--            <t t-set="o" t-value="o.with_context(change_footer_payment= True)"/>-->
+        </xpath>
+    </template>
+    <template id="external_layout_report_payment_receipt_footer" inherit_id="web.external_layout_standard">
+        <xpath expr="//div[@t-attf-class='footer o_standard_footer o_company_#{company.id}_layout']"
+               position="replace">
+            <t t-if=" o and o.env and 'change_footer_payment' in o.env.context and o.env.context.get('change_footer_payment',False)">
+                <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout"/>
+            </t>
+            <t t-else="">
+                <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+                    <div class="text-center" style="border-top: 1px solid black;">
+
+<!--                        <div class="row" t-if="o._name == 'account.move'">-->
+                        <div class="row" t-if="o._name == 'account.move' or o._name == 'account.payment'">
+                            <div class="col-5">
+
+                                <div style="display:inline-block;margin-right:10px">
+
+                                    <span>
+                                        <!-- <u>_______________</u>:التوقيع -->
+
+                                    </span>
+                                    <br/><br/>
+
+                                    <span>
+                                        <!-- <u>________________</u>:الختم -->
+
+                                    </span>
+
+                                </div>
+
+                                <div style="display:inline-block">
+
+                                    <span>
+                                        <!-- <u>______________</u>:التاريخ -->
+                                    </span>
+
+                                    <br/><br/>
+
+                                    <span>
+                                        <!-- <u>_______________</u>:الاسم -->
+                                    </span>
+
+                                </div>
+
+
+                            </div>
+                            <div class="col-3" style="font-size:12px;">
+                              <span>
+<!--                                  تم استلام البضاعة والفاتورة الاصلي-->
+                              </span>
+                            </div>
+                          <div class="col-4" style="font-size:12px;">
+                            <span>
+                              استوفي رسم الطابع المالي مسبقاً لدى<br/>وزارة المالية بموجب ايصالات رسمية
+
+
+                            </span>
+                          </div>
+
+                        </div>
+
+
+                        <div t-if="report_type == 'pdf'" class="text-muted">
+                            page: <span class="page"/> / <span class="topage"/>
+                        </div>
+                        <div t-if="report_type == 'pdf' and display_name_in_footer" class="text-muted">
+                            <span t-out="o.name">(document name)</span>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="external_layout_report_invoice_receipt_footer" inherit_id="web.external_layout_standard">
+        <xpath expr="//div[@t-attf-class='footer o_standard_footer o_company_#{company.id}_layout']"
+               position="replace">
+
+               <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+                <div class="text-center" style="border-top: 1px solid black;">
+
+                    <div class="row" t-if="o._name == 'account.move'">
+                        <div class="col-5">
+
+                            <div style="display:inline-block;margin-right:10px">
+
+                                <span>
+                                    <u>_______________</u>:التوقيع
+
+                                </span>
+                                <br/><br/>
+
+                                <span>
+                                    <u>________________</u>:الختم
+
+                                </span>
+
+                            </div>
+
+                            <div style="display:inline-block">
+
+                                <span>
+                                    <u>______________</u>:التاريخ
+                                </span>
+
+                                <br/><br/>
+
+                                <span>
+                                    <u>_______________</u>:الاسم
+                                </span>
+
+                            </div>
+
+
+                        </div>
+                        <div class="col-3" style="font-size:12px;">
+                          <span>
+                              تم استلام البضاعة والفاتورة الاصلي
+                          </span>
+                        </div>
+                      <div class="col-4" style="font-size:12px;">
+                        <span>
+                          استوفي رسم الطابع المالي مسبقاً لدى<br/>وزارة المالية بموجب ايصالات رسمية
+
+
+                        </span>
+                      </div>
+
+                    </div>
+
+                    <ul class="list-inline mb4">
+                        <div t-field="company.report_footer"/>
+                    </ul>
+
+                    <div t-if="report_type == 'pdf'" class="text-muted">
+                        Page: <span class="page"/> / <span class="topage"/>
+                    </div>
+                    <div t-if="report_type == 'pdf' and display_name_in_footer" class="text-muted">
+                        <span t-out="o.name">(document name)</span>
+                    </div>
+                </div>
+            </div>
+
+        </xpath>
+    </template>
+</odoo>

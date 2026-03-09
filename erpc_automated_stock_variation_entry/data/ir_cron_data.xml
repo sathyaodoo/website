@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+<!--            Transfer the customization of automated stock valuation from Forfait to Marwan SARL-->
+    <record id="ir_cron_auto_create_inventory_variation_entry" model="ir.cron">
+        <field name="name">Stock Accounting: Automated Stock Variation Entries</field>
+        <field name="model_id" ref="stock_account.model_stock_valuation_layer"/>
+        <field name="state">code</field>
+        <field name="code">
+            if model.env.company.id == 1: model._create_stock_variation_entry()
+        </field>
+        <field name="active" eval="True"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+<!--        <field name="numbercall">-1</field>-->
+<!--        <field name="doall" eval="False"/>-->
+        <field name="nextcall" eval="(DateTime.now().replace(hour=21, minute=55, second=55, microsecond=0))"/>
+    </record>
+
+
+</odoo>

@@ -1,0 +1,15 @@
+<odoo>
+    <record id="erpc_view_move_form_inherit_hide_post" model="ir.ui.view">
+        <field name="name">erpc.account.move.form.inherit.hide_post</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='other_info']/group[1]/group[not(@name)][1]/field[@name='company_id']" position="after">
+                <field name="hide_mhr_post_btn" invisible="1"/>
+            </xpath>
+            <xpath expr="//form[1]/header[1]/button[@name='action_post'][1]" position="attributes">
+                <attribute name="invisible">hide_post_button or move_type != "entry" or hide_mhr_post_btn == True</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
